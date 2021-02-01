@@ -1,7 +1,7 @@
-const { app } = require('./app');
+const { app } = require("./app");
 
-const port = app.get('port');
+const port = app.get("port");
 
-app.listen(port, () => console.log('hey from port 5000'));
+app.listen(port, () => console.log("App running on port", port));
 
 module.exports = { app };
