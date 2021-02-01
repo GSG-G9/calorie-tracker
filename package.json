@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "dev": "NODE_ENV=development node server/index.js",
+    "start": "NODE_ENV=production node server/index.js",
+    "kill": "fuser -k 5000/tcp"
   },
   "repository": {
     "type": "git",
@@ -18,9 +21,11 @@
   },
   "homepage": "https://github.com/GSG-G9/calorie-tracker#readme",
   "dependencies": {
+    "dotenv": "^8.2.0",
     "express": "^4.17.1"
   },
   "devDependencies": {
     "jest": "^26.6.0"
-  }
+  },
+  "proxy": "http://localhost:4000"
 }
