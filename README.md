@@ -76,9 +76,10 @@ As a user, I can create an account then enter my health details. Then, I can add
 #### Backend:
 
 1.  Express
-1.  Postgres DataBase
+2.  Postgres DataBase
 
 #### Frontend:
 
 1.  React
-1.  Material UI
+2.  Material UI 
+3.  Css
