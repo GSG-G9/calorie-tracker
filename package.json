@@ -18,7 +18,11 @@
   },
   "homepage": "https://github.com/GSG-G9/calorie-tracker#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "bcrypt": "^5.0.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "joi": "^17.3.0",
+    "jsonwebtoken": "^8.5.1"
   },
   "devDependencies": {
     "jest": "^26.6.0"
