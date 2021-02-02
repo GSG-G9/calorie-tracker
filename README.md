@@ -2,7 +2,6 @@
 
 ## Live Demo :
 
-
 ## Problem
 
 People usually find it difficult to control weight and keep track of their progress, or when they start working out they might lose interest when they don’t have a visual representation of what they’ve accomplished.
@@ -86,5 +85,5 @@ As a user, I can create an account then enter my health details. Then, I can add
 #### Frontend:
 
 1.  React
-2.  Material UI 
+2.  Material UI
 3.  Css
