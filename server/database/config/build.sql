@@ -1,6 +1,6 @@
 BEGIN;
 
-DROP TABLE IF EXISTS users, exercise, food, food_category, food_type, nutrition, UserExerciseRelation, UserFoodRelation, news CASCADE;
+DROP TABLE IF EXISTS users, exercises, food, food_category, food_type, nutrition, UserExerciseRelation, UserFoodRelation, news CASCADE;
 
 CREATE TABLE users(
 id SERIAL PRIMARY KEY,
