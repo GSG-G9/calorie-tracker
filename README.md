@@ -10,17 +10,6 @@ People usually find it difficult to control weight and keep track of their progr
 
 App for calculating working out hours, calories burnt while working out, weight progress (loss and gain), and chart shows weekly progress.
 
-### Lead Mentor:
-
-- Lina Jamal
-
-### Team Members:
-
-- Hassan Alnajjar
-- Iman Sedky
-- Khamis AlBashiti
-- Zein Jendeya
-
 ## User Journey 🚀
 
 As a user, I can create an account then enter my health details. Then, I can add daily meals(breakfast-lunch-dinner-snacks) and exercises. The app calculates burnt and consumed calories, goal progress(desired weight), and can view daily/monthly progress and nutrition.
@@ -87,3 +76,16 @@ As a user, I can create an account then enter my health details. Then, I can add
 1.  React
 2.  Material UI
 3.  Css
+
+### Lead Mentor:
+
+- Lina Jamal
+
+### Team Members:
+
+- Hassan Alnajjar
+- Iman Sedky
+- Khamis AlBashiti
+- Zein Jendeya
+
+## Resources
