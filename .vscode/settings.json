@@ -14,5 +14,11 @@
 	"files.eol": "\n",
 	"cSpell.words": [
 		"pgport"
+	],
+	"cSpell.ignoreWords": [
+		"browserslist",
+		"eslint",
+		"flowtype",
+		"plugin"
 	]
 }
