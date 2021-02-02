@@ -1,19 +1,19 @@
 const { Pool } = require('pg');
 require('dotenv').config({ path: './config.env' });
 const {
-  DATABASE_URL,
+  DEV_DATABASE_URL,
   TEST_DATABASE_URL,
-  PRODUCTION_DATABASE_URL,
+  DATABASE_URL,
   NODE_ENV,
 } = process.env;
 
 let dbUrl = '';
 switch (NODE_ENV) {
   case 'production':
-    dbUrl = PRODUCTION_DATABASE_URL;
+    dbUrl = DATABASE_URL;
     break;
   case 'development':
-    dbUrl = DATABASE_URL;
+    dbUrl = DEV_DATABASE_URL;
     break;
   case 'test':
     dbUrl = TEST_DATABASE_URL;
