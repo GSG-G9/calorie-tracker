@@ -8,7 +8,7 @@ first_name VARCHAR(100) NOT NULL UNIQUE,
 last_name VARCHAR(100) NOT NULL UNIQUE,
 email VARCHAR (100) NOT NULL UNIQUE,
 password VARCHAR(250) NOT NULL ,
-gender TINYINT,
+gender CHAR(1),
 height INTEGER,
 weight INTEGER,
 age INTEGER,
@@ -24,7 +24,7 @@ met Float
 
 CREATE TABLE food(
 id SERIAL PRIMARY KEY,
-food_type INTEGER FOREIGN KEY REFERENCES food_type(id),
+food_type INTEGER REFERENCES food_type(id),
 food_name VARCHAR(100) NOT NULL,
 image TEXT
 );
@@ -41,7 +41,7 @@ name VARCHAR(100) NOT NULL UNIQUE
 
 CREATE TABLE nutrition(
 id SERIAL PRIMARY KEY,
-food INTEGER FOREIGN KEY REFERENCES food(id),
+food INTEGER REFERENCES food(id),
 calories INTEGER,
 fat INTEGER,
 carbs INTEGER,
@@ -55,22 +55,22 @@ cholesterol INTEGER
 
 CREATE TABLE UserExerciseRelation(
 id SERIAL PRIMARY KEY,
-users INTEGER FOREIGN KEY REFERENCES users(id),
-exercise INTEGER FOREIGN KEY REFERENCES exercise(id),
+users INTEGER REFERENCES users(id),
+exercise INTEGER REFERENCES exercise(id),
 created_at TIMESTAMP NOT NULL
 );
 
 CREATE TABLE UserFoodRelation(
 id SERIAL PRIMARY KEY,
-users INTEGER FOREIGN KEY REFERENCES users(id),
-food INTEGER FOREIGN KEY REFERENCES food(id),
-food_category INTEGER FOREIGN KEY REFERENCES food_category(id),
+users INTEGER REFERENCES users(id),
+food INTEGER REFERENCES food(id),
+food_category INTEGER REFERENCES food_category(id),
 created_at TIMESTAMP NOT NULL
 );
 
 CREATE TABLE news(
 id SERIAL PRIMARY KEY,
-users INTEGER FOREIGN KEY REFERENCES users(id),
+users INTEGER REFERENCES users(id),
 title VARCHAR(250),
 content VARCHAR(250),
 created_at TIMESTAMP NOT NULL
