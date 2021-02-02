@@ -1,11 +1,9 @@
+import React from 'react';
+import Container from './components/Container';
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <h1> Hi from React App</h1>
-    </div>
-  );
+  return <Container screenSize="sm">Abooooooooooooood</Container>;
 }
 
 export default App;
