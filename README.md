@@ -2,28 +2,13 @@
 
 ## Live Demo :
 
-### Team Lead:
-
-- Lina Jamal
-
-### Team Members:
-
-- Hassan Alnajjar
-- Iman Sedky
-- Khamis AlBashiti
-- Zein Jendeya
-
-## Proplem
+## Problem
 
 People usually find it difficult to control weight and keep track of their progress, or when they start working out they might lose interest when they don’t have a visual representation of what they’ve accomplished.
 
 ## The Solution 💡
 
 App for calculating working out hours, calories burnt while working out, weight progress (loss and gain), and chart shows weekly progress.
-
-## Prototype
-
-#### [show figma](https://www.figma.com/file/1FtfYBIz27qmLXEiTJ590m/CalTrack?node-id=0%3A1)
 
 ## User Journey 🚀
 
@@ -39,10 +24,10 @@ As a user, I can create an account then enter my health details. Then, I can add
 6- as a user, I can view workout tutorials when viewing the app
 7- as a user I can see recipe details so I can make it at home :)
 8- as a user I can view my food Nutrition details in my meals as a chart so i can manage and organize them in my meals.
-9- as a user u can view calories details in my meals as a chart so i can know which of them have a high calories percetages.
+9- as a user u can view calories details in my meals as a chart so i can know which of them have a high calories percentages.
 
 8- as an admin, I can see users' numbers, see all meals/ food entered by users to mentor them, and also I can edit and delete meals.
-9- as a user i can Add favourite food.
+9- as a user i can Add favorite food.
 10- as a user i can sign up as therapist role so i can post a new Healthy tips
 
 ## User Stories 📝
@@ -51,7 +36,7 @@ As a user, I can create an account then enter my health details. Then, I can add
 
 1- I can view health news
 2- I can sing up by entering username, name, email and password  
-3- I can login to the App to view my calories and entring my daily food-exercies
+3- I can login to the App to view my calories and entering my daily food-exercise
 
 #### as a new user who wants to sign up :
 
@@ -67,6 +52,14 @@ As a user, I can create an account then enter my health details. Then, I can add
 5- I can in the food page choose the food/ meal and it's amount and also view the food Nutrition details.
 6- I can add my weight in any time so the app will draw the weight vs time progress.
 
+## Prototype
+
+#### [show figma](https://www.figma.com/file/1FtfYBIz27qmLXEiTJ590m/CalTrack?node-id=0%3A1)
+
+## DATABASE Schema :file_cabinet:
+
+![schema](https://user-images.githubusercontent.com/62110034/106577269-d7f1db80-6546-11eb-88ea-952899d94f45.png)
+
 ## Technologies 🔧
 
 #### Testing :
@@ -81,5 +74,18 @@ As a user, I can create an account then enter my health details. Then, I can add
 #### Frontend:
 
 1.  React
-2.  Material UI 
+2.  Material UI
 3.  Css
+
+### Lead Mentor:
+
+- Lina Jamal
+
+### Team Members:
+
+- Hassan Alnajjar
+- Iman Sedky
+- Khamis AlBashiti
+- Zein Jendeya
+
+## Resources
