@@ -8,6 +8,7 @@ const {
 	NODE_ENV,
 } = process.env;
 
+//Database Url
 let dbUrl = '';
 
 switch (NODE_ENV) {
