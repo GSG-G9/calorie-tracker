@@ -1,4 +1,4 @@
-const {} = require('pg');
+const { Pool } = require('pg');
 require('dotenv').config({ path: './config.env' });
 const {
 	DATABASE_URL,
