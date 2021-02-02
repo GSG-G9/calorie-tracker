@@ -17,6 +17,7 @@
 	],
 	"cSpell.ignoreWords": [
 		"browserslist",
+		"describedby",
 		"eslint",
 		"flowtype",
 		"plugin"
