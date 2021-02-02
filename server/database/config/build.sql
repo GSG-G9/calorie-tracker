@@ -22,12 +22,6 @@ exercise_name VARCHAR(100) NOT NULL UNIQUE,
 met Float
 );
 
-CREATE TABLE food(
-id SERIAL PRIMARY KEY,
-food_type INTEGER REFERENCES food_type(id),
-food_name VARCHAR(100) NOT NULL,
-image TEXT
-);
 
 CREATE TABLE food_category(
 id SERIAL PRIMARY KEY,
@@ -37,6 +31,13 @@ name VARCHAR(100) NOT NULL
 CREATE TABLE food_type(
 id SERIAL PRIMARY KEY,
 name VARCHAR(100) NOT NULL UNIQUE
+);
+
+CREATE TABLE food(
+id SERIAL PRIMARY KEY,
+food_type INTEGER REFERENCES food_type(id),
+food_name VARCHAR(100) NOT NULL,
+image TEXT
 );
 
 CREATE TABLE nutrition(
