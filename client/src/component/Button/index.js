@@ -6,7 +6,7 @@ const IconLabeledButton = ({
   variant,
   styles,
   icon,
-  text,
+  children,
   event,
   disable,
   starticon,
@@ -19,11 +19,11 @@ const IconLabeledButton = ({
     disabled={disable}
     onClick={event}
   >
-    {text}
+    {children}
   </Button>
 );
 
-const { string, objectOf, element, func, bool } = PropTypes;
+const { string, objectOf, element, func, bool, children } = PropTypes;
 
 IconLabeledButton.defaultProps = {
   icon: null,
@@ -36,7 +36,7 @@ IconLabeledButton.propTypes = {
   variant: string.isRequired,
   styles: objectOf(string),
   icon: element,
-  text: string.isRequired,
+  children: children.isRequired,
   event: func,
   disable: bool.isRequired,
   starticon: element,
