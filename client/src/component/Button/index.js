@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '@material-ui/core';
 
-const IconLabeledButton = ({ variant, color, icon, text, event, disable }) => (
+const IconLabeledButton = ({ variant, styles, icon, text, event, disable }) => (
   <Button
     variant={variant}
-    color={color}
+    style={styles}
     endIcon={icon}
     disabled={disable}
     onClick={event}
@@ -17,11 +17,12 @@ const IconLabeledButton = ({ variant, color, icon, text, event, disable }) => (
 IconLabeledButton.defaultProps = {
   icon: null,
   event: null,
+  styles: { color: 'green' },
 };
 
 IconLabeledButton.propTypes = {
   variant: PropTypes.string.isRequired,
-  color: PropTypes.string.isRequired,
+  styles: PropTypes.objectOf(PropTypes.string),
   icon: PropTypes.element,
   text: PropTypes.string.isRequired,
   event: PropTypes.func,
