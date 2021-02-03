@@ -14,6 +14,8 @@ const IconLabeledButton = ({ variant, styles, icon, text, event, disable }) => (
   </Button>
 );
 
+const { string, objectOf, element, func, bool } = PropTypes;
+
 IconLabeledButton.defaultProps = {
   icon: null,
   event: null,
@@ -21,12 +23,12 @@ IconLabeledButton.defaultProps = {
 };
 
 IconLabeledButton.propTypes = {
-  variant: PropTypes.string.isRequired,
-  styles: PropTypes.objectOf(PropTypes.string),
-  icon: PropTypes.element,
-  text: PropTypes.string.isRequired,
-  event: PropTypes.func,
-  disable: PropTypes.bool.isRequired,
+  variant: string.isRequired,
+  styles: objectOf(PropTypes.string),
+  icon: element,
+  text: string.isRequired,
+  event: func,
+  disable: bool.isRequired,
 };
 
 export default IconLabeledButton;
