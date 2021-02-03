@@ -30,12 +30,17 @@ function DoughnutChart({ legend, section, sectionBackground, width, height }) {
   );
 }
 
+DoughnutChart.defaultProps = {
+  width: [20],
+  height: [5],
+};
+
 DoughnutChart.propTypes = {
   legend: arrayOf(string).isRequired,
   section: arrayOf(number).isRequired,
   sectionBackground: arrayOf(string).isRequired,
-  width: arrayOf(number).isRequired,
-  height: arrayOf(number).isRequired,
+  width: arrayOf(number),
+  height: arrayOf(number),
 };
 
 export default DoughnutChart;
