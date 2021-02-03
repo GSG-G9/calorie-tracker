@@ -1,15 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FormControlLabel, Checkbox } from '@material-ui/core';
 
-const LabeledCheckbox = ({ label, color, icon, checkedIcon }) => {
-  const [state, setState] = React.useState({
+const { string, element, func, objectOf } = PropTypes;
+
+const LabeledCheckbox = ({ label, icon, checkedIcon, handleChange, style }) => {
+  const [state, setState] = useState({
     checked: true,
   });
-
-  const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-  };
 
   return (
     <FormControlLabel
@@ -18,7 +16,7 @@ const LabeledCheckbox = ({ label, color, icon, checkedIcon }) => {
           checked={state.checked}
           onChange={handleChange}
           name="checked"
-          color={color}
+          style={style}
           icon={icon}
           checkedIcon={checkedIcon}
         />
@@ -29,10 +27,11 @@ const LabeledCheckbox = ({ label, color, icon, checkedIcon }) => {
 };
 
 LabeledCheckbox.propTypes = {
-  color: PropTypes.string.isRequired,
-  icon: PropTypes.element.isRequired,
-  checkedIcon: PropTypes.element.isRequired,
-  label: PropTypes.string.isRequired,
+  icon: element.isRequired,
+  checkedIcon: element.isRequired,
+  label: string.isRequired,
+  handleChange: func.isRequired,
+  style: objectOf(string).isRequired,
 };
 
 export default LabeledCheckbox;
