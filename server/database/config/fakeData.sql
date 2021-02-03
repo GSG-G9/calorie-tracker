@@ -1,15 +1,4 @@
 INSERT INTO food_type(name) values ('food');
-INSERT INTO food_type(name) values ('food');
-INSERT INTO food_type(name) values ('food');
-INSERT INTO food_type(name) values ('food');
-INSERT INTO food_type(name) values ('food');
-INSERT INTO food_type(name) values ('food');
-INSERT INTO food_type(name) values ('meal');
-INSERT INTO food_type(name) values ('meal');
-INSERT INTO food_type(name) values ('meal');
-INSERT INTO food_type(name) values ('food');
-INSERT INTO food_type(name) values ('food');
-INSERT INTO food_type(name) values ('food');
 INSERT INTO food_type(name) values ('meal');
 
 
