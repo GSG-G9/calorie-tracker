@@ -24,7 +24,7 @@ IconLabeledButton.defaultProps = {
 
 IconLabeledButton.propTypes = {
   variant: string.isRequired,
-  styles: objectOf(PropTypes.string),
+  styles: objectOf(string),
   icon: element,
   text: string.isRequired,
   event: func,
