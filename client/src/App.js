@@ -1,10 +1,13 @@
+import React from 'react';
 import './App.css';
+import ThemeProvider from './components/ThemeProvider';
+import TestComponent from './components/TestComponent';
 
 function App() {
   return (
-    <div className="App">
-      <h1> Hi from React App</h1>
-    </div>
+    <ThemeProvider>
+      <TestComponent />
+    </ThemeProvider>
   );
 }
 
