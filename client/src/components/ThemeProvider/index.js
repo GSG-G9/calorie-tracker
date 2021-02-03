@@ -9,19 +9,31 @@ import {
 
 const { node } = PropTypes;
 
+const paletteColors = {
+  1: '#00262F',
+  2: '#044C58',
+  3: '#035C6E',
+  4: '#3F8994',
+  5: '#7DB3BD',
+  6: '#E1EBED',
+};
+
 const theme = createMuiTheme({
   palette: {
-    primary: { main: '#00262F', dark: '#fff' },
-    secondary: { main: '#E1EBED' },
+    primary: {
+      main: paletteColors[1],
+      dark: '#fff',
+      light: '#fff',
+      contrastText: paletteColors[6],
+    },
+    secondary: { main: paletteColors[6] },
   },
-  customColors: {
-    0: '#FFF',
-    1: '#00262F',
-    2: '#044C58',
-    3: '#035C6E',
-    4: '#3F8994',
-    5: '#7DB3BD',
-    6: '#E1EBED',
+  customColors: paletteColors,
+  button: {
+    backgroundColor: paletteColors[1],
+    color: paletteColors[5],
+    fontSize: '20px',
+    textTransform: 'capitalize',
   },
 });
 
