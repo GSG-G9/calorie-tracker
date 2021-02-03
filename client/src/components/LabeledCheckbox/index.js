@@ -5,9 +5,7 @@ import { FormControlLabel, Checkbox } from '@material-ui/core';
 const { string, element, func, objectOf } = PropTypes;
 
 const LabeledCheckbox = ({ label, icon, checkedIcon, handleChange, style }) => {
-  const [state, setState] = useState({
-    checked: true,
-  });
+  const [state, setState] = useState(true);
 
   return (
     <FormControlLabel
