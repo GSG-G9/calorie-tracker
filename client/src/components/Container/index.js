@@ -12,19 +12,6 @@ function ContainerComponent({
   spacing,
   ...rest
 }) {
-  /*
-  <ContainerComponent
-      screenSize="sm"
-      direction="row"
-      gridWidth="3"
-      spacing="10"
-    >
-      <p>p1</p>
-      <p>p2</p>
-      <p>p3</p>
-      <p>p4</p>
-    </ContainerComponent> 
-  */
   return (
     <Container maxWidth={screenSize} {...rest}>
       <Grid container direction={direction} justify="center" spacing={spacing}>
