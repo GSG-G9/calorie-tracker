@@ -6,6 +6,7 @@ const useStyle = makeStyles((theme) => ({
   text: {
     color: theme.palette.secondary.main,
     fontSize: '20px',
+    textTransform: 'capitalize',
   },
 }));
 
