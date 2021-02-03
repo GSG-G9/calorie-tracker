@@ -4,15 +4,15 @@ import { Button } from '@material-ui/core';
 
 const useStyle = makeStyles((theme) => ({
   text: {
-    color: theme.palette.secondary.main,
+    backgroundColor: theme.customColors[6],
+    color: theme.customColors[1],
     fontSize: '20px',
     textTransform: 'capitalize',
   },
 }));
 
 export default function TestComponent() {
-  const theme = useTheme();
-  console.log(theme);
+  // useTheme();
   const classes = useStyle();
 
   return (
