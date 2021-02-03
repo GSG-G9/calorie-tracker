@@ -31,3 +31,25 @@ INSERT INTO nutrition(food_id, calories, fat, carbs, protein, sugar, cholesterol
 INSERT INTO nutrition(food_id, calories, fat, carbs, protein, sugar, cholesterol) values (12, 52, 0, 14, 0, 20, 0);
 INSERT INTO nutrition(food_id, calories, fat, carbs, protein, sugar, cholesterol) values (13, 60, 5, 3, 6, 0, 20);
 
+INSERT INTO exercises (exercise_name, met) VALUES
+('bicycling', 7.5),
+('push ups', 3.8),
+('sit ups', 3.8),
+('pull-ups', 3.8),
+('lunge', 3.8),
+('weight lifting', 6.0),
+('squats', 5.0),
+('pilates', 3.0),
+('yoga', 3.3),
+('jogging', 7.0),
+('cardio', 4.0),
+('stretching', 2.3),
+('back exercises', 3.5),
+('abdominal crunches', 2.8),
+('jumping jacks', 8.0),
+('rope skipping', 12.3),
+('leg exercises', 3.5),
+('ski machine', 6.8),
+('aerobic', 8.0),
+('slide board',11.0),
+('slimnastics', 6.0);
