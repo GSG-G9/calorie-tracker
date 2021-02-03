@@ -1,13 +1,9 @@
 import { Doughnut } from "react-chartjs-2";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
+const { string, number, arrayOf } = PropTypes;
 
-const DoughnutChart = ({
-  legend,
-  section,
-  sectionBackground,
-  width,
-  height,
-}) => {
+function DoughnutChart({ legend, section, sectionBackground, width, height }) {
+  
   const data = {
     labels: legend,
     datasets: [
@@ -31,14 +27,14 @@ const DoughnutChart = ({
       />
     </div>
   );
-};
+}
 
 DoughnutChart.propTypes = {
-  legend: propTypes.arrayOf(propTypes.string).isRequired,
-  section: propTypes.arrayOf(propTypes.number).isRequired,
-  sectionBackground: propTypes.arrayOf(propTypes.string).isRequired,
-  width: propTypes.arrayOf(propTypes.number).isRequired,
-  height: propTypes.arrayOf(propTypes.number).isRequired,
+  legend: arrayOf(string).isRequired,
+  section: arrayOf(number).isRequired,
+  sectionBackground: arrayOf(string).isRequired,
+  width: arrayOf(number).isRequired,
+  height: arrayOf(number).isRequired,
 };
 
 export default DoughnutChart;
