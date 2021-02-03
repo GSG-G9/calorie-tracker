@@ -1,9 +1,10 @@
-import { Doughnut } from "react-chartjs-2";
-import PropTypes from "prop-types";
+import React from 'react';
+import { Doughnut } from 'react-chartjs-2';
+import PropTypes from 'prop-types';
+
 const { string, number, arrayOf } = PropTypes;
 
 function DoughnutChart({ legend, section, sectionBackground, width, height }) {
-  
   const data = {
     labels: legend,
     datasets: [
