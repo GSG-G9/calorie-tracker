@@ -29,12 +29,6 @@ const theme = createMuiTheme({
     secondary: { main: paletteColors[6] },
   },
   customColors: paletteColors,
-  button: {
-    backgroundColor: paletteColors[1],
-    color: paletteColors[5],
-    fontSize: '20px',
-    textTransform: 'capitalize',
-  },
 });
 
 function ThemeProvider({ children }) {
