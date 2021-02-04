@@ -1,37 +1,33 @@
 const bcrypt = require("bcrypt");
-const Boom = require("boom");
-const { validateSchema, signToken, boomify } = require("../utils");
+const Boom = require("@hapi/boom");
+const { validateSchema, signToken } = require("../utils");
 const { getUser } = require("../database");
 
-const login = (req, res, next) => {
-  const { email, password } = req.body;
-  let userID;
-  validateSchema
-    .validateAsync({ email, password })
-    .catch(() => {
+const login = async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+    let userID;
+    try {
+      await validateSchema.validateAsync({ email, password });
+    } catch (error) {
       throw Boom.badRequest("invalid information");
-    })
-    .then(() => getUser(email))
-    .then(({ rows, rowCount }) => {
-      if (rowCount === 0) {
-        throw Boom.unauthorized("email doesn't exist");
-      }
-      const user = rows[0];
-      userID = user.id;
+    }
 
-      return bcrypt.compare(password, user.password);
-    })
-    .then((authorized) => {
-      if (!authorized) {
-        throw Boom.unauthorized('invalid password');
-      }
-      return signToken(userID);
-    })
-    .then((token) => {
-      res.cookie("token", token, {httpOnly: true });
-      res.status(200).json({ status: 200, message: "logged in successfully" });
-    })
-    .catch(next);
+    const { rows, rowCount } = await getUser(email);
+    if (rowCount === 0) {
+      throw Boom.unauthorized("email doesn't exist");
+    }
+    const user = rows[0];
+    userID = user.id;
+    const authorized = await bcrypt.compare(password, user.password);
+    if (!authorized) {
+      throw Boom.unauthorized("invalid password");
+    }
+    const token = await signToken(userID);
+    res.cookie("token", token, { httpOnly: true });
+    res.status(200).json({ status: 200, message: "logged in successfully" });
+  } catch (err) {
+    next(err);
+  }
 };
-
 module.exports = login;

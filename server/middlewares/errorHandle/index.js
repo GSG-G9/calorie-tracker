@@ -3,8 +3,8 @@ const clientError = (req, res) => {
 }
 
 const serverError = (err, req, res, next) => {
-    const message = err.message || "something went wrong";
-    const status = err.statusCode || 500;
+    const message = err.output.payload.message || "something went wrong";
+    const status = err.output.statusCode || 500;
 
     res.status(status).send({statusCode: status, message: message});
 }
