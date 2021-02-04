@@ -1,6 +1,9 @@
 INSERT INTO food_type(name) values ('food');
 INSERT INTO food_type(name) values ('meal');
 
+INSERT INTO users (first_name,last_name,email,password) values ('has', 'has','has','has');
+
+INSERT INTO food_category(name) values ('dinner');
 
 INSERT INTO food(food_type_id, food_name) values (1, 'egg');
 INSERT INTO food(food_type_id, food_name) values (1, 'chocolate');
