@@ -3,9 +3,9 @@ const clientError = (req, res) => {
 }
 
 const serverError = (err, req, res, next) => {
-    const message = err.msg || "something went wrong";
-    const status = err.status || 500;
-console.log("error message: ", message);
+    const message = err.message || "something went wrong";
+    const status = err.statusCode || 500;
+
     res.status(status).send({statusCode: status, message: message});
 }
 

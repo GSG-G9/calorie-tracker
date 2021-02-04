@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt");
+const Boom = require("boom");
 const { validateSchema, signToken, boomify } = require("../utils");
 const { getUser } = require("../database");
 
@@ -7,22 +8,22 @@ const login = (req, res, next) => {
   let userID;
   validateSchema
     .validateAsync({ email, password })
-    .catch((err) => {
-      throw boomify(400, err.details[0].message);
+    .catch(() => {
+      throw Boom.badRequest("invalid information");
     })
     .then(() => getUser(email))
     .then(({ rows, rowCount }) => {
       if (rowCount === 0) {
-        throw boomify(400, "user doesn't exist");
+        throw Boom.unauthorized("email doesn't exist");
       }
       const user = rows[0];
       userID = user.id;
 
       return bcrypt.compare(password, user.password);
-    }).catch(next)
+    })
     .then((authorized) => {
       if (!authorized) {
-        throw boomify(400, "incorrect information, check again");
+        throw Boom.unauthorized('invalid password');
       }
       return signToken(userID);
     })
