@@ -5,7 +5,7 @@ describe('Test getFood Query',()=>{
 
   beforeEach(() => build());
   afterAll(() => connection.end());
-  test('should return all data from food table',()=>{
+  test('should return all data from food table',async ()=>{
     const foodData = [
       { id: 1, food_type_id: 1, food_name: 'egg', image: null },
       { id: 2, food_type_id: 1, food_name: 'chocolate', image: null },
@@ -21,7 +21,8 @@ describe('Test getFood Query',()=>{
       { id: 12, food_type_id: 1, food_name: 'apple', image: null },
       { id: 13, food_type_id: 2, food_name: 'Falafel', image: null },
     ];
-    return getFood().then(({rows})=> expect(rows).toEqual(foodData))
+    const {rows} = await getFood()
+    return expect(rows).toEqual(foodData)
   })
 
 })
