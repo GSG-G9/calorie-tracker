@@ -1,11 +1,10 @@
-import "./App.css";
-import Chart from "./components/Chart"
+import React from 'react';
+import './App.css';
 
 function App() {
   return (
     <div className="App">
       <h1> Hi from React App</h1>
-      <Chart />
     </div>
   );
 }
