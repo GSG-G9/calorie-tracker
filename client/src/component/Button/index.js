@@ -23,16 +23,11 @@ const IconLabeledButton = ({
 
 const { string, func, bool, children } = PropTypes;
 
-IconLabeledButton.defaultProps = {
-  event: null,
-  className: null,
-};
-
 IconLabeledButton.propTypes = {
   variant: string.isRequired,
-  className: string,
+  className: string.isRequired,
   children: children.isRequired,
-  event: func,
+  event: func.isRequired,
   disable: bool.isRequired,
 };
 
