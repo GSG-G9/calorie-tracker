@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Card, CardContent } from "@material-ui/core";
 import "./style.css";
 
-const { string } = PropTypes;
+const { string , node } = PropTypes;
 
 const CardComponent = ({ cardClassName, ContentClassName, children }) => {
   return (
@@ -16,7 +16,7 @@ const CardComponent = ({ cardClassName, ContentClassName, children }) => {
 CardComponent.propTypes = {
   cardClassName: string.isRequired,
   ContentClassName: string.isRequired,
-  children: string.isRequired,
+  children: node.isRequired,
 };
 
 export default CardComponent;
