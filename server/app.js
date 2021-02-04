@@ -22,7 +22,7 @@ const middlewares = [
 
   if(process.env.NODE_ENV === "production"){
     app.use(express.static(join(__dirname, "..", "client", "build")));
-    app.all("*", req, res, ()=>{
+    app.all("*", (req, res)=>{
       res.send(join(__dirname, "..", "client", "build", "index.html"));
     })
   }

@@ -1,11 +1,14 @@
 const { getFood } = require('../../database/queries');
 
-module.exports = (req, res,next) => {
-  getFood().then(({ rows }) =>
-    res.status(200).json({
+module.exports = async (req, res, next) => {
+  try {
+    const { rows } = await getFood();
+    return res.status(200).json({
       message: 'success',
       status: 200,
       data: rows,
-    })
-  ).catch(next);
+    });
+  } catch (error) {
+    next(error);
+  }
 };
