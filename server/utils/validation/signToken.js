@@ -1,5 +1,5 @@
 const { sign } = require("jsonwebtoken");
-require("dotenv")("./config.env");
+require('dotenv').config({ path: './config.env' });
 
 const signToken = (userID) => {
   return new Promise((resolve, reject) => {

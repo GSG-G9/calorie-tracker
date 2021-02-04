@@ -1,10 +1,9 @@
-const {clientError, serverError} = require("./middlewares")
+const {clientError, serverError} = require("./middlewares");
+const {login} = require("./controllers")
 const router = require('express').Router();
 
 
-router.get('/hi', (req, res) => {
-    res.send('hello')
-});
+router.post("/login", login);
 
 router.use(clientError);
 router.use(serverError);
