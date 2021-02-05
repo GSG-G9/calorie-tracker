@@ -5,6 +5,7 @@ INSERT INTO users (first_name,last_name,email,password) values ('has', 'has','ha
 
 INSERT INTO food_category(name) values ('dinner');
 
+
 INSERT INTO food(food_type_id, food_name) values (1, 'egg');
 INSERT INTO food(food_type_id, food_name) values (1, 'chocolate');
 INSERT INTO food(food_type_id, food_name) values (1, 'checken');
@@ -56,3 +57,6 @@ INSERT INTO exercises (exercise_name, met) VALUES
 ('aerobic', 8.0),
 ('slide board',11.0),
 ('slimnastics', 6.0);
+
+
+INSERT INTO UserFoodRelation(users_id,food_id,food_category_id,amount_in_gram) values (1,1,1,3);
