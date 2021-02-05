@@ -4,16 +4,18 @@ DROP TABLE IF EXISTS users, exercises, food, food_category, food_type, nutrition
 
 CREATE TABLE users(
 id SERIAL PRIMARY KEY,
-first_name VARCHAR(100) NOT NULL,
-last_name VARCHAR(100) NOT NULL,
-email VARCHAR (100) NOT NULL UNIQUE,
-password VARCHAR(250) NOT NULL ,
-gender CHAR(1),
-height INTEGER,
+username VARCHAR(100),
+email VARCHAR (100),
+password VARCHAR(250),
+name VARCHAR(100) NOT NULL,
+gender VARCHAR(100),
+minAge INTEGER,
+maxAge INTEGER,
 weight INTEGER,
-age INTEGER,
-image TEXT,
-daily_calories_goal INTEGER
+height INTEGER,
+goalWeight DECIMAL(5,2),
+
+
 );
 
 CREATE TABLE exercises(

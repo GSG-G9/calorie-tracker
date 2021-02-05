@@ -1,3 +1,8 @@
+INSERT INTO users(name, password, email) values ('lina', '2062519s@#', 'lina@gmail.com');
+INSERT INTO users(name, password, email) values ('zain', '2065519s@#', 'zain@gmail.com');
+INSERT INTO users(name, password, email) values ('iman', '20617889s@#', 'iman.ewaiti@gmail.com');
+INSERT INTO users(name, password, email) values ('abood', '20617889s@#', 'abood.ewaiti@gmail.com');
+      
 INSERT INTO food_type(name) values ('food');
 INSERT INTO food_type(name) values ('meal');
 

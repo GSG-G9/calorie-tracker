@@ -1,5 +1,8 @@
 require("dotenv").config();
 
+const serverError = require('./middlewares/errorHandle')
+
+
 const express = require("express");
 const { join } = require('path');
 const compression = require('compression');
@@ -19,6 +22,8 @@ const middlewares = [
 
   app.use(middlewares);
   app.use('/api/v1/', router);
+
+  router.use(serverError);
 
 
 module.exports =  app ;
