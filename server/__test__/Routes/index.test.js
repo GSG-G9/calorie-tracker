@@ -40,6 +40,7 @@ test('router returns 200 if user logged in successfully', (done)=>{
   })
   .send(JSON.stringify({email: 'zein@gmail.com', password: 'zein2002jendeya'}))
   .expect(200)
+  .expect('Content-Type', /json/)
   .end((err, res)=> {
     if( err) return done(err);
     expect(res.status).toBe(200);
