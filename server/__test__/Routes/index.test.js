@@ -43,7 +43,7 @@ test('router returns 200 if user logged in successfully', (done)=>{
   .end((err, res)=> {
     if( err) return done(err);
     expect(res.status).toBe(200);
-    done();
+    return done();
   });
 })
 
