@@ -25,7 +25,7 @@ module.exports = async (req, res, next) => {
 		]);
 		const remainingCalories =
 			userCalories - userFoodCalories + userExercisesCalories;
-		res.status(200).json({
+		res.json({
 			status: 200,
 			message: 'success',
 			data: {
