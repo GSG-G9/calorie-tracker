@@ -16,7 +16,7 @@ export default function TestComponent() {
 
   return (
     <Button variant="contained" color="primary" className={classes.text}>
-      Hassanx
+      Button
     </Button>
   );
 }
