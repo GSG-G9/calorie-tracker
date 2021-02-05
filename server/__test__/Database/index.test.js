@@ -2,7 +2,7 @@ const { getUser } = require("../../database/queries");
 const build = require("../../database/config/build");
 const connection = require("../../database/config/connection");
 
-describe("Test getFood Query", () => {
+describe("Test getUser Query", () => {
   beforeEach(() => build());
   afterAll(() => connection.end());
   test("should return the user zein jendeya from users table", async () => {
