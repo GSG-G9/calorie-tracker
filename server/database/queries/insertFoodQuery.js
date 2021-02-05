@@ -1,9 +1,9 @@
 const connection = require("../config/connection");
 
-const insertFoodQuery = (users_id, food_id, food_category_id) => {
+const insertFoodQuery = (user_id, foodId, categoryId ,grams) => {
   return connection.query({
-    text: "INSERT INTO UserFoodRelation(users_id, food_id, food_category_id) values ($1,$2,$3)",
-    values: [users_id, food_id, food_category_id],
+    text: "INSERT INTO UserFoodRelation(users_id, food_id, food_category_id, amount_in_gram) values ($1,$2,$3,$4)",
+    values: [user_id, foodId, categoryId , grams],
   });
 };
 
