@@ -6,7 +6,7 @@ router.get('/hi', (req, res) => {
     res.send('hello')
 });
 
-router.post('/user/:id/Food',insertFoodController);
+router.post('/user/:id/category/:categoryId/food/:foodId',insertFoodController);
 
 router.use(clientError);
 router.use(serverError);
