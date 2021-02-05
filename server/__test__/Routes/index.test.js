@@ -35,10 +35,10 @@ test('router returns 400 if there is no email', (done) => {
 test('router returns 200 if user logged in successfully', (done)=>{
   supertest(router)
   .post("/api/v1/login")
-  .send(JSON.stringify({email: 'zein@gmail.com', password: 'zein2002jendeya'}))
   .set({
-      'Content-Type': 'application/json',
-    })
+    'Content-Type': 'application/json',
+  })
+  .send(JSON.stringify({email: 'zein@gmail.com', password: 'zein2002jendeya'}))
   .expect(200)
   .end((err, res)=> {
     if( err) return done(err);
