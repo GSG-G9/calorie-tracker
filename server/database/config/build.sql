@@ -9,11 +9,11 @@ last_name VARCHAR(100) NOT NULL,
 email VARCHAR (100) NOT NULL UNIQUE,
 password VARCHAR(250) NOT NULL ,
 gender CHAR(1),
-height INTEGER,
+height float,
 weight INTEGER,
 age INTEGER,
 image TEXT,
-daily_calories_goal INTEGER
+daily_calories_goal float
 );
 
 CREATE TABLE exercises(
@@ -43,15 +43,15 @@ image TEXT
 CREATE TABLE nutrition(
 id SERIAL PRIMARY KEY,
 food_id INTEGER REFERENCES food(id) ON DELETE CASCADE ON UPDATE CASCADE,
-calories INTEGER,
-fat INTEGER,
-carbs INTEGER,
-protein INTEGER,
-sugar INTEGER,
-vitamin_A INTEGER,
-vitamin_C INTEGER,
-vitamin_D INTEGER,
-cholesterol INTEGER
+calories float,
+fat float,
+carbs float,
+protein float,
+sugar float,
+vitamin_A float,
+vitamin_C float,
+vitamin_D float,
+cholesterol float
 );
 
 CREATE TABLE UserExerciseRelation(
