@@ -32,21 +32,21 @@ test('router returns 400 if there is no email', (done) => {
 });
 
 
-// test('router returns 200 if user logged in successfully', (done)=>{
-//   supertest(router)
-//   .post("/api/v1/login")
-//   .set({
-//     'Content-Type': 'application/json',
-//   })
-//   .send(JSON.stringify({email: 'zein@gmail.com', password: 'zein2002jendeya'}))
-//   .expect(200)
-//   .expect('Content-Type', /json/)
-//   .end((err, res)=> {
-//     if( err) return done(err);
-//     expect(res.status).toBe(200);
-//     done();
-//   });
-// })
+test('router returns 200 if user logged in successfully', (done)=>{
+  supertest(router)
+  .post("/api/v1/login")
+  .set({
+    'Content-Type': 'application/json',
+  })
+  .send(JSON.stringify({email: 'zein@gmail.com', password: 'zein2002jendeya'}))
+  .expect(200)
+  .expect('Content-Type', /json/)
+  .end((err, res)=> {
+    if( err) return done(err);
+    expect(res.status).toBe(200);
+    done();
+  });
+})
 
 test('router returns 401 if password is incorrect', (done)=>{
   supertest(router)
