@@ -1,2 +1,1 @@
-
-module.exports.getFood = require('./getFood')
+module.exports.getFood = require('./getFood');
