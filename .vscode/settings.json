@@ -13,7 +13,10 @@
 	"editor.formatOnSave": true,
 	"files.eol": "\n",
 	"cSpell.words": [
-		"pgport"
+		"pgport",
+		"usercalories",
+		"userexercisescalories",
+		"userfoodcalories"
 	],
 	"cSpell.ignoreWords": [
 		"starticon"

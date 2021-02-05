@@ -3,5 +3,5 @@ const connection = require('./connection.js');
 
 buildFunction()
 	.then(() => console.log('Build Success'))
-	.catch(() => console.log('Build Fails'))
+	.catch((e) => console.log('Build Fails',e))
 	.finally(() => connection.end());
