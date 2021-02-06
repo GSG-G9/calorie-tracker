@@ -3,10 +3,9 @@ const app = require("../../app");
 const connection = require("../../database/config/connection");
 const build = require("../../database/config/build");
 
-beforeEach(() => build());
-afterAll(() => connection.end());
-
 describe("Test POST /api/v1/user/:id/category/:categoryId/food/:foodId Route", () => {
+  beforeEach(() => build());
+  afterAll(() => connection.end());
 
   test("Should return successfully added", (done) => {
     const reqFood = {
@@ -16,7 +15,7 @@ describe("Test POST /api/v1/user/:id/category/:categoryId/food/:foodId Route", (
     return request(app)
       .post("/api/v1/user/1/category/1/food/1")
       .set({
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       })
       .send(JSON.stringify(reqFood))
       .expect(200)
@@ -24,7 +23,7 @@ describe("Test POST /api/v1/user/:id/category/:categoryId/food/:foodId Route", (
       .end((err, res) => {
         if (err) return done(err);
         expect(res.status).toBe(200);
-        expect(res.body.message).toBe('Food Successfully Added')
+        expect(res.body.message).toBe("Food Successfully Added");
         done();
       });
   });
@@ -37,7 +36,7 @@ describe("Test POST /api/v1/user/:id/category/:categoryId/food/:foodId Route", (
     return request(app)
       .post("/api/v1/user/1/category/1/food/1")
       .set({
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       })
       .send(JSON.stringify(reqFood))
       .expect(400)
@@ -45,13 +44,8 @@ describe("Test POST /api/v1/user/:id/category/:categoryId/food/:foodId Route", (
       .end((err, res) => {
         if (err) return done(err);
         expect(res.status).toBe(400);
-        expect(res.body.message).toBe('\"grams\" must be a positive number')
+        expect(res.body.message).toBe('"grams" must be a positive number');
         done();
       });
   });
-
 });
-
-
-
-  

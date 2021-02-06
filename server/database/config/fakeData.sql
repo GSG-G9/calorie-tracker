@@ -58,5 +58,4 @@ INSERT INTO exercises (exercise_name, met) VALUES
 ('slide board',11.0),
 ('slimnastics', 6.0);
 
-
 INSERT INTO UserFoodRelation(users_id,food_id,food_category_id,amount_in_gram) values (1,1,1,3);
