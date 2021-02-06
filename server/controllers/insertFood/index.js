@@ -16,8 +16,7 @@ const insertFoodController = async (req, res, next) => {
     } catch (err) {
       throw Boom.badRequest(err.details.map((e) => e.message).join('\n'));
     }
-    const foodData = insertFoodQuery(user_id, foodId, categoryId,grams);
-    await foodData;
+    const foodData = await insertFoodQuery(user_id, foodId, categoryId,grams);
     res.json({ message: "Food Successfully Added", status: 200 });
   } catch (err) {
     next(err);
