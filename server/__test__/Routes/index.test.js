@@ -69,10 +69,10 @@ describe("POST /api/v1/login", () => {
     supertest(router)
       .post("/api/v1/login")
       .send({ email: "user@gmail.com", password: "dddddd888" })
-      .expect(401)
+      .expect(422)
       .end((err, res) => {
         if (err) return done(err);
-        expect(res.statusCode).toBe(401);
+        expect(res.statusCode).toBe(422);
         done();
       });
   });
