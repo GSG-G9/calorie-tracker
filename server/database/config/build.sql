@@ -13,9 +13,7 @@ minAge INTEGER,
 maxAge INTEGER,
 weight INTEGER,
 height INTEGER,
-goalWeight DECIMAL(5,2),
-
-
+goalWeight DECIMAL(5,2)
 );
 
 CREATE TABLE exercises(

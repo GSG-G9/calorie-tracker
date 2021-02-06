@@ -45,12 +45,12 @@ const signupUser = require('../database/queries/signup');
   if (rowCount > 0) {
     throw Boom.conflict('user already exists');
    }
-   else{
+  
     const hashedPassword = await bcrypt.hash(password, 10);
-    signupUser(username, hashedPassword, email, name, gender, minAge, maxAge, weight, height, goalWeight);
-    res.status(200).json({ status: 200, message: "signed up successfully" });
+    await signupUser( username, hashedPassword, email, name, gender, minAge, maxAge, weight, height, goalWeight);
+    res.json({ status: 200, message: "signed up successfully" });
 
-   }
+   
 
    }
   catch(err){

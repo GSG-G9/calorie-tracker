@@ -1,4 +1,7 @@
-require("dotenv").config();
+// require("dotenv").config();
+require('dotenv').config({path:'./config.env'})
+
+
 
 const serverError = require('./middlewares/errorHandle')
 
