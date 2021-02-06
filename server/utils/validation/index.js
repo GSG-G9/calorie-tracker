@@ -1,8 +1,8 @@
 const joi = require('joi');
 
- const schema = joi.object({
-  username: joi.string().required(),
-  name: joi.string().required(),
+const schema = joi.object({
+  firstName: joi.string().required(),
+  lastName: joi.string().required(),
   email: joi.string().email().required(),
   password: joi.string().alphanum().required(),
   gender: joi.string().required(),
@@ -11,6 +11,7 @@ const joi = require('joi');
   weight: joi.number().required(),
   height: joi.number().required(),
   goalWeight: joi.number().required(),
+  activity: joi.string().required(),
 
 });
 module.exports = schema

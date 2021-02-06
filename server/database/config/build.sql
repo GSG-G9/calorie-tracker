@@ -1,20 +1,29 @@
 BEGIN;
 
-DROP TABLE IF EXISTS users, exercises, food, food_category, food_type, nutrition, UserExerciseRelation, UserFoodRelation, news CASCADE;
+DROP TABLE IF EXISTS users, activity, exercises, food, food_category, food_type, nutrition, UserExerciseRelation, UserFoodRelation, news CASCADE;
 
 CREATE TABLE users(
 id SERIAL PRIMARY KEY,
-username VARCHAR(100),
+lastName VARCHAR(100),
 email VARCHAR (100),
 password VARCHAR(250),
-name VARCHAR(100) NOT NULL,
+firstName VARCHAR(100) NOT NULL,
 gender VARCHAR(100),
 minAge INTEGER,
 maxAge INTEGER,
 weight INTEGER,
 height INTEGER,
-goalWeight DECIMAL(5,2)
+goalWeight INTEGER,
+dailyCaloriesGoal INTEGER
 );
+
+
+CREATE TABLE activity(
+id SERIAL PRIMARY KEY,
+users_id INTEGER REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE,
+activity_name VARCHAR(100) NOT NULL 
+);
+
 
 CREATE TABLE exercises(
 id SERIAL PRIMARY KEY,

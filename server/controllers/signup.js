@@ -5,35 +5,39 @@ const Boom = require('boom')
 const schema = require('../utils/validation');
 const getUserByEmail = require('../database/queries/getEmail');
 const signupUser = require('../database/queries/signup');
+const calculateDailyCalories = require('../utils/dailyCalories')
 
  const signup = async (req, res, next) => {
    try{
     const {
-      username,
+      lastName,
       email,
       password,
-      name,
+      firstName,
       gender,
       minAge,
       maxAge,
       weight,
       height,
       goalWeight,
+      activity
+
     } = req.body;
   
     try{
       await schema
           .validateAsync({
-            username,
+            lastName,
             email,
             password,
-            name,
+            firstName,
             gender,
             minAge,
             maxAge,
             weight,
             height,
             goalWeight,
+            activity
           })
     }
     catch(err){
@@ -45,9 +49,12 @@ const signupUser = require('../database/queries/signup');
   if (rowCount > 0) {
     throw Boom.conflict('user already exists');
    }
+
+   let dailyCaloriesGoal = calculateDailyCalories(gender, activity, weight, height, minAge);
+
   
     const hashedPassword = await bcrypt.hash(password, 10);
-    await signupUser( username, hashedPassword, email, name, gender, minAge, maxAge, weight, height, goalWeight);
+    await signupUser( lastName, hashedPassword, email, firstName, gender, minAge, maxAge, weight, height, goalWeight, dailyCaloriesGoal);
     res.json({ status: 200, message: "signed up successfully" });
 
    
