@@ -6,11 +6,13 @@ const { getUser } = require("../database");
 const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
-    let userID;
     try {
-      await validateSchema.validateAsync({ email, password }, { abortEarly: false });
+      await validateSchema.validateAsync(
+        { email, password },
+        { abortEarly: false }
+      );
     } catch (error) {
-      throw Boom.badRequest(error.details.map((e)=>e.message).join('\n'));
+      throw Boom.badRequest(error.details.map((e) => e.message).join("\n"));
     }
 
     const { rows, rowCount } = await getUser(email);
@@ -19,12 +21,15 @@ const login = async (req, res, next) => {
     }
 
     const user = rows[0];
-    userID = user.email;
     const authorized = await bcrypt.compare(password, user.password);
     if (!authorized) {
       throw Boom.unauthorized("invalid password");
     }
-    const token = await signToken(userID);
+    const token = await signToken({
+      email: user.email,
+      name: user.first_name + " " + user.last_name,
+      image: user.image,
+    });
 
     res.cookie("token", token, { httpOnly: true });
     res.status(200).json({ status: 200, message: "logged in successfully" });
