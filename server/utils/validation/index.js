@@ -6,12 +6,11 @@ const schema = joi.object({
   email: joi.string().email().required(),
   password: joi.string().alphanum().required(),
   gender: joi.string().required(),
-  minAge: joi.number().required(),
-  maxAge: joi.number().required(),
+  age: joi.number().required(),
   weight: joi.number().required(),
   height: joi.number().required(),
   goalWeight: joi.number().required(),
-  activity: joi.string().required(),
+  activity_id: joi.number().required(),
 
 });
 module.exports = schema

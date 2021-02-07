@@ -1,9 +1,10 @@
 const connection = require("../config/connection");
 
-const signupUser = (...args) => {
+const signupUser = ({lastName, email, password, firstName, gender, age, weight, height, goalWeight, dailyCaloriesGoal, activity_id}) => {
+const args = [lastName, email, password, firstName, gender, age, weight, height, goalWeight, dailyCaloriesGoal, activity_id]
   return connection.query({
     text:
-      "INSERT INTO users(lastName, email, password, firstName, gender, minAge, maxAge, weight, height, goalWeight, dailyCaloriesGoal) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *;",
+      "INSERT INTO users(lastName, email, password, firstName, gender, age, weight, height, goalWeight, dailyCaloriesGoal, activity_id) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *;",
     values: args,
   });
 };

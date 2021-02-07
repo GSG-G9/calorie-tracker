@@ -1,5 +1,4 @@
 
-module.exports = serverError;
 const clientError = (req, res) => {
     res.status(404).send({statusCode: 404, message: "page not found"});
 }

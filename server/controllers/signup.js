@@ -1,44 +1,24 @@
 const bcrypt = require("bcrypt");
-const Boom = require("boom");
+const Boom = require("@hapi/boom");
 
 const schema = require("../utils/validation");
 const getUserByEmail = require("../database/queries/getEmail");
 const signupUser = require("../database/queries/signup");
-const insertUserActivity = require("../database/queries/insertUserActivity");
+const getUserActivity = require("../database/queries/getUserActivity");
 const calculateDailyCalories = require("../utils/dailyCalories");
+const { message } = require("../utils/validation");
 
 const signup = async (req, res, next) => {
   try {
-    const {
-      lastName,
-      email,
-      password,
-      firstName,
-      gender,
-      minAge,
-      maxAge,
-      weight,
-      height,
-      goalWeight,
-      activity,
-    } = req.body;
-
+    const userData = req.body;
+    const { activity_id } = userData;
     try {
-      await schema.validateAsync({
-        lastName,
-        email,
-        password,
-        firstName,
-        gender,
-        minAge,
-        maxAge,
-        weight,
-        height,
-        goalWeight,
-        activity,
-      });
+      await schema.validateAsync(userData, { abortEarly: false });
     } catch (err) {
-      throw Boom.badRequest(err.details[0].message);
+      console.log(err);
+      throw Boom.badRequest(
+        err.details.map(({ message }) => message).join("\n")
+      );
     }
 
     const { rowCount } = await getUserByEmail(email);
@@ -46,31 +26,23 @@ const signup = async (req, res, next) => {
     if (rowCount > 0) {
       throw Boom.conflict("user already exists");
     }
+    const {
+      rows: [{ activity_value: activityValue }],
+    } = await getUserActivity(activity_id);
 
-    let dailyCaloriesGoal = calculateDailyCalories(
-      gender,
-      activity,
-      weight,
-      height,
-      minAge
-    );
+    let dailyCaloriesGoal = calculateDailyCalories({
+      ...userData,
+      activityValue,
+    });
+    console.log(...userData);
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    await insertUserActivity(activity);
-    await signupUser(
-      lastName,
-      hashedPassword,
-      email,
-      firstName,
-      gender,
-      minAge,
-      maxAge,
-      weight,
-      height,
-      goalWeight,
-      dailyCaloriesGoal
-    );
-    res.json({ status: 200, message: "signed up successfully" });
+    await signupUser({
+      ...userData,
+      password: hashedPassword,
+      dailyCaloriesGoal,
+    });
+    res.status(201).json({ status: 201, message: "signed up successfully" });
   } catch (err) {
     next(err);
   }
