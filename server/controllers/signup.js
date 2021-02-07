@@ -1,33 +1,35 @@
-const bcrypt = require("bcrypt");
-const Boom = require("@hapi/boom");
+const bcrypt = require('bcrypt');
+const Boom = require('@hapi/boom');
 
-const signupSchema = require("../utils/validation");
-const getUserByEmail = require("../database/queries/getEmail");
-const signupUser = require("../database/queries/signup");
-const getUserActivity = require("../database/queries/getUserActivity");
-const calculateDailyCalories = require("../utils/dailyCalories");
+const signupSchema = require('../utils/validation/signupSchema');
+const getUserByEmail = require('../database/queries/getEmail');
+const signupUser = require('../database/queries/signup');
+const getUserActivity = require('../database/queries/getUserActivity');
+const calculateDailyCalories = require('../utils/dailyCalories');
 
 const signup = async (req, res, next) => {
   try {
     const userData = req.body;
-    const { activity_id, email,password} = userData;
+    const { activityId, email, password } = userData;
+    console.log(activityId, 44);
     try {
       await signupSchema.validateAsync(userData, { abortEarly: false });
     } catch (err) {
       throw Boom.badRequest(
-        err.details.map(({ message }) => message).join("\n")
+        err.details.map(({ message }) => message).join('\n'),
       );
     }
 
     const { rowCount } = await getUserByEmail(email);
 
     if (rowCount > 0) {
-      throw Boom.conflict("user already exists");
+      throw Boom.conflict('user already exists');
     }
 
     const {
-      rows:activityValueData,rowCount:activityValueRowCount
-    } = await getUserActivity(activity_id);
+      rows: activityValueData,
+      rowCount: activityValueRowCount,
+    } = await getUserActivity(activityId);
 
     if (!activityValueRowCount) {
       throw Boom.notFound('activity id not found');
@@ -35,7 +37,7 @@ const signup = async (req, res, next) => {
 
     const [{ activity_value: activityValue }] = activityValueData;
 
-    let dailyCaloriesGoal = calculateDailyCalories({
+    const dailyCaloriesGoal = calculateDailyCalories({
       ...userData,
       activityValue,
     });
@@ -46,7 +48,7 @@ const signup = async (req, res, next) => {
       password: hashedPassword,
       dailyCaloriesGoal,
     });
-    res.status(201).json({ status: 201, message: "signed up successfully" });
+    res.status(201).json({ status: 201, message: 'signed up successfully' });
   } catch (err) {
     next(err);
   }

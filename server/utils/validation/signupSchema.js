@@ -10,7 +10,6 @@ const signupSchema = joi.object({
   weight: joi.number().required(),
   height: joi.number().required(),
   goalWeight: joi.number().required(),
-  activity_id: joi.number().required(),
-
+  activityId: joi.number().required(),
 });
-module.exports = signupSchema
+module.exports = signupSchema;

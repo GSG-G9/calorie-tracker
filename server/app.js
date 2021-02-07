@@ -1,11 +1,12 @@
-require("dotenv").config({ path: "./config.env" });
+require('dotenv').config({ path: './config.env' });
 
-const express = require("express");
-const { join } = require("path");
-const compression = require("compression");
-const cookieParser = require("cookie-parser");
+const express = require('express');
+const { join } = require('path');
+const compression = require('compression');
+const cookieParser = require('cookie-parser');
 
-const router = require("./router");
+const router = require('./router');
+
 const app = express();
 
 app.set('port', process.env.PORT || 5000);
