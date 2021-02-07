@@ -8,5 +8,3 @@ const getUserActivity = (activity_id) => {
 };
 
 module.exports = getUserActivity;
-
-
