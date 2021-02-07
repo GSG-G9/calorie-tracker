@@ -1,19 +1,18 @@
 const bcrypt = require("bcrypt");
 const Boom = require("@hapi/boom");
 
-const schema = require("../utils/validation");
+const signupSchema = require("../utils/validation");
 const getUserByEmail = require("../database/queries/getEmail");
 const signupUser = require("../database/queries/signup");
 const getUserActivity = require("../database/queries/getUserActivity");
 const calculateDailyCalories = require("../utils/dailyCalories");
-const { message } = require("../utils/validation");
 
 const signup = async (req, res, next) => {
   try {
     const userData = req.body;
     const { activity_id } = userData;
     try {
-      await schema.validateAsync(userData, { abortEarly: false });
+      await signupSchema.validateAsync(userData, { abortEarly: false });
     } catch (err) {
       console.log(err);
       throw Boom.badRequest(
@@ -34,7 +33,6 @@ const signup = async (req, res, next) => {
       ...userData,
       activityValue,
     });
-    console.log(...userData);
 
     const hashedPassword = await bcrypt.hash(password, 10);
     await signupUser({

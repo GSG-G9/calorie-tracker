@@ -1,10 +1,10 @@
 const joi = require('joi');
 
-const schema = joi.object({
+const signupSchema = joi.object({
   firstName: joi.string().required(),
   lastName: joi.string().required(),
   email: joi.string().email().required(),
-  password: joi.string().alphanum().required(),
+  password: joi.string().alphanum().min(8).required(),
   gender: joi.string().required(),
   age: joi.number().required(),
   weight: joi.number().required(),
@@ -13,4 +13,4 @@ const schema = joi.object({
   activity_id: joi.number().required(),
 
 });
-module.exports = schema
+module.exports = signupSchema
