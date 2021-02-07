@@ -1,9 +1,8 @@
 const router = require('express').Router();
 const { clientError, serverError } = require('./middlewares');
+const { healthNews } = require('./controllers');
 
-router.get('/hi', (req, res) => {
-  res.send('hello');
-});
+router.get('/healthnews', healthNews);
 
 router.use(clientError);
 router.use(serverError);
