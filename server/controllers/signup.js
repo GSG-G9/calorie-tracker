@@ -10,11 +10,10 @@ const calculateDailyCalories = require("../utils/dailyCalories");
 const signup = async (req, res, next) => {
   try {
     const userData = req.body;
-    const { activity_id, email} = userData;
+    const { activity_id, email,password} = userData;
     try {
       await signupSchema.validateAsync(userData, { abortEarly: false });
     } catch (err) {
-      console.log(err);
       throw Boom.badRequest(
         err.details.map(({ message }) => message).join("\n")
       );
@@ -25,14 +24,22 @@ const signup = async (req, res, next) => {
     if (rowCount > 0) {
       throw Boom.conflict("user already exists");
     }
+
     const {
-      rows: [{ activity_value: activityValue }],
+      rows:activityValueData,rowCount:activityValueRowCount
     } = await getUserActivity(activity_id);
+
+    if (!activityValueRowCount) {
+			throw Boom.notFound('activity id not found');
+		}
+
+    const [{ activity_value: activityValue }] = activityValueData;
 
     let dailyCaloriesGoal = calculateDailyCalories({
       ...userData,
       activityValue,
     });
+
 
     const hashedPassword = await bcrypt.hash(password, 10);
     await signupUser({
