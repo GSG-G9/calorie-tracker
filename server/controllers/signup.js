@@ -10,7 +10,7 @@ const calculateDailyCalories = require("../utils/dailyCalories");
 const signup = async (req, res, next) => {
   try {
     const userData = req.body;
-    const { activity_id } = userData;
+    const { activity_id, email} = userData;
     try {
       await signupSchema.validateAsync(userData, { abortEarly: false });
     } catch (err) {
