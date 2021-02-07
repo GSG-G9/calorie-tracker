@@ -1,8 +1,6 @@
 const router = require('express').Router();
 const { clientError, serverError } = require('./middlewares');
-const { login } = require('./controllers');
-
-const signup = require('./controllers');
+const { login, signup } = require('./controllers');
 
 router.post('/signup', signup);
 router.post('/login', login);
