@@ -1,15 +1,19 @@
 const bcrypt = require('bcrypt');
 const Boom = require('@hapi/boom');
 
-const signupSchema = require('../utils');
-const getUserByEmail = require('../database/queries/getEmail');
-const signupUser = require('../database/queries/signup');
-const getUserActivity = require('../database/queries/getUserActivity');
+const { signupSchema } = require('../utils');
+const {
+  getUserByEmail,
+  getUserActivity,
+  signupUser,
+} = require('../database/queries');
+
 const calculateDailyCalories = require('../utils/dailyCalories');
 
 const signup = async (req, res, next) => {
   try {
     const userData = req.body;
+
     const { activityId, email, password } = userData;
     try {
       await signupSchema.validateAsync(userData, { abortEarly: false });

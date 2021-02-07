@@ -1,13 +1,13 @@
 const bcrypt = require('bcrypt');
 const Boom = require('@hapi/boom');
-const { validateSchema, signToken } = require('../utils');
-const { getUser } = require('../database');
+const { loginSchema, signToken } = require('../utils');
+const { getUserByEmail } = require('../database/queries');
 
 const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
     try {
-      await validateSchema.validateAsync(
+      await loginSchema.validateAsync(
         { email, password },
         { abortEarly: false },
       );
@@ -15,7 +15,7 @@ const login = async (req, res, next) => {
       throw Boom.badRequest(error.details.map((e) => e.message).join('\n'));
     }
 
-    const { rows, rowCount } = await getUser(email);
+    const { rows, rowCount } = await getUserByEmail(email);
     if (rowCount === 0) {
       throw Boom.badData("email doesn't exist");
     }
