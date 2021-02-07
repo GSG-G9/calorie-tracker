@@ -1,3 +1,10 @@
+INSERT INTO activity (activity_name, activity_value) VALUES
+('very active', 1.725),
+('active', 1.55),
+('light active', 1.375),
+('lazy', 1.25);
+
+
 INSERT INTO users(firstName, password, email) values ('lina', '2062519s@#', 'lina@gmail.com');
 INSERT INTO users(firstName, password, email) values ('zain', '2065519s@#', 'zain@gmail.com');
 INSERT INTO users(firstName, password, email) values ('iman', '20617889s@#', 'iman.ewaiti@gmail.com');
@@ -6,6 +13,7 @@ INSERT INTO users(firstName, password, email) values ('abood', '20617889s@#', 'a
       
 INSERT INTO food_type(name) values ('food');
 INSERT INTO food_type(name) values ('meal');
+
 
 
 INSERT INTO food(food_type_id, food_name) values (1, 'egg');
