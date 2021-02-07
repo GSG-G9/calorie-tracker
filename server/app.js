@@ -8,7 +8,7 @@ const cookieParser = require("cookie-parser");
 const router = require("./router");
 const app = express();
 
-app.set("port", process.env.PORT || 5000);
+app.set('port', process.env.PORT || 5000);
 
 const middlewares = [
   compression(),
@@ -18,12 +18,12 @@ const middlewares = [
 ];
 
 app.use(middlewares);
-app.use("/api/v1/", router);
+app.use('/api/v1/', router);
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(join(__dirname, "..", "client", "build")));
-  app.all("*", (req, res) => {
-    res.send(join(__dirname, "..", "client", "build", "index.html"));
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(join(__dirname, '..', 'client', 'build')));
+  app.all('*', (req, res) => {
+    res.send(join(__dirname, '..', 'client', 'build', 'index.html'));
   });
 }
 
