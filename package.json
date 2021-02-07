@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development node server/index.js",
+    "dev": "cross-env NODE_ENV=development nodemon server/index.js",
     "kill": "fuser -k 5000/tcp",
     "server": "npm run dev",
     "client": "cd client && npm start",
@@ -34,7 +34,7 @@
   "homepage": "https://github.com/GSG-G9/calorie-tracker#readme",
   "dependencies": {
     "@hapi/boom": "^9.1.1",
-    "boom": "^7.3.0",
+    "bcrypt": "^5.0.0",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.5",
     "dotenv": "^8.2.0",
