@@ -1,8 +1,8 @@
-const { sign } = require("jsonwebtoken");
+const { sign } = require('jsonwebtoken');
 require('dotenv').config({ path: './config.env' });
 
-const signToken = (userID) => {
-  return new Promise((resolve, reject) => {
+const signToken = (userID) =>
+  new Promise((resolve, reject) => {
     sign(userID, process.env.SECRET_KEY, (err, token) => {
       if (err) {
         reject(err);
@@ -11,6 +11,5 @@ const signToken = (userID) => {
       }
     });
   });
-};
 
 module.exports = signToken;

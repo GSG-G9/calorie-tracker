@@ -1,5 +1,5 @@
-const validateSchema = require("./validation");
-const signToken = require("./signToken")
+const validateSchema = require('./validation');
+const signToken = require('./signToken');
 
 module.exports = {
   validateSchema,
