@@ -40,7 +40,6 @@ const signup = async (req, res, next) => {
       activityValue,
     });
 
-
     const hashedPassword = await bcrypt.hash(password, 10);
     await signupUser({
       ...userData,
