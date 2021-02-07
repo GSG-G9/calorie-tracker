@@ -1,4 +1,4 @@
-const getNews = require('./queries');
+const { getNews } = require('./queries');
 
 module.exports = {
   getNews,
