@@ -2,6 +2,8 @@ const buildFunction = require('./build.js');
 const connection = require('./connection.js');
 
 buildFunction()
-	.then(() => console.log('Build Success'))
-	.catch(() => console.log('Build Fails'))
-	.finally(() => connection.end());
+  // eslint-disable-next-line no-console
+  .then(() => console.log('Build Success'))
+  // eslint-disable-next-line no-console
+  .catch(() => console.log('Build Fails'))
+  .finally(() => connection.end());
