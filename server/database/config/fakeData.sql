@@ -53,3 +53,11 @@ INSERT INTO exercises (exercise_name, met) VALUES
 ('aerobic', 8.0),
 ('slide board',11.0),
 ('slimnastics', 6.0);
+
+INSERT INTO news(title, content, created_at) VALUES
+('Childhood diet', 'Eating too much fat and sugar as a child can alter your microbiome for life, even if you later learn to eat healthier, a new study in mice suggests.', '2021-02-07 20:09:14.439102'),
+('School-made lunch better for children', 'Packing a lunchbox is common practice for most Australian families. But what if there was another way? Researchers say uniform delivery of lunchtime food at school could be a solution to better childhood nutrition and learning in Australia.', '2021-02-02 23:19:14.439102'),
+('What happens to your body during tailgating', 'Researchers simulated a tailgating situation with a small group of overweight but healthy men and examined the impact of eating and drinking on their livers using blood tests and a liver scan.', '2020-02-02 23:19:14.439102'),
+('Fatty acid may help combat multiple sclerosis' , 'The abnormal immune system response that causes MS by attacking and damaging the central nervous system can be triggered by the lack of a specific fatty acid in fat tissue. dietary change might help treat some people with autoimmune diseases.', '2021-01-20 15:39:14.439102'),
+('Consuming omega-3 fatty acids could prevent asthma.', 'New research suggests that a higher dietary intake of long-chain omega-3 fatty acids in childhood may reduce the risk of developing subsequent asthma, but only in children carrying a common gene variant.', '2021-01-07 21:49:14.439102'),
+('The longevity gene mammalian Indy (mINDY) is involved in blood pressure regulation.','Reduced expression of mINDY, which is known to extend the life span in lower organisms and to prevent from diet induced obesity, fatty liver, has now been shown to lower blood pressure and heart rate in rodents.', '2020-12-23 10:10:14.439102');
