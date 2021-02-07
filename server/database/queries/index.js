@@ -1,5 +1,9 @@
-const getUser = require('./getUser');
+const getUserByEmail = require('./getEmail');
+const signupUser = require('./signup');
+const getUserActivity = require('./getUserActivity');
 
 module.exports = {
-  getUser,
+  getUserByEmail,
+  signupUser,
+  getUserActivity,
 };
