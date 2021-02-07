@@ -7,7 +7,13 @@ describe("Test insertFood Query", () => {
   afterAll(() => connection.end());
 
   test(" Test insert Food ", async () => {
-    const { rowCount } = await insertFoodQuery(1, 1, 1, 3);
+    
+    const user_id = 1;
+    const foodId = 1;
+    const categoryId = 1;
+    const grams = 3;
+
+    const { rowCount } = await insertFoodQuery(user_id, foodId, categoryId ,grams);
     return expect(rowCount).toEqual(1);
   });
 });
