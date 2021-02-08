@@ -69,3 +69,5 @@ INSERT INTO exercises (exercise_name, met) VALUES
 ('aerobic', 8.0),
 ('slide board',11.0),
 ('slimnastics', 6.0);
+
+INSERT INTO users(firstName, lastName, email, password, gender, height, weight, age, image, dailyCaloriesGoal) values ('zein', 'jendeya', 'zein@gmail.com', '$2b$11$5IkI6Vvo5xGqxgRw4I6uWeCJCyJyd3k7WPvnW.fgjZZQG6aSSdQLK', 'f', 1.68, 63, 19, 'https://i.pinimg.com/564x/a9/f6/e3/a9f6e37a1211793bd2f45f161dc3dfbb.jpg', 2099.196);
