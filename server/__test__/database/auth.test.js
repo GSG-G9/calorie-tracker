@@ -1,7 +1,6 @@
 const dbBuild = require('../../database/config/build');
 const connection = require('../../database/config/connection');
 const getUserByEmail = require('../../database/queries/getEmail');
-const { getNews } = require('../../database/queries');
 
 describe('sign up queries tests', () => {
   beforeEach(() => dbBuild());
@@ -41,12 +40,5 @@ describe('sign up queries tests', () => {
     const { rows } = await getUserByEmail('zein@gmail.com');
 
     return expect(rows).toEqual(userData);
-  });
-
-  test('should get news from the news table', async () => {
-    const { rows } = await getNews();
-    return expect(rows[5].content).toEqual(
-      'Researchers simulated a tailgating situation with a small group of overweight but healthy men and examined the impact of eating and drinking on their livers using blood tests and a liver scan.',
-    );
   });
 });
