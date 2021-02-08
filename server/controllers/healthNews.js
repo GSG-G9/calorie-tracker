@@ -1,4 +1,4 @@
-const { getNews } = require('../database');
+const { getNews } = require('../database/queries');
 
 // eslint-disable-next-line no-unused-vars
 const healthNews = async (req, res, next) => {

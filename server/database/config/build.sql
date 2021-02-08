@@ -18,10 +18,11 @@ password VARCHAR(250),
 firstName VARCHAR(100) NOT NULL,
 gender VARCHAR(1),
 age INTEGER,
-weight INTEGER,
-height INTEGER,
-goalWeight INTEGER,
-dailyCaloriesGoal INTEGER,
+weight float,
+height float,
+goalWeight float,
+dailyCaloriesGoal float,
+image TEXT,
 activity_id INTEGER REFERENCES activity(id) ON DELETE CASCADE ON UPDATE CASCADE
 
 );
@@ -56,15 +57,15 @@ image TEXT
 CREATE TABLE nutrition(
 id SERIAL PRIMARY KEY,
 food_id INTEGER REFERENCES food(id) ON DELETE CASCADE ON UPDATE CASCADE,
-calories INTEGER,
-fat INTEGER,
-carbs INTEGER,
-protein INTEGER,
-sugar INTEGER,
-vitamin_A INTEGER,
-vitamin_C INTEGER,
-vitamin_D INTEGER,
-cholesterol INTEGER
+calories float,
+fat float,
+carbs float,
+protein float,
+sugar float,
+vitamin_A float,
+vitamin_C float,
+vitamin_D float,
+cholesterol float
 );
 
 CREATE TABLE UserExerciseRelation(

@@ -1,12 +1,10 @@
 const router = require('express').Router();
-
-const signup = require('./controllers');
-
 const { clientError, serverError } = require('./middlewares');
-const { healthNews } = require('./controllers');
+const { login, signup, healthNews } = require('./controllers');
 
 router.get('/healthnews', healthNews);
 router.post('/signup', signup);
+router.post('/login', login);
 
 router.use(clientError);
 router.use(serverError);
