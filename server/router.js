@@ -1,9 +1,9 @@
 const router = require('express').Router();
 const { clientError, serverError } = require('./middlewares');
+const { login, signup } = require('./controllers');
 
-router.get('/hi', (req, res) => {
-  res.send('hello');
-});
+router.post('/signup', signup);
+router.post('/login', login);
 
 router.use(clientError);
 router.use(serverError);
