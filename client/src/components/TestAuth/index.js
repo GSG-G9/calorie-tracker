@@ -2,16 +2,16 @@ import React, { useContext } from 'react';
 import { context } from '../userProvider';
 
 function TestAuth() {
-  const [userData, setUserData] = useContext(context);
+  const [, setIsAuthenticated] = useContext(context);
   const handleLogin = async () => {
     const req = await fetch('https://jsonplaceholder.typicode.com/posts/1');
     await req.json();
-    setUserData({ ...userData, isAuthenticated: true });
+    setIsAuthenticated(true);
   };
   const handleLogout = async () => {
     const req = await fetch('https://jsonplaceholder.typicode.com/posts/1');
     await req.json();
-    setUserData({ ...userData, isAuthenticated: false });
+    setIsAuthenticated(false);
   };
   return (
     <div>
@@ -27,6 +27,6 @@ function TestAuth() {
 export default TestAuth;
 
 export function AuthComponent() {
-  const [{ isAuthenticated }] = useContext(context);
+  const [isAuthenticated] = useContext(context);
   return isAuthenticated && <p>I am auth Paragraph</p>;
 }

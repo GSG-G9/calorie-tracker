@@ -5,12 +5,10 @@ const { node } = PropTypes;
 export const context = createContext();
 
 function userProvider({ children }) {
-  const userState = useState({
-    isAuthenticated: false,
-    userId: undefined,
-    userName: undefined,
-  });
-  return <context.Provider value={userState}>{children}</context.Provider>;
+  const isAuthenticated = useState(false);
+  return (
+    <context.Provider value={isAuthenticated}>{children}</context.Provider>
+  );
 }
 
 userProvider.propTypes = {
