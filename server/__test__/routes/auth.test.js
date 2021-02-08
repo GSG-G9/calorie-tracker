@@ -128,4 +128,11 @@ describe('authentication', () => {
       return expect(statusCode).toBe(422);
     });
   });
+
+  it('router returns 200', async () => {
+    const { status } = await request(app)
+      .get('/api/v1/healthnews/')
+      .expect(200);
+    expect(status).toBe(200);
+  });
 });
