@@ -83,36 +83,29 @@ describe('authentication', () => {
   });
 
   describe('POST /api/v1/login', () => {
-    it('router returns 400 if there is no password', async () => {
+    test('router returns 400 if there is no password', async () => {
       const { statusCode } = await request(app)
         .post('/api/v1/login')
         .send({ email: 'user@gmail.com', password: '' });
-      expect(statusCode).toBe(400);
+      return expect(statusCode).toBe(400);
     });
 
-    it('router returns 400 if there is no email', async () => {
+    test('router returns 400 if there is no email', async () => {
       const { statusCode } = await request(app)
         .post('/api/v1/login')
         .send({ email: '', password: 'hohoho123123' });
-      expect(statusCode).toBe(400);
+      return expect(statusCode).toBe(400);
     });
 
-    it('router returns 200 if user logged in successfully', async () => {
-      const { statusCode } = await request(app)
-        .post('/api/v1/login')
-        .set({
-          'Content-Type': 'application/json',
-        })
-        .send(
-          JSON.stringify({
-            email: 'zein@gmail.com',
-            password: 'zein2002jendeya',
-          }),
-        );
+    test('router returns 200 if user logged in successfully', async () => {
+      const { statusCode } = await request(app).post('/api/v1/login').send({
+        email: 'zein@gmail.com',
+        password: 'zein2002jendeya',
+      });
 
-      expect(statusCode).toBe(200);
+      return expect(statusCode).toBe(200);
     });
-    it('router returns 401 if password is incorrect', async () => {
+    test('router returns 401 if password is incorrect', async () => {
       const {
         body: { message },
         statusCode,
@@ -125,14 +118,14 @@ describe('authentication', () => {
           JSON.stringify({ email: 'zein@gmail.com', password: 'zein2002j' }),
         );
       expect(statusCode).toBe(401);
-      expect(message).toBe('invalid password');
+      return expect(message).toBe('invalid password');
     });
 
     test('router returns 401 if email is incorrect', async () => {
       const { statusCode } = await request(app)
         .post('/api/v1/login')
         .send({ email: 'user@gmail.com', password: 'dddddd888' });
-      expect(statusCode).toBe(422);
+      return expect(statusCode).toBe(422);
     });
   });
 });
