@@ -7,7 +7,7 @@ import LoginPage from "./components/Login";
 import SignupPage from "./components/Signup";
 import LogoutPage from "./components/Logout";
 import NutritionPage from "./components/Nutrition";
-import myProfilePage from "./components/Profile";
+import MyProfilePage from "./components/Profile";
 import CaloriesPage from "./components/Calories";
 import MyFoodPage from "./components/MyFood";
 import FoodPage from "./components/Food";
@@ -25,7 +25,7 @@ function App() {
           <Route exact path="/signup" component={SignupPage} />
           <Route exact path="/logout	" component={LogoutPage} />
           <Route exact path="/nutrition" component={NutritionPage} />
-          <Route exact path="/myprofile" component={myProfilePage} />
+          <Route exact path="/myprofile" component={MyProfilePage} />
           <Route exact path="/calories" component={CaloriesPage} />
           <Route exact path="/myfood" component={MyFoodPage} />
           <Route exact path="/food" component={FoodPage} />  

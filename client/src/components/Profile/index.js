@@ -1,11 +1,11 @@
 import React from 'react'
 
-function ProfilePage() {
+function MyProfilePage() {
     return (
         <div>
-            <h1> Profile Page </h1>
+            <h1> My Profile Page </h1>
         </div>
     )
 }
 
-export default ProfilePage
+export default MyProfilePage
