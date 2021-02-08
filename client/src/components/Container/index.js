@@ -15,6 +15,7 @@ function ContainerComponent({
   return (
     <Container maxWidth={screenSize} {...rest}>
       <Grid container direction={direction} justify="center" spacing={spacing}>
+        {console.log(children)}
         {children.map((element) => (
           <Grid
             item

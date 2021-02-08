@@ -16,16 +16,17 @@ const paletteColors = {
   4: '#3F8994',
   5: '#7DB3BD',
   6: '#E1EBED',
-  white: '#fff',
+  7: '#E3F6F5',
+  white: '#FFF',
 };
 
 const theme = createMuiTheme({
   palette: {
     primary: {
       main: paletteColors[2],
-      dark: '#fff',
-      light: '#fff',
-      contrastText: '#fff',
+      // dark: '#fff',
+      // light: '#fff',
+      // contrastText: '#fff',
     },
     secondary: { main: paletteColors[6] },
   },

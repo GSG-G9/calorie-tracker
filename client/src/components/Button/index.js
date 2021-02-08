@@ -21,12 +21,12 @@ const IconLabeledButton = ({
   </Button>
 );
 
-const { string, func, bool, children } = PropTypes;
+const { string, func, bool, node } = PropTypes;
 
 IconLabeledButton.propTypes = {
   variant: string.isRequired,
   className: string.isRequired,
-  children: children.isRequired,
+  children: node.isRequired,
   event: func.isRequired,
   disable: bool.isRequired,
 };
