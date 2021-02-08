@@ -42,15 +42,11 @@ describe('sign up queries tests', () => {
 
     return expect(rows).toEqual(userData);
   });
-});
 
-describe('Test getNews Query', () => {
-  beforeEach(() => dbBuild());
-  afterAll(() => connection.end());
   test('should get news from the news table', async () => {
     const { rows } = await getNews();
     return expect(rows[5].content).toEqual(
-      'Reduced expression of mINDY, which is known to extend the life span in lower organisms and to prevent from diet induced obesity, fatty liver, has now been shown to lower blood pressure and heart rate in rodents.',
+      'Researchers simulated a tailgating situation with a small group of overweight but healthy men and examined the impact of eating and drinking on their livers using blood tests and a liver scan.',
     );
   });
 });
