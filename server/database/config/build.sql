@@ -1,20 +1,34 @@
 BEGIN;
 
-DROP TABLE IF EXISTS users, exercises, food, food_category, food_type, nutrition, UserExerciseRelation, UserFoodRelation, news CASCADE;
+DROP TABLE IF EXISTS users, activity, exercises, food, food_category, food_type, nutrition, UserExerciseRelation, UserFoodRelation, news CASCADE;
+
+
+CREATE TABLE activity(
+    id SERIAL PRIMARY KEY,
+    activity_name VARCHAR(100),
+    activity_value Float
+);
+
 
 CREATE TABLE users(
 id SERIAL PRIMARY KEY,
-first_name VARCHAR(100) NOT NULL,
-last_name VARCHAR(100) NOT NULL,
-email VARCHAR (100) NOT NULL UNIQUE,
-password VARCHAR(250) NOT NULL ,
-gender CHAR(1),
-height INTEGER,
-weight INTEGER,
+lastName VARCHAR(100),
+email VARCHAR (100),
+password VARCHAR(250),
+firstName VARCHAR(100) NOT NULL,
+gender VARCHAR(1),
 age INTEGER,
+weight float,
+height float,
+goalWeight float,
+dailyCaloriesGoal float,
 image TEXT,
-daily_calories_goal INTEGER
+activity_id INTEGER REFERENCES activity(id) ON DELETE CASCADE ON UPDATE CASCADE
+
 );
+
+
+
 
 CREATE TABLE exercises(
 id SERIAL PRIMARY KEY,
@@ -43,15 +57,15 @@ image TEXT
 CREATE TABLE nutrition(
 id SERIAL PRIMARY KEY,
 food_id INTEGER REFERENCES food(id) ON DELETE CASCADE ON UPDATE CASCADE,
-calories INTEGER,
-fat INTEGER,
-carbs INTEGER,
-protein INTEGER,
-sugar INTEGER,
-vitamin_A INTEGER,
-vitamin_C INTEGER,
-vitamin_D INTEGER,
-cholesterol INTEGER
+calories float,
+fat float,
+carbs float,
+protein float,
+sugar float,
+vitamin_A float,
+vitamin_C float,
+vitamin_D float,
+cholesterol float
 );
 
 CREATE TABLE UserExerciseRelation(
@@ -60,6 +74,7 @@ users_id INTEGER REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE,
 exercises_id INTEGER REFERENCES exercises(id) ON DELETE CASCADE ON UPDATE CASCADE,
 created_at TIMESTAMP NOT NULL
 );
+
 
 CREATE TABLE UserFoodRelation(
 id SERIAL PRIMARY KEY,

@@ -1,5 +1,6 @@
 const { Pool } = require('pg');
 require('dotenv').config({ path: './config.env' });
+
 const {
   DEV_DATABASE_URL,
   TEST_DATABASE_URL,
