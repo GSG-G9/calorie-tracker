@@ -1,13 +1,15 @@
+/* eslint-disable no-console */
 const Boom = require('@hapi/boom');
 const { getFoodCategory } = require('../database/queries');
 
 const foodCategory = async (req, res, next) => {
   const { user } = req;
   const { id, categoryId } = req.params;
-  if (!user) {
-    throw Boom.unauthorized('you are not logged in');
-  }
+
   try {
+    if (!user) {
+      throw Boom.unauthorized('you are not logged in');
+    }
     const { rows, rowCount } = await getFoodCategory(id, categoryId);
     if (rowCount === 0) {
       res

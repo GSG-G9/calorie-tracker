@@ -1,3 +1,4 @@
+const cookie = require('cookie');
 const request = require('supertest');
 const app = require('../app');
 const dbBuild = require('../database/config/build');
@@ -8,6 +9,8 @@ const { getNews, getFoodCategory } = require('../database/queries');
 describe('authentication', () => {
   beforeEach(() => dbBuild());
   afterAll(() => connection.end());
+  let tokenCategory;
+
   describe('sign up routes tests', () => {
     const userData = {
       lastName: 'iman96',
@@ -100,11 +103,14 @@ describe('authentication', () => {
     });
 
     test('router returns 200 if user logged in successfully', async () => {
-      const { statusCode } = await request(app).post('/api/v1/login').send({
+      const {
+        statusCode,
+        header: { 'set-cookie': cookiesCategory },
+      } = await request(app).post('/api/v1/login').send({
         email: 'zein@gmail.com',
         password: 'zein2002jendeya',
       });
-
+      tokenCategory = cookie.parse(cookiesCategory[0]).token;
       return expect(statusCode).toBe(200);
     });
     test('router returns 401 if password is incorrect', async () => {
@@ -192,8 +198,8 @@ describe('authentication', () => {
 
   describe('getFoodCategory query', () => {
     test('should get Food in Category from the userFoodRelation table', async () => {
-      const { rows } = await getFoodCategory();
-      return expect(rows).toEqual();
+      const { rows } = await getFoodCategory(4, 2);
+      return expect(rows[0].food_name).toEqual('maqlobah');
     });
   });
 
@@ -205,9 +211,18 @@ describe('authentication', () => {
       expect(status).toBe(401);
     });
 
-    it('router returns 200 and sends all foods in the table', async () => {
+    it('router returns 200 if there is no food in the category', async () => {
       const { status } = await request(app)
         .get('/api/v1/user/4/category/1/food')
+        .set('Cookie', [`token=${tokenCategory}`])
+        .expect(200);
+      expect(status).toBe(200);
+    });
+
+    it('router returns 200 if there is food in the category', async () => {
+      const { status } = await request(app)
+        .get('/api/v1/user/4/category/2/food')
+        .set('Cookie', [`token=${tokenCategory}`])
         .expect(200);
       expect(status).toBe(200);
     });
