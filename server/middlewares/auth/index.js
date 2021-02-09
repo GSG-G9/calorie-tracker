@@ -3,12 +3,12 @@ const { verifyToken } = require('../../utils');
 
 const Auth = async (req, res, next) => {
   const { token } = req.cookies;
-  if (!token) throw Boom.unauthorized('You are not registered yet');
+  if (!token) return next(Boom.unauthorized('You are not registered yet'));
   try {
     req.user = await verifyToken(token);
     next();
   } catch (err) {
-    throw Boom.unauthorized('You are not Authorized');
+    return next(Boom.unauthorized('You are not Authorized'));
   }
 };
 

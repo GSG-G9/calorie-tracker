@@ -29,6 +29,7 @@ const login = async (req, res, next) => {
       email: user.email,
       name: `${user.firstname} ${user.lastname}`,
       image: user.image,
+      id: user.id,
     });
 
     res.cookie('token', token, { httpOnly: true });
