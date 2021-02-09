@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-
-import { Typography, Hidden, CardMedia, TextField } from '@material-ui/core';
+import PropTypes from 'prop-types';
+import { Typography, Hidden, CardMedia } from '@material-ui/core';
 
 import InputField from '../../InputField';
 import Container from '../../Container';
@@ -15,6 +15,8 @@ import {
   weightSchema,
 } from './validation';
 
+const { shape, func } = PropTypes;
+
 const useStyle = makeStyles((theme) => ({
   input: {
     color: theme.customColors[1],
@@ -22,7 +24,11 @@ const useStyle = makeStyles((theme) => ({
     backgroundColor: theme.customColors[7],
   },
 }));
-function BasicUserInfo() {
+
+function PhysicalCharacteristics(props) {
+  const {
+    methods: { handleBack, setData },
+  } = props;
   const classes = useStyle();
 
   const [age, setAge] = useState('');
@@ -145,10 +151,29 @@ function BasicUserInfo() {
           </Container>
         </form>
         <Container key="4" direction="row" itemColumns="4" spacing={5}>
-          <ButtonComponent key="2" variant="outlined" color="primary">
+          <ButtonComponent
+            onClick={handleBack}
+            key="2"
+            variant="outlined"
+            color="primary"
+          >
             Back
           </ButtonComponent>
-          <ButtonComponent key="1" variant="contained" color="primary">
+          <ButtonComponent
+            onClick={() => {
+              setData((userData) => ({
+                ...userData,
+                weight,
+                goalWeight,
+                activity,
+                age,
+                height,
+              }));
+            }}
+            key="1"
+            variant="contained"
+            color="primary"
+          >
             Finish
           </ButtonComponent>
         </Container>
@@ -157,4 +182,11 @@ function BasicUserInfo() {
   );
 }
 
-export default BasicUserInfo;
+PhysicalCharacteristics.propTypes = {
+  methods: shape({
+    handleBack: func.isRequired,
+    setData: func.isRequired,
+  }).isRequired,
+};
+
+export default PhysicalCharacteristics;

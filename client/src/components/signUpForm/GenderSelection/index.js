@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React from 'react';
+import PropTypes from 'prop-types';
 import {
   Typography,
   Hidden,
@@ -7,11 +7,15 @@ import {
   CardActionArea,
   CardMedia,
 } from '@material-ui/core';
-
 import Container from '../../Container';
 import ButtonComponent from '../../Button';
 
-function BasicUserInfo() {
+const { shape, func } = PropTypes;
+
+function GenderSelection(props) {
+  const {
+    methods: { handleNext, setData, handleBack },
+  } = props;
   return (
     <Container screenSize="lg" direction="row" itemColumns="6" spacing={2}>
       <Hidden smDown key="1">
@@ -33,8 +37,15 @@ function BasicUserInfo() {
             <CardMedia
               component="img"
               height="140"
-              image="./signupImages/1.png"
+              image="./signupImages/2.png"
               title="male"
+              onClick={() => {
+                handleNext();
+                setData((userData) => ({
+                  ...userData,
+                  gender: 'm',
+                }));
+              }}
             />
           </CardActionArea>
         </Card>
@@ -43,17 +54,36 @@ function BasicUserInfo() {
             <CardMedia
               component="img"
               height="140px"
-              image="./signupImages/2.png"
+              image="./signupImages/1.png"
               title="female"
+              onClick={() => {
+                handleNext();
+                setData((userData) => ({
+                  ...userData,
+                  gender: 'f',
+                }));
+              }}
             />
           </CardActionArea>
         </Card>
 
         <Container key="4" direction="row" itemColumns="4" spacing={5}>
-          <ButtonComponent key="1" variant="outlined" color="primary">
+          <ButtonComponent
+            onClick={handleBack}
+            key="1"
+            variant="outlined"
+            color="primary"
+          >
             Back
           </ButtonComponent>
-          <ButtonComponent key="2" variant="contained" color="primary">
+          <ButtonComponent
+            onClick={() => {
+              handleNext(); // Validation
+            }}
+            key="2"
+            variant="contained"
+            color="primary"
+          >
             Next
           </ButtonComponent>
         </Container>
@@ -62,4 +92,11 @@ function BasicUserInfo() {
   );
 }
 
-export default BasicUserInfo;
+GenderSelection.propTypes = {
+  methods: shape({
+    handleNext: func.isRequired,
+    setData: func.isRequired,
+    handleBack: func.isRequired,
+  }).isRequired,
+};
+export default GenderSelection;

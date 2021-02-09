@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Hidden, CardMedia } from '@material-ui/core';
+import PropTypes from 'prop-types';
 
 import InputField from '../../InputField';
 import Container from '../../Container';
 import ButtonComponent from '../../Button';
-import {
+import schema, {
   emailSchema,
   firstNameSchema,
   lastNameSchema,
   passwordSchema,
 } from './validation';
+
+const { shape, func } = PropTypes;
 
 const useStyle = makeStyles((theme) => ({
   input: {
@@ -19,7 +22,11 @@ const useStyle = makeStyles((theme) => ({
     backgroundColor: theme.customColors[7],
   },
 }));
-function BasicUserInfo() {
+
+function BasicUserInfo(props) {
+  const {
+    methods: { handleNext, setData },
+  } = props;
   const classes = useStyle();
 
   const [firstName, setFirstName] = useState('');
@@ -43,11 +50,27 @@ function BasicUserInfo() {
         />
       </Hidden>
 
-      <Container key="2" direction="column" itemColumns="12" spacing={5}>
+      <Container
+        key="2"
+        direction="column"
+        itemColumns="12"
+        spacing={5}
+        style={{
+          width: '100%',
+          border: '1px solid blue',
+          borderRadius: '12px',
+          padding: '15px 0',
+        }}
+      >
         <Typography key="1" variant="h4">
           Create User Account :-
         </Typography>
-        <form key="2" style={{ width: '100%' }}>
+        <form
+          key="2"
+          style={{
+            width: '100%',
+          }}
+        >
           <Container direction="column" itemColumns="12" spacing={5}>
             <InputField
               key="1"
@@ -128,8 +151,37 @@ function BasicUserInfo() {
           </Container>
         </form>
         <Container key="3" direction="row" itemColumns="4" spacing={5}>
-          <ButtonComponent key="1" variant="contained" color="primary">
-            Register
+          <ButtonComponent
+            disable={
+              passwordError || emailError || firstNameError || lastNameError
+            }
+            onClick={async () => {
+              const isValid = await schema.isValid({
+                firstName,
+                lastName,
+                email,
+                password,
+              });
+              if (!isValid) {
+                setPasswordError(() => !isValid);
+                setFirstNameError(() => !isValid);
+                setLastNameError(() => !isValid);
+                return setEmailError(() => !isValid);
+              }
+              handleNext();
+              return setData((userData) => ({
+                ...userData,
+                password,
+                firstName,
+                lastName,
+                email,
+              }));
+            }}
+            key="1"
+            variant="contained"
+            color="primary"
+          >
+            Next
           </ButtonComponent>
           <ButtonComponent key="2" variant="outlined" color="primary">
             Cancel
@@ -140,4 +192,10 @@ function BasicUserInfo() {
   );
 }
 
+BasicUserInfo.propTypes = {
+  methods: shape({
+    handleNext: func.isRequired,
+    setData: func.isRequired,
+  }).isRequired,
+};
 export default BasicUserInfo;

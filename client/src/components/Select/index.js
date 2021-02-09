@@ -5,6 +5,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { Button, FormHelperText } from '@material-ui/core';
+import PropTypes from 'prop-types';
+
+const { number, func, bool } = PropTypes;
 
 const useStyles = makeStyles({
   button: {
@@ -61,4 +64,9 @@ function ControlledOpenSelect(props) {
   );
 }
 
+ControlledOpenSelect.propTypes = {
+  value: number.isRequired,
+  handleChange: func.isRequired,
+  activityError: bool.isRequired,
+};
 export default ControlledOpenSelect;
