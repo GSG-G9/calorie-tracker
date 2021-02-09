@@ -36,7 +36,7 @@ function BasicUserInfo() {
       <Typography key="1" variant="h4">
         Create User Account :-
       </Typography>
-      <form key="2" style={{ width: '80%' }}>
+      <form key="2" style={{ width: '70%' }}>
         <Container direction="column" itemColumns="12" spacing={5}>
           <InputField
             key="1"
