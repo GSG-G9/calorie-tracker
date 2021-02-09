@@ -10,7 +10,6 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     marginTop: '14%',
     color: theme.palette.primary,
-    transform: 'scale(1.4)',
   },
 }));
 
@@ -19,7 +18,7 @@ const LoadingProgressBar = () => {
 
   return (
     <div className={classes.root}>
-      <CircularProgress />
+      <CircularProgress size={70} thickness={4} />
     </div>
   );
 };
