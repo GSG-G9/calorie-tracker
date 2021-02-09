@@ -1,7 +1,7 @@
 const request = require('supertest');
-const app = require('../../app');
-const dbBuild = require('../../database/config/build');
-const connection = require('../../database/config/connection');
+const app = require('../app');
+const dbBuild = require('../database/config/build');
+const connection = require('../database/config/connection');
 
 describe('health news', () => {
   beforeEach(() => dbBuild());

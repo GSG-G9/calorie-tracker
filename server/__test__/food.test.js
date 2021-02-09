@@ -1,6 +1,6 @@
-const dbBuild = require('../../database/config/build');
-const connection = require('../../database/config/connection');
-const { getFoodCategory } = require('../../database/queries');
+const dbBuild = require('../database/config/build');
+const connection = require('../database/config/connection');
+const { getFoodCategory } = require('../database/queries');
 
 describe('getNews query', () => {
   beforeEach(() => dbBuild());

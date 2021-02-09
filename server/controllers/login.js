@@ -27,8 +27,9 @@ const login = async (req, res, next) => {
     }
     const token = await signToken({
       email: user.email,
-      name: `${user.first_name} ${user.last_name}`,
+      name: `${user.firstname} ${user.lastname}`,
       image: user.image,
+      id: user.id,
     });
 
     res.cookie('token', token, { httpOnly: true });
