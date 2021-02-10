@@ -29,8 +29,8 @@ const useStyles = makeStyles((theme) => ({
     },
     '@media (min-device-width: 1200px)': {
       top: '26%',
-      width: '7%',
-      height: '32%',
+      width: '6.5%',
+      height: '40%',
       borderRadius: '5%',
     },
   },
