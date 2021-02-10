@@ -21,7 +21,7 @@ const useStyles = makeStyles({
 function ControlledOpenSelect(props) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-  const { value, handleChange, activityError } = props;
+  const { value, handleChange, activityIdError } = props;
 
   const handleClose = () => {
     setOpen(false);
@@ -55,7 +55,7 @@ function ControlledOpenSelect(props) {
           <MenuItem value={4}>lazy</MenuItem>
         </Select>
       </FormControl>
-      {activityError && (
+      {activityIdError && (
         <FormHelperText className="Mui-error">
           You Have to choose an activity !
         </FormHelperText>
@@ -67,6 +67,6 @@ function ControlledOpenSelect(props) {
 ControlledOpenSelect.propTypes = {
   value: number.isRequired,
   handleChange: func.isRequired,
-  activityError: bool.isRequired,
+  activityIdError: bool.isRequired,
 };
 export default ControlledOpenSelect;

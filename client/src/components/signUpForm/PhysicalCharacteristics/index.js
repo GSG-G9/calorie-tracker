@@ -32,13 +32,13 @@ function PhysicalCharacteristics(props) {
   const classes = useStyle();
 
   const [age, setAge] = useState('');
-  const [activityId, setactivityId] = useState(0);
+  const [activityId, setActivityId] = useState(0);
   const [weight, setWeight] = useState('');
   const [height, setHeight] = useState('');
   const [goalWeight, setGoalWeight] = useState('');
 
   const [ageError, setAgeError] = useState(false);
-  const [activityIdError, setactivityIdError] = useState(false);
+  const [activityIdError, setActivityIdError] = useState(false);
 
   const [weightError, setWeightError] = useState(false);
   const [heightError, setHeightError] = useState(false);
@@ -64,9 +64,9 @@ function PhysicalCharacteristics(props) {
               key="1"
               value={activityId}
               handleChange={async ({ target: { value } }) => {
-                setactivityId(value);
+                setActivityId(value);
                 const isValid = await activitySchema.isValid({ activityId });
-                setactivityIdError(!isValid);
+                setActivityIdError(!isValid);
               }}
               activityIdError={activityIdError}
             />

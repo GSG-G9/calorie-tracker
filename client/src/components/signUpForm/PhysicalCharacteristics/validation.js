@@ -1,7 +1,7 @@
 import * as yup from 'yup';
 
 export const activitySchema = yup.object({
-  activity: yup.number().required(),
+  activityId: yup.number().required(),
 });
 
 export const ageSchema = yup.object({
