@@ -3,6 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Hidden, CardMedia } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
+import updateAndValidateInput from '../../../Utils/checkValidationPureFunction';
+
 import InputField from '../../InputField';
 import Container from '../../Container';
 import ButtonComponent from '../../Button';
@@ -11,15 +13,15 @@ import schema, {
   firstNameSchema,
   lastNameSchema,
   passwordSchema,
-} from './validation';
+} from '../../../Utils/signUpBasicInfoValidation';
 
 const { shape, func } = PropTypes;
 
 const useStyle = makeStyles((theme) => ({
   input: {
     color: theme.customColors[1],
-    width: '80%',
     backgroundColor: theme.customColors[7],
+    width: '300px',
   },
 }));
 
@@ -50,27 +52,11 @@ function BasicUserInfo(props) {
         />
       </Hidden>
 
-      <Container
-        key="2"
-        direction="column"
-        itemColumns="12"
-        spacing={5}
-        style={{
-          width: '100%',
-          border: '1px solid blue',
-          borderRadius: '12px',
-          padding: '15px 0',
-        }}
-      >
+      <Container key="2" direction="column" itemColumns="12" spacing={5}>
         <Typography key="1" variant="h4">
           Create User Account :-
         </Typography>
-        <form
-          key="2"
-          style={{
-            width: '100%',
-          }}
-        >
+        <form key="2">
           <Container direction="column" itemColumns="12" spacing={5}>
             <InputField
               key="1"
@@ -78,11 +64,12 @@ function BasicUserInfo(props) {
               label="First Name"
               className={classes.input}
               type="text"
-              onChange={async ({ target: { value } }) => {
-                setFirstName(value);
-                const isValid = await firstNameSchema.isValid({ firstName });
-                setFirstNameError(() => !isValid);
-              }}
+              onChange={updateAndValidateInput(
+                'firstName',
+                firstNameSchema,
+                setFirstName,
+                setFirstNameError
+              )}
               value={firstName}
               placeholder="Enter First Name ..."
               error={!!firstNameError}
@@ -96,11 +83,12 @@ function BasicUserInfo(props) {
               label="Last Name"
               className={classes.input}
               type="text"
-              onChange={async ({ target: { value } }) => {
-                setLastName(value);
-                const isValid = await lastNameSchema.isValid({ lastName });
-                setLastNameError(() => !isValid);
-              }}
+              onChange={updateAndValidateInput(
+                'lastName',
+                lastNameSchema,
+                setLastName,
+                setLastNameError
+              )}
               value={lastName}
               placeholder="Enter Last Name ..."
               error={!!lastNameError}
@@ -114,11 +102,12 @@ function BasicUserInfo(props) {
               label="Email"
               className={classes.input}
               type="email"
-              onChange={async ({ target: { value } }) => {
-                setEmail(value);
-                const isValid = await emailSchema.isValid({ email });
-                setEmailError(() => !isValid);
-              }}
+              onChange={updateAndValidateInput(
+                'email',
+                emailSchema,
+                setEmail,
+                setEmailError
+              )}
               value={email}
               placeholder="Enter Email ..."
               error={!!emailError}
@@ -134,11 +123,12 @@ function BasicUserInfo(props) {
               label="Password"
               className={classes.input}
               type="password"
-              onChange={async ({ target: { value } }) => {
-                setPassword(value);
-                const isValid = await passwordSchema.isValid({ password });
-                setPasswordError(() => !isValid);
-              }}
+              onChange={updateAndValidateInput(
+                'password',
+                passwordSchema,
+                setPassword,
+                setPasswordError
+              )}
               value={password}
               placeholder="Enter Password ..."
               error={!!passwordError}

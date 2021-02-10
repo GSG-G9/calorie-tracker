@@ -9,14 +9,21 @@ import PropTypes from 'prop-types';
 
 const { number, func, bool } = PropTypes;
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   button: {
     display: 'block',
   },
   formControl: {
-    minWidth: 120,
+    width: '100%',
+    color: theme.customColors[1],
+    backgroundColor: theme.customColors[7],
   },
-});
+  divSelect: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'space-around',
+  },
+}));
 
 function ControlledOpenSelect(props) {
   const classes = useStyles();
@@ -32,12 +39,7 @@ function ControlledOpenSelect(props) {
   };
 
   return (
-    <div
-      style={{ width: '100%', display: 'flex', justifyContent: 'space-around' }}
-    >
-      <Button className={classes.button} onClick={handleOpen}>
-        Select Your Activity
-      </Button>
+    <div className={classes.divSelect}>
       <FormControl className={classes.formControl}>
         <InputLabel id="demo-controlled-open-select-label">Activity</InputLabel>
         <Select

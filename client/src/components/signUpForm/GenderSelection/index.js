@@ -87,7 +87,7 @@ function GenderSelection(props) {
           </ButtonComponent>
           <ButtonComponent
             onClick={() => {
-              if (data.gender) {
+              if (data && data.gender) {
                 return handleNext();
               }
               return setGenderError(true);

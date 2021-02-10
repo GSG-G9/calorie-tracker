@@ -4,16 +4,9 @@ import { Box } from '@material-ui/core';
 import axios from 'axios';
 import StepContent from '../StepContent';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     width: '100%',
-  },
-  button: {
-    marginRight: theme.spacing(1),
-  },
-  instructions: {
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1),
   },
 }));
 
@@ -22,6 +15,7 @@ export default function SignupFormSteps() {
   const [activeStep, setActiveStep] = useState(0);
   const [skipped, setSkipped] = useState(new Set());
   const [data, setData] = useState({});
+  const [errorMessage, setErrorMessage] = useState('');
 
   const isStepSkipped = (step) => skipped.has(step);
 
@@ -42,33 +36,35 @@ export default function SignupFormSteps() {
 
   useEffect(() => {
     if (Object.keys(data).length === 10) {
-      const request = async () => {
+      const { CancelToken } = axios;
+      const source = CancelToken.source();
+
+      (async () => {
         try {
-          const { CancelToken } = axios;
-          const source = CancelToken.source();
           await axios.post('/api/v1/signup', data, {
             cancelToken: source.token,
           });
-          return () => {
-            source.cancel('Operation canceled by the user.');
-          };
         } catch (err) {
-          console.log(err);
+          return setErrorMessage(
+            err.response.data.message || 'Something went wrong !! '
+          );
         }
-      };
-      request();
+      })();
+
+      return () => source.cancel('Operation canceled by the user.');
     }
   }, [data]);
 
   return (
     <div className={classes.root}>
-      <Box className={classes.instructions}>
+      <Box>
         <StepContent
           handleBack={handleBack}
           handleNext={handleNext}
           setData={setData}
           data={data}
           step={activeStep}
+          errorMessage={errorMessage}
         />
       </Box>
     </div>

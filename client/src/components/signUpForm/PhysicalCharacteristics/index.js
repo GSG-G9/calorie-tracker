@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import { Typography, Hidden, CardMedia } from '@material-ui/core';
+import { Alert } from '@material-ui/lab';
 
 import InputField from '../../InputField';
 import Container from '../../Container';
@@ -13,26 +14,28 @@ import {
   goalWeightSchema,
   heightSchema,
   weightSchema,
-} from './validation';
+} from '../../../Utils/signUpPhysicalCharacteristicsValidation';
+
+import updateAndValidateInput from '../../../Utils/checkValidationPureFunction';
 
 const { shape, func } = PropTypes;
 
 const useStyle = makeStyles((theme) => ({
   input: {
     color: theme.customColors[1],
-    width: '80%',
+    width: '300px',
     backgroundColor: theme.customColors[7],
   },
 }));
 
 function PhysicalCharacteristics(props) {
   const {
-    methods: { handleBack, setData },
+    methods: { handleBack, setData, errorMessage },
   } = props;
   const classes = useStyle();
 
   const [age, setAge] = useState('');
-  const [activityId, setActivityId] = useState(0);
+  const [activityId, setActivityId] = useState(1);
   const [weight, setWeight] = useState('');
   const [height, setHeight] = useState('');
   const [goalWeight, setGoalWeight] = useState('');
@@ -58,29 +61,20 @@ function PhysicalCharacteristics(props) {
         <Typography key="1" variant="h5">
           Select Your Physical Characteristics :-
         </Typography>
-        <form key="22" style={{ width: '100%' }}>
+        <form key="22">
           <Container direction="column" itemColumns="12" spacing={5}>
-            <SelectComponent
-              key="1"
-              value={activityId}
-              handleChange={async ({ target: { value } }) => {
-                setActivityId(value);
-                const isValid = await activitySchema.isValid({ activityId });
-                setActivityIdError(!isValid);
-              }}
-              activityIdError={activityIdError}
-            />
             <InputField
               key="6"
               variant="outlined"
               label="Age"
               className={classes.input}
               type="number"
-              onChange={async ({ target: { value } }) => {
-                setAge(value);
-                const isValid = await ageSchema.isValid({ age });
-                setAgeError(() => !isValid);
-              }}
+              onChange={updateAndValidateInput(
+                'age',
+                ageSchema,
+                setAge,
+                setAgeError
+              )}
               value={age}
               placeholder="Enter Your Age..."
               InputProps={{
@@ -95,11 +89,12 @@ function PhysicalCharacteristics(props) {
               label="Height"
               className={classes.input}
               type="number"
-              onChange={async ({ target: { value } }) => {
-                setHeight(value);
-                const isValid = await heightSchema.isValid({ height });
-                setHeightError(() => !isValid);
-              }}
+              onChange={updateAndValidateInput(
+                'height',
+                heightSchema,
+                setHeight,
+                setHeightError
+              )}
               value={height}
               placeholder="Enter Your Height..."
               InputProps={{
@@ -114,11 +109,12 @@ function PhysicalCharacteristics(props) {
               label="Current Weight"
               className={classes.input}
               type="number"
-              onChange={async ({ target: { value } }) => {
-                setWeight(value);
-                const isValid = await weightSchema.isValid({ weight });
-                setWeightError(() => !isValid);
-              }}
+              onChange={updateAndValidateInput(
+                'weight',
+                weightSchema,
+                setWeight,
+                setWeightError
+              )}
               value={weight}
               InputProps={{
                 endAdornment: <span>Kg</span>,
@@ -133,11 +129,12 @@ function PhysicalCharacteristics(props) {
               label="Goal Weight"
               className={classes.input}
               type="number"
-              onChange={async ({ target: { value } }) => {
-                setGoalWeight(value);
-                const isValid = await goalWeightSchema.isValid({ goalWeight });
-                setGoalWeightError(() => !isValid);
-              }}
+              onChange={updateAndValidateInput(
+                'goalWeight',
+                goalWeightSchema,
+                setGoalWeight,
+                setGoalWeightError
+              )}
               value={goalWeight}
               placeholder="Enter Your Goal Weight..."
               InputProps={{
@@ -148,8 +145,26 @@ function PhysicalCharacteristics(props) {
                 goalWeightError ? 'Please Enter A Positive Number' : null
               }
             />
+            <SelectComponent
+              key="1"
+              value={activityId}
+              handleChange={updateAndValidateInput(
+                'activityId',
+                activitySchema,
+                setActivityId,
+                setActivityIdError
+              )}
+              activityIdError={activityIdError}
+            />
           </Container>
         </form>
+        <div key="111">
+          {errorMessage && (
+            <Alert variant="outlined" severity="error">
+              {errorMessage}
+            </Alert>
+          )}
+        </div>
         <Container key="4" direction="row" itemColumns="4" spacing={5}>
           <ButtonComponent
             onClick={handleBack}

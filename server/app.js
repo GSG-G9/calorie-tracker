@@ -6,6 +6,7 @@ const compression = require('compression');
 const cookieParser = require('cookie-parser');
 
 const router = require('./router');
+const { clientError } = require('./middlewares');
 
 const app = express();
 
@@ -20,6 +21,8 @@ const middlewares = [
 
 app.use(middlewares);
 app.use('/api/v1/', router);
+
+app.use(clientError);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(join(__dirname, '..', 'client', 'build')));
