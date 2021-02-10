@@ -4,10 +4,10 @@ import BasicUserInfo from '../signUpForm/BasicUserInfo';
 import GenderSelection from '../signUpForm/GenderSelection';
 import PhysicalCharacteristics from '../signUpForm/PhysicalCharacteristics';
 
-const { number, func, object } = PropTypes;
+const { number, func, string, objectOf } = PropTypes;
 const StepContent = (props) => {
   const { step, handleBack, handleNext, setData, data } = props;
-
+  console.log(step, 'step');
   switch (step) {
     case 0:
       return <BasicUserInfo methods={{ handleBack, handleNext, setData }} />;
@@ -25,11 +25,14 @@ const StepContent = (props) => {
 };
 
 StepContent.propTypes = {
-  step: number.isRequired,
+  step: number,
   handleBack: func.isRequired,
   handleNext: func.isRequired,
   setData: func.isRequired,
-  data: object.isRequired,
+  data: objectOf(string).isRequired,
+};
+StepContent.defaultProps = {
+  step: 0,
 };
 
 export default StepContent;

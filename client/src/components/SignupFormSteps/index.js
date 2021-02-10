@@ -29,11 +29,13 @@ export default function SignupFormSteps() {
   }, [setActiveStep]);
 
   const handleNext = useCallback(() => {
+    console.log('next');
     let newSkipped = skipped;
     if (isStepSkipped(activeStep)) {
       newSkipped = new Set(newSkipped.values());
       newSkipped.delete(activeStep);
     }
+    console.log(activeStep);
 
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     setSkipped(newSkipped);
@@ -41,7 +43,15 @@ export default function SignupFormSteps() {
 
   useEffect(() => {
     if (Object.keys(data).length === 10) {
-      console.log(data);
+      fetch('/api/v1/signup', {
+        header: {
+          'Content-Type': 'application/json',
+        },
+        method: 'POST',
+        body: JSON.stringify(data),
+      })
+        .then((res) => res.json())
+        .then((res) => console.log(res));
     }
   }, [data]);
 
@@ -53,6 +63,7 @@ export default function SignupFormSteps() {
           handleNext={handleNext}
           setData={setData}
           data={data}
+          step={activeStep}
         />
       </Box>
     </div>
