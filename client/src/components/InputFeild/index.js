@@ -28,9 +28,14 @@ TextInputField.propTypes = {
   type: string.isRequired,
   className: string.isRequired,
   label: string.isRequired,
-  variant: string.isRequired,
+  variant: string,
   onChange: func.isRequired,
-  placeholder: string.isRequired,
+  placeholder: string,
+};
+
+TextInputField.defaultProps = {
+  variant: '',
+  placeholder: '',
 };
 
 export default TextInputField;
