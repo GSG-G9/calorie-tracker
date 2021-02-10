@@ -250,7 +250,8 @@ describe('authentication', () => {
     describe('getFoodCategory query', () => {
       test('should get Food in Category from the userFoodRelation table', async () => {
         const { rows } = await getFoodCategory(4, 2);
-        return expect(rows[0].food_name).toEqual('maqlobah');
+        const foods = rows.map((row) => row.food_name);
+        return expect(foods).toContain('maqlobah');
       });
     });
 

@@ -1,5 +1,5 @@
 const Boom = require('@hapi/boom');
-const { getFoodCategory, getFoodCalorie } = require('../database/queries');
+const { getFoodCategory } = require('../database/queries');
 
 const foodCategory = async (req, res, next) => {
   const { user } = req;
@@ -11,27 +11,16 @@ const foodCategory = async (req, res, next) => {
     }
     if (categoryId > 4 || categoryId < 1) {
       throw Boom.notFound('category not found!');
+    }
+    const { id: userID } = user;
+    const { rows, rowCount } = await getFoodCategory(userID, categoryId);
+    if (rowCount === 0) {
+      res.status(200).json({ status: 200, data: [] });
     } else {
-      const { rows, rowCount } = await getFoodCategory(user.id, categoryId);
-      if (rowCount === 0) {
-        res.status(200).json({ status: 200, data: [] });
-      } else {
-        const foodIDs = rows.map(({ id }) => id);
-
-        const foodCalorie = await getFoodCalorie(foodIDs);
-
-        const foodWithCalories = rows.map((row, index) => {
-          if (row.id === foodCalorie.rows[index].food_id) {
-            return { food: row, calories: foodCalorie.rows[index].calories };
-          }
-          return null;
-        });
-
-        res.status(200).json({
-          status: 200,
-          data: foodWithCalories,
-        });
-      }
+      res.status(200).json({
+        status: 200,
+        data: rows,
+      });
     }
   } catch (err) {
     next(err);
