@@ -1,3 +1,4 @@
+const getFood = require('./getFood');
 const healthNews = require('./healthNews');
 const signup = require('./signup');
 const login = require('./login');
@@ -8,4 +9,5 @@ module.exports = {
   login,
   signup,
   foodCategory,
+  getFood,
 };

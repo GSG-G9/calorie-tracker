@@ -4,12 +4,13 @@ const app = require('../app');
 const dbBuild = require('../database/config/build');
 const connection = require('../database/config/connection');
 const getUserByEmail = require('../database/queries/getEmail');
-const { getNews, getFoodCategory } = require('../database/queries');
+const { getNews, getFoodCategory, getFood } = require('../database/queries');
 
 describe('authentication', () => {
   beforeEach(() => dbBuild());
   afterAll(() => connection.end());
   let tokenCategory;
+  let token;
 
   describe('sign up routes tests', () => {
     const userData = {
@@ -106,11 +107,13 @@ describe('authentication', () => {
       const {
         statusCode,
         header: { 'set-cookie': cookiesCategory },
+        header: { 'set-cookie': cookies },
       } = await request(app).post('/api/v1/login').send({
         email: 'zein@gmail.com',
         password: 'zein2002jendeya',
       });
       tokenCategory = cookie.parse(cookiesCategory[0]).token;
+      token = cookie.parse(cookies[0]).token;
       return expect(statusCode).toBe(200);
     });
     test('router returns 401 if password is incorrect', async () => {
@@ -136,95 +139,144 @@ describe('authentication', () => {
       return expect(statusCode).toBe(422);
     });
   });
-
-  test('router returns 200', async () => {
-    const { status } = await request(app)
-      .get('/api/v1/healthnews/')
-      .expect(200);
-    expect(status).toBe(200);
+  describe('Test GET /api/v1/food Route', () => {
+    test('GET /api/v1/food Route Should return response with status code 200 and all Food data with secret key = hello', async () => {
+      const res = await request(app)
+        .get('/api/v1/food')
+        .set('Cookie', [`token=${token}`])
+        .expect(200);
+      const actual = JSON.parse(res.text);
+      const foodData = [
+        { id: 1, food_type_id: 1, food_name: 'egg', image: null },
+        { id: 2, food_type_id: 1, food_name: 'chocolate', image: null },
+        { id: 3, food_type_id: 1, food_name: 'checken', image: null },
+        { id: 4, food_type_id: 1, food_name: 'icecream', image: null },
+        { id: 5, food_type_id: 1, food_name: 'avokado', image: null },
+        { id: 6, food_type_id: 1, food_name: 'fish', image: null },
+        { id: 7, food_type_id: 2, food_name: 'mosakhan', image: null },
+        { id: 8, food_type_id: 2, food_name: 'maqlobah', image: null },
+        { id: 9, food_type_id: 1, food_name: 'checken pizza', image: null },
+        { id: 10, food_type_id: 1, food_name: 'cake', image: null },
+        { id: 11, food_type_id: 1, food_name: 'coffee', image: null },
+        { id: 12, food_type_id: 1, food_name: 'apple', image: null },
+        { id: 13, food_type_id: 2, food_name: 'Falafel', image: null },
+      ];
+      const expected = { message: 'success', status: 200, data: foodData };
+      expect(actual).toEqual(expected);
+    });
   });
-  test('getUserByEmail query, number of rows when email is exist will be 1', async () => {
-    const { rows } = await getUserByEmail('lina@gmail.com');
-    expect(rows).toHaveLength(1);
-    expect(rows[0].firstname).toBe('lina');
-  });
-
-  test('getUserByEmail query, number of rows when email is not exist will be 0', async () => {
-    const { rows } = await getUserByEmail('lana@gmail.com');
-    expect(rows).toHaveLength(0);
-  });
-
-  test('should return the user zein jendeya from users table', async () => {
-    const userData = [
-      {
-        id: 4,
-        activity_id: 1,
-        firstname: 'zein',
-        lastname: 'jendeya',
-        email: 'zein@gmail.com',
-        password:
-          '$2b$11$5IkI6Vvo5xGqxgRw4I6uWeCJCyJyd3k7WPvnW.fgjZZQG6aSSdQLK',
-        gender: 'f',
-        height: 1.68,
-        weight: 63,
-        age: 19,
-        goalweight: null,
-        image:
-          'https://i.pinimg.com/564x/a9/f6/e3/a9f6e37a1211793bd2f45f161dc3dfbb.jpg',
-        dailycaloriesgoal: 2099.196,
-      },
-    ];
-    const { rows } = await getUserByEmail('zein@gmail.com');
-
-    return expect(rows).toEqual(userData);
-  });
-
-  test('should get news from the news table', async () => {
-    const { rows } = await getNews();
-    const allContent = rows.map((row) => row.content);
-    return expect(allContent).toContain(
-      'Researchers simulated a tailgating situation with a small group of overweight but healthy men and examined the impact of eating and drinking on their livers using blood tests and a liver scan.',
-    );
+  describe('Test getFood Query', () => {
+    test('should return all data from food table', async () => {
+      const foodData = [
+        { id: 1, food_type_id: 1, food_name: 'egg', image: null },
+        { id: 2, food_type_id: 1, food_name: 'chocolate', image: null },
+        { id: 3, food_type_id: 1, food_name: 'checken', image: null },
+        { id: 4, food_type_id: 1, food_name: 'icecream', image: null },
+        { id: 5, food_type_id: 1, food_name: 'avokado', image: null },
+        { id: 6, food_type_id: 1, food_name: 'fish', image: null },
+        { id: 7, food_type_id: 2, food_name: 'mosakhan', image: null },
+        { id: 8, food_type_id: 2, food_name: 'maqlobah', image: null },
+        { id: 9, food_type_id: 1, food_name: 'checken pizza', image: null },
+        { id: 10, food_type_id: 1, food_name: 'cake', image: null },
+        { id: 11, food_type_id: 1, food_name: 'coffee', image: null },
+        { id: 12, food_type_id: 1, food_name: 'apple', image: null },
+        { id: 13, food_type_id: 2, food_name: 'Falafel', image: null },
+      ];
+      const { rows } = await getFood();
+      return expect(rows).toEqual(foodData);
+    });
   });
 
-  describe('health news', () => {
-    it('router returns 200 after sending the news', async () => {
+  describe('Test DataBase', () => {
+    test('router returns 200', async () => {
       const { status } = await request(app)
         .get('/api/v1/healthnews/')
         .expect(200);
       expect(status).toBe(200);
     });
-  });
-
-  describe('getFoodCategory query', () => {
-    test('should get Food in Category from the userFoodRelation table', async () => {
-      const { rows } = await getFoodCategory(4, 2);
-      return expect(rows[0].food_name).toEqual('maqlobah');
-    });
-  });
-
-  describe('food category', () => {
-    it('router returns 401 if there is no user logged', async () => {
-      const { status } = await request(app)
-        .get('/api/v1/user/0/category/1/food')
-        .expect(401);
-      expect(status).toBe(401);
+    test('getUserByEmail query, number of rows when email is exist will be 1', async () => {
+      const { rows } = await getUserByEmail('lina@gmail.com');
+      expect(rows).toHaveLength(1);
+      expect(rows[0].firstname).toBe('lina');
     });
 
-    it('router returns 200 if there is no food in the category', async () => {
-      const { status } = await request(app)
-        .get('/api/v1/user/4/category/1/food')
-        .set('Cookie', [`token=${tokenCategory}`])
-        .expect(200);
-      expect(status).toBe(200);
+    test('getUserByEmail query, number of rows when email is not exist will be 0', async () => {
+      const { rows } = await getUserByEmail('lana@gmail.com');
+      expect(rows).toHaveLength(0);
     });
 
-    it('router returns 200 if there is food in the category', async () => {
-      const { status } = await request(app)
-        .get('/api/v1/user/4/category/2/food')
-        .set('Cookie', [`token=${tokenCategory}`])
-        .expect(200);
-      expect(status).toBe(200);
+    test('should return the user zein jendeya from users table', async () => {
+      const userData = [
+        {
+          id: 4,
+          activity_id: 1,
+          firstname: 'zein',
+          lastname: 'jendeya',
+          email: 'zein@gmail.com',
+          password:
+            '$2b$11$5IkI6Vvo5xGqxgRw4I6uWeCJCyJyd3k7WPvnW.fgjZZQG6aSSdQLK',
+          gender: 'f',
+          height: 1.68,
+          weight: 63,
+          age: 19,
+          goalweight: null,
+          image:
+            'https://i.pinimg.com/564x/a9/f6/e3/a9f6e37a1211793bd2f45f161dc3dfbb.jpg',
+          dailycaloriesgoal: 2099.196,
+        },
+      ];
+      const { rows } = await getUserByEmail('zein@gmail.com');
+
+      return expect(rows).toEqual(userData);
+    });
+
+    test('should get news from the news table', async () => {
+      const { rows } = await getNews();
+      const allContent = rows.map((row) => row.content);
+      return expect(allContent).toContain(
+        'Researchers simulated a tailgating situation with a small group of overweight but healthy men and examined the impact of eating and drinking on their livers using blood tests and a liver scan.',
+      );
+    });
+
+    describe('health news', () => {
+      it('router returns 200 after sending the news', async () => {
+        const { status } = await request(app)
+          .get('/api/v1/healthnews/')
+          .expect(200);
+        expect(status).toBe(200);
+      });
+    });
+
+    describe('getFoodCategory query', () => {
+      test('should get Food in Category from the userFoodRelation table', async () => {
+        const { rows } = await getFoodCategory(4, 2);
+        return expect(rows[0].food_name).toEqual('maqlobah');
+      });
+    });
+
+    describe('food category', () => {
+      it('router returns 401 if there is no user logged', async () => {
+        const { status } = await request(app)
+          .get('/api/v1/user/0/category/1/food')
+          .expect(401);
+        expect(status).toBe(401);
+      });
+
+      it('router returns 200 if there is no food in the category', async () => {
+        const { status } = await request(app)
+          .get('/api/v1/user/4/category/1/food')
+          .set('Cookie', [`token=${tokenCategory}`])
+          .expect(200);
+        expect(status).toBe(200);
+      });
+
+      it('router returns 200 if there is food in the category', async () => {
+        const { status } = await request(app)
+          .get('/api/v1/user/4/category/2/food')
+          .set('Cookie', [`token=${tokenCategory}`])
+          .expect(200);
+        expect(status).toBe(200);
+      });
     });
   });
 });
