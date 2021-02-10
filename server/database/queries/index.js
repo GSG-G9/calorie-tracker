@@ -1,3 +1,4 @@
+const getFood = require('./getFood');
 const getNews = require('./getNews');
 const getUserByEmail = require('./getEmail');
 const signupUser = require('./signup');
@@ -8,4 +9,5 @@ module.exports = {
   getUserByEmail,
   signupUser,
   getUserActivity,
+  getFood,
 };

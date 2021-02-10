@@ -27,4 +27,5 @@ const options = {
   ssl: NODE_ENV === 'production',
 };
 
+
 module.exports = new Pool(options);
