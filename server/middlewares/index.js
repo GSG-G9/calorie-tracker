@@ -1,5 +1,8 @@
-const {serverError, clientError} = require("./errorHandle");
+const { serverError, clientError } = require('./errorHandle');
+const Auth = require('./auth');
 
 module.exports = {
-    serverError, clientError
-}
+  serverError,
+  clientError,
+  Auth,
+};

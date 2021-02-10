@@ -1,16 +1,18 @@
-const {clientError, serverError} = require("./middlewares")
 const router = require('express').Router();
-const {getUserCalories} = require('./controllers')
+const { getFood, getUserCalories } = require('./controllers');
 
-router.get('/hi', (req, res) => {
-    res.send('hello')
-});
+const { clientError, serverError, Auth } = require('./middlewares');
+const { login, signup, healthNews } = require('./controllers');
 
-router.get('/user/calories',getUserCalories)
+router.get('/healthnews', healthNews);
+router.post('/signup', signup);
+router.post('/login', login);
+router.use(Auth);
+
+router.get('/food', getFood);
+router.get('/user/calories', getUserCalories);
 
 router.use(clientError);
 router.use(serverError);
 
-
-module.exports = router
-
+module.exports = router;

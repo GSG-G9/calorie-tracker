@@ -1,5 +1,6 @@
 const { Pool } = require('pg');
 require('dotenv').config({ path: './config.env' });
+
 const {
   DEV_DATABASE_URL,
   TEST_DATABASE_URL,
@@ -25,5 +26,6 @@ const options = {
   connectionString: dbUrl,
   ssl: NODE_ENV === 'production',
 };
+
 
 module.exports = new Pool(options);
