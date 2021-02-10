@@ -1,62 +1,126 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import PersonIcon from '@material-ui/icons/Person';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, Box } from '@material-ui/core';
 import Axios from 'axios';
 import Container from '../../components/Container';
 import Button from '../../components/Button';
 import InputFeild from '../../components/InputFeild';
-import validationLogin from '../../Utils/validationLogin';
+import validationLogin, {
+  emailSchema,
+  passwordSchema,
+} from '../../Utils/validationLogin';
 import Home from '../Home';
 
-const useStyle = makeStyles((them) => ({
+const useStyle = makeStyles(() => ({
   root: {
-    margin: them.spacing(1),
+    marginRight: '15px',
   },
   input: {
     width: '60%',
   },
-  loginIcon: {
-    margin: them.spacing(2),
+  box: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  but: {
+    display: 'flex',
+    marginLeft: '18%',
   },
 }));
 
 function LoginPage() {
   const classes = useStyle();
   const history = useHistory();
-  const [data, setData] = useState({});
-  const handleChange = (e) => {
-    setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
 
-  console.log(data);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const [emailError, setEmailError] = useState(null);
+  const [passwordError, setPasswordError] = useState(null);
+
+  const [loading, setLoading] = useState(false);
 
   const handlePush = async (e) => {
     try {
       e.preventDefault();
-      await validationLogin.validate(data);
-      await Axios.post('https://jsonplaceholder.typicode.com/posts', data)
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      setData({});
-      history.push(Home);
+      setLoading(true);
+      const isValid = await validationLogin.validate({ email, password });
+      if (!isValid) {
+        console.log(err);
+      }
+
+      const response = await Axios.post(
+        'https://jsonplaceholder.typicode.com/posts',
+        {
+          email,
+          password,
+        }
+      );
+      if (response) {
+        setLoading(false);
+        setEmail('');
+        setPassword('');
+        history.push(Home);
+        console.log(response);
+      }
     } catch (err) {
       console.log(err);
+      setLoaded(false);
     }
+  };
+
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      setLoading(true);
+      const isValid = await validationLogin.validate({ email, password });
+      if (!isValid) {
+        console.log(err);
+      }
+
+      const response = await Axios.post(
+        'https://jsonplaceholder.typicode.com/posts',
+        {
+          email,
+          password,
+        }
+      );
+      if (response) {
+        setLoading(false);
+        setEmail('');
+        setPassword('');
+        history.push(Home);
+        console.log(response);
+      }
+    } catch (err) {
+      console.log(err);
+      setLoaded(false);
+    }
+  };
+
+  const updateAndValidateInput = (
+    schemaKey,
+    schema,
+    setValue,
+    setIsValid
+  ) => async ({ target: { value } }) => {
+    setValue(value);
+    const isValid = await schema.isValid({ [schemaKey]: value });
+    setIsValid(isValid);
   };
 
   return (
     <>
-      <Container direction="column">
-        <Container direction="row" spacing="1" className={classes.loginIcon}>
+      <Container direction="column" itemColumns="12" spacing={1}>
+        {/* <Container direction="row" itemColumns="12" spacing={1}> */}
+        <Box className={classes.box}>
           <PersonIcon color="primary" />
           <Typography variant="body1">Log In</Typography>
-        </Container>
+        </Box>
+
+        {/* </Container> */}
 
         <form>
           <Container direction="column">
@@ -64,28 +128,54 @@ function LoginPage() {
               type="email"
               label="Email"
               margin="normal"
-              // value={email}
+              variant="outlined"
+              value={email}
               name="email"
               className={classes.input}
-              onChange={handleChange}
+              onChange={updateAndValidateInput(
+                'email',
+                emailSchema,
+                setEmail,
+                setEmailError
+              )}
+              error={emailError === null ? false : !emailError}
+              helperText={
+                emailError === null
+                  ? null
+                  : !emailError
+                  ? 'Please Enter A valid Email like exmaple@test.com'
+                  : null
+              }
             />
             <InputFeild
               type="password"
               label="Password"
-              margin="normal"
-              // value={password}
+              variant="outlined"
+              value={password}
               name="password"
               className={classes.input}
-              onChange={handleChange}
+              onChange={updateAndValidateInput(
+                'password',
+                passwordSchema,
+                setPassword,
+                setPasswordError
+              )}
+              error={passwordError === null ? false : !passwordError}
+              helperText={
+                passwordError === null
+                  ? null
+                  : !passwordError
+                  ? 'Please Enter A valid Password which must contain 6 characters'
+                  : null
+              }
             />
           </Container>
         </form>
-        <form>
+        <form className={classes.but}>
           <Button
             variant="contained"
             color="primary"
-            size="medium"
-            className={classes.button}
+            className={classes.root}
             event={handlePush}
           >
             Login
@@ -94,8 +184,7 @@ function LoginPage() {
             variant="contained"
             color="primary"
             size="medium"
-            className={classes.root}
-            // event={handleSubmit}
+            event={handleSubmit}
           >
             Cancel
           </Button>

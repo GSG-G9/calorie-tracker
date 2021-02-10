@@ -33,7 +33,8 @@ const theme = createMuiTheme({
   typography: {
     body1: {
       fontWeight: 900,
-      fontSize: 17,
+      fontSize: 19,
+      marginLeft: '10px',
     },
   },
 });
