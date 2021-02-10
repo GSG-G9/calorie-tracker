@@ -42,7 +42,9 @@ export default function HorizontalLinearStepper() {
   };
 
   useEffect(() => {
-    console.log(data);
+    if (Object.keys(data).length === 10) {
+      console.log(data);
+    }
   }, [data]);
 
   function getStepContent(step) {
@@ -51,7 +53,9 @@ export default function HorizontalLinearStepper() {
         return <BasicUserInfo methods={{ handleBack, handleNext, setData }} />;
       case 1:
         return (
-          <GenderSelection methods={{ handleBack, handleNext, setData }} />
+          <GenderSelection
+            methods={{ handleBack, handleNext, setData, data }}
+          />
         );
       case 2:
         return (

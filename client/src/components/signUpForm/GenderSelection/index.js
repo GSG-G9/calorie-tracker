@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   Typography,
@@ -6,6 +6,7 @@ import {
   Card,
   CardActionArea,
   CardMedia,
+  FormHelperText,
 } from '@material-ui/core';
 import Container from '../../Container';
 import ButtonComponent from '../../Button';
@@ -14,8 +15,9 @@ const { shape, func } = PropTypes;
 
 function GenderSelection(props) {
   const {
-    methods: { handleNext, setData, handleBack },
+    methods: { handleNext, setData, handleBack, data },
   } = props;
+  const [genderError, setGenderError] = useState(false);
   return (
     <Container screenSize="lg" direction="row" itemColumns="6" spacing={2}>
       <Hidden smDown key="1">
@@ -66,6 +68,13 @@ function GenderSelection(props) {
             />
           </CardActionArea>
         </Card>
+        <div key="5">
+          {genderError && (
+            <FormHelperText className="Mui-error">
+              You Have to choose your Gender !
+            </FormHelperText>
+          )}
+        </div>
 
         <Container key="4" direction="row" itemColumns="4" spacing={5}>
           <ButtonComponent
@@ -78,7 +87,10 @@ function GenderSelection(props) {
           </ButtonComponent>
           <ButtonComponent
             onClick={() => {
-              handleNext(); // Validation
+              if (data.gender) {
+                return handleNext();
+              }
+              return setGenderError(true);
             }}
             key="2"
             variant="contained"
