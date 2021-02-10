@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
+import axios from 'axios';
 import StepContent from '../StepContent';
 
 const useStyles = makeStyles((theme) => ({
@@ -29,13 +30,11 @@ export default function SignupFormSteps() {
   }, [setActiveStep]);
 
   const handleNext = useCallback(() => {
-    console.log('next');
     let newSkipped = skipped;
     if (isStepSkipped(activeStep)) {
       newSkipped = new Set(newSkipped.values());
       newSkipped.delete(activeStep);
     }
-    console.log(activeStep);
 
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     setSkipped(newSkipped);
@@ -43,15 +42,21 @@ export default function SignupFormSteps() {
 
   useEffect(() => {
     if (Object.keys(data).length === 10) {
-      fetch('/api/v1/signup', {
-        header: {
-          'Content-Type': 'application/json',
-        },
-        method: 'POST',
-        body: JSON.stringify(data),
-      })
-        .then((res) => res.json())
-        .then((res) => console.log(res));
+      const request = async () => {
+        try {
+          const { CancelToken } = axios;
+          const source = CancelToken.source();
+          await axios.post('/api/v1/signup', data, {
+            cancelToken: source.token,
+          });
+          return () => {
+            source.cancel('Operation canceled by the user.');
+          };
+        } catch (err) {
+          console.log(err);
+        }
+      };
+      request();
     }
   }, [data]);
 

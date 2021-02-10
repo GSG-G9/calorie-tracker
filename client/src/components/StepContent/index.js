@@ -7,7 +7,6 @@ import PhysicalCharacteristics from '../signUpForm/PhysicalCharacteristics';
 const { number, func, string, objectOf } = PropTypes;
 const StepContent = (props) => {
   const { step, handleBack, handleNext, setData, data } = props;
-  console.log(step, 'step');
   switch (step) {
     case 0:
       return <BasicUserInfo methods={{ handleBack, handleNext, setData }} />;

@@ -32,13 +32,13 @@ function PhysicalCharacteristics(props) {
   const classes = useStyle();
 
   const [age, setAge] = useState('');
-  const [activity, setActivity] = useState(0);
+  const [activityId, setactivityId] = useState(0);
   const [weight, setWeight] = useState('');
   const [height, setHeight] = useState('');
   const [goalWeight, setGoalWeight] = useState('');
 
   const [ageError, setAgeError] = useState(false);
-  const [activityError, setActivityError] = useState(false);
+  const [activityIdError, setactivityIdError] = useState(false);
 
   const [weightError, setWeightError] = useState(false);
   const [heightError, setHeightError] = useState(false);
@@ -62,13 +62,13 @@ function PhysicalCharacteristics(props) {
           <Container direction="column" itemColumns="12" spacing={5}>
             <SelectComponent
               key="1"
-              value={activity}
+              value={activityId}
               handleChange={async ({ target: { value } }) => {
-                setActivity(value);
-                const isValid = await activitySchema.isValid({ activity });
-                setActivityError(!isValid);
+                setactivityId(value);
+                const isValid = await activitySchema.isValid({ activityId });
+                setactivityIdError(!isValid);
               }}
-              activityError={activityError}
+              activityIdError={activityIdError}
             />
             <InputField
               key="6"
@@ -165,7 +165,7 @@ function PhysicalCharacteristics(props) {
                 ...userData,
                 weight,
                 goalWeight,
-                activity,
+                activityId,
                 age,
                 height,
               }));
