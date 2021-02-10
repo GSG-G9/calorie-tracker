@@ -4,6 +4,7 @@ const getUserByEmail = require('./getEmail');
 const signupUser = require('./signup');
 const getUserActivity = require('./getUserActivity');
 const getFoodCategory = require('./getFoodCategory');
+const getFoodCalorie = require('./getFoodCalories');
 
 module.exports = {
   getNews,
@@ -12,4 +13,5 @@ module.exports = {
   getUserActivity,
   getFoodCategory,
   getFood,
+  getFoodCalorie,
 };
