@@ -49,10 +49,10 @@ function ControlledOpenSelect(props) {
           value={value}
           onChange={handleChange}
         >
-          <MenuItem value={0}>Very Active</MenuItem>
-          <MenuItem value={1}>Active</MenuItem>
-          <MenuItem value={2}>light active</MenuItem>
-          <MenuItem value={3}>lazy</MenuItem>
+          <MenuItem value={1}>Very Active</MenuItem>
+          <MenuItem value={2}>Active</MenuItem>
+          <MenuItem value={3}>light active</MenuItem>
+          <MenuItem value={4}>lazy</MenuItem>
         </Select>
       </FormControl>
       {activityError && (

@@ -2,12 +2,12 @@ import React from 'react';
 import './App.css';
 import ThemeProvider from './components/ThemeProvider';
 
-import MultiStep from './components/MultiStep';
+import SignupFormSteps from './components/SignupFormSteps';
 
 function App() {
   return (
     <ThemeProvider>
-      <MultiStep />
+      <SignupFormSteps />
     </ThemeProvider>
   );
 }
