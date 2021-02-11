@@ -4,12 +4,12 @@ const { insertFoodValidation } = require('../../utils');
 
 const insertFoodController = async (req, res, next) => {
   const { grams } = req.body;
-  const { id: user_id, categoryId, foodId } = req.params;
+  const { id: userId, categoryId, foodId } = req.params;
   try {
     try {
       await insertFoodValidation.validateAsync(
         {
-          user_id,
+          userId,
           foodId,
           categoryId,
           grams,
@@ -19,10 +19,9 @@ const insertFoodController = async (req, res, next) => {
     } catch (err) {
       throw Boom.badRequest(err.details.map((e) => e.message).join('\n'));
     }
-    await insertFoodQuery(user_id, foodId, categoryId, grams);
+    await insertFoodQuery(userId, foodId, categoryId, grams);
     res.json({ message: 'Food Successfully Added', status: 200 });
   } catch (err) {
-    console.log(err);
     next(err);
   }
 };
