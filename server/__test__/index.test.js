@@ -9,7 +9,6 @@ const { getNews, getFoodCategory, getFood } = require('../database/queries');
 describe('authentication', () => {
   beforeEach(() => dbBuild());
   afterAll(() => connection.end());
-  let tokenCategory;
   let token;
 
   describe('sign up routes tests', () => {
@@ -106,13 +105,11 @@ describe('authentication', () => {
     test('router returns 200 if user logged in successfully', async () => {
       const {
         statusCode,
-        header: { 'set-cookie': cookiesCategory },
         header: { 'set-cookie': cookies },
       } = await request(app).post('/api/v1/login').send({
         email: 'zein@gmail.com',
         password: 'zein2002jendeya',
       });
-      tokenCategory = cookie.parse(cookiesCategory[0]).token;
       token = cookie.parse(cookies[0]).token;
       return expect(statusCode).toBe(200);
     });
@@ -249,7 +246,9 @@ describe('authentication', () => {
 
     describe('getFoodCategory query', () => {
       test('should get Food in Category from the userFoodRelation table', async () => {
-        const { rows } = await getFoodCategory(4, 2);
+        const userID = 4;
+        const categoryId = 2;
+        const { rows } = await getFoodCategory(userID, categoryId);
         const foods = rows.map((row) => row.food_name);
         return expect(foods).toContain('maqlobah');
       });
@@ -266,7 +265,7 @@ describe('authentication', () => {
       it('router returns 200 if there is no food in the category', async () => {
         const { status } = await request(app)
           .get('/api/v1/category/1/food')
-          .set('Cookie', [`token=${tokenCategory}`])
+          .set('Cookie', [`token=${token}`])
           .expect(200);
         expect(status).toBe(200);
       });
@@ -274,7 +273,7 @@ describe('authentication', () => {
       it('router returns 200 if there is food in the category', async () => {
         const { status } = await request(app)
           .get('/api/v1/category/2/food')
-          .set('Cookie', [`token=${tokenCategory}`])
+          .set('Cookie', [`token=${token}`])
           .expect(200);
         expect(status).toBe(200);
       });
