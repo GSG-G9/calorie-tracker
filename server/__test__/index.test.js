@@ -350,14 +350,14 @@ describe('authentication', () => {
       });
     });
 
-    describe('Test POST /api/v1/user/:id/category/:categoryId/food/:foodId Route', () => {
+    describe('Test POST /api/v1/category/:categoryId/food/:foodId Route', () => {
       test('Should return successfully added', async () => {
         const reqFood = {
           grams: 3,
         };
 
         const res = await request(app)
-          .post('/api/v1/user/1/category/1/food/1')
+          .post('/api/v1/category/1/food/1')
           .set({
             'Content-Type': 'application/json',
           })
@@ -376,7 +376,7 @@ describe('authentication', () => {
         };
 
         const res = await request(app)
-          .post('/api/v1/user/1/category/1/food/1')
+          .post('/api/v1/category/1/food/1')
           .set({
             'Content-Type': 'application/json',
           })

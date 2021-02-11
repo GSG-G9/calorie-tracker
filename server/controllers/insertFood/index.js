@@ -4,7 +4,8 @@ const { insertFoodValidation } = require('../../utils');
 
 const insertFoodController = async (req, res, next) => {
   const { grams } = req.body;
-  const { id: userId, categoryId, foodId } = req.params;
+  const { id: userId } = req.user;
+  const { categoryId, foodId } = req.params;
   try {
     try {
       await insertFoodValidation.validateAsync(
