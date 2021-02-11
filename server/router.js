@@ -1,14 +1,29 @@
-const { clientError, serverError } = require("./middlewares");
-const router = require("express").Router();
-const { insertFoodController } = require("./controllers");
+const router = require('express').Router();
 
-router.get("/hi", (req, res) => {
-  res.send("hello");
-});
+const {
+  login,
+  signup,
+  healthNews,
+  foodCategory,
+  getFood,
+  getUserCalories,
+  insertFoodController,
+} = require('./controllers');
+
+const { clientError, serverError, Auth } = require('./middlewares');
+
+router.get('/healthnews', healthNews);
+router.post('/signup', signup);
+router.post('/login', login);
+router.use(Auth);
+
+router.get('/category/:categoryId/food', foodCategory);
+router.get('/food', getFood);
+router.get('/user/calories', getUserCalories);
 
 router.post(
-  "/user/:id/category/:categoryId/food/:foodId",
-  insertFoodController
+  '/user/:id/category/:categoryId/food/:foodId',
+  insertFoodController,
 );
 
 router.use(clientError);
