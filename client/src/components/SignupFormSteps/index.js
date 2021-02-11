@@ -2,6 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
+import { Home } from '../../Utils/constant.js';
 import StepContent from '../StepContent';
 
 const useStyles = makeStyles(() => ({
@@ -12,6 +14,7 @@ const useStyles = makeStyles(() => ({
 
 export default function SignupFormSteps() {
   const classes = useStyles();
+  const history = useHistory();
   const [activeStep, setActiveStep] = useState(0);
   const [skipped, setSkipped] = useState(new Set());
   const [data, setData] = useState({});
@@ -41,9 +44,10 @@ export default function SignupFormSteps() {
 
       (async () => {
         try {
-          return await axios.post('/api/v1/signup', data, {
+          await axios.post('/api/v1/signup', data, {
             cancelToken: source.token,
           });
+          return history.push(Home);
         } catch (err) {
           return setErrorMessage(
             err.response.data.message || 'Something went wrong !! '
