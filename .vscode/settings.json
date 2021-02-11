@@ -9,13 +9,17 @@
 	"[json]": {
 		"editor.defaultFormatter": "vscode.json-language-features"
 	},
-	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.defaultFormatter": "dbaeumer.vscode-eslint",
+	"editor.codeActionsOnSave": {
+      "source.fixAll": true,
+    },
 	"editor.formatOnSave": true,
 	"files.eol": "\n",
 	"cSpell.words": [
-		"pgport"
+		"pgport",
+		"usercalories",
+		"userexercisescalories",
+		"userfoodcalories"
 	],
-	"cSpell.ignoreWords": [
-		"starticon"
-	]
+	"cSpell.ignoreWords": ["starticon"]
 }

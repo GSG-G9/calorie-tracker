@@ -1,4 +1,4 @@
-const Joi = require("joi");
+const Joi = require('joi');
 
 const insertFoodValidation = Joi.object().keys({
   user_id: Joi.number().required().positive(),
@@ -7,4 +7,4 @@ const insertFoodValidation = Joi.object().keys({
   grams: Joi.number().required().positive(),
 });
 
-module.exports = insertFoodValidation
+module.exports = insertFoodValidation;

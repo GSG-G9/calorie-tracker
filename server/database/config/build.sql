@@ -1,20 +1,34 @@
 BEGIN;
 
-DROP TABLE IF EXISTS users, exercises, food, food_category, food_type, nutrition, UserExerciseRelation, UserFoodRelation, news CASCADE;
+DROP TABLE IF EXISTS users, activity, exercises, food, food_category, food_type, nutrition, UserExerciseRelation, UserFoodRelation, news CASCADE;
+
+
+CREATE TABLE activity(
+    id SERIAL PRIMARY KEY,
+    activity_name VARCHAR(100),
+    activity_value Float
+);
+
 
 CREATE TABLE users(
 id SERIAL PRIMARY KEY,
-first_name VARCHAR(100) NOT NULL,
-last_name VARCHAR(100) NOT NULL,
+firstname VARCHAR(100) NOT NULL,
+lastname VARCHAR(100) NOT NULL,
 email VARCHAR (100) NOT NULL UNIQUE,
 password VARCHAR(250) NOT NULL ,
-gender CHAR(1),
-height INTEGER,
-weight INTEGER,
+gender VARCHAR(1),
 age INTEGER,
+weight float,
+height float,
+goalWeight float,
+dailyCaloriesGoal float,
 image TEXT,
-daily_calories_goal INTEGER
+activity_id INTEGER REFERENCES activity(id) ON DELETE CASCADE ON UPDATE CASCADE
+
 );
+
+
+
 
 CREATE TABLE exercises(
 id SERIAL PRIMARY KEY,
@@ -42,40 +56,42 @@ image TEXT
 
 CREATE TABLE nutrition(
 id SERIAL PRIMARY KEY,
-food_id INTEGER REFERENCES food(id) ON DELETE CASCADE ON UPDATE CASCADE,
-calories INTEGER,
-fat INTEGER,
-carbs INTEGER,
-protein INTEGER,
-sugar INTEGER,
-vitamin_A INTEGER,
-vitamin_C INTEGER,
-vitamin_D INTEGER,
-cholesterol INTEGER
+food_id INTEGER REFERENCES food(id) ON DELETE CASCADE ON UPDATE CASCADE UNIQUE,
+calories_per_gram float NOT NUll,
+fat float,
+carbs float,
+protein float,
+sugar float,
+vitamin_A float,
+vitamin_C float,
+vitamin_D float,
+cholesterol float
 );
 
 CREATE TABLE UserExerciseRelation(
 id SERIAL PRIMARY KEY,
 users_id INTEGER REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE,
 exercises_id INTEGER REFERENCES exercises(id) ON DELETE CASCADE ON UPDATE CASCADE,
-created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+exercise_duration_in_minutes float NOT NULL,
+created_at TIMESTAMP DEFAULT CURRENT_DATE
 );
 
+
 CREATE TABLE UserFoodRelation(
-id SERIAL PRIMARY KEY,
-users_id INTEGER REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE,
-food_id INTEGER REFERENCES food(id) ON DELETE CASCADE ON UPDATE CASCADE,
-food_category_id INTEGER REFERENCES food_category(id) ON DELETE CASCADE ON UPDATE CASCADE,
-amount_in_gram Float NOT NULL,
-created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+  id SERIAL PRIMARY KEY,
+  users_id INTEGER REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE,
+  food_id INTEGER REFERENCES food(id) ON DELETE CASCADE ON UPDATE CASCADE,
+  food_category_id INTEGER REFERENCES food_category(id) ON DELETE CASCADE ON UPDATE CASCADE,
+  amount_in_grams float NOT NUll,
+  created_at TIMESTAMP DEFAULT CURRENT_DATE
+  );
 
 CREATE TABLE news(
 id SERIAL PRIMARY KEY,
 users_id INTEGER REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE,
 title VARCHAR(250),
 content VARCHAR(250),
-created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+created_at TIMESTAMP DEFAULT CURRENT_DATE
 );
 
 COMMIT;
