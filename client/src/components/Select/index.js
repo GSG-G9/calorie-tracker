@@ -4,7 +4,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import { Button, FormHelperText } from '@material-ui/core';
+import { FormHelperText } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
 const { number, func, bool } = PropTypes;
@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   divSelect: {
     width: '100%',
     display: 'flex',
-    justifyContent: 'space-around',
+    flexDirection: 'column',
   },
 }));
 
@@ -51,6 +51,7 @@ function ControlledOpenSelect(props) {
           value={value}
           onChange={handleChange}
         >
+          <MenuItem value={0}>None</MenuItem>
           <MenuItem value={1}>Very Active</MenuItem>
           <MenuItem value={2}>Active</MenuItem>
           <MenuItem value={3}>light active</MenuItem>

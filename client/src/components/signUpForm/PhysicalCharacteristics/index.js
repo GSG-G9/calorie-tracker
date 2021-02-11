@@ -35,7 +35,7 @@ function PhysicalCharacteristics(props) {
   const classes = useStyle();
 
   const [age, setAge] = useState('');
-  const [activityId, setActivityId] = useState(1);
+  const [activityId, setActivityId] = useState(0);
   const [weight, setWeight] = useState('');
   const [height, setHeight] = useState('');
   const [goalWeight, setGoalWeight] = useState('');
@@ -175,25 +175,36 @@ function PhysicalCharacteristics(props) {
             Back
           </ButtonComponent>
           <ButtonComponent
+            disable={
+              activityIdError ||
+              ageError ||
+              goalWeightError ||
+              heightError ||
+              weightError
+            }
             onClick={async () => {
-              const isValid = await Promise.all([
-                activitySchema.isValid({ weight }),
-                ageSchema.isValid({ goalWeight }),
-                goalWeightSchema.isValid({ activityId }),
-                heightSchema.isValid({ age }),
-                weightSchema.isValid({ height }),
-              ]);
-
-              console.log(isValid);
-
-              if (!isValid.every((schema) => schema)) {
-                setActivityIdError(() => !isValid[0]);
-                setAgeError(() => !isValid[1]);
-                setGoalWeightError(() => !isValid[2]);
-                setHeightError(() => !isValid[3]);
-                return setWeightError(() => !isValid[4]);
+              const activityIdIsValid = await activitySchema.isValid({
+                activityId,
+              });
+              const ageIsValid = await ageSchema.isValid({ age });
+              const goalWeightIsValid = await goalWeightSchema.isValid({
+                goalWeight,
+              });
+              const heightIsValid = await heightSchema.isValid({ height });
+              const weightIsValid = await weightSchema.isValid({ weight });
+              if (
+                !activityIdIsValid ||
+                !ageIsValid ||
+                !goalWeightIsValid ||
+                !heightIsValid ||
+                !weightIsValid
+              ) {
+                setActivityIdError(() => !activityIdIsValid);
+                setAgeError(() => !ageIsValid);
+                setGoalWeightError(() => !goalWeightIsValid);
+                setHeightError(() => !heightIsValid);
+                return setWeightError(() => !weightIsValid);
               }
-
               return setData((userData) => ({
                 ...userData,
                 weight,

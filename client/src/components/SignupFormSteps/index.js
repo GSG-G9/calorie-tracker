@@ -41,7 +41,7 @@ export default function SignupFormSteps() {
 
       (async () => {
         try {
-          await axios.post('/api/v1/signup', data, {
+          return await axios.post('/api/v1/signup', data, {
             cancelToken: source.token,
           });
         } catch (err) {

@@ -8,7 +8,7 @@ import updateAndValidateInput from '../../../Utils/checkValidationPureFunction';
 import InputField from '../../InputField';
 import Container from '../../Container';
 import ButtonComponent from '../../Button';
-import schema, {
+import {
   emailSchema,
   firstNameSchema,
   lastNameSchema,
@@ -146,17 +146,27 @@ function BasicUserInfo(props) {
               passwordError || emailError || firstNameError || lastNameError
             }
             onClick={async () => {
-              const isValid = await schema.isValid({
+              const firstNameIsValid = await firstNameSchema.isValid({
                 firstName,
+              });
+              const lastNameIsValid = await lastNameSchema.isValid({
                 lastName,
-                email,
+              });
+              const emailIsValid = await emailSchema.isValid({ email });
+              const passwordIsValid = await passwordSchema.isValid({
                 password,
               });
-              if (!isValid) {
-                setPasswordError(() => !isValid);
-                setFirstNameError(() => !isValid);
-                setLastNameError(() => !isValid);
-                return setEmailError(() => !isValid);
+
+              if (
+                !firstNameIsValid ||
+                !lastNameIsValid ||
+                !emailIsValid ||
+                !passwordIsValid
+              ) {
+                setPasswordError(() => !passwordIsValid);
+                setFirstNameError(() => !firstNameIsValid);
+                setLastNameError(() => !lastNameIsValid);
+                return setEmailError(() => !emailIsValid);
               }
               handleNext();
               return setData((userData) => ({
