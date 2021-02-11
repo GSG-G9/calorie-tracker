@@ -2,31 +2,74 @@ import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import PersonIcon from '@material-ui/icons/Person';
-import { makeStyles, Box } from '@material-ui/core';
+import { makeStyles, Grid } from '@material-ui/core';
 import Axios from 'axios';
-import Container from '../../components/Container';
+import { Alert } from '@material-ui/lab';
 import Button from '../../components/Button';
-import InputFeild from '../../components/InputFeild';
-import validationLogin, {
-  emailSchema,
-  passwordSchema,
-} from '../../Utils/validationLogin';
-import Home from '../Home';
+import InputField from '../../components/InputField';
+import { emailSchema, passwordSchema } from '../../Utils/validationLogin';
+import { Home } from '../../Utils/constant';
+import { context } from '../../components/userProvider';
 
-const useStyle = makeStyles(() => ({
+const useStyle = makeStyles((theme) => ({
   root: {
-    marginRight: '15px',
+    marginTop: '20%',
+    '@media (min-device-width: 900px)': {
+      marginTop: '8%',
+    },
+  },
+  flex: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  flexRow: {
+    display: 'flex',
+    flexDirection: 'row ',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+  },
+  form: {
+    marginTop: '10%',
+    width: '55%',
+    '@media (min-device-width: 500px) and (max-device-width: 900px)': {
+      marginTop: '3%',
+      width: '30%',
+    },
+    '@media (min-device-width: 900px) ': {
+      marginTop: '3%',
+      width: '15%',
+    },
   },
   input: {
-    width: '60%',
+    width: '300px',
+    color: theme.customColors[2],
+    marginTop: '10%',
+    '@media (min-device-width: 900px)': {
+      width: '380px',
+    },
   },
-  box: {
+  logo: {
     display: 'flex',
     flexDirection: 'row',
+    width: '65%',
+    '@media (min-device-width: 500px) and (max-device-width: 900px)': {
+      width: '40%',
+    },
+    '@media (min-device-width: 900px) ': {
+      width: '25%',
+    },
   },
-  but: {
-    display: 'flex',
-    marginLeft: '18%',
+  button: {
+    justifyContent: 'space-around',
+  },
+  wordStyle: {
+    fontWeight: 900,
+    fontSize: 19,
+    marginLeft: '8px',
+    color: theme.customColors[1],
   },
 }));
 
@@ -34,70 +77,59 @@ function LoginPage() {
   const classes = useStyle();
   const history = useHistory();
 
+  const [, setIsAuthenticated] = useContext(context);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const [emailError, setEmailError] = useState(null);
-  const [passwordError, setPasswordError] = useState(null);
+  const [emailError, setEmailError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
 
-  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const [, setLoading] = useState(false);
 
   const handlePush = async (e) => {
     try {
       e.preventDefault();
       setLoading(true);
-      const isValid = await validationLogin.validate({ email, password });
-      if (!isValid) {
-        console.log(err);
+      const emailIsValid = await emailSchema.isValid({ email });
+      const passwordIsValid = await passwordSchema.isValid({ password });
+      if (!emailIsValid) {
+        setEmailError('Please Enter A valid Email like exmaple@test.com');
+      }
+      if (!passwordIsValid) {
+        setPasswordError(
+          'Please Enter A valid Password which must contain 6 characters'
+        );
       }
 
-      const response = await Axios.post(
-        'https://jsonplaceholder.typicode.com/posts',
-        {
-          email,
-          password,
-        }
-      );
+      if (!emailIsValid || !passwordIsValid) {
+        return;
+      }
+      const response = await Axios.post('/api/v1/login', {
+        email,
+        password,
+      });
       if (response) {
         setLoading(false);
         setEmail('');
         setPassword('');
+        setIsAuthenticated(true);
         history.push(Home);
-        console.log(response);
       }
     } catch (err) {
-      console.log(err);
-      setLoaded(false);
+      setLoading(false);
+      if (err.response.data.message) {
+        setErrorMessage(err.response.data.message);
+      } else {
+        setErrorMessage('something wrong');
+      }
     }
   };
 
-  const handleSubmit = async (e) => {
-    try {
-      e.preventDefault();
-      setLoading(true);
-      const isValid = await validationLogin.validate({ email, password });
-      if (!isValid) {
-        console.log(err);
-      }
-
-      const response = await Axios.post(
-        'https://jsonplaceholder.typicode.com/posts',
-        {
-          email,
-          password,
-        }
-      );
-      if (response) {
-        setLoading(false);
-        setEmail('');
-        setPassword('');
-        history.push(Home);
-        console.log(response);
-      }
-    } catch (err) {
-      console.log(err);
-      setLoaded(false);
-    }
+  const handleCancel = () => {
+    history.push(Home);
   };
 
   const updateAndValidateInput = (
@@ -108,89 +140,89 @@ function LoginPage() {
   ) => async ({ target: { value } }) => {
     setValue(value);
     const isValid = await schema.isValid({ [schemaKey]: value });
-    setIsValid(isValid);
+    setIsValid(!isValid);
   };
 
   return (
-    <>
-      <Container direction="column" itemColumns="12" spacing={1}>
-        {/* <Container direction="row" itemColumns="12" spacing={1}> */}
-        <Box className={classes.box}>
-          <PersonIcon color="primary" />
-          <Typography variant="body1">Log In</Typography>
-        </Box>
+    <div className={`${classes.flex} ${classes.root}`}>
+      <Grid className={classes.logo}>
+        <PersonIcon color="primary" />
+        <Typography className={classes.wordStyle}>Log In</Typography>
+      </Grid>
 
-        {/* </Container> */}
-
-        <form>
-          <Container direction="column">
-            <InputFeild
-              type="email"
-              label="Email"
-              margin="normal"
-              variant="outlined"
-              value={email}
-              name="email"
-              className={classes.input}
-              onChange={updateAndValidateInput(
-                'email',
-                emailSchema,
-                setEmail,
-                setEmailError
-              )}
-              error={emailError === null ? false : !emailError}
-              helperText={
-                emailError === null
-                  ? null
-                  : !emailError
-                  ? 'Please Enter A valid Email like exmaple@test.com'
-                  : null
-              }
-            />
-            <InputFeild
-              type="password"
-              label="Password"
-              variant="outlined"
-              value={password}
-              name="password"
-              className={classes.input}
-              onChange={updateAndValidateInput(
-                'password',
-                passwordSchema,
-                setPassword,
-                setPasswordError
-              )}
-              error={passwordError === null ? false : !passwordError}
-              helperText={
-                passwordError === null
-                  ? null
-                  : !passwordError
-                  ? 'Please Enter A valid Password which must contain 6 characters'
-                  : null
-              }
-            />
-          </Container>
-        </form>
-        <form className={classes.but}>
+      <form className={classes.flex}>
+        <Grid className={classes.flex}>
+          <InputField
+            type="email"
+            label="Email"
+            margin="normal"
+            variant="outlined"
+            value={email}
+            name="email"
+            className={classes.input}
+            onChange={updateAndValidateInput(
+              'email',
+              emailSchema,
+              setEmail,
+              setEmailError
+            )}
+            error={emailError}
+            helperText={
+              emailError
+                ? 'Please Enter A valid Email like exmaple@test.com'
+                : null
+            }
+          />
+          <InputField
+            type="password"
+            label="Password"
+            variant="outlined"
+            value={password}
+            name="password"
+            className={classes.input}
+            onChange={updateAndValidateInput(
+              'password',
+              passwordSchema,
+              setPassword,
+              setPasswordError
+            )}
+            error={passwordError}
+            helperText={
+              passwordError
+                ? 'Please Enter A valid Password which must contain 6 characters'
+                : null
+            }
+          />
+        </Grid>
+      </form>
+      <div>
+        {errorMessage && (
+          <Alert variant="outlined" severity="error">
+            {errorMessage}
+          </Alert>
+        )}
+      </div>
+      <form className={`${classes.flex} ${classes.form}`}>
+        <Grid className={`${classes.flexRow} ${classes.button}`}>
           <Button
             variant="contained"
             color="primary"
-            className={classes.root}
+            size="medium"
             event={handlePush}
           >
             Login
           </Button>
           <Button
             variant="contained"
-            color="primary"
+            color="light"
             size="medium"
-            event={handleSubmit}
+            event={handleCancel}
           >
             Cancel
           </Button>
-        </form>
-      </Container>
-    </>
+        </Grid>
+      </form>
+    </div>
   );
 }
 
