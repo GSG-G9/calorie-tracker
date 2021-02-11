@@ -30,13 +30,6 @@ const theme = createMuiTheme({
     secondary: { main: paletteColors[6] },
   },
   customColors: paletteColors,
-  typography: {
-    body1: {
-      fontWeight: 900,
-      fontSize: 19,
-      marginLeft: '10px',
-    },
-  },
 });
 
 function ThemeProvider({ children }) {
