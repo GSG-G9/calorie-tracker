@@ -1,3 +1,6 @@
+const calculateUserFoodCalories = require('./calculateUserFoodCalories');
+const getUserCalories = require('./getUserCalories');
+const calculateUserExercisesCalories = require('./calculateUserExercisesCalories');
 const getFood = require('./getFood');
 const getNews = require('./getNews');
 const getUserByEmail = require('./getEmail');
@@ -12,4 +15,7 @@ module.exports = {
   getUserActivity,
   getFoodCategory,
   getFood,
+  calculateUserFoodCalories,
+  getUserCalories,
+  calculateUserExercisesCalories,
 };

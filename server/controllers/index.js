@@ -1,3 +1,4 @@
+const getUserCalories = require('./getUserCalories');
 const getFood = require('./getFood');
 const healthNews = require('./healthNews');
 const signup = require('./signup');
@@ -10,4 +11,5 @@ module.exports = {
   signup,
   foodCategory,
   getFood,
+  getUserCalories,
 };

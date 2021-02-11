@@ -10,8 +10,16 @@
 		"editor.defaultFormatter": "vscode.json-language-features"
 	},
 	"editor.defaultFormatter": "dbaeumer.vscode-eslint",
+	"editor.codeActionsOnSave": {
+      "source.fixAll": true,
+    },
 	"editor.formatOnSave": true,
 	"files.eol": "\n",
-	"cSpell.words": ["pgport"],
+	"cSpell.words": [
+		"pgport",
+		"usercalories",
+		"userexercisescalories",
+		"userfoodcalories"
+	],
 	"cSpell.ignoreWords": ["starticon"]
 }

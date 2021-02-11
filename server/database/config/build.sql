@@ -12,10 +12,10 @@ CREATE TABLE activity(
 
 CREATE TABLE users(
 id SERIAL PRIMARY KEY,
-lastName VARCHAR(100),
-email VARCHAR (100),
-password VARCHAR(250),
-firstName VARCHAR(100) NOT NULL,
+firstname VARCHAR(100) NOT NULL,
+lastname VARCHAR(100) NOT NULL,
+email VARCHAR (100) NOT NULL UNIQUE,
+password VARCHAR(250) NOT NULL ,
 gender VARCHAR(1),
 age INTEGER,
 weight float,
@@ -56,8 +56,8 @@ image TEXT
 
 CREATE TABLE nutrition(
 id SERIAL PRIMARY KEY,
-food_id INTEGER REFERENCES food(id) ON DELETE CASCADE ON UPDATE CASCADE,
-calories float,
+food_id INTEGER REFERENCES food(id) ON DELETE CASCADE ON UPDATE CASCADE UNIQUE,
+calories_per_gram float NOT NUll,
 fat float,
 carbs float,
 protein float,
@@ -72,7 +72,8 @@ CREATE TABLE UserExerciseRelation(
 id SERIAL PRIMARY KEY,
 users_id INTEGER REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE,
 exercises_id INTEGER REFERENCES exercises(id) ON DELETE CASCADE ON UPDATE CASCADE,
-created_at TIMESTAMP NOT NULL
+exercise_duration_in_minutes float NOT NULL,
+created_at TIMESTAMP DEFAULT CURRENT_DATE
 );
 
 
@@ -90,7 +91,7 @@ id SERIAL PRIMARY KEY,
 users_id INTEGER REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE,
 title VARCHAR(250),
 content VARCHAR(250),
-created_at TIMESTAMP NOT NULL
+created_at TIMESTAMP DEFAULT CURRENT_DATE
 );
 
 COMMIT;

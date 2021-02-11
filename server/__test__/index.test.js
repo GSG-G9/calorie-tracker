@@ -4,7 +4,14 @@ const app = require('../app');
 const dbBuild = require('../database/config/build');
 const connection = require('../database/config/connection');
 const getUserByEmail = require('../database/queries/getEmail');
-const { getNews, getFoodCategory, getFood } = require('../database/queries');
+const {
+  getNews,
+  getFood,
+  calculateUserExercisesCalories,
+  calculateUserFoodCalories,
+  getUserCalories,
+  getFoodCategory,
+} = require('../database/queries');
 
 describe('authentication', () => {
   beforeEach(() => dbBuild());
@@ -142,7 +149,7 @@ describe('authentication', () => {
         .get('/api/v1/food')
         .set('Cookie', [`token=${token}`])
         .expect(200);
-      const actual = JSON.parse(res.text);
+      const actual = res.body;
       const foodData = [
         { id: 1, food_type_id: 1, food_name: 'egg', image: null },
         { id: 2, food_type_id: 1, food_name: 'chocolate', image: null },
@@ -150,14 +157,33 @@ describe('authentication', () => {
         { id: 4, food_type_id: 1, food_name: 'icecream', image: null },
         { id: 5, food_type_id: 1, food_name: 'avokado', image: null },
         { id: 6, food_type_id: 1, food_name: 'fish', image: null },
-        { id: 7, food_type_id: 2, food_name: 'mosakhan', image: null },
+        { id: 7, food_type_id: 2, food_name: 'pizza', image: null },
         { id: 8, food_type_id: 2, food_name: 'maqlobah', image: null },
         { id: 9, food_type_id: 1, food_name: 'checken pizza', image: null },
         { id: 10, food_type_id: 1, food_name: 'cake', image: null },
         { id: 11, food_type_id: 1, food_name: 'coffee', image: null },
         { id: 12, food_type_id: 1, food_name: 'apple', image: null },
         { id: 13, food_type_id: 2, food_name: 'Falafel', image: null },
+        { id: 14, food_type_id: 1, food_name: 'egg', image: null },
+        { id: 15, food_type_id: 1, food_name: 'chocolate', image: null },
+        { id: 16, food_type_id: 1, food_name: 'checken', image: null },
+        { id: 17, food_type_id: 1, food_name: 'icecream', image: null },
+        { id: 18, food_type_id: 1, food_name: 'avokado', image: null },
+        { id: 19, food_type_id: 1, food_name: 'fish', image: null },
+        { id: 20, food_type_id: 2, food_name: 'mosakhan', image: null },
+        { id: 21, food_type_id: 2, food_name: 'maqlobah', image: null },
+        {
+          id: 22,
+          food_type_id: 1,
+          food_name: 'checken pizza',
+          image: null,
+        },
+        { id: 23, food_type_id: 1, food_name: 'cake', image: null },
+        { id: 24, food_type_id: 1, food_name: 'coffee', image: null },
+        { id: 25, food_type_id: 1, food_name: 'apple', image: null },
+        { id: 26, food_type_id: 2, food_name: 'Falafel', image: null },
       ];
+
       const expected = { message: 'success', status: 200, data: foodData };
       expect(actual).toEqual(expected);
     });
@@ -171,16 +197,78 @@ describe('authentication', () => {
         { id: 4, food_type_id: 1, food_name: 'icecream', image: null },
         { id: 5, food_type_id: 1, food_name: 'avokado', image: null },
         { id: 6, food_type_id: 1, food_name: 'fish', image: null },
-        { id: 7, food_type_id: 2, food_name: 'mosakhan', image: null },
+        { id: 7, food_type_id: 2, food_name: 'pizza', image: null },
         { id: 8, food_type_id: 2, food_name: 'maqlobah', image: null },
         { id: 9, food_type_id: 1, food_name: 'checken pizza', image: null },
         { id: 10, food_type_id: 1, food_name: 'cake', image: null },
         { id: 11, food_type_id: 1, food_name: 'coffee', image: null },
         { id: 12, food_type_id: 1, food_name: 'apple', image: null },
         { id: 13, food_type_id: 2, food_name: 'Falafel', image: null },
+        { id: 14, food_type_id: 1, food_name: 'egg', image: null },
+        { id: 15, food_type_id: 1, food_name: 'chocolate', image: null },
+        { id: 16, food_type_id: 1, food_name: 'checken', image: null },
+        { id: 17, food_type_id: 1, food_name: 'icecream', image: null },
+        { id: 18, food_type_id: 1, food_name: 'avokado', image: null },
+        { id: 19, food_type_id: 1, food_name: 'fish', image: null },
+        { id: 20, food_type_id: 2, food_name: 'mosakhan', image: null },
+        { id: 21, food_type_id: 2, food_name: 'maqlobah', image: null },
+        {
+          id: 22,
+          food_type_id: 1,
+          food_name: 'checken pizza',
+          image: null,
+        },
+        { id: 23, food_type_id: 1, food_name: 'cake', image: null },
+        { id: 24, food_type_id: 1, food_name: 'coffee', image: null },
+        { id: 25, food_type_id: 1, food_name: 'apple', image: null },
+        { id: 26, food_type_id: 2, food_name: 'Falafel', image: null },
       ];
       const { rows } = await getFood();
       return expect(rows).toEqual(foodData);
+    });
+  });
+  describe('Test GET /api/v1/user/calories', () => {
+    test('should return status 200 and an object with correct data {message:"success",status:200,data:{}}', async () => {
+      const res = await request(app)
+        .get('/api/v1/user/calories')
+        .expect('Content-Type', /json/)
+        .set('Cookie', [`token=${token}`])
+        .expect(200);
+      const expected = {
+        status: 200,
+        message: 'success',
+        data: {
+          userCalories: 1500,
+          userFoodCalories: 307495,
+          userExercisesCalories: 456750,
+          remainingCalories: 150755,
+        },
+      };
+      expect(JSON.parse(res.text)).toEqual(expected);
+    });
+  });
+
+  describe('Test Database Queries', () => {
+    const userId = 1;
+    test('calculateUserExercisesCalories Query should return calories equal to 456750 of user 1', async () => {
+      const {
+        rows: [{ userexercisescalories: userExercisesCalories }],
+      } = await calculateUserExercisesCalories(userId);
+      return expect(userExercisesCalories).toBe(456750);
+    });
+
+    test('calculateUserFoodCalories Query should return calories equal to 307495 of user 1', async () => {
+      const {
+        rows: [{ userfoodcalories: userFoodCalories }],
+      } = await calculateUserFoodCalories(userId);
+      return expect(userFoodCalories).toBe(307495);
+    });
+
+    test('getUserCalories Query should return calories equal to 1500 of user 1', async () => {
+      const {
+        rows: [{ usercalories: userCalories }],
+      } = await getUserCalories(userId);
+      return expect(userCalories).toBe(1500);
     });
   });
 
@@ -205,7 +293,7 @@ describe('authentication', () => {
     test('should return the user zein jendeya from users table', async () => {
       const userData = [
         {
-          id: 4,
+          id: 8,
           activity_id: 1,
           firstname: 'zein',
           lastname: 'jendeya',
