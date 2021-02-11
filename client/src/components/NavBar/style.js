@@ -4,7 +4,7 @@ const useStyles = makeStyles((theme) => ({
   nav_icons: {
     width: 80,
     height: 80,
-    color: theme.customColors.white,
+
     '@media (min-device-width: 900px) and (max-device-width: 1800px)': {
       width: 70,
       height: 70,
@@ -27,7 +27,13 @@ const useStyles = makeStyles((theme) => ({
       height: '33%',
       borderRadius: '5%',
     },
-    '@media (min-device-width: 1200px)': {
+    '@media (min-device-width: 1200px) and (max-device-width: 1800px)': {
+      top: '26%',
+      borderRadius: '5%',
+      width: '7%',
+      height: ' 50%',
+    },
+    '@media (min-device-width: 1800px)': {
       top: '26%',
       width: '6.5%',
       height: '40%',
