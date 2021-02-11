@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import { Home } from '../../Utils/constant.js';
+import { Login } from '../../Utils/constant';
 import StepContent from '../StepContent';
 
 const useStyles = makeStyles(() => ({
@@ -47,7 +47,7 @@ export default function SignupFormSteps() {
           await axios.post('/api/v1/signup', data, {
             cancelToken: source.token,
           });
-          return history.push(Home);
+          return history.push(Login);
         } catch (err) {
           return setErrorMessage(
             err.response.data.message || 'Something went wrong !! '
