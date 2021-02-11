@@ -122,3 +122,5 @@ INSERT INTO news(title, content, created_at) VALUES
 
 INSERT INTO users(firstname, lastname, email, password, gender, height, weight, age, image, dailyCaloriesGoal, activity_id) values ('zein', 'jendeya', 'zein@gmail.com', '$2b$11$5IkI6Vvo5xGqxgRw4I6uWeCJCyJyd3k7WPvnW.fgjZZQG6aSSdQLK', 'f', 1.68, 63, 19, 'https://i.pinimg.com/564x/a9/f6/e3/a9f6e37a1211793bd2f45f161dc3dfbb.jpg', 2099.196, 1);
 
+INSERT INTO food_category(name) values('breakfast'),('lunch'),('dinner'),('snack');
+INSERT INTO UserFoodRelation(users_id, food_id, food_category_id, amount_in_grams) VALUES(4, 8, 2, 15.3 );

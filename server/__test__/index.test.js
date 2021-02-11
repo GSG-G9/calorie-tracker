@@ -1,5 +1,5 @@
-const request = require('supertest');
 const cookie = require('cookie');
+const request = require('supertest');
 const app = require('../app');
 const dbBuild = require('../database/config/build');
 const connection = require('../database/config/connection');
@@ -10,6 +10,7 @@ const {
   calculateUserExercisesCalories,
   calculateUserFoodCalories,
   getUserCalories,
+  getFoodCategory,
 } = require('../database/queries');
 
 describe('authentication', () => {
@@ -316,9 +317,54 @@ describe('authentication', () => {
 
     test('should get news from the news table', async () => {
       const { rows } = await getNews();
-      return expect(rows[5].content).toEqual(
+      const allContent = rows.map((row) => row.content);
+      return expect(allContent).toContain(
         'Researchers simulated a tailgating situation with a small group of overweight but healthy men and examined the impact of eating and drinking on their livers using blood tests and a liver scan.',
       );
+    });
+
+    describe('health news', () => {
+      it('router returns 200 after sending the news', async () => {
+        const { status } = await request(app)
+          .get('/api/v1/healthnews/')
+          .expect(200);
+        expect(status).toBe(200);
+      });
+    });
+
+    describe('getFoodCategory query', () => {
+      test('should get Food in Category from the userFoodRelation table', async () => {
+        const userID = 4;
+        const categoryId = 2;
+        const { rows } = await getFoodCategory(userID, categoryId);
+        const foods = rows.map((row) => row.food_name);
+        return expect(foods).toContain('maqlobah');
+      });
+    });
+
+    describe('food category', () => {
+      it('router returns 401 if there is no user logged', async () => {
+        const { status } = await request(app)
+          .get('/api/v1/category/1/food')
+          .expect(401);
+        expect(status).toBe(401);
+      });
+
+      it('router returns 200 if there is no food in the category', async () => {
+        const { status } = await request(app)
+          .get('/api/v1/category/1/food')
+          .set('Cookie', [`token=${token}`])
+          .expect(200);
+        expect(status).toBe(200);
+      });
+
+      it('router returns 200 if there is food in the category', async () => {
+        const { status } = await request(app)
+          .get('/api/v1/category/2/food')
+          .set('Cookie', [`token=${token}`])
+          .expect(200);
+        expect(status).toBe(200);
+      });
     });
   });
 });
