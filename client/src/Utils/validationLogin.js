@@ -5,20 +5,5 @@ export const emailSchema = yup.object({
 });
 
 export const passwordSchema = yup.object({
-  password: yup
-    .string()
-    .min(6)
-    .required()
-    .matches(/(?=.*[0-9])/),
+  password: yup.string().min(6).required(),
 });
-
-const validationLogin = yup.object().shape({
-  email: yup.string().email().required(),
-  password: yup
-    .string()
-    .required()
-    .min(6)
-    .matches(/(?=.*[0-9])/),
-});
-
-export default validationLogin;
