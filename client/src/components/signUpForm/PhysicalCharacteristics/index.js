@@ -175,8 +175,26 @@ function PhysicalCharacteristics(props) {
             Back
           </ButtonComponent>
           <ButtonComponent
-            onClick={() => {
-              setData((userData) => ({
+            onClick={async () => {
+              const isValid = await Promise.all([
+                activitySchema.isValid({ weight }),
+                ageSchema.isValid({ goalWeight }),
+                goalWeightSchema.isValid({ activityId }),
+                heightSchema.isValid({ age }),
+                weightSchema.isValid({ height }),
+              ]);
+
+              console.log(isValid);
+
+              if (!isValid.every((schema) => schema)) {
+                setActivityIdError(() => !isValid[0]);
+                setAgeError(() => !isValid[1]);
+                setGoalWeightError(() => !isValid[2]);
+                setHeightError(() => !isValid[3]);
+                return setWeightError(() => !isValid[4]);
+              }
+
+              return setData((userData) => ({
                 ...userData,
                 weight,
                 goalWeight,
