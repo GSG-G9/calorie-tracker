@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import axios from 'axios';
 import FoodItems from '../FoodItems';
 import Container from '../Container';
-
 import Button from '../Button';
 
 const useStyle = makeStyles((theme) => ({
@@ -16,6 +16,10 @@ const useStyle = makeStyles((theme) => ({
 }));
 
 function FoodItemsSelected() {
+  useEffect(() => {
+    const res = axios.post('https://jsonplaceholder.typicode.com/todos/1');
+    console.log(res);
+  }, []);
   const classes = useStyle();
   return (
     <Container direction="column" itemColumns="12" spacing={4}>
