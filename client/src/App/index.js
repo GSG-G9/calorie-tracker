@@ -23,25 +23,28 @@ import CaloriesPage from '../Pages/Calories';
 import MyFoodPage from '../Pages/MyFood';
 import FoodPage from '../Pages/Food';
 import ExercisePage from '../Pages/Exercise';
+import UserProvider from '../components/userProvider';
 import './style.css';
 
 function App() {
   return (
     <ThemeProvider>
-      <Router>
-        <Switch>
-          <Route exact path={Home} component={HomePage} />
-          <Route exact path={Login} component={LoginPage} />
-          <Route exact path={Signup} component={SignupPage} />
-          <Route exact path={Logout} component={LogoutPage} />
-          <Route exact path={Nutrition} component={NutritionPage} />
-          <Route exact path={MyProfile} component={MyProfilePage} />
-          <Route exact path={Calories} component={CaloriesPage} />
-          <Route exact path={MyFood} component={MyFoodPage} />
-          <Route exact path={Food} component={FoodPage} />
-          <Route exact path={Exercise} component={ExercisePage} />
-        </Switch>
-      </Router>
+      <UserProvider>
+        <Router>
+          <Switch>
+            <Route exact path={Home} component={HomePage} />
+            <Route exact path={Login} component={LoginPage} />
+            <Route exact path={Signup} component={SignupPage} />
+            <Route exact path={Logout} component={LogoutPage} />
+            <Route exact path={Nutrition} component={NutritionPage} />
+            <Route exact path={MyProfile} component={MyProfilePage} />
+            <Route exact path={Calories} component={CaloriesPage} />
+            <Route exact path={MyFood} component={MyFoodPage} />
+            <Route exact path={Food} component={FoodPage} />
+            <Route exact path={Exercise} component={ExercisePage} />
+          </Switch>
+        </Router>
+      </UserProvider>
     </ThemeProvider>
   );
 }
