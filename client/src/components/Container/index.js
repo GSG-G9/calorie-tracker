@@ -17,6 +17,11 @@ function ContainerComponent({
       <Grid container direction={direction} justify="center" spacing={spacing}>
         {children.map((element) => (
           <Grid
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
             item
             sm={screenSize === 'sm' ? itemColumns : false}
             md={screenSize === 'md' ? itemColumns : false}
