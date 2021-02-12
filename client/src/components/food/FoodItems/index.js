@@ -18,9 +18,20 @@ function FootItems({ foodArray }) {
   const classes = useStyle();
   return (
     <ul className={classes.list}>
-      {foodArray.map(({ name, id, calories }) => (
-        <FoodItem label={name} calories={calories} key={id} />
-      ))}
+      {foodArray.map(
+        ({
+          food_name: foodName,
+          id,
+          calories_per_gram: caloriesPerGram,
+          amount_in_grams: amountInGrams,
+        }) => {
+          const calories = +(
+            (+caloriesPerGram * +amountInGrams) /
+            1000
+          ).toFixed(0);
+          return <FoodItem label={foodName} calories={calories} key={id} />;
+        }
+      )}
     </ul>
   );
 }

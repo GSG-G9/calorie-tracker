@@ -99,12 +99,13 @@ INSERT INTO exercises (exercise_name, met) VALUES
 ('slimnastics', 6.0);
 
 
+INSERT INTO users(firstname, lastname, email, password, gender, height, weight, age, image, dailyCaloriesGoal, activity_id) values ('zein', 'jendeya', 'zein@gmail.com', '$2b$11$5IkI6Vvo5xGqxgRw4I6uWeCJCyJyd3k7WPvnW.fgjZZQG6aSSdQLK', 'f', 1.68, 63, 19, 'https://i.pinimg.com/564x/a9/f6/e3/a9f6e37a1211793bd2f45f161dc3dfbb.jpg', 2099.196, 1);
 
-INSERT INTO UserFoodRelation(users_id,food_id,food_category_id,amount_in_grams) values(1,1,1,100);
-INSERT INTO UserFoodRelation(users_id,food_id,food_category_id,amount_in_grams) values(1,2,1,400);
-INSERT INTO UserFoodRelation(users_id,food_id,food_category_id,amount_in_grams) values(1,3,1,500);
-INSERT INTO UserFoodRelation(users_id,food_id,food_category_id,amount_in_grams) values(1,4,1,200);
-INSERT INTO UserFoodRelation(users_id,food_id,food_category_id,amount_in_grams) values(1,5,1,235);
+INSERT INTO UserFoodRelation(users_id,food_id,food_category_id,amount_in_grams) values(8,1,1,100);
+INSERT INTO UserFoodRelation(users_id,food_id,food_category_id,amount_in_grams) values(8,2,1,400);
+INSERT INTO UserFoodRelation(users_id,food_id,food_category_id,amount_in_grams) values(8,3,1,500);
+INSERT INTO UserFoodRelation(users_id,food_id,food_category_id,amount_in_grams) values(8,4,1,200);
+INSERT INTO UserFoodRelation(users_id,food_id,food_category_id,amount_in_grams) values(8,5,1,235);
 INSERT INTO UserFoodRelation(users_id,food_id,food_category_id,amount_in_grams,created_at) values(1,5,1,20,'2021-02-04 00:00:00');
 INSERT INTO UserFoodRelation(users_id,food_id,food_category_id,amount_in_grams,created_at) values(1,5,1,20,'2021-02-04 00:00:00');
 
@@ -120,7 +121,7 @@ INSERT INTO news(title, content, created_at) VALUES
 ('Consuming omega-3 fatty acids could prevent asthma.', 'New research suggests that a higher dietary intake of long-chain omega-3 fatty acids in childhood may reduce the risk of developing subsequent asthma, but only in children carrying a common gene variant.', '2021-01-07 21:49:14.439102'),
 ('The longevity gene mammalian Indy (mINDY) is involved in blood pressure regulation.','Reduced expression of mINDY, which is known to extend the life span in lower organisms and to prevent from diet induced obesity, fatty liver, has now been shown to lower blood pressure and heart rate in rodents.', '2020-12-23 10:10:14.439102');
 
-INSERT INTO users(firstname, lastname, email, password, gender, height, weight, age, image, dailyCaloriesGoal, activity_id) values ('zein', 'jendeya', 'zein@gmail.com', '$2b$11$5IkI6Vvo5xGqxgRw4I6uWeCJCyJyd3k7WPvnW.fgjZZQG6aSSdQLK', 'f', 1.68, 63, 19, 'https://i.pinimg.com/564x/a9/f6/e3/a9f6e37a1211793bd2f45f161dc3dfbb.jpg', 2099.196, 1);
+
 
 INSERT INTO food_category(name) values('breakfast'),('lunch'),('dinner'),('snack');
 INSERT INTO UserFoodRelation(users_id, food_id, food_category_id, amount_in_grams) VALUES(4, 8, 2, 15.3 );

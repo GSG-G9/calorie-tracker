@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import AddCircleOutlinedIcon from '@material-ui/icons/AddCircleOutlined';
 import RemoveCircleOutlinedIcon from '@material-ui/icons/RemoveCircleOutlined';
-import Button from '../Button';
+import Button from '../../Button';
 
-const { string } = PropTypes;
+const { string, bool, func } = PropTypes;
 
 const useStyle = makeStyles((theme) => ({
   button: {
@@ -13,6 +13,7 @@ const useStyle = makeStyles((theme) => ({
     backgroundColor: theme.customColors[6],
     width: '149px',
     fontSize: '20px',
+    textTransform: 'capitalize',
   },
   container: {
     width: '214px',
@@ -27,24 +28,25 @@ const useStyle = makeStyles((theme) => ({
   },
 }));
 
-function FoodCategoryButton({ label, ...rest }) {
+function FoodCategoryButton(props) {
   const classes = useStyle();
-  const [showIcon, setShowIcon] = useState(true);
+  const { label, showIcon, handleClick, ...rest } = props;
   return (
     <div className={classes.container}>
       {showIcon ? (
-        <AddCircleOutlinedIcon className={classes.icon} />
+        <AddCircleOutlinedIcon onClick={handleClick} className={classes.icon} />
       ) : (
-        <RemoveCircleOutlinedIcon className={classes.icon} />
+        <RemoveCircleOutlinedIcon
+          onClick={handleClick}
+          className={classes.icon}
+        />
       )}
 
       <Button
         className={classes.button}
         variant="contained"
         disable={false}
-        event={() => {
-          setShowIcon(!showIcon);
-        }}
+        event={handleClick}
         {...rest}
       >
         {label}
@@ -55,6 +57,8 @@ function FoodCategoryButton({ label, ...rest }) {
 
 FoodCategoryButton.propTypes = {
   label: string.isRequired,
+  showIcon: bool.isRequired,
+  handleClick: func.isRequired,
 };
 
 export default FoodCategoryButton;

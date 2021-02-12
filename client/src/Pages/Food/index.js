@@ -1,5 +1,5 @@
 import React from 'react';
-import FoodCategories from '../../components/FoodCategories';
+import FoodCategories from '../../components/food/FoodCategories';
 
 function FoodPage() {
   return (
