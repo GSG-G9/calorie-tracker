@@ -239,9 +239,9 @@ describe('authentication', () => {
         message: 'success',
         data: {
           userCalories: 1500,
-          userFoodCalories: 307495,
+          userFoodCalories: null,
           userExercisesCalories: 456750,
-          remainingCalories: 150755,
+          remainingCalories: 458250,
         },
       };
       expect(JSON.parse(res.text)).toEqual(expected);
@@ -261,7 +261,7 @@ describe('authentication', () => {
       const {
         rows: [{ userfoodcalories: userFoodCalories }],
       } = await calculateUserFoodCalories(userId);
-      return expect(userFoodCalories).toBe(307495);
+      return expect(userFoodCalories).toBe(null);
     });
 
     test('getUserCalories Query should return calories equal to 1500 of user 1', async () => {
