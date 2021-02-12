@@ -19,17 +19,37 @@ const useStyle = makeStyles((theme) => ({
   container: {
     width: '300px',
   },
+  totalCalories: {
+    fontSize: '20px',
+    fontWeight: '800',
+  },
 }));
 
 function FoodItemsSelected(props) {
   const { foodCategoryId } = props;
   const history = useHistory();
   const [foodArray, setFoodArray] = useState([]);
+  const [totalCalories, setTotalCalories] = useState(0);
   useEffect(() => {
     (async () => {
       const {
         data: { data },
       } = await axios.get(`/api/v1/category/${foodCategoryId}/food`);
+
+      setTotalCalories(
+        (
+          data.reduce(
+            (
+              calories,
+              {
+                calories_per_gram: caloriesPerGram,
+                amount_in_grams: amountInGrams,
+              }
+            ) => calories + +caloriesPerGram * +amountInGrams,
+            0
+          ) / 1000
+        ).toFixed(0)
+      );
       setFoodArray(data);
     })();
   }, [foodCategoryId]);
@@ -39,6 +59,7 @@ function FoodItemsSelected(props) {
       <FoodItems key="1" foodArray={foodArray} />
       <Container key="2" direction="row" itemColumns="12" spacing="4">
         {[
+          <p className={classes.totalCalories}>{totalCalories} Kcal</p>,
           <Button
             key="1"
             color="primary"
@@ -55,6 +76,8 @@ function FoodItemsSelected(props) {
   );
 }
 
-FoodItemsSelected.propTypes = { foodCategoryId: number.isRequired };
+FoodItemsSelected.propTypes = {
+  foodCategoryId: number.isRequired,
+};
 
 export default FoodItemsSelected;
