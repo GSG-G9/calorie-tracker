@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   nav_icons: {
     width: 80,
     height: 80,
@@ -44,7 +44,6 @@ const useStyles = makeStyles((theme) => ({
     width: '80%',
     display: 'flex',
     justifyContent: 'space-between',
-    // backgroundColor: 'red',
 
     '@media (min-device-width: 900px)': {
       flexDirection: 'column',
