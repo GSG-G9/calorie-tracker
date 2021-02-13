@@ -19,6 +19,7 @@ export default function SignupFormSteps() {
   const [skipped, setSkipped] = useState(new Set());
   const [data, setData] = useState({});
   const [errorMessage, setErrorMessage] = useState('');
+  const [showLoading, setShowLoading] = useState(false);
 
   const isStepSkipped = (step) => skipped.has(step);
 
@@ -44,11 +45,15 @@ export default function SignupFormSteps() {
 
       (async () => {
         try {
+          setShowLoading(true); // turn the loading progress bar
           await axios.post('/api/v1/signup', data, {
             cancelToken: source.token,
           });
+          setShowLoading(false); // turnoff the loading progress bar after success
+          setErrorMessage('success');
           return history.push(Login);
         } catch (err) {
+          setShowLoading(false); // turnoff the loading progress bar after fail
           return setErrorMessage(
             err.response.data.message || 'Something went wrong !! '
           );
@@ -69,6 +74,7 @@ export default function SignupFormSteps() {
           data={data}
           step={activeStep}
           errorMessage={errorMessage}
+          loadingBar={{ showLoading, setShowLoading }}
         />
       </Box>
     </div>

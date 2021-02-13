@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import { Typography, Hidden, CardMedia } from '@material-ui/core';
-import { Alert } from '@material-ui/lab';
-
+import Loading from '../../Loading';
 import InputField from '../../InputField';
 import Container from '../../Container';
 import ButtonComponent from '../../Button';
 import SelectComponent from '../../Select';
+import Alert from '../../Alert';
 import {
   activitySchema,
   ageSchema,
@@ -26,11 +26,19 @@ const useStyle = makeStyles((theme) => ({
     width: '300px',
     backgroundColor: theme.customColors[7],
   },
+  loadingArea: {
+    height: '30px',
+  },
 }));
 
 function PhysicalCharacteristics(props) {
   const {
-    methods: { handleBack, setData, errorMessage },
+    methods: {
+      handleBack,
+      setData,
+      errorMessage,
+      loadingBar: { showLoading },
+    },
   } = props;
   const classes = useStyle();
 
@@ -158,11 +166,11 @@ function PhysicalCharacteristics(props) {
             />
           </Container>
         </form>
-        <div key="111">
-          {errorMessage && (
-            <Alert variant="outlined" severity="error">
-              {errorMessage}
-            </Alert>
+        <div key="111" className={classes.loadingArea}>
+          {showLoading ? (
+            <Loading circleSize={30} />
+          ) : (
+            <Alert errorMessage={errorMessage} />
           )}
         </div>
         <Container key="4" direction="row" itemColumns="4" spacing={5}>
