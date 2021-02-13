@@ -8,13 +8,14 @@ import Container from '../../Container';
 const useStyle = makeStyles({
   FoodItemsSelected: {
     width: '300px',
+    height: '300px',
   },
   media: {
     height: '300px',
     width: '300px',
   },
   container: {
-    maxWidth: '100%',
+    maxWidth: '80%',
   },
 });
 function FoodCatagories() {
