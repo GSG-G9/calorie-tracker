@@ -12,7 +12,7 @@ const useStyle = makeStyles({
   },
 });
 
-const { node, string } = PropTypes;
+const { node, string, number } = PropTypes;
 
 function ContainerComponent({
   children,
@@ -48,7 +48,7 @@ ContainerComponent.propTypes = {
   screenSize: string,
   direction: string.isRequired,
   itemColumns: string.isRequired,
-  spacing: string.isRequired,
+  spacing: number.isRequired,
 };
 
 ContainerComponent.defaultProps = {
