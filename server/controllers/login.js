@@ -17,7 +17,7 @@ const login = async (req, res, next) => {
 
     const { rows, rowCount } = await getUserByEmail(email);
     if (rowCount === 0) {
-      throw Boom.badData("email doesn't exist");
+      throw Boom.unauthorized("email doesn't exist");
     }
 
     const user = rows[0];
