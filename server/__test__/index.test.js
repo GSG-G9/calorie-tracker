@@ -355,7 +355,6 @@ describe('authentication', () => {
           .get('/api/v1/category/1/food')
           .set('Cookie', [`token=${token}`])
           .expect(200);
-        console.log(token);
         expect(status).toBe(200);
       });
 
