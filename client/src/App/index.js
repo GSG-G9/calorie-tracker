@@ -24,6 +24,7 @@ import MyFoodPage from '../Pages/MyFood';
 import FoodPage from '../Pages/Food';
 import ExercisePage from '../Pages/Exercise';
 import Provider from '../components/userProvider';
+import FoodQuantity from '../components/FoodQuantity';
 import './style.css';
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
             <Route exact path={MyFood} component={MyFoodPage} />
             <Route exact path={Food} component={FoodPage} />
             <Route exact path={Exercise} component={ExercisePage} />
+            <Route exact path="/food/FoodQuantity" component={FoodQuantity} />
           </Switch>
         </Router>
       </Provider>

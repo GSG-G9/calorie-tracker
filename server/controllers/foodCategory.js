@@ -14,7 +14,6 @@ const foodCategory = async (req, res, next) => {
     }
     const { id: userID } = user;
     const { rows, rowCount } = await getFoodCategory(userID, categoryId);
-    console.log(userID);
     if (rowCount === 0) {
       res.status(200).json({ status: 200, data: [] });
     } else {

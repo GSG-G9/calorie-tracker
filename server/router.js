@@ -6,6 +6,7 @@ const {
   foodCategory,
   getFood,
   getUserCalories,
+  getFoodById,
 } = require('./controllers');
 
 const { clientError, serverError, Auth } = require('./middlewares');
@@ -16,6 +17,8 @@ router.post('/login', login);
 router.use(Auth);
 
 router.get('/category/:categoryId/food', foodCategory);
+
+router.route('/category/:categoryId/food/:foodId').get(getFoodById);
 router.get('/food', getFood);
 router.get('/user/calories', getUserCalories);
 

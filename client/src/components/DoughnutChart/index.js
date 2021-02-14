@@ -39,8 +39,8 @@ DoughnutChart.propTypes = {
   legend: arrayOf(string).isRequired,
   section: arrayOf(number).isRequired,
   sectionBackground: arrayOf(string).isRequired,
-  width: arrayOf(number),
-  height: arrayOf(number),
+  width: number,
+  height: number,
 };
 
 export default DoughnutChart;
