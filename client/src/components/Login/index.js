@@ -73,6 +73,9 @@ const useStyle = makeStyles((theme) => ({
     marginLeft: '8px',
     color: theme.customColors[1],
   },
+  alert: {
+    marginTop: '10px',
+  },
 }));
 
 function LoginPage() {
@@ -183,7 +186,9 @@ function LoginPage() {
           />
         </Grid>
       </form>
-      <div>{loading ? <Loading /> : <Alert errorMessage={errorMessage} />}</div>
+      <div className={classes.alert}>
+        {loading ? <Loading /> : <Alert errorMessage={errorMessage} />}
+      </div>
       <form className={`${classes.flex} ${classes.form}`}>
         <Grid className={`${classes.flexRow} ${classes.button}`}>
           <Button
