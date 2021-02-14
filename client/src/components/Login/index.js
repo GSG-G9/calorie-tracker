@@ -119,6 +119,7 @@ function LoginPage() {
       setLoading(false);
       setEmail('');
       setPassword('');
+      setErrorMessage('');
       setIsAuthenticated(true);
       return history.push(Home);
     } catch (err) {
