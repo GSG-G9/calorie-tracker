@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+// import { withStyles } from '@material-ui/core';
 import IconLabeledButton from '../../components/Button';
 import ContainerComponent from '../../components/Container';
 import TextInputField from '../../components/InputFeild';
 import CardComponent from '../../components/Card';
 
-const axios = require('axios');
+// const useStyle = withStyles((theme) => ({
+//   searchInput: {
+//     width: 75%
+//   }
+// }));
 
 function FoodPage() {
+  // const classes = useStyle;
   const [allFood, setAllFood] = useState({});
   const [errorMessage, setErrorMessage] = useState('');
   const [searchValue, setSearchValue] = useState('');
@@ -25,7 +32,7 @@ function FoodPage() {
       }
     })();
     return () => source.cancel('Operation canceled by the user.');
-  });
+  }, []);
   return (
     <>
       <h1>Food Page</h1>
@@ -74,8 +81,15 @@ function FoodPage() {
               cardClassName="foodCard"
               ContentClassName="innerFoodContent"
             >
-              {allFood.data !== 0
+              {allFood
                 ? allFood.data
+                    .filter(
+                      (row) =>
+                        row.food_name
+                          .toLowerCase()
+                          .indexOf(searchValue.toLowerCase()) === 0
+                    )
+                    .filter((row) => row.food_type_id === foodFilter)
                     .map((row) => (
                       <>
                         <p>{row.food_name}</p>
@@ -83,14 +97,7 @@ function FoodPage() {
                         <img src={row.image} alt={row.food_name} />
                       </>
                     ))
-                    .filter(
-                      (foodName) =>
-                        foodName.food_name
-                          .toLowerCase()
-                          .indexOf(searchValue.toLowerCase()) === 0 &&
-                        foodFilter === foodName.food_type_id
-                    )
-                : 'no food to view'}
+                : null}
             </CardComponent>
           </ContainerComponent>
         </>
