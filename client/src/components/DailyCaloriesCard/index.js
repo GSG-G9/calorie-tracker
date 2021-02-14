@@ -8,24 +8,15 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableRow from '@material-ui/core/TableRow';
 
 const useStyles = makeStyles({
-  table: {
-    border: '1px solid black',
-    width: '40%',
-    margin: 'auto',
-    // display: 'flex',
-    // flexDirection: 'column',
-    // justifyContent: 'center',
-    // alignContent: 'center',
+  container: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignContent: 'center',
   },
-  // table: {
-  //   border: '1px solid black',
-  //   minWidth: 650,
-  //   width: '20%',
-  //   display: 'flex',
-  //   flexDirection: 'column',
-  //   justifyContent: 'center',
-  //   alignContent: 'center',
-  // },
+  table: {
+    width: '40%',
+  },
+
   row: {
     '&:last-child td': {
       borderBottom: 0,
@@ -37,7 +28,7 @@ function createData(Goal, Food, Exercises, Remaining) {
   return { Goal, Food, Exercises, Remaining };
 }
 
-function DailyCalories() {
+function DailyCaloriesCard() {
   const classes = useStyles();
 
   const [goal, setGoal] = useState(1500);
@@ -72,8 +63,8 @@ function DailyCalories() {
 
   return (
     <>
-      <TableContainer className={classes.table}>
-        <Table aria-label="simple table">
+      <TableContainer className={classes.container}>
+        <Table aria-label="simple table" className={classes.table}>
           <TableBody>
             {rows.map((row) => (
               <TableRow className={classes.row}>
@@ -104,4 +95,4 @@ function DailyCalories() {
   );
 }
 
-export default DailyCalories;
+export default DailyCaloriesCard;

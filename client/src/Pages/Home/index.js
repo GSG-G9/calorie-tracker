@@ -1,11 +1,11 @@
 import React from 'react';
-import DailyCalories from '../../components/dailyCalories';
+import DailyCaloriesCard from '../../components/DailyCaloriesCard';
 
 function HomePage() {
   return (
     <div>
       <h1>Home Page</h1>
-      <DailyCalories />
+      <DailyCaloriesCard />
     </div>
   );
 }
