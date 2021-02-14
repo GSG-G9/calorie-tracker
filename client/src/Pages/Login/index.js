@@ -117,14 +117,13 @@ function LoginPage() {
       setEmail('');
       setPassword('');
       setIsAuthenticated(true);
-      history.push(Home);
+      return history.push(Home);
     } catch (err) {
       setLoading(false);
       if (err.response.data.message) {
-        setErrorMessage(err.response.data.message);
-      } else {
-        setErrorMessage('something wrong');
+        return setErrorMessage(err.response.data.message);
       }
+      return setErrorMessage('something wrong');
     }
   };
 
