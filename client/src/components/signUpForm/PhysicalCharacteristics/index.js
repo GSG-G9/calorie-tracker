@@ -18,7 +18,7 @@ import {
 
 import updateAndValidateInput from '../../../Utils/checkValidationPureFunction';
 
-const { shape, func } = PropTypes;
+const { shape, func, bool } = PropTypes;
 
 const useStyle = makeStyles((theme) => ({
   input: {
@@ -238,6 +238,7 @@ PhysicalCharacteristics.propTypes = {
   methods: shape({
     handleBack: func.isRequired,
     setData: func.isRequired,
+    showLoading: bool.isRequired,
   }).isRequired,
 };
 
