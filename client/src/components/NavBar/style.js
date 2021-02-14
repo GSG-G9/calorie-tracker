@@ -2,11 +2,14 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() => ({
   nav_icons: {
-    width: '8vh',
+    width: '11.5vw',
+    height: '12vh',
 
-    height: 80,
-
-    '@media (min-device-width: 900px) and (max-device-width: 1800px)': {
+    '@media (min-device-width: 900px) and (max-device-width: 1199px)': {
+      height: '7.4vh',
+      width: '6.6vw',
+    },
+    '@media (min-device-width: 1200px)': {
       height: '7.4vh',
       width: '3.6vw',
     },
@@ -28,7 +31,6 @@ const useStyles = makeStyles(() => ({
       borderRadius: '5%',
       width: '5.3vw',
       height: '40vh',
-      // backgroundColor: 'red',
     },
   },
   navbar_toolBar: {
