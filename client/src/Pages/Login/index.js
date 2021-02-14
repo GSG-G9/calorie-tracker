@@ -4,12 +4,14 @@ import Typography from '@material-ui/core/Typography';
 import PersonIcon from '@material-ui/icons/Person';
 import { makeStyles, Grid } from '@material-ui/core';
 import Axios from 'axios';
-import { Alert } from '@material-ui/lab';
 import Button from '../../components/Button';
 import InputField from '../../components/InputField';
 import { emailSchema, passwordSchema } from '../../Utils/validationLogin';
 import { Home } from '../../Utils/constant';
 import { context } from '../../components/userProvider';
+import updateAndValidateInput from '../../Utils/checkValidationPureFunction';
+import Loading from '../../components/Loading';
+import Alert from '../../components/Alert';
 
 const useStyle = makeStyles((theme) => ({
   root: {
@@ -87,7 +89,7 @@ function LoginPage() {
 
   const [errorMessage, setErrorMessage] = useState('');
 
-  const [, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handlePush = async (e) => {
     try {
@@ -105,19 +107,17 @@ function LoginPage() {
       }
 
       if (!emailIsValid || !passwordIsValid) {
-        return;
+        return setLoading(false);
       }
-      const response = await Axios.post('/api/v1/login', {
+      await Axios.post('/api/v1/login', {
         email,
         password,
       });
-      if (response) {
-        setLoading(false);
-        setEmail('');
-        setPassword('');
-        setIsAuthenticated(true);
-        history.push(Home);
-      }
+      setLoading(false);
+      setEmail('');
+      setPassword('');
+      setIsAuthenticated(true);
+      history.push(Home);
     } catch (err) {
       setLoading(false);
       if (err.response.data.message) {
@@ -130,17 +130,6 @@ function LoginPage() {
 
   const handleCancel = () => {
     history.push(Home);
-  };
-
-  const updateAndValidateInput = (
-    schemaKey,
-    schema,
-    setValue,
-    setIsValid
-  ) => async ({ target: { value } }) => {
-    setValue(value);
-    const isValid = await schema.isValid({ [schemaKey]: value });
-    setIsValid(!isValid);
   };
 
   return (
@@ -195,13 +184,7 @@ function LoginPage() {
           />
         </Grid>
       </form>
-      <div>
-        {errorMessage && (
-          <Alert variant="outlined" severity="error">
-            {errorMessage}
-          </Alert>
-        )}
-      </div>
+      <div>{loading ? <Loading /> : <Alert errorMessage={errorMessage} />}</div>
       <form className={`${classes.flex} ${classes.form}`}>
         <Grid className={`${classes.flexRow} ${classes.button}`}>
           <Button
