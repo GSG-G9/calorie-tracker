@@ -3,7 +3,7 @@ import axios from 'axios';
 // import { withStyles } from '@material-ui/core';
 import IconLabeledButton from '../../components/Button';
 import ContainerComponent from '../../components/Container';
-import TextInputField from '../../components/InputFeild';
+import TextInputField from '../../components/InputField';
 import CardComponent from '../../components/Card';
 
 // const useStyle = withStyles((theme) => ({
