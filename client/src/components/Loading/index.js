@@ -2,6 +2,7 @@ import React from 'react';
 
 import { CircularProgress } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { number } from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -13,14 +14,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LoadingProgressBar = () => {
+const LoadingProgressBar = (props) => {
+  const { circleSize } = props;
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <CircularProgress size={70} thickness={4} />
+      <CircularProgress size={circleSize} thickness={4} />
     </div>
   );
 };
+
+LoadingProgressBar.propTypes = { circleSize: number };
+LoadingProgressBar.defaultProps = { circleSize: 70 };
 
 export default LoadingProgressBar;

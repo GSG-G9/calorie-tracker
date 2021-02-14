@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 
 function NutritionPage() {
-    return (
-        <div>
-           <h1>Nutrition Page</h1> 
-        </div>
-    )
+  return (
+    <div>
+      <h1>Nutrition Page</h1>
+    </div>
+  );
 }
 
-export default NutritionPage
+export default NutritionPage;
