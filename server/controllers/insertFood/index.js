@@ -20,6 +20,11 @@ const insertFoodController = async (req, res, next) => {
     } catch (err) {
       throw Boom.badRequest(err.details.map((e) => e.message).join('\n'));
     }
+
+    if (categoryId > 4 || categoryId < 1) {
+      throw Boom.notFound('category not found!');
+    }
+
     await insertFoodQuery(userId, foodId, categoryId, grams);
     res.json({ message: 'Food Successfully Added', status: 200 });
   } catch (err) {
