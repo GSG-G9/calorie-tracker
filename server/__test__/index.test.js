@@ -141,7 +141,7 @@ describe('authentication', () => {
       const { statusCode } = await request(app)
         .post('/api/v1/login')
         .send({ email: 'user@gmail.com', password: 'dddddd888' });
-      return expect(statusCode).toBe(422);
+      return expect(statusCode).toBe(401);
     });
   });
   describe('Test GET /api/v1/food Route', () => {
