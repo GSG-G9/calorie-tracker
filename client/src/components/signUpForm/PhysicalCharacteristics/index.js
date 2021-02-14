@@ -238,7 +238,7 @@ PhysicalCharacteristics.propTypes = {
   methods: shape({
     handleBack: func.isRequired,
     setData: func.isRequired,
-    showLoading: bool.isRequired,
+    loadingBar: shape({ showLoading: bool.isRequired }).isRequired,
   }).isRequired,
 };
 
