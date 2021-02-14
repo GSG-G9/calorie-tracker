@@ -238,10 +238,10 @@ describe('authentication', () => {
         status: 200,
         message: 'success',
         data: {
-          userCalories: 1500,
-          userFoodCalories: 307495,
-          userExercisesCalories: 456750,
-          remainingCalories: 150755,
+          userCalories: 2099.196,
+          userFoodCalories: null,
+          userExercisesCalories: null,
+          remainingCalories: 2099.196,
         },
       };
       expect(JSON.parse(res.text)).toEqual(expected);
