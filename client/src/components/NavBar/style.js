@@ -2,17 +2,13 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() => ({
   nav_icons: {
-    width: 80,
+    width: '8vh',
+
     height: 80,
 
     '@media (min-device-width: 900px) and (max-device-width: 1800px)': {
-      width: 70,
-      height: 70,
-    },
-
-    '@media (min-device-width: 1800px)': {
-      width: 80,
-      height: 80,
+      height: '7.4vh',
+      width: '3.6vw',
     },
   },
   navbar_appBar: {
@@ -24,20 +20,15 @@ const useStyles = makeStyles(() => ({
     '@media (min-device-width: 900px) and (max-device-width: 1200px)': {
       top: '26%',
       width: '9%',
-      height: '33%',
+      height: '37vh',
       borderRadius: '5%',
     },
-    '@media (min-device-width: 1200px) and (max-device-width: 1800px)': {
+    '@media (min-device-width: 1200px) and (max-device-width: 1799px)': {
       top: '26%',
       borderRadius: '5%',
-      width: '7%',
-      height: ' 50%',
-    },
-    '@media (min-device-width: 1800px)': {
-      top: '26%',
-      width: '6.5%',
-      height: '40%',
-      borderRadius: '5%',
+      width: '5.3vw',
+      height: '40vh',
+      // backgroundColor: 'red',
     },
   },
   navbar_toolBar: {

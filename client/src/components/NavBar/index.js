@@ -11,7 +11,8 @@ import { context } from '../userProvider';
 
 function NavBar() {
   const classes = useStyles();
-  const isAuthenticated = useContext(context);
+  const [isAuthenticated] = useContext(context);
+  console.log(isAuthenticated);
   const [isClicked, setIsClicked] = useState(true);
 
   const toggle = () => {
