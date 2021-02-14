@@ -11,6 +11,7 @@ const {
   calculateUserFoodCalories,
   getUserCalories,
   getFoodCategory,
+  insertFoodQuery,
 } = require('../database/queries');
 
 describe('authentication', () => {
@@ -41,7 +42,7 @@ describe('authentication', () => {
         .set({
           'Content-Type': 'application/json',
         })
-        .send(JSON.stringify(userData));
+        .send(JSON.stringify({ ...userData, email: 'zein@gmail.com' }));
       expect(message).toBe('user already exists');
       expect(statusCode).toBe(409);
     });
@@ -238,10 +239,10 @@ describe('authentication', () => {
         status: 200,
         message: 'success',
         data: {
-          userCalories: 1500,
-          userFoodCalories: 307495,
-          userExercisesCalories: 456750,
-          remainingCalories: 150755,
+          userCalories: 2099.196,
+          userFoodCalories: 2345.9,
+          userExercisesCalories: 248.0625,
+          remainingCalories: 1.3584999999998217,
         },
       };
       expect(JSON.parse(res.text)).toEqual(expected);
@@ -254,21 +255,21 @@ describe('authentication', () => {
       const {
         rows: [{ userexercisescalories: userExercisesCalories }],
       } = await calculateUserExercisesCalories(userId);
-      return expect(userExercisesCalories).toBe(456750);
+      return expect(userExercisesCalories).toBe(248.0625);
     });
 
-    test('calculateUserFoodCalories Query should return calories equal to 307495 of user 1', async () => {
+    test('calculateUserFoodCalories Query should return calories equal to 308245 of user 1', async () => {
       const {
         rows: [{ userfoodcalories: userFoodCalories }],
       } = await calculateUserFoodCalories(userId);
-      return expect(userFoodCalories).toBe(307495);
+      return expect(userFoodCalories).toBe(2345.9);
     });
 
     test('getUserCalories Query should return calories equal to 1500 of user 1', async () => {
       const {
         rows: [{ usercalories: userCalories }],
       } = await getUserCalories(userId);
-      return expect(userCalories).toBe(1500);
+      return expect(userCalories).toBe(2099.196);
     });
   });
 
@@ -280,9 +281,9 @@ describe('authentication', () => {
       expect(status).toBe(200);
     });
     test('getUserByEmail query, number of rows when email is exist will be 1', async () => {
-      const { rows } = await getUserByEmail('lina@gmail.com');
+      const { rows } = await getUserByEmail('zein@gmail.com');
       expect(rows).toHaveLength(1);
-      expect(rows[0].firstname).toBe('lina');
+      expect(rows[0].firstname).toBe('zein');
     });
 
     test('getUserByEmail query, number of rows when email is not exist will be 0', async () => {
@@ -293,7 +294,7 @@ describe('authentication', () => {
     test('should return the user zein jendeya from users table', async () => {
       const userData = [
         {
-          id: 8,
+          id: 1,
           activity_id: 1,
           firstname: 'zein',
           lastname: 'jendeya',
@@ -334,7 +335,7 @@ describe('authentication', () => {
 
     describe('getFoodCategory query', () => {
       test('should get Food in Category from the userFoodRelation table', async () => {
-        const userID = 4;
+        const userID = 1;
         const categoryId = 2;
         const { rows } = await getFoodCategory(userID, categoryId);
         const foods = rows.map((row) => row.food_name);
@@ -342,6 +343,54 @@ describe('authentication', () => {
       });
     });
 
+    describe('Test insertFood Query', () => {
+      test('insert Food', async () => {
+        const { rowCount } = await insertFoodQuery(1, 1, 1, 3);
+        return expect(rowCount).toEqual(1);
+      });
+    });
+
+    describe('Test POST /api/v1/category/:categoryId/food/:foodId Route', () => {
+      test('Should return successfully added', async () => {
+        const reqFood = {
+          grams: 3,
+        };
+
+        const res = await request(app)
+          .post('/api/v1/category/1/food/1')
+          .set({
+            'Content-Type': 'application/json',
+          })
+          .set('Cookie', [`token=${token}`])
+          .send(JSON.stringify(reqFood))
+          .expect(200)
+          .expect('Content-Type', /json/);
+
+        expect(res.status).toBe(200);
+        return expect(res.body.message).toBe('Food Successfully Added');
+      });
+
+      test('Should return must be a positive number', async () => {
+        const reqFood = {
+          grams: -3,
+        };
+
+        const res = await request(app)
+          .post('/api/v1/category/1/food/1')
+          .set({
+            'Content-Type': 'application/json',
+          })
+          .set('Cookie', [`token=${token}`])
+          .send(JSON.stringify(reqFood))
+          .expect(400)
+          .expect('Content-Type', /json/);
+
+        expect(res.status).toBe(400);
+        return expect(res.body.message).toBe(
+          '"grams" must be a positive number',
+        );
+      });
+    });
     describe('food category', () => {
       it('router returns 401 if there is no user logged', async () => {
         const { status } = await request(app)

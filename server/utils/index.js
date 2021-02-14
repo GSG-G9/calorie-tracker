@@ -1,4 +1,8 @@
-const { loginSchema, signupSchema } = require('./validation');
+const {
+  loginSchema,
+  signupSchema,
+  insertFoodValidation,
+} = require('./validation');
 const { signToken, verifyToken } = require('./jwt');
 
 module.exports = {
@@ -6,4 +10,5 @@ module.exports = {
   signupSchema,
   signToken,
   verifyToken,
+  insertFoodValidation,
 };
