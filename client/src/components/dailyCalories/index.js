@@ -8,22 +8,24 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableRow from '@material-ui/core/TableRow';
 
 const useStyles = makeStyles({
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignContent: 'center',
-  },
   table: {
     border: '1px solid black',
-
-    // minWidth: 650,
-    width: '20%',
+    width: '40%',
+    margin: 'auto',
     // display: 'flex',
     // flexDirection: 'column',
     // justifyContent: 'center',
     // alignContent: 'center',
   },
+  // table: {
+  //   border: '1px solid black',
+  //   minWidth: 650,
+  //   width: '20%',
+  //   display: 'flex',
+  //   flexDirection: 'column',
+  //   justifyContent: 'center',
+  //   alignContent: 'center',
+  // },
   row: {
     '&:last-child td': {
       borderBottom: 0,
@@ -70,8 +72,8 @@ function DailyCalories() {
 
   return (
     <>
-      <TableContainer className={classes.container}>
-        <Table aria-label="simple table" className={classes.table}>
+      <TableContainer className={classes.table}>
+        <Table aria-label="simple table">
           <TableBody>
             {rows.map((row) => (
               <TableRow className={classes.row}>
