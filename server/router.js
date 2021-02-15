@@ -22,7 +22,7 @@ router.get('/category/:categoryId/food', foodCategory);
 router.get('/food', getFood);
 router.get('/user/calories', getUserCalories);
 
-router.get('/user/profile', getProfileData);
+router.get('/profile', getProfileData);
 
 router.post('/category/:categoryId/food/:foodId', insertFoodController);
 
