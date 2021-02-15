@@ -4,26 +4,32 @@ import PropTypes from 'prop-types';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const { number } = PropTypes;
 
 function CircularProgressWithLabel(props) {
   const { value } = props;
 
+  const smallScreen = useMediaQuery('(max-width : 600px)');
+
   const useStyles = makeStyles({
     progress: {
-      fontSize: '2rem',
+      fontSize: '.8rem',
       '@media (min-device-width: 900px)': {
-        fontSize: '3.2rem',
         marginLeft: '65%',
+        fontSize: '1.2rem',
       },
     },
     box: {
       display: 'inline-flex',
-      marginLeft: '33%',
-      marginTop: '12%',
+      marginLeft: '30%',
+      marginTop: '10%',
+
       '@media (min-device-width: 900px)': {
-        width: '12vw',
+        width: '10vw',
+        marginTop: '1%',
+        marginLeft: '4%',
       },
     },
   });
@@ -41,20 +47,32 @@ function CircularProgressWithLabel(props) {
       />
       <Box
         top={0}
-        left={55}
-        bottom={0}
+        left={smallScreen ? 60 : 0}
+        bottom={smallScreen ? 0 : 24}
         right={0}
+        className={classes.circular}
         position="absolute"
         display="flex"
         alignItems="center"
         justifyContent="center"
       >
-        <Typography
-          variant="caption"
-          component="div"
-          color="textSecondary"
-          className={classes.progress}
-        >{`${Math.round(value)}%`}</Typography>
+        <Box>
+          <Typography
+            variant="caption"
+            component="p"
+            color="textSecondary"
+            className={classes.progress}
+          >{`${Math.round(value)}%`}</Typography>
+
+          <Typography
+            variant="caption"
+            component="p"
+            color="textSecondary"
+            className={classes.progress}
+          >
+            Calories
+          </Typography>
+        </Box>
       </Box>
     </Box>
   );
