@@ -5,8 +5,6 @@ const {
 } = require('../../database/queries');
 
 module.exports = async (req, res, next) => {
-  // should get the user id from the req.userId when the Auth is Completed.
-
   try {
     const {
       user: { id: userId },
