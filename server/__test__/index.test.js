@@ -12,6 +12,7 @@ const {
   getUserCalories,
   getFoodCategory,
   insertFoodQuery,
+  getProfile,
 } = require('../database/queries');
 
 describe('authentication', () => {
@@ -446,23 +447,23 @@ describe('authentication', () => {
     });
   });
 
-  // describe('Test getProfileData Query', () => {
-  //   test('should return profile data from users table', async () => {
-  //     const profileData = [
-  //       {
-  //         image:
-  //           'https://i.pinimg.com/564x/a9/f6/e3/a9f6e37a1211793bd2f45f161dc3dfbb.jpg',
-  //         firstname: 'zein',
-  //         lastname: 'jendeya',
-  //         email: 'zein@gmail.com',
-  //         weight: 63,
-  //         height: 1.68,
-  //         gender: 'f',
-  //         age: 19,
-  //       },
-  //     ];
-  //     const { rows } = await getProfile(1);
-  //     return expect(rows).toEqual(profileData);
-  //   });
-  // });
+  describe('Test getProfileData Query', () => {
+    test('should return profile data from users table', async () => {
+      const profileData = [
+        {
+          image:
+            'https://i.pinimg.com/564x/a9/f6/e3/a9f6e37a1211793bd2f45f161dc3dfbb.jpg',
+          firstname: 'zein',
+          lastname: 'jendeya',
+          email: 'zein@gmail.com',
+          weight: 63,
+          height: 1.68,
+          gender: 'f',
+          age: 19,
+        },
+      ];
+      const { rows } = await getProfile(1);
+      return expect(rows).toEqual(profileData);
+    });
+  });
 });
