@@ -32,9 +32,10 @@ function HomePage() {
         return setNews(data);
       } catch (err) {
         setLoading(false);
-        return setErrorMessage(
-          err.response.data.message || 'something went wrong'
-        );
+        if (err.response) {
+          return setErrorMessage(err.response.data.message);
+        }
+        return setErrorMessage('something went wrong');
       }
     })();
     return () => source.cancel();
@@ -64,48 +65,46 @@ function HomePage() {
           join our family and enjoy the luxury of a healthy body
         </Typography>
       </Box>
-      {loading ? (
-        <LoadingComponent />
-      ) : (
-        <Box className={classes.news_box}>
-          <Typography variant="h5" gutterBottom className={classes.news_feed}>
-            news feed
-          </Typography>
 
-          {errorMessage ? (
-            <p>{errorMessage}</p>
-          ) : (
-            <ContainerComponent
-              spacing="2"
-              direction="column"
-              screenSize={smallScreen ? 'sm' : 'lg'}
-              className={classes.news_container}
-            >
-              {news.map((el) => (
-                <CardComponent
-                  cardClassName={classes.news_card}
-                  ContentClassName={classes.news_content}
+      <Box className={classes.news_box}>
+        <Typography variant="h5" gutterBottom className={classes.news_feed}>
+          news feed
+        </Typography>
+        {loading ? (
+          <LoadingComponent />
+        ) : errorMessage ? (
+          <p>{errorMessage}</p>
+        ) : (
+          <ContainerComponent
+            spacing="2"
+            direction="column"
+            screenSize={smallScreen ? 'sm' : 'lg'}
+            className={classes.news_container}
+          >
+            {news.map((el) => (
+              <CardComponent
+                cardClassName={classes.news_card}
+                ContentClassName={classes.news_content}
+              >
+                <Typography
+                  variant="subtitle2"
+                  gutterBottom
+                  className={classes.card_news_title}
                 >
-                  <Typography
-                    variant="subtitle2"
-                    gutterBottom
-                    className={classes.card_news_title}
-                  >
-                    {el.title}:
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    gutterBottom
-                    className={classes.card_news_body}
-                  >
-                    {el.content}
-                  </Typography>
-                </CardComponent>
-              ))}
-            </ContainerComponent>
-          )}
-        </Box>
-      )}
+                  {el.title}:
+                </Typography>
+                <Typography
+                  variant="body2"
+                  gutterBottom
+                  className={classes.card_news_body}
+                >
+                  {el.content}
+                </Typography>
+              </CardComponent>
+            ))}
+          </ContainerComponent>
+        )}
+      </Box>
     </Box>
   );
 }

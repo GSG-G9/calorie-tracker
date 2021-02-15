@@ -28,14 +28,11 @@ const useStyles = makeStyles((theme) => ({
 
   header_box: {
     backgroundColor: theme.customColors[3],
-    height: '50vh',
+    height: '40vh',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    '@media (min-device-width: 600px) and (max-device-width: 899px)': {
-      height: '40vh',
-    },
     '@media (min-device-width: 900px)': {
       flexDirection: 'row',
     },
@@ -47,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     height: '50%',
 
     '@media (min-device-width: 900px)': {
-      width: '36%',
+      width: '26%',
       height: '60%',
     },
   },
