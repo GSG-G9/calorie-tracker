@@ -20,7 +20,10 @@ function NavBar() {
     <>
       <AppBar position="fixed" className={classes.navbar_appBar}>
         <Toolbar className={classes.navbar_toolBar}>
-          <Link to={isAuthenticated ? '/' : ''} className="link">
+          <Link
+            to="/"
+            className={isAuthenticated ? classes.link : classes.linkDisabled}
+          >
             <HomeIcon
               className={
                 isAuthenticated ? classes.nav_icons : classes.nav_icons_disabled
@@ -31,10 +34,15 @@ function NavBar() {
             isClicked={isClicked}
             onClick={toggle}
             className={
-              isAuthenticated ? classes.nav_icons : classes.nav_icons_disabled
+              isAuthenticated
+                ? `${classes.link} ${classes.nav_icons}`
+                : `${classes.linkDisabled} ${classes.nav_icons_disabled}`
             }
           />
-          <Link to={isAuthenticated ? '/myprofile' : ''} className="link">
+          <Link
+            to="/myprofile"
+            className={isAuthenticated ? classes.link : classes.linkDisabled}
+          >
             <MoreHorizIcon
               className={
                 isAuthenticated ? classes.nav_icons : classes.nav_icons_disabled

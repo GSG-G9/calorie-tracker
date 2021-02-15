@@ -38,6 +38,14 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    cursor: 'pointer',
+  },
+  linkDisabled: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    cursor: 'default',
+    pointerEvents: 'none',
   },
   nav_icons: {
     fontSize: '40px',
