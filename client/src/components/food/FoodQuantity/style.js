@@ -15,10 +15,20 @@ const useStyle = makeStyles(() => ({
   },
   InputField: {
     width: '50%',
+    '@media(min-width:600px)': {
+      width: '80%',
+    },
   },
   nutritionFact: {
     height: '200px',
     overflow: 'auto',
+  },
+  media: {
+    maxWidth: '100%',
+    maxHeight: '80vh',
+  },
+  container: {
+    height: '50vh',
   },
 }));
 

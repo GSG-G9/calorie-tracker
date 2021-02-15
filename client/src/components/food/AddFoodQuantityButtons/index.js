@@ -5,7 +5,7 @@ import Container from '../../Container';
 import Button from '../../Button';
 
 function AddFoodQuantityButtons(props) {
-  const { handleAddFoodQuantity } = props;
+  const { handleAddFoodQuantity, ...rest } = props;
   const history = useHistory();
   return (
     <Container
@@ -14,6 +14,7 @@ function AddFoodQuantityButtons(props) {
       direction="row"
       itemColumns="6"
       spacing={2}
+      {...rest}
     >
       <Button
         color="primary"

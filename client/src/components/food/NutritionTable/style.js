@@ -18,6 +18,9 @@ const useStyle = makeStyles(() => ({
   },
   nutritionFact: {
     height: '200px',
+    '@media(min-width:600px)': {
+      height: '450px',
+    },
     overflow: 'auto',
   },
 }));

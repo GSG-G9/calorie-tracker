@@ -1,5 +1,5 @@
 import React from 'react';
-import { arrayOf, number, string } from 'prop-types';
+import { number, objectOf, oneOfType, string } from 'prop-types';
 import { Typography } from '@material-ui/core';
 import Container from '../../Container';
 
@@ -7,7 +7,31 @@ import useStyle from './style';
 
 function NutritionTable(props) {
   const classes = useStyle();
-  const { nutrition, quantity } = props;
+  const {
+    nutrition: {
+      calories_per_gram: Calories,
+      carbs: Carbs,
+      cholesterol: Cholesterol,
+      fat: Fat,
+      protein: Protein,
+      sugar: Sugar,
+      vitamin_a: VitaminA,
+      vitamin_c: VitaminC,
+      vitamin_d: VitaminD,
+    },
+    quantity,
+  } = props;
+  const nutritionOnly = {
+    Calories,
+    Carbs,
+    Cholesterol,
+    Fat,
+    Protein,
+    Sugar,
+    VitaminA,
+    VitaminC,
+    VitaminD,
+  };
   return (
     <Container
       screenSize="xs"
@@ -16,7 +40,7 @@ function NutritionTable(props) {
       itemColumns="12"
       spacing={2}
     >
-      <Typography key="1" variant="h5">
+      <Typography key="1" variant="body1">
         Nutrition Fact
       </Typography>
       <Container
@@ -27,7 +51,7 @@ function NutritionTable(props) {
         spacing={0}
         className={classes.nutritionFact}
       >
-        {Object.entries(nutrition).map(([name, value], index) => (
+        {Object.entries(nutritionOnly).map(([name, value], index) => (
           <div
             key={name}
             className={classes.nutritionTable}
@@ -35,7 +59,7 @@ function NutritionTable(props) {
           >
             <span className={classes.nutritionValues}>{name}</span>
             <span className={classes.nutritionValues}>
-              {value * quantity || 0} g
+              {value * quantity || 0} {name === 'Calories' ? 'Cal' : 'G'}
             </span>
           </div>
         ))}
@@ -44,7 +68,7 @@ function NutritionTable(props) {
   );
 }
 NutritionTable.propTypes = {
-  nutrition: arrayOf(number).isRequired,
+  nutrition: objectOf(oneOfType([number, string])).isRequired,
   quantity: number.isRequired,
 };
 export default NutritionTable;
