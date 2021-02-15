@@ -8,6 +8,7 @@ import Container from '../../Container';
 import Button from '../../Button';
 import { MyFood } from '../../../Utils/constant';
 import Loading from '../../Loading';
+import CustomErrorMessage from '../CustomErrorMessage';
 
 const { number } = PropTypes;
 
@@ -32,12 +33,20 @@ function FoodItemsSelected(props) {
   const [foodArray, setFoodArray] = useState([]);
   const [totalCalories, setTotalCalories] = useState(0);
   const [showLoading, setShowLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
   useEffect(() => {
+    let source;
     (async () => {
+      const { CancelToken } = axios;
+      source = CancelToken.source();
       try {
+        setShowLoading(true);
         const {
           data: { data },
-        } = await axios.get(`/api/v1/category/${foodCategoryId}/food`);
+        } = await axios.get(`/api/v1/category/${foodCategoryId}/food`, {
+          cancelToken: source.token,
+        });
 
         setTotalCalories(
           (
@@ -54,10 +63,16 @@ function FoodItemsSelected(props) {
           ).toFixed(0)
         );
         setFoodArray(data);
+        setErrorMessage('success');
+        return setShowLoading(false);
       } catch (err) {
-        setShowLoading(true);
+        setShowLoading(false);
+        return setErrorMessage(
+          err.response.data.message || 'Something went wrong !! '
+        );
       }
     })();
+    return () => source.cancel('Operation canceled by the user.');
   }, [foodCategoryId]);
   const classes = useStyle();
   return (
@@ -65,9 +80,11 @@ function FoodItemsSelected(props) {
       {showLoading ? (
         <Loading key="10" height200px />
       ) : (
-        <FoodItems key="1" foodArray={foodArray} />
+        <CustomErrorMessage
+          errorMessage={errorMessage}
+          component={<FoodItems key="1" foodArray={foodArray} />}
+        />
       )}
-
       <Container key="2" direction="row" itemColumns="12" spacing="1">
         {[
           <p key="3" className={classes.totalCalories}>

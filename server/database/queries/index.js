@@ -1,3 +1,5 @@
+const insertFoodQuery = require('./insertFoodQuery');
+
 const calculateUserFoodCalories = require('./calculateUserFoodCalories');
 const getUserCalories = require('./getUserCalories');
 const calculateUserExercisesCalories = require('./calculateUserExercisesCalories');
@@ -18,4 +20,5 @@ module.exports = {
   calculateUserFoodCalories,
   getUserCalories,
   calculateUserExercisesCalories,
+  insertFoodQuery,
 };
