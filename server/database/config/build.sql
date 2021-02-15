@@ -22,7 +22,7 @@ weight float,
 height float,
 goalWeight float,
 dailyCaloriesGoal float,
-image TEXT,
+image TEXT DEFAULT ('https://image.freepik.com/free-vector/vector-avatar-smiling-man-facial-expression_102172-203.jpg'),
 activity_id INTEGER REFERENCES activity(id) ON DELETE CASCADE ON UPDATE CASCADE
 
 );
