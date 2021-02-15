@@ -33,19 +33,19 @@ function HomePage() {
   }, []);
 
   return (
-    <>
+    <Box className={classes.container_box}>
+      {!isAuthenticated && (
+        <Box className={classes.login_signup_box}>
+          <Link to="/login" className={classes.login_signup_link}>
+            <Button className={classes.login_signup_button}>log in</Button>
+          </Link>
+          <span className={classes.separated_span}>|</span>
+          <Link to="/signup" className={classes.login_signup_link}>
+            <Button className={classes.login_signup_button}>sign up</Button>
+          </Link>
+        </Box>
+      )}
       <Box className={classes.header_box}>
-        {!isAuthenticated && (
-          <Box className={classes.login_signup_box}>
-            <Link to="/login" className={classes.login_signup_link}>
-              <Button className={classes.login_signup_button}>log in</Button>
-            </Link>
-            <span className={classes.separated_span}>|</span>
-            <Link to="/signup" className={classes.login_signup_link}>
-              <Button className={classes.login_signup_button}>sign up</Button>
-            </Link>
-          </Box>
-        )}
         <img alt="girl" src={headerImageSrc} className={classes.header_img} />
         <Typography
           variant="caption"
@@ -90,7 +90,7 @@ function HomePage() {
         </ContainerComponent>
       </Box>
       {/* <Footer /> */}
-    </>
+    </Box>
   );
 }
 

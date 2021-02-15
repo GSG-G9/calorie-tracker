@@ -19,38 +19,41 @@ const useStyles = makeStyles((theme) => ({
   news_card: {
     backgroundColor: theme.customColors[6],
     borderRadius: '5px',
-    width: '390px',
     margin: 'auto',
     '@media (min-device-width: 600px)': {
-      width: '100%',
       borderRadius: '14px',
     },
   },
+  container_box: {
+    backgroundColor: theme.customColors[3],
+  },
+
   header_box: {
     backgroundColor: theme.customColors[3],
     height: '33.5vh',
-
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
     '@media (min-device-width: 600px) and (max-device-width: 899px)': {
-      height: '37vh',
+      height: '40vh',
     },
     '@media (min-device-width: 900px)': {
-      position: 'relative',
+      flexDirection: 'row',
     },
   },
+
   header_img: {
     display: 'block',
-    margin: 'auto',
     width: '65%',
     height: '50%',
 
     '@media (min-device-width: 900px)': {
       width: '36%',
-      position: 'absolute',
-      top: '50px',
-      left: '8%',
       height: '60%',
     },
   },
+
   header_caption: {
     color: 'white',
     textTransform: 'capitalize',
@@ -58,7 +61,6 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '1.2rem',
     fontWeight: 'bold',
     width: '90vw',
-    margin: 'auto',
     padding: '1em',
     opacity: '0.77',
     '@media (min-device-width: 600px) and (max-device-width: 899px)': {
@@ -67,9 +69,6 @@ const useStyles = makeStyles((theme) => ({
     '@media (min-device-width: 900px)': {
       width: '44%',
       fontSize: '2rem',
-      position: 'absolute',
-      left: '49%',
-      top: '14%',
     },
   },
   news_feed: {
