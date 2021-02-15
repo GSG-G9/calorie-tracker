@@ -24,7 +24,7 @@ import MyFoodPage from '../Pages/MyFood';
 import FoodPage from '../Pages/Food';
 import ExercisePage from '../Pages/Exercise';
 import Provider from '../components/userProvider';
-import FoodQuantity from '../components/FoodQuantity';
+import FoodQuantity from '../components/food/FoodQuantity';
 import './style.css';
 
 function App() {
