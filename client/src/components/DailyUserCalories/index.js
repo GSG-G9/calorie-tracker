@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Axios from 'axios';
 import DailyCaloriesCard from '../DailyCaloriesCard';
-// import DailyCaloriesChart from '../DailyCaloriesChart';
+
 import CircularProgressWithLabel from '../CircularProgress';
 import Loading from '../Loading';
 
@@ -16,19 +16,11 @@ function DailyUserCalories() {
 
   const useStyles = makeStyles(() => ({
     root: {
-      display: 'flex',
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-      // alignItems: 'center',
-      // border: '1px solid black',
-    },
-    card: {
-      border: '1px solid red',
-      float: 'left',
-    },
-    circular: {
-      border: '1px solid blue',
-      float: 'left',
+      '@media (min-device-width: 900px)': {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+      },
     },
   }));
 
@@ -37,18 +29,27 @@ function DailyUserCalories() {
   useEffect(() => {
     const getCalories = async () => {
       try {
-        const response = await Axios.get('/api/v1/user/calories');
-        if (response) {
-          setGoal(response.data.data.userCalories);
+        const {
+          data: {
+            data: {
+              userCalories,
+              userFoodCalories,
+              userExercisesCalories,
+              remainingCalories,
+            },
+          },
+        } = await Axios.get('/api/v1/user/calories');
 
-          setFood(response.data.data.userFoodCalories);
+        setGoal(Math.round(userCalories));
 
-          setExercises(response.data.data.userExercisesCalories);
+        setFood(Math.round(userFoodCalories));
 
-          setRemaining(response.data.data.remainingCalories);
+        setExercises(Math.round(userExercisesCalories));
 
-          setLoading(false);
-        }
+        setRemaining(Math.round(remainingCalories));
+
+        setLoading(false);
+
         return null;
       } catch (err) {
         setLoading(false);
@@ -70,14 +71,9 @@ function DailyUserCalories() {
         food={food}
         exercises={exercises}
         remaining={remaining}
-        className={classes.card}
       />
-      {/* <DailyCaloriesChart goal={goal} remaining={remaining} /> */}
-      <CircularProgressWithLabel
-        value={(1 - 200 / 1000) * 100}
-        className={classes.circular}
-      />
-      {/* (1 - remaining / goal) * 100 */}
+
+      <CircularProgressWithLabel value={(1 - remaining / goal) * 100} />
     </div>
   );
 }
