@@ -93,7 +93,6 @@ function AllFoodList() {
 
   return (
     <>
-      <h1>Food Page</h1>
       {errorMessage ? (
         <p>{errorMessage}</p>
       ) : (
