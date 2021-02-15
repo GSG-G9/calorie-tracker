@@ -10,12 +10,12 @@ const Popover = () => {
       <Box className={classes.btns_container}>
         <Link to="/food" className={classes.links}>
           <Button variant="outlined" className={classes.popover_btns}>
-            🥗 food
+            🥗 Food
           </Button>
         </Link>
         <Link to="/exercise" className={classes.links}>
           <Button variant="outlined" className={classes.popover_btns}>
-            🚴‍♂️ exersise
+            🚴‍♂️ Exercise
           </Button>
         </Link>
       </Box>
