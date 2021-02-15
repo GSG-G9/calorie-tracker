@@ -62,6 +62,7 @@ export default function SignupFormSteps() {
 
       return () => source.cancel('Operation canceled by the user.');
     }
+    return null;
   }, [data]);
 
   return (

@@ -6,7 +6,7 @@ const useStyles = makeStyles((theme) => ({
     height: '50px',
     '@media (min-device-width: 600px)': {
       color: theme.palette.primary.main,
-      width: '220px',
+      width: '180px',
       height: '70px',
       fontSize: '24px',
       fontWeight: 'bold',
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     left: 'calc(50% - 100px)',
     '@media (min-device-width: 600px)': {
       height: '150px',
-      width: '360px',
+      width: '400px',
       borderRadius: '10px',
       display: 'flex',
       justifyContent: 'space-around',
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
       margin: '0 auto',
       bottom: '0',
       position: 'fixed',
-      left: 'calc(50% - 180px)',
+      left: 'calc(50% - 200px)',
     },
   },
   links: {

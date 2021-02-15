@@ -15,15 +15,12 @@ function NavBar() {
   const [isAuthenticated] = useContext(context);
   const [isClicked, setIsClicked] = useState(true);
 
-  const toggle = () => {
-    setIsClicked(!isClicked);
-  };
-
+  const toggle = () => (isAuthenticated ? setIsClicked(!isClicked) : '');
   return (
     <>
       <AppBar position="fixed" className={classes.navbar_appBar}>
         <Toolbar className={classes.navbar_toolBar}>
-          <Link to="/" className="link">
+          <Link to={isAuthenticated ? '/' : ''} className="link">
             <HomeIcon
               className={
                 isAuthenticated ? classes.nav_icons : classes.nav_icons_disabled
@@ -37,7 +34,7 @@ function NavBar() {
               isAuthenticated ? classes.nav_icons : classes.nav_icons_disabled
             }
           />
-          <Link to="/myprofile" className="link">
+          <Link to={isAuthenticated ? '/myprofile' : ''} className="link">
             <MoreHorizIcon
               className={
                 isAuthenticated ? classes.nav_icons : classes.nav_icons_disabled
