@@ -4,10 +4,8 @@ const useStyles = makeStyles((theme) => ({
   news_box: {
     backgroundColor: 'white',
     borderRadius: '25px 25px 0 0',
-    marginTop: '-2em',
-    '@media (min-device-width: 600px)': {
-      marginTop: '-1em',
-    },
+    width: '100%',
+    margin: 'auto',
   },
   news_container: {
     width: '90%',
@@ -30,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 
   header_box: {
     backgroundColor: theme.customColors[3],
-    height: '33.5vh',
+    height: '50vh',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
