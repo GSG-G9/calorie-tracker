@@ -6,5 +6,5 @@ export const Nutrition = '/nutrition';
 export const MyProfile = '/myprofile';
 export const Calories = '/calories';
 export const MyFood = '/myfood';
-export const Food = '/food';
+export const Food = '/food/list';
 export const Exercise = '/exercise';

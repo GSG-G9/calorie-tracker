@@ -21,7 +21,7 @@ import NutritionPage from '../Pages/Nutrition';
 import MyProfilePage from '../Pages/Profile';
 import CaloriesPage from '../Pages/Calories';
 import MyFoodPage from '../Pages/MyFood';
-import FoodPage from '../Pages/Food';
+import FoodPage from '../Pages/FoodList';
 import ExercisePage from '../Pages/Exercise';
 import Provider from '../components/userProvider';
 import './style.css';

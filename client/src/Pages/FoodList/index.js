@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { makeStyles } from '@material-ui/core';
+import AddCircleOutlinedIcon from '@material-ui/icons/AddCircleOutlined';
+import { useHistory } from 'react-router-dom';
 import IconLabeledButton from '../../components/Button';
 import ContainerComponent from '../../components/Container';
 import TextInputField from '../../components/InputField';
@@ -32,25 +34,40 @@ const useStyle = makeStyles((theme) => ({
   foodCard: {
     width: '40%',
     borderRadius: 10,
+    backgroundColor: theme.customColors[6],
     display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignContent: 'center',
+    flexDirection: 'row',
   },
-  foodCardContent: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignContent: 'center',
-  },
-  image: {
-    borderRadius: 20,
+  media: {
+    borderRadius: 50,
     width: '40%',
-    height: '30%',
+    height: '50%',
+    margin: 'auto',
+  },
+  content: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  detail: {
+    width: '60%',
+    height: '40%',
+    margin: 'auto',
+    marginLeft: 10,
+  },
+  iconAdd: {
+    color: theme.customColors[3],
+  },
+  backBtn: {
+    width: 'fit-content',
+    marginTop: '20%',
+    marginLeft: '10%',
+    backgroundColor: theme.customColors[3],
+    color: theme.customColors[6],
   },
 }));
 
 function FoodPage() {
+  const history = useHistory();
   const classes = useStyle();
   const [foodArray, setFoodArray] = useState([]);
   const [showType, setShowType] = useState('');
@@ -83,7 +100,7 @@ function FoodPage() {
           <div className={classes.searchBar}>
             <TextInputField
               type="text"
-              className="searchInput"
+              className={classes.searchInput}
               label="Search"
               variant="filled"
               onChange={({ target: { value } }) => setShowFoodName(value)}
@@ -139,16 +156,21 @@ function FoodPage() {
                   }) => (
                     <CardComponent
                       key={id}
+                      ContentClassName={classes.content}
                       cardClassName={classes.foodCard}
-                      ContentClassName={classes.foodCardContent}
                     >
                       <img
-                        className={classes.image}
+                        className={classes.media}
                         src={image}
                         alt={foodsName}
                       />
-                      <p>{foodsName}</p>
-                      <p>{foodsType}</p>
+                      <p className={classes.detail}>
+                        `{foodsName}: ({foodsType})`
+                      </p>
+                      <AddCircleOutlinedIcon
+                        className={classes.iconAdd}
+                        onClick={() => history.push('/food/list/quantity')}
+                      />
                     </CardComponent>
                   )
                 )
@@ -161,7 +183,14 @@ function FoodPage() {
               </CardComponent>
             )}
           </ContainerComponent>
-          <IconLabeledButton>Back</IconLabeledButton>
+          <IconLabeledButton
+            className={classes.backBtn}
+            variant="outlined"
+            disable={false}
+            event={() => history.push('/food')}
+          >
+            Back
+          </IconLabeledButton>
         </>
       )}
     </>
