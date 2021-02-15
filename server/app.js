@@ -25,7 +25,7 @@ app.use('/api/v1/', router);
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(join(__dirname, '..', 'client', 'build')));
   app.all('*', (req, res) => {
-    res.send(join(__dirname, '..', 'client', 'build', 'index.html'));
+    res.sendFile(join(__dirname, '..', 'client', 'build', 'index.html'));
   });
 }
 app.use(clientError);
