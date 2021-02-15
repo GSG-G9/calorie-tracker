@@ -25,6 +25,8 @@ import FoodPage from '../Pages/Food';
 import ExercisePage from '../Pages/Exercise';
 import Provider from '../components/userProvider';
 import FoodQuantity from '../components/food/FoodQuantity';
+import NavBar from '../components/NavBar';
+
 import './style.css';
 
 function App() {
@@ -32,6 +34,7 @@ function App() {
     <ThemeProvider>
       <Provider>
         <Router>
+          <NavBar />
           <Switch>
             <Route exact path={Home} component={HomePage} />
             <Route exact path={Login} component={LoginPage} />
