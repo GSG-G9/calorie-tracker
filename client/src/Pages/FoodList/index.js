@@ -10,10 +10,6 @@ import CardComponent from '../../components/Card';
 
 const useStyle = makeStyles((theme) => ({
   searchBar: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignContent: 'center',
-    flexDirection: 'row',
     width: '90%',
   },
   searchInput: {
@@ -32,7 +28,8 @@ const useStyle = makeStyles((theme) => ({
     width: '100%',
   },
   foodCard: {
-    width: '40%',
+    width: '100%',
+    height: '100%',
     borderRadius: 10,
     backgroundColor: theme.customColors[6],
     display: 'flex',
@@ -40,7 +37,7 @@ const useStyle = makeStyles((theme) => ({
   },
   media: {
     borderRadius: 50,
-    width: '40%',
+    width: '50%',
     height: '50%',
     margin: 'auto',
   },
@@ -50,7 +47,7 @@ const useStyle = makeStyles((theme) => ({
   },
   detail: {
     width: '60%',
-    height: '40%',
+    height: 'fit-content',
     margin: 'auto',
     marginLeft: 10,
   },
@@ -66,7 +63,7 @@ const useStyle = makeStyles((theme) => ({
   },
 }));
 
-function FoodPage() {
+function AllFoodList() {
   const history = useHistory();
   const classes = useStyle();
   const [foodArray, setFoodArray] = useState([]);
@@ -97,7 +94,13 @@ function FoodPage() {
         <p>{errorMessage}</p>
       ) : (
         <>
-          <div className={classes.searchBar}>
+          <ContainerComponent
+            className={classes.searchBar}
+            direction="column"
+            spacing={5}
+            screenSize="xs"
+            itemColumns="6"
+          >
             <TextInputField
               type="text"
               className={classes.searchInput}
@@ -106,37 +109,37 @@ function FoodPage() {
               onChange={({ target: { value } }) => setShowFoodName(value)}
               placeholder="search for your desired food"
             />
-          </div>
+            <ContainerComponent
+              direction="row"
+              spacing={5}
+              screenSize="sm"
+              itemColumns="6"
+              className="filteringButtons"
+            >
+              <IconLabeledButton
+                variant="outlined"
+                disable={false}
+                className={classes.filterFoodButton}
+                event={() => setShowType('meal')}
+              >
+                Meals
+              </IconLabeledButton>
+              <IconLabeledButton
+                variant="outlined"
+                disable={false}
+                className={classes.filterFoodButton}
+                event={() => setShowType('food')}
+              >
+                Food
+              </IconLabeledButton>
+            </ContainerComponent>
+          </ContainerComponent>
 
           <ContainerComponent
             direction="row"
-            spacing={5}
-            screenSize="sm"
-            itemColumns="6"
-            className="filteringButtons"
-          >
-            <IconLabeledButton
-              variant="outlined"
-              disable={false}
-              className={classes.filterFoodButton}
-              event={() => setShowType('meal')}
-            >
-              Meals
-            </IconLabeledButton>
-            <IconLabeledButton
-              variant="outlined"
-              disable={false}
-              className={classes.filterFoodButton}
-              event={() => setShowType('food')}
-            >
-              Food
-            </IconLabeledButton>
-          </ContainerComponent>
-          <ContainerComponent
-            direction="row"
             spacing={4}
-            screenSize="lg"
-            itemColumns="auto"
+            screenSize="sm"
+            itemColumns="4"
             className={classes.foodContainer}
           >
             {foodArray ? (
@@ -197,4 +200,4 @@ function FoodPage() {
   );
 }
 
-export default FoodPage;
+export default AllFoodList;
