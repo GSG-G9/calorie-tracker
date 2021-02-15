@@ -1,6 +1,6 @@
 const { getProfile } = require('../../database/queries');
 
-const profileData = async (req, res, next) => {
+const getProfileData = async (req, res, next) => {
   const {
     user: { id },
   } = req;
@@ -17,4 +17,4 @@ const profileData = async (req, res, next) => {
   }
 };
 
-module.exports = { profileData };
+module.exports = getProfileData;
