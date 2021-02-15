@@ -4,7 +4,6 @@ const { getFoodCategory } = require('../database/queries');
 const foodCategory = async (req, res, next) => {
   const { user } = req;
   const { categoryId } = req.params;
-
   try {
     if (!user) {
       throw Boom.unauthorized('you are not logged in');

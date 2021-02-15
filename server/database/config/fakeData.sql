@@ -101,6 +101,7 @@ INSERT INTO UserFoodRelation(users_id,food_id,food_category_id,amount_in_grams) 
 (1, 8, 2, 15.3 );
 
 
+
 INSERT INTO UserExerciseRelation(users_id,exercises_id,exercise_duration_in_minutes) VALUES 
 (1,1,30);
 

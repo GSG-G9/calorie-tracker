@@ -22,14 +22,12 @@ const middlewares = [
 app.use(middlewares);
 app.use('/api/v1/', router);
 
-app.use(clientError);
-app.use(serverError);
-
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(join(__dirname, '..', 'client', 'build')));
   app.all('*', (req, res) => {
-    res.send(join(__dirname, '..', 'client', 'build', 'index.html'));
+    res.sendFile(join(__dirname, '..', 'client', 'build', 'index.html'));
   });
 }
-
+app.use(clientError);
+app.use(serverError);
 module.exports = app;
