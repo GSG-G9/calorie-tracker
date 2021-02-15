@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation, useHistory } from 'react-router-dom';
 import axios from 'axios';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, useMediaQuery } from '@material-ui/core';
 import AddCircleOutlinedIcon from '@material-ui/icons/AddCircleOutlined';
-import { useHistory } from 'react-router-dom';
 import IconLabeledButton from '../../components/Button';
 import ContainerComponent from '../../components/Container';
 import TextInputField from '../../components/InputField';
@@ -64,6 +64,10 @@ const useStyle = makeStyles((theme) => ({
 }));
 
 function AllFoodList() {
+  const {
+    state: { categoryId },
+  } = useLocation();
+  const smallScreen = useMediaQuery('(max-width:600px)');
   const history = useHistory();
   const classes = useStyle();
   const [foodArray, setFoodArray] = useState([]);
@@ -138,8 +142,9 @@ function AllFoodList() {
           <ContainerComponent
             direction="row"
             spacing={4}
-            screenSize="sm"
-            itemColumns="4"
+            screenSize={smallScreen ? 'xs' : 'md'}
+            itemColumns={smallScreen ? '6' : '3'}
+            gridUserWidth={smallScreen ? '50%' : '25%'}
             className={classes.foodContainer}
           >
             {foodArray ? (
@@ -172,7 +177,12 @@ function AllFoodList() {
                       </p>
                       <AddCircleOutlinedIcon
                         className={classes.iconAdd}
-                        onClick={() => history.push('/food/list/quantity')}
+                        onClick={() =>
+                          history.push('/food/list/quantity', {
+                            foodId: id,
+                            categoryId,
+                          })
+                        }
                       />
                     </CardComponent>
                   )

@@ -96,7 +96,7 @@ function FoodItemsSelected(props) {
             className={classes.button}
             variant="contained"
             disable={false}
-            event={() => history.push(FoodList)}
+            event={() => history.push(FoodList, { categoryId: foodCategoryId })}
           >
             add food
           </Button>,
