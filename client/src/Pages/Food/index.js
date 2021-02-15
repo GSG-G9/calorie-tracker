@@ -1,12 +1,11 @@
 import React from 'react';
+import FoodCategories from '../../components/food/FoodCategories';
 
 function FoodPage() {
   return (
-    <>
-      <div>
-        <h1>Food Page</h1>
-      </div>
-    </>
+    <div>
+      <FoodCategories />
+    </div>
   );
 }
 
