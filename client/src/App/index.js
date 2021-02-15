@@ -23,13 +23,13 @@ import CaloriesPage from '../Pages/Calories';
 import MyFoodPage from '../Pages/MyFood';
 import FoodPage from '../Pages/Food';
 import ExercisePage from '../Pages/Exercise';
+import Provider from '../components/userProvider';
 import './style.css';
-import UserProvider from '../components/userProvider';
 
 function App() {
   return (
     <ThemeProvider>
-      <UserProvider>
+      <Provider>
         <Router>
           <Switch>
             <Route exact path={Home} component={HomePage} />
@@ -44,7 +44,7 @@ function App() {
             <Route exact path={Exercise} component={ExercisePage} />
           </Switch>
         </Router>
-      </UserProvider>
+      </Provider>
     </ThemeProvider>
   );
 }

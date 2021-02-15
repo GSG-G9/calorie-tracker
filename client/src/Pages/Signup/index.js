@@ -1,15 +1,8 @@
 import React from 'react';
-import NavBar from '../../components/NavBar';
+import SignupFormSteps from '../../components/SignupFormSteps';
 
 function SignupPage() {
-  return (
-    <>
-      <div>
-        <h1> Signup Page</h1>
-      </div>
-      <NavBar />
-    </>
-  );
+  return <SignupFormSteps />;
 }
 
 export default SignupPage;

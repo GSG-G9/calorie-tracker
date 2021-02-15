@@ -1,15 +1,8 @@
 import React from 'react';
-import NavBar from '../../components/NavBar';
+import LoginPage from '../../components/Login';
 
-function LoginPage() {
-  return (
-    <>
-      <div>
-        <h1>Login Page</h1>
-      </div>
-      <NavBar />
-    </>
-  );
+function Login() {
+  return <LoginPage />;
 }
 
-export default LoginPage;
+export default Login;
