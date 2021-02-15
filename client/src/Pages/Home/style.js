@@ -10,7 +10,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   news_container: {
-    // backgroundColor: 'red',
     width: '90%',
     '@media (min-device-width: 1200px)': {
       width: '80%',
@@ -29,9 +28,10 @@ const useStyles = makeStyles((theme) => ({
   },
   header_box: {
     backgroundColor: theme.customColors[3],
-    height: '31vh',
+    height: '33.5vh',
+
     '@media (min-device-width: 600px) and (max-device-width: 899px)': {
-      height: '33vh',
+      height: '37vh',
     },
     '@media (min-device-width: 900px)': {
       position: 'relative',
@@ -41,7 +41,8 @@ const useStyles = makeStyles((theme) => ({
     display: 'block',
     margin: 'auto',
     width: '65%',
-    height: '55%',
+    height: '50%',
+
     '@media (min-device-width: 900px)': {
       width: '36%',
       position: 'absolute',
@@ -101,6 +102,29 @@ const useStyles = makeStyles((theme) => ({
     },
     '@media (min-device-width: 1200px)': {
       fontSize: '1.6em',
+    },
+  },
+  login_signup_link: {
+    textDecoration: 'none',
+  },
+  login_signup_button: {
+    color: 'white',
+    fontSize: '1.1em',
+    fontWeight: 'bold',
+    '@media (min-device-width: 600px)': {
+      fontSize: '1.3em',
+    },
+  },
+  login_signup_box: {
+    marginLeft: 15,
+    opacity: '0.85',
+  },
+  separated_span: {
+    color: 'white',
+    fontWeight: 'bold',
+
+    '@media (min-device-width: 900px)': {
+      fontSize: '1.3em',
     },
   },
 }));
