@@ -1,5 +1,4 @@
 import React from 'react';
-import NavBar from '../../components/NavBar';
 
 function MyfoodPage() {
   return (
@@ -7,7 +6,6 @@ function MyfoodPage() {
       <div>
         <h1>My Food Page</h1>
       </div>
-      <NavBar />
     </>
   );
 }

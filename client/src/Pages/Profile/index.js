@@ -1,5 +1,4 @@
 import React from 'react';
-import NavBar from '../../components/NavBar';
 
 function MyProfilePage() {
   return (
@@ -7,7 +6,6 @@ function MyProfilePage() {
       <div>
         <h1> My Profile Page </h1>
       </div>
-      <NavBar />
     </>
   );
 }

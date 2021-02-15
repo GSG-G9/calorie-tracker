@@ -1,5 +1,4 @@
 import React from 'react';
-import NavBar from '../../components/NavBar';
 
 function NutritionPage() {
   return (
@@ -7,7 +6,6 @@ function NutritionPage() {
       <div>
         <h1>Nutrition Page</h1>
       </div>
-      <NavBar />
     </>
   );
 }

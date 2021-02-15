@@ -14,8 +14,8 @@ function NavBar() {
   const classes = useStyles();
   const [isAuthenticated] = useContext(context);
   const [isClicked, setIsClicked] = useState(true);
-
-  const toggle = () => (isAuthenticated ? setIsClicked(!isClicked) : '');
+  const toggle = () =>
+    isAuthenticated ? setIsClicked(!isClicked) : setIsClicked(false);
   return (
     <>
       <AppBar position="fixed" className={classes.navbar_appBar}>

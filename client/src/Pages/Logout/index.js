@@ -1,5 +1,4 @@
 import React from 'react';
-import NavBar from '../../components/NavBar';
 
 function LogoutPage() {
   return (
@@ -7,7 +6,6 @@ function LogoutPage() {
       <div>
         <h1>Logout Page</h1>
       </div>
-      <NavBar />
     </>
   );
 }
