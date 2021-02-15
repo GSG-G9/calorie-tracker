@@ -51,7 +51,7 @@ function NavBar() {
           </Link>
         </Toolbar>
       </AppBar>
-      {!isClicked && <Popover />}
+      {!isClicked && <Popover setIsClicked={setIsClicked} />}
     </>
   );
 }

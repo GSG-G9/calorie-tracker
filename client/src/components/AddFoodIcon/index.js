@@ -5,9 +5,12 @@ import { bool } from 'prop-types';
 
 const AddFoodIcon = (props) => {
   const { isClicked, ...rest } = props;
+
   switch (isClicked) {
-    case isClicked:
+    case true:
       return <ControlPointIcon {...rest} />;
+    case false:
+      return <IndeterminateCheckBoxOutlinedIcon {...rest} />;
     default:
       return <IndeterminateCheckBoxOutlinedIcon {...rest} />;
   }
