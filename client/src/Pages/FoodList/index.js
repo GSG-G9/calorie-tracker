@@ -105,6 +105,7 @@ function AllFoodList() {
             itemColumns="6"
           >
             <TextInputField
+              key={10001}
               type="text"
               className={classes.searchInput}
               label="Search"
@@ -120,6 +121,7 @@ function AllFoodList() {
               className="filteringButtons"
             >
               <IconLabeledButton
+                key={100003}
                 variant="outlined"
                 disable={false}
                 className={classes.filterFoodButton}
@@ -128,6 +130,7 @@ function AllFoodList() {
                 Meals
               </IconLabeledButton>
               <IconLabeledButton
+                key={100004}
                 variant="outlined"
                 disable={false}
                 className={classes.filterFoodButton}
@@ -172,7 +175,7 @@ function AllFoodList() {
                         alt={foodsName}
                       />
                       <p className={classes.detail}>
-                        `{foodsName}: ({foodsType})`
+                        {foodsName}: {foodsType}
                       </p>
                       <AddCircleOutlinedIcon
                         className={classes.iconAdd}
