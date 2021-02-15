@@ -1,5 +1,4 @@
 import React from 'react';
-import DailyUserCalories from '../../components/DailyUserCalories';
 
 function HomePage() {
   return (
