@@ -4,7 +4,14 @@ import PropTypes from 'prop-types';
 
 const { string, number, arrayOf } = PropTypes;
 
-function DoughnutChart({ legend, section, sectionBackground, width, height }) {
+function DoughnutChart({
+  legend,
+  section,
+  sectionBackground,
+  width,
+  height,
+  ...rest
+}) {
   const data = {
     labels: legend,
     datasets: [
@@ -25,6 +32,7 @@ function DoughnutChart({ legend, section, sectionBackground, width, height }) {
           responsive: true,
           maintainAspectRatio: true,
         }}
+        {...rest}
       />
     </div>
   );

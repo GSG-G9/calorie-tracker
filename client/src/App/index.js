@@ -47,7 +47,7 @@ function App() {
               exact
               path="/food/list/quantity"
               render={(props) => (
-                <FoodQuantity categoryId={1} foodId={1} {...props} />
+                <FoodQuantity categoryId={1} foodId={5} {...props} />
               )}
             />
           </Switch>

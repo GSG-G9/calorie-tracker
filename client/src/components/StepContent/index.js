@@ -48,7 +48,6 @@ StepContent.propTypes = {
   data: objectOf(oneOfType([string, number])).isRequired,
   loadingBar: shape.isRequired,
   errorMessage: string,
-  loadingBar: shape.isRequired,
 };
 StepContent.defaultProps = {
   step: 0,

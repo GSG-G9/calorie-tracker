@@ -56,7 +56,7 @@ const filterNutrition = ({
   vitamin_d: vitaminD,
   cholesterol,
   amount_in_grams: amountInGrams,
-  calories_per_gram: caloriesPerGram,
+  // calories_per_gram: caloriesPerGram,
 }) => {
   const foodNutrition = {
     fat,
@@ -68,7 +68,6 @@ const filterNutrition = ({
     vitamin_d: vitaminD,
     cholesterol,
   };
-  console.log(caloriesPerGram);
   const keys = Object.keys(foodNutrition);
   const values = Object.values(foodNutrition).map((el) => el * amountInGrams);
   const colors = [
@@ -86,17 +85,21 @@ const filterNutrition = ({
 
 function FoodQuantity(props) {
   const { categoryId, foodId } = props;
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(1);
   const classes = useStyle();
-  const [nutrition] = useState(filterNutrition(data[0])[3]);
+  const [nutrition, setNutrition] = useState(filterNutrition(data[0])[3]);
   const [nutritionNames, nutritionValues, nutritionColors] = filterNutrition(
-    nutrition
+    data[0]
   );
 
   useEffect(() => {
     const request = async () => {
-      await axios.get(`/api/v1/category/${categoryId}/food/${foodId}`);
+      const {
+        data: { data: foodData },
+      } = await axios.get(`/api/v1/category/${categoryId}/food/${foodId}`);
+      setNutrition(foodData);
     };
+
     request();
   }, [categoryId, foodId]);
 
@@ -133,9 +136,20 @@ function FoodQuantity(props) {
         legend={nutritionNames}
         section={nutritionValues}
         sectionBackground={nutritionColors}
-        height={400}
-        width={400}
+        height={300}
+        width={300}
         key="3"
+        options={{
+          title: {
+            display: true,
+            text: 'Nutrition Chart',
+            fontSize: 20,
+          },
+          legend: {
+            display: true,
+            position: 'left',
+          },
+        }}
       />
       <Container
         screenSize="xs"
@@ -163,7 +177,9 @@ function FoodQuantity(props) {
               >
                 {name}
               </span>
-              <span className={classes.nutritionValues}>{value || 0} g</span>
+              <span className={classes.nutritionValues}>
+                {value * quantity || 0} g
+              </span>
             </div>
           ))}
         </Container>
