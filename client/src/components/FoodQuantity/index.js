@@ -3,6 +3,7 @@ import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import axios from 'axios';
+import { number } from 'prop-types';
 import Button from '../Button';
 import Container from '../Container';
 import InputField from '../InputField';
@@ -54,8 +55,8 @@ const filterNutrition = ({
   vitamin_c: vitaminC,
   vitamin_d: vitaminD,
   cholesterol,
-  amount_in_grams,
-  calories_per_gram,
+  amount_in_grams: amountInGrams,
+  calories_per_gram: caloriesPerGram,
 }) => {
   const foodNutrition = {
     fat,
@@ -67,9 +68,9 @@ const filterNutrition = ({
     vitamin_d: vitaminD,
     cholesterol,
   };
-
+  console.log(caloriesPerGram);
   const keys = Object.keys(foodNutrition);
-  const values = Object.values(foodNutrition).map((el) => el * amount_in_grams);
+  const values = Object.values(foodNutrition).map((el) => el * amountInGrams);
   const colors = [
     '#6FE0B9',
     '#999BD2',
@@ -84,7 +85,7 @@ const filterNutrition = ({
 };
 
 function FoodQuantity(props) {
-  const { categoryId } = props;
+  const { categoryId, foodId } = props;
   const [quantity, setQuantity] = useState(0);
   const classes = useStyle();
   const [nutrition] = useState(filterNutrition(data[0])[3]);
@@ -94,10 +95,10 @@ function FoodQuantity(props) {
 
   useEffect(() => {
     const request = async () => {
-      await axios.get(`/api/v1/category/${categoryId}/food`);
+      await axios.get(`/api/v1/category/${categoryId}/food/${foodId}`);
     };
     request();
-  }, [categoryId]);
+  }, [categoryId, foodId]);
 
   return (
     <Container screenSize="xs" direction="column" itemColumns="12" spacing={2}>
@@ -170,5 +171,8 @@ function FoodQuantity(props) {
     </Container>
   );
 }
-
+FoodQuantity.propTypes = {
+  categoryId: number.isRequired,
+  foodId: number.isRequired,
+};
 export default FoodQuantity;

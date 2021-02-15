@@ -43,7 +43,13 @@ function App() {
             <Route exact path={MyFood} component={MyFoodPage} />
             <Route exact path={Food} component={FoodPage} />
             <Route exact path={Exercise} component={ExercisePage} />
-            <Route exact path="/food/FoodQuantity" component={FoodQuantity} />
+            <Route
+              exact
+              path="/food/FoodQuantity"
+              render={(props) => (
+                <FoodQuantity categoryId={1} foodId={1} {...props} />
+              )}
+            />
           </Switch>
         </Router>
       </Provider>
