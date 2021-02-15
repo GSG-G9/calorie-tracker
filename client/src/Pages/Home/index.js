@@ -7,25 +7,31 @@ import CardComponent from '../../components/Card';
 import useStyles from './style';
 import headerImageSrc from '../../images/header.png';
 import { context } from '../../components/userProvider';
+import LoadingComponent from '../../components/Loading';
 
 function HomePage() {
   const [isAuthenticated] = useContext(context);
   const smallScreen = useMediaQuery('(max-width:900px)');
   const classes = useStyles();
   const [errorMessage, setErrorMessage] = useState('');
+  const [loading, setLoading] = useState(false);
+
   const [news, setNews] = useState([]);
   useEffect(() => {
     const { CancelToken } = axios;
     const source = CancelToken.source();
     (async () => {
       try {
+        setLoading(true);
         const {
           data: { data },
         } = await axios.get('http://localhost:5000/api/v1/healthnews', {
           cancelToken: source.token,
         });
-        setNews(data);
+        setLoading(false);
+        return setNews(data);
       } catch (err) {
+        setLoading(false);
         return setErrorMessage(
           err.response.data.message || 'something went wrong'
         );
@@ -58,44 +64,48 @@ function HomePage() {
           join our family and enjoy the luxury of a healthy body
         </Typography>
       </Box>
-      <Box className={classes.news_box}>
-        <Typography variant="h5" gutterBottom className={classes.news_feed}>
-          news feed
-        </Typography>
+      {loading ? (
+        <LoadingComponent />
+      ) : (
+        <Box className={classes.news_box}>
+          <Typography variant="h5" gutterBottom className={classes.news_feed}>
+            news feed
+          </Typography>
 
-        {errorMessage ? (
-          <p>{errorMessage}</p>
-        ) : (
-          <ContainerComponent
-            spacing="2"
-            direction="column"
-            screenSize={smallScreen ? 'sm' : 'lg'}
-            className={classes.news_container}
-          >
-            {news.map((el) => (
-              <CardComponent
-                cardClassName={classes.news_card}
-                ContentClassName={classes.news_content}
-              >
-                <Typography
-                  variant="subtitle2"
-                  gutterBottom
-                  className={classes.card_news_title}
+          {errorMessage ? (
+            <p>{errorMessage}</p>
+          ) : (
+            <ContainerComponent
+              spacing="2"
+              direction="column"
+              screenSize={smallScreen ? 'sm' : 'lg'}
+              className={classes.news_container}
+            >
+              {news.map((el) => (
+                <CardComponent
+                  cardClassName={classes.news_card}
+                  ContentClassName={classes.news_content}
                 >
-                  {el.title}:
-                </Typography>
-                <Typography
-                  variant="body2"
-                  gutterBottom
-                  className={classes.card_news_body}
-                >
-                  {el.content}
-                </Typography>
-              </CardComponent>
-            ))}
-          </ContainerComponent>
-        )}
-      </Box>
+                  <Typography
+                    variant="subtitle2"
+                    gutterBottom
+                    className={classes.card_news_title}
+                  >
+                    {el.title}:
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    gutterBottom
+                    className={classes.card_news_body}
+                  >
+                    {el.content}
+                  </Typography>
+                </CardComponent>
+              ))}
+            </ContainerComponent>
+          )}
+        </Box>
+      )}
     </Box>
   );
 }
