@@ -1,4 +1,5 @@
 const router = require('express').Router();
+
 const {
   login,
   signup,
@@ -7,6 +8,7 @@ const {
   getFood,
   getUserCalories,
   getFoodById,
+  insertFoodController,
 } = require('./controllers');
 
 const { clientError, serverError, Auth } = require('./middlewares');
@@ -21,6 +23,8 @@ router.get('/category/:categoryId/food', foodCategory);
 router.route('/category/:categoryId/food/:foodId').get(getFoodById);
 router.get('/food', getFood);
 router.get('/user/calories', getUserCalories);
+
+router.post('/category/:categoryId/food/:foodId', insertFoodController);
 
 router.use(clientError);
 router.use(serverError);

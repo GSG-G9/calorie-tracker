@@ -1,3 +1,4 @@
+const { insertFoodController } = require('./insertFood');
 const getUserCalories = require('./getUserCalories');
 const getFood = require('./getFood');
 const healthNews = require('./healthNews');
@@ -14,4 +15,5 @@ module.exports = {
   getFood,
   getUserCalories,
   getFoodById,
+  insertFoodController,
 };
