@@ -45,7 +45,7 @@ function App() {
             <Route exact path={Exercise} component={ExercisePage} />
             <Route
               exact
-              path="/food/FoodQuantity"
+              path="/food/list/quantity"
               render={(props) => (
                 <FoodQuantity categoryId={1} foodId={1} {...props} />
               )}
