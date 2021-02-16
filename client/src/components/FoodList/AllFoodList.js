@@ -69,6 +69,7 @@ const useStyle = makeStyles((theme) => ({
   },
   iconAdd: {
     color: theme.customColors[3],
+    cursor: 'pointer',
   },
   backBtn: {
     width: 'fit-content',

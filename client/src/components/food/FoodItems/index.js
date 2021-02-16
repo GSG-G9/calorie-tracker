@@ -21,7 +21,7 @@ function FootItems({ foodArray }) {
       {foodArray.map(
         ({
           food_name: foodName,
-          id,
+          unique_id: uniqueId,
           calories_per_gram: caloriesPerGram,
           amount_in_grams: amountInGrams,
         }) => {
@@ -29,7 +29,9 @@ function FootItems({ foodArray }) {
             (+caloriesPerGram * +amountInGrams) /
             1000
           ).toFixed(0);
-          return <FoodItem label={foodName} calories={calories} key={id} />;
+          return (
+            <FoodItem label={foodName} calories={calories} key={uniqueId} />
+          );
         }
       )}
     </ul>
