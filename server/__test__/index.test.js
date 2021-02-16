@@ -351,7 +351,7 @@ describe('authentication', () => {
     });
 
     describe('Test Get /logout', () => {
-      test('should return successfully logout with status 200', async () => {
+      test('should return successfully logout with status 200 with message logged out successfully', async () => {
         const res = await request(app)
           .get('/api/v1/logout')
           .set('Cookie', [`token=${token}`]);
