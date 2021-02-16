@@ -11,6 +11,9 @@ const editFood = async (req, res, next) => {
     if (!id) {
       throw Boom.unauthorized('you are not logged!');
     }
+    if (quantityInGrams < 0 || typeof quantityInGrams !== 'number') {
+      throw Boom.badRequest('invalid value');
+    }
     const { rowCount } = await editFoodGrams(
       id,
       categoryId,
