@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Button, Box } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import favIcon from '../../images/favicon.ico';
+import favIcon from './favicon.ico';
 import { context } from '../userProvider';
 import LoginSignupButtonsBox from '../LoginSignupButtonsBox';
 import useStyles from './style';

@@ -24,6 +24,7 @@ const useStyle = makeStyles({
   },
   container: {
     maxWidth: '80%',
+    '@media(min-width:600px)': { marginTop: '10rem' },
   },
 });
 function FoodCatagories() {

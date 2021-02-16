@@ -29,6 +29,9 @@ const useStyle = makeStyles(() => ({
   },
   container: {
     height: '50vh',
+    '@media(min-width:600px)': {
+      marginTop: '5rem',
+    },
   },
   errorMessage: {
     width: '250px',
