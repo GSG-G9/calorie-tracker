@@ -154,6 +154,7 @@ function FoodQuantity() {
                       />
 
                       <AddFoodQuantityButtons
+                        categoryId={categoryId}
                         handleAddFoodQuantity={handleAddFoodQuantity(
                           quantity,
                           categoryId,
