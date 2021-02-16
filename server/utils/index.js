@@ -2,6 +2,7 @@ const {
   loginSchema,
   signupSchema,
   insertFoodValidation,
+  foodAmountValidation,
 } = require('./validation');
 const { signToken, verifyToken } = require('./jwt');
 
@@ -11,4 +12,5 @@ module.exports = {
   signToken,
   verifyToken,
   insertFoodValidation,
+  foodAmountValidation,
 };
