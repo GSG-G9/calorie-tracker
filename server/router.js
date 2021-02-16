@@ -8,6 +8,7 @@ const {
   getFood,
   getUserCalories,
   insertFoodController,
+  deleteFoodController,
 } = require('./controllers');
 
 const { clientError, serverError, Auth } = require('./middlewares');
@@ -18,6 +19,7 @@ router.post('/login', login);
 router.use(Auth);
 
 router.get('/category/:categoryId/food', foodCategory);
+router.delete('/food/:categoryID/:foodID', deleteFoodController);
 router.get('/food', getFood);
 router.get('/user/calories', getUserCalories);
 
