@@ -1,32 +1,17 @@
 import React, { useState, useEffect } from 'react';
-// import Axios from 'axios';
-// import CardMedia from '@material-ui/core/CardMedia';
+import Axios from 'axios';
 import Typography from '@material-ui/core/Typography';
 import CardMedia from '@material-ui/core/CardMedia';
 import { makeStyles } from '@material-ui/core/styles';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import Loading from '../Loading';
 import CardComponent from '../Card';
+import AlertComponent from '../Alert';
 
-function ProfileInfo({ ContentClassName }) {
-  //   const [firstName, setFirstName] = useState();
-  //   const [lastName, setLastName] = useState();
-  //   const [ErrorMessage, setErrorMessage] = useState('');
+function ProfileInfo() {
+  const [userData, setUserData] = useState([]);
+  const [ErrorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
-
-  const data = [
-    {
-      image:
-        'https://i.pinimg.com/564x/a9/f6/e3/a9f6e37a1211793bd2f45f161dc3dfbb.jpg',
-      firstname: 'zein',
-      lastname: 'jendeya',
-      email: 'zein@gmail.com',
-      weight: 63,
-      height: 1.68,
-      gender: 'f',
-      age: 19,
-    },
-  ];
 
   const useStyles = makeStyles(() => ({
     cardContent: {
@@ -45,6 +30,7 @@ function ProfileInfo({ ContentClassName }) {
         width: '30vw',
         height: '55vh',
         marginTop: '7%',
+        marginLeft: '0',
       },
     },
     icon: {
@@ -62,82 +48,83 @@ function ProfileInfo({ ContentClassName }) {
       },
     },
     myprofile: {
+      fontWeight: '700',
       '@media (min-device-width: 900px)': {
-        width: '7vw',
+        width: '9vw',
         height: '7vh',
-        margin: '3% 0 0 3%',
+        margin: '3% 0 0 10%',
       },
     },
   }));
 
   const classes = useStyles();
 
-  //   useEffect(() => {
-  //     const { CancelToken } = Axios;
-  //     const source = CancelToken.source();
-  //     const getCalories = async () => {
-  //       try {
-  //         const {
-  //           data: {
-  //             data: { firstname, lastname },
-  //           },
-  //         } = await Axios.get('/api/v1/profile');
+  useEffect(() => {
+    const { CancelToken } = Axios;
+    const source = CancelToken.source();
+    const getCalories = async () => {
+      try {
+        const {
+          data: { data },
+        } = await Axios.get('/api/v1/profile');
 
-  //         setFirstName(firstname);
-  //         setLastName(lastname);
+        setUserData(data[0]);
+        setLoading(false);
 
-  //         setLoading(false);
-  //         setErrorMessage('success');
-
-  //         return null;
-  //       } catch (err) {
-  //         setLoading(false);
-  //         if (err.response.data.message) {
-  //           return setErrorMessage(err.response.data.message);
-  //         }
-  //         return setErrorMessage('something wrong');
-  //       }
-  //     };
-  //     getCalories();
-  //     return () => source.cancel('Operation canceled');
-  //   }, []);
+        return null;
+      } catch (err) {
+        setLoading(false);
+        if (err.response.data.message) {
+          return setErrorMessage(err.response.data.message);
+        }
+        return setErrorMessage('something wrong');
+      }
+    };
+    getCalories();
+    return () => source.cancel('Operation canceled');
+  }, []);
 
   return loading ? (
     <Loading />
   ) : (
     <>
-      <CardComponent ContentClassName={classes.cardContent}>
-        <Typography variant="h6" className={classes.myprofile}>
-          My Profile
-        </Typography>
-        <CardMedia
-          component="img"
-          className={classes.img}
-          image="https://image.freepik.com/free-vector/vector-avatar-smiling-man-facial-expression_102172-203.jpg"
-        />
-        <EditOutlinedIcon fontSize="large" className={classes.icon} />
+      {ErrorMessage ? (
+        <AlertComponent errorMessage={ErrorMessage} />
+      ) : (
+        <CardComponent ContentClassName={classes.cardContent}>
+          <Typography variant="h5" className={classes.myprofile}>
+            My Profile
+          </Typography>
 
-        <div className={classes.info}>
-          <Typography gutterBottom variant="h6">
-            User Name : {data[0].firstname} {data[0].lastname}
-          </Typography>
-          <Typography gutterBottom variant="h6">
-            Email : {data[0].email}
-          </Typography>
-          <Typography gutterBottom variant="h6">
-            Initial Weight : {data[0].weight} kg
-          </Typography>
-          <Typography gutterBottom variant="h6">
-            Initial Height : {data[0].height} cm
-          </Typography>
-          <Typography gutterBottom variant="h6">
-            Gender : {data[0].gender === 'f' ? 'Female' : 'Male'}
-          </Typography>
-          <Typography gutterBottom variant="h6">
-            Age : {data[0].age} yr
-          </Typography>
-        </div>
-      </CardComponent>
+          <CardMedia
+            component="img"
+            className={classes.img}
+            image="https://image.freepik.com/free-vector/vector-avatar-smiling-man-facial-expression_102172-203.jpg"
+          />
+          <EditOutlinedIcon fontSize="large" className={classes.icon} />
+
+          <div className={classes.info}>
+            <Typography gutterBottom variant="h6">
+              User Name : {userData.firstname} {userData.lastname}
+            </Typography>
+            <Typography gutterBottom variant="h6">
+              Email : {userData.email}
+            </Typography>
+            <Typography gutterBottom variant="h6">
+              Initial Weight : {userData.weight} kg
+            </Typography>
+            <Typography gutterBottom variant="h6">
+              Initial Height : {userData.height} cm
+            </Typography>
+            <Typography gutterBottom variant="h6">
+              Gender : {userData.gender === 'f' ? 'Female' : 'Male'}
+            </Typography>
+            <Typography gutterBottom variant="h6">
+              Age : {userData.age} yr
+            </Typography>
+          </div>
+        </CardComponent>
+      )}
     </>
   );
 }
