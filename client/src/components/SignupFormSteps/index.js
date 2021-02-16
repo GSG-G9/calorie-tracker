@@ -1,10 +1,12 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 import { Login } from '../../Utils/constant';
 import StepContent from '../StepContent';
+import { context } from '../userProvider';
+import Loading from '../Loading';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -12,7 +14,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function SignupFormSteps() {
+function SignupFormSteps() {
   const classes = useStyles();
   const history = useHistory();
   const [activeStep, setActiveStep] = useState(0);
@@ -81,3 +83,17 @@ export default function SignupFormSteps() {
     </div>
   );
 }
+
+const SignUp = () => {
+  const [isAuthenticated] = useContext(context);
+
+  return isAuthenticated === null ? (
+    <Loading />
+  ) : isAuthenticated ? (
+    <Redirect to="/" />
+  ) : (
+    <SignupFormSteps />
+  );
+};
+
+export default SignUp;

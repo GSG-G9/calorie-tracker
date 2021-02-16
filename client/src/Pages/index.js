@@ -34,28 +34,8 @@ function Pages() {
     <>
       {isAuthenticated ? <NavBar /> : ''}
       <Switch>
-        <Route
-          exact
-          path={Login}
-          render={(props) =>
-            isAuthenticated ? (
-              <Redirect component={HomePage} />
-            ) : (
-              <LoginPage {...props} />
-            )
-          }
-        />
-        <Route
-          exact
-          path={Signup}
-          render={(props) =>
-            isAuthenticated ? (
-              <Redirect component={HomePage} />
-            ) : (
-              <SignupPage {...props} />
-            )
-          }
-        />
+        <Route exact path={Login} component={LoginPage} />
+        <Route exact path={Signup} component={SignupPage} />
         <Route exact path={Home} component={HomePage} />
         <Route exact path={Logout} component={LogoutPage} />
         {isAuthenticated ? (

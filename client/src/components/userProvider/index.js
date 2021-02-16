@@ -1,4 +1,4 @@
-import React, { useState, createContext, useEffect } from 'react';
+import React, { useState, createContext, useLayoutEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
@@ -6,10 +6,10 @@ const { node } = PropTypes;
 export const context = createContext();
 
 function userProvider({ children }) {
-  const isAuthenticated = useState(false);
+  const isAuthenticated = useState(null);
   const [, setIsAuth] = isAuthenticated;
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const { CancelToken } = axios;
     const source = CancelToken.source();
     const request = async () => {

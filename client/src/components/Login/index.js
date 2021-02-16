@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import PersonIcon from '@material-ui/icons/Person';
 import { makeStyles, Grid } from '@material-ui/core';
@@ -209,4 +209,16 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+const Login = () => {
+  const [isAuthenticated] = useContext(context);
+
+  return isAuthenticated === null ? (
+    <Loading />
+  ) : isAuthenticated ? (
+    <Redirect to="/" />
+  ) : (
+    <LoginPage />
+  );
+};
+
+export default Login;
