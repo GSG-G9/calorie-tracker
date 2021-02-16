@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import axios from 'axios';
-import { makeStyles, useMediaQuery } from '@material-ui/core';
+import { makeStyles, useMediaQuery, InputAdornment } from '@material-ui/core';
 import AddCircleOutlinedIcon from '@material-ui/icons/AddCircleOutlined';
+import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 import IconLabeledButton from '../../components/Button';
 import ContainerComponent from '../../components/Container';
 import TextInputField from '../../components/InputField';
@@ -29,8 +30,9 @@ const useStyle = makeStyles((theme) => ({
     borderColor: 'none',
     backgroundColor: theme.customColors[6],
     marginTop: '10%',
-    marginLeft: '10%',
-    marginBottom: '7%',
+  },
+  searchIcon: {
+    color: theme.customColors[3],
   },
   filterFoodButton: {
     borderColor: theme.customColors[1],
@@ -70,8 +72,6 @@ const useStyle = makeStyles((theme) => ({
   },
   backBtn: {
     width: 'fit-content',
-    marginTop: '20%',
-    marginLeft: '10%',
     backgroundColor: theme.customColors[3],
     color: theme.customColors[6],
   },
@@ -126,16 +126,23 @@ function AllFoodList() {
             direction="column"
             spacing={5}
             screenSize="xs"
-            itemColumns="2"
+            itemColumns="3"
           >
             <TextInputField
               key={10001}
               type="text"
               className={classes.searchInput}
-              label="Search"
+              label=""
               variant="filled"
               onChange={({ target: { value } }) => setShowFoodName(value)}
-              placeholder="search for your desired food"
+              placeholder="search for food"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchOutlinedIcon className={classes.searchIcon} />
+                  </InputAdornment>
+                ),
+              }}
             />
 
             <ContainerComponent
@@ -165,6 +172,15 @@ function AllFoodList() {
                 Food
               </IconLabeledButton>
             </ContainerComponent>
+            <IconLabeledButton
+              key={10009}
+              className={classes.backBtn}
+              variant="outlined"
+              disable={false}
+              event={() => history.push('/food')}
+            >
+              Back
+            </IconLabeledButton>
           </ContainerComponent>
 
           <ContainerComponent
@@ -215,14 +231,6 @@ function AllFoodList() {
               </CardComponent>
             )}
           </ContainerComponent>
-          <IconLabeledButton
-            className={classes.backBtn}
-            variant="outlined"
-            disable={false}
-            event={() => history.push('/food')}
-          >
-            Back
-          </IconLabeledButton>
         </>
       )}
     </>
