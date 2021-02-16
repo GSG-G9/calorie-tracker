@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Typography from '@material-ui/core/Typography';
 import CardMedia from '@material-ui/core/CardMedia';
 import { makeStyles } from '@material-ui/core/styles';
+import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import Loading from '../Loading';
 import CardComponent from '../Card';
 
@@ -28,10 +29,43 @@ function ProfileInfo({ ContentClassName }) {
   ];
 
   const useStyles = makeStyles(() => ({
-    img: {
+    cardContent: {
+      minHeight: '100vh',
       '@media (min-device-width: 900px)': {
-        flexDirection: 'row',
-        width: '40%',
+        display: 'flex',
+        minHeight: '100vh',
+      },
+    },
+
+    img: {
+      width: '70vw',
+      height: '38vh',
+      marginLeft: '12%',
+      '@media (min-device-width: 900px)': {
+        width: '30vw',
+        height: '55vh',
+        marginTop: '7%',
+      },
+    },
+    icon: {
+      margin: '0 0 5% 45%',
+      '@media (min-device-width: 900px)': {
+        margin: '10% 0 0 5%',
+      },
+    },
+    info: {
+      marginLeft: '18%',
+      '@media (min-device-width: 900px)': {
+        marginLeft: '0',
+        height: '40vh',
+        marginTop: '13%',
+      },
+    },
+    myprofile: {
+      '@media (min-device-width: 900px)': {
+        width: '7vw',
+        height: '7vh',
+        margin: '3% 0 0 3%',
       },
     },
   }));
@@ -72,14 +106,18 @@ function ProfileInfo({ ContentClassName }) {
     <Loading />
   ) : (
     <>
-      <CardComponent className={ContentClassName} style={{ display: 'flex' }}>
+      <CardComponent ContentClassName={classes.cardContent}>
+        <Typography variant="h6" className={classes.myprofile}>
+          My Profile
+        </Typography>
         <CardMedia
           component="img"
           className={classes.img}
           image="https://image.freepik.com/free-vector/vector-avatar-smiling-man-facial-expression_102172-203.jpg"
         />
+        <EditOutlinedIcon fontSize="large" className={classes.icon} />
 
-        <div style={{ marginLeft: '18%' }}>
+        <div className={classes.info}>
           <Typography gutterBottom variant="h6">
             User Name : {data[0].firstname} {data[0].lastname}
           </Typography>
