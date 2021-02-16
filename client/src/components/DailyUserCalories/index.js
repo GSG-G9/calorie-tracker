@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Axios from 'axios';
 import DailyCaloriesCard from '../DailyCaloriesCard';
-
+import CustomErrorMessage from '../food/CustomErrorMessage';
 import CircularProgressWithLabel from '../CircularProgress';
 import Loading from '../Loading';
 
@@ -12,7 +12,7 @@ function DailyUserCalories() {
   const [food, setFood] = useState();
   const [exercises, setExercises] = useState();
   const [remaining, setRemaining] = useState();
-  const [, setErrorMessage] = useState('');
+  const [ErrorMessage, setErrorMessage] = useState('');
 
   const useStyles = makeStyles(() => ({
     root: {
@@ -49,6 +49,7 @@ function DailyUserCalories() {
         setRemaining(Math.round(remainingCalories));
 
         setLoading(false);
+        setErrorMessage('success');
 
         return null;
       } catch (err) {
@@ -65,16 +66,20 @@ function DailyUserCalories() {
   return loading ? (
     <Loading />
   ) : (
-    <div className={classes.root}>
-      <DailyCaloriesCard
-        goal={goal}
-        food={food}
-        exercises={exercises}
-        remaining={remaining}
-      />
-
-      <CircularProgressWithLabel value={(1 - remaining / goal) * 100} />
-    </div>
+    <CustomErrorMessage
+      errorMessage={ErrorMessage}
+      component={
+        <div className={classes.root}>
+          <DailyCaloriesCard
+            goal={goal}
+            food={food}
+            exercises={exercises}
+            remaining={remaining}
+          />
+          <CircularProgressWithLabel value={(1 - remaining / goal) * 100} />{' '}
+        </div>
+      }
+    />
   );
 }
 
