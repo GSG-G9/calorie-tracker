@@ -25,7 +25,6 @@ const useStyle = makeStyles((theme) => ({
   },
   searchBar: {
     width: '90%',
-    paddingTop: '5rem',
   },
   searchInput: {
     borderColor: 'none',

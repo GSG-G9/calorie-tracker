@@ -29,7 +29,6 @@ const useStyle = makeStyles(() => ({
   },
   container: {
     height: '50vh',
-    paddingTop: '5rem',
   },
   errorMessage: {
     width: '250px',
