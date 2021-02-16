@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 import FoodItems from '../FoodItems';
 import Container from '../../Container';
 import Button from '../../Button';
-import { MyFood } from '../../../Utils/constant';
+import { FoodList } from '../../../Utils/constant';
 import Loading from '../../Loading';
 import CustomErrorMessage from '../CustomErrorMessage';
 
@@ -47,7 +47,7 @@ function FoodItemsSelected(props) {
         } = await axios.get(`/api/v1/category/${foodCategoryId}/food`, {
           cancelToken: source.token,
         });
-
+        console.log(data);
         setTotalCalories(
           (
             data.reduce(
@@ -76,7 +76,7 @@ function FoodItemsSelected(props) {
   }, [foodCategoryId]);
   const classes = useStyle();
   return (
-    <Container direction="column" itemColumns="12" spacing="1">
+    <Container direction="column" itemColumns="12" spacing={1}>
       {showLoading ? (
         <Loading key="10" height200px />
       ) : (
@@ -85,7 +85,7 @@ function FoodItemsSelected(props) {
           component={<FoodItems key="1" foodArray={foodArray} />}
         />
       )}
-      <Container key="2" direction="row" itemColumns="12" spacing="1">
+      <Container key="2" direction="row" itemColumns="12" spacing={1}>
         {[
           <p key="3" className={classes.totalCalories}>
             Total : {totalCalories} Kcal
@@ -96,7 +96,7 @@ function FoodItemsSelected(props) {
             className={classes.button}
             variant="contained"
             disable={false}
-            event={() => history.push(MyFood)}
+            event={() => history.push(FoodList, { categoryId: foodCategoryId })}
           >
             add food
           </Button>,

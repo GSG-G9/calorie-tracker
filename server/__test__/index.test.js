@@ -152,37 +152,186 @@ describe('authentication', () => {
         .expect(200);
       const actual = res.body;
       const foodData = [
-        { id: 1, food_type_id: 1, food_name: 'egg', image: null },
-        { id: 2, food_type_id: 1, food_name: 'chocolate', image: null },
-        { id: 3, food_type_id: 1, food_name: 'checken', image: null },
-        { id: 4, food_type_id: 1, food_name: 'icecream', image: null },
-        { id: 5, food_type_id: 1, food_name: 'avokado', image: null },
-        { id: 6, food_type_id: 1, food_name: 'fish', image: null },
-        { id: 7, food_type_id: 2, food_name: 'pizza', image: null },
-        { id: 8, food_type_id: 2, food_name: 'maqlobah', image: null },
-        { id: 9, food_type_id: 1, food_name: 'checken pizza', image: null },
-        { id: 10, food_type_id: 1, food_name: 'cake', image: null },
-        { id: 11, food_type_id: 1, food_name: 'coffee', image: null },
-        { id: 12, food_type_id: 1, food_name: 'apple', image: null },
-        { id: 13, food_type_id: 2, food_name: 'Falafel', image: null },
-        { id: 14, food_type_id: 1, food_name: 'egg', image: null },
-        { id: 15, food_type_id: 1, food_name: 'chocolate', image: null },
-        { id: 16, food_type_id: 1, food_name: 'checken', image: null },
-        { id: 17, food_type_id: 1, food_name: 'icecream', image: null },
-        { id: 18, food_type_id: 1, food_name: 'avokado', image: null },
-        { id: 19, food_type_id: 1, food_name: 'fish', image: null },
-        { id: 20, food_type_id: 2, food_name: 'mosakhan', image: null },
-        { id: 21, food_type_id: 2, food_name: 'maqlobah', image: null },
+        {
+          id: 1,
+          food_type: 'food',
+          food_name: 'egg',
+          image:
+            'https://upload.wikimedia.org/wikipedia/en/thumb/5/58/Instagram_egg.jpg/220px-Instagram_egg.jpg',
+        },
+        {
+          id: 2,
+          food_type: 'food',
+          food_name: 'chocolate',
+          image:
+            'https://vaya.in/recipes/wp-content/uploads/2018/02/Milk-Chocolate-1.jpg',
+        },
+        {
+          id: 3,
+          food_type: 'food',
+          food_name: 'checken',
+          image:
+            'https://thestayathomechef.com/wp-content/uploads/2016/06/Fried-Chicken-4-1.jpg',
+        },
+        {
+          id: 4,
+          food_type: 'food',
+          food_name: 'icecream',
+          image:
+            'https://upload.wikimedia.org/wikipedia/commons/e/ea/Ice_cream_cone_%28cropped%29.jpg',
+        },
+        {
+          id: 5,
+          food_type: 'food',
+          food_name: 'avokado',
+          image:
+            'https://images.immediate.co.uk/production/volatile/sites/30/2020/02/Avocados-3d84a3a.jpg?quality=90&resize=960,872',
+        },
+        {
+          id: 6,
+          food_type: 'food',
+          food_name: 'fish',
+          image:
+            'https://www.krumpli.co.uk/wp-content/uploads/2019/03/Campfire-Baked-Fish-in-Foil-4-720x720.jpg',
+        },
+        {
+          id: 7,
+          food_type: 'meal',
+          food_name: 'pizza',
+          image:
+            'https://www.qsrmagazine.com/sites/default/files/styles/story_page/public/phut_0.jpg?itok=h30EAnkk',
+        },
+        {
+          id: 8,
+          food_type: 'meal',
+          food_name: 'maqlobah',
+          image: 'https://chefjar.com/wp-content/uploads/2017/04/2-2.jpg',
+        },
+        {
+          id: 9,
+          food_type: 'food',
+          food_name: 'checken pizza',
+          image:
+            'https://jeanniestriedandtruerecipes.com/wp-content/uploads/2020/05/Buffalo-Chicken-Pizza-2020-500x500.jpg',
+        },
+        {
+          id: 10,
+          food_type: 'food',
+          food_name: 'cake',
+          image:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRw9CXAFWkzlaQSYLCZGRkf3sU_QXWgcuAryw&usqp=CAU',
+        },
+        {
+          id: 11,
+          food_type: 'food',
+          food_name: 'coffee',
+          image:
+            'https://cdn-prod.medicalnewstoday.com/content/images/articles/270/270202/cups-of-coffee.jpg',
+        },
+        {
+          id: 12,
+          food_type: 'food',
+          food_name: 'apple',
+          image:
+            'https://bestapples.com/wp-content/uploads/2018/01/envy-apple.jpg',
+        },
+        {
+          id: 13,
+          food_type: 'meal',
+          food_name: 'Falafel',
+          image:
+            'https://www.themediterraneandish.com/wp-content/uploads/2020/02/falafel-recipe-1.jpg',
+        },
+        {
+          id: 14,
+          food_type: 'food',
+          food_name: 'egg',
+          image:
+            'https://upload.wikimedia.org/wikipedia/en/thumb/5/58/Instagram_egg.jpg/220px-Instagram_egg.jpg',
+        },
+        {
+          id: 15,
+          food_type: 'food',
+          food_name: 'chocolate',
+          image:
+            'https://vaya.in/recipes/wp-content/uploads/2018/02/Milk-Chocolate-1.jpg',
+        },
+        {
+          id: 16,
+          food_type: 'food',
+          food_name: 'checken',
+          image:
+            'https://thestayathomechef.com/wp-content/uploads/2016/06/Fried-Chicken-4-1.jpg',
+        },
+        {
+          id: 17,
+          food_type: 'food',
+          food_name: 'icecream',
+          image:
+            'https://upload.wikimedia.org/wikipedia/commons/e/ea/Ice_cream_cone_%28cropped%29.jpg',
+        },
+        {
+          id: 18,
+          food_type: 'food',
+          food_name: 'avokado',
+          image:
+            'https://images.immediate.co.uk/production/volatile/sites/30/2020/02/Avocados-3d84a3a.jpg?quality=90&resize=960,872',
+        },
+        {
+          id: 19,
+          food_type: 'food',
+          food_name: 'fish',
+          image:
+            'https://www.krumpli.co.uk/wp-content/uploads/2019/03/Campfire-Baked-Fish-in-Foil-4-720x720.jpg',
+        },
+        {
+          id: 20,
+          food_type: 'meal',
+          food_name: 'mosakhan',
+          image:
+            'https://i0.wp.com/www.middleeastmonitor.com/wp-content/uploads/2018/03/2018_2-34-food-blog-7.jpg?quality=85&strip=all&zoom=1&ssl=1',
+        },
+        {
+          id: 21,
+          food_type: 'meal',
+          food_name: 'maqlobah',
+          image: 'https://chefjar.com/wp-content/uploads/2017/04/2-2.jpg',
+        },
         {
           id: 22,
-          food_type_id: 1,
+          food_type: 'food',
           food_name: 'checken pizza',
-          image: null,
+          image:
+            'https://jeanniestriedandtruerecipes.com/wp-content/uploads/2020/05/Buffalo-Chicken-Pizza-2020-500x500.jpg',
         },
-        { id: 23, food_type_id: 1, food_name: 'cake', image: null },
-        { id: 24, food_type_id: 1, food_name: 'coffee', image: null },
-        { id: 25, food_type_id: 1, food_name: 'apple', image: null },
-        { id: 26, food_type_id: 2, food_name: 'Falafel', image: null },
+        {
+          id: 23,
+          food_type: 'food',
+          food_name: 'cake',
+          image:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRw9CXAFWkzlaQSYLCZGRkf3sU_QXWgcuAryw&usqp=CAU',
+        },
+        {
+          id: 24,
+          food_type: 'food',
+          food_name: 'coffee',
+          image:
+            'https://cdn-prod.medicalnewstoday.com/content/images/articles/270/270202/cups-of-coffee.jpg',
+        },
+        {
+          id: 25,
+          food_type: 'food',
+          food_name: 'apple',
+          image:
+            'https://bestapples.com/wp-content/uploads/2018/01/envy-apple.jpg',
+        },
+        {
+          id: 26,
+          food_type: 'meal',
+          food_name: 'Falafel',
+          image:
+            'https://www.themediterraneandish.com/wp-content/uploads/2020/02/falafel-recipe-1.jpg',
+        },
       ];
 
       const expected = { message: 'success', status: 200, data: foodData };
@@ -192,37 +341,186 @@ describe('authentication', () => {
   describe('Test getFood Query', () => {
     test('should return all data from food table', async () => {
       const foodData = [
-        { id: 1, food_type_id: 1, food_name: 'egg', image: null },
-        { id: 2, food_type_id: 1, food_name: 'chocolate', image: null },
-        { id: 3, food_type_id: 1, food_name: 'checken', image: null },
-        { id: 4, food_type_id: 1, food_name: 'icecream', image: null },
-        { id: 5, food_type_id: 1, food_name: 'avokado', image: null },
-        { id: 6, food_type_id: 1, food_name: 'fish', image: null },
-        { id: 7, food_type_id: 2, food_name: 'pizza', image: null },
-        { id: 8, food_type_id: 2, food_name: 'maqlobah', image: null },
-        { id: 9, food_type_id: 1, food_name: 'checken pizza', image: null },
-        { id: 10, food_type_id: 1, food_name: 'cake', image: null },
-        { id: 11, food_type_id: 1, food_name: 'coffee', image: null },
-        { id: 12, food_type_id: 1, food_name: 'apple', image: null },
-        { id: 13, food_type_id: 2, food_name: 'Falafel', image: null },
-        { id: 14, food_type_id: 1, food_name: 'egg', image: null },
-        { id: 15, food_type_id: 1, food_name: 'chocolate', image: null },
-        { id: 16, food_type_id: 1, food_name: 'checken', image: null },
-        { id: 17, food_type_id: 1, food_name: 'icecream', image: null },
-        { id: 18, food_type_id: 1, food_name: 'avokado', image: null },
-        { id: 19, food_type_id: 1, food_name: 'fish', image: null },
-        { id: 20, food_type_id: 2, food_name: 'mosakhan', image: null },
-        { id: 21, food_type_id: 2, food_name: 'maqlobah', image: null },
+        {
+          id: 1,
+          food_type: 'food',
+          food_name: 'egg',
+          image:
+            'https://upload.wikimedia.org/wikipedia/en/thumb/5/58/Instagram_egg.jpg/220px-Instagram_egg.jpg',
+        },
+        {
+          id: 2,
+          food_type: 'food',
+          food_name: 'chocolate',
+          image:
+            'https://vaya.in/recipes/wp-content/uploads/2018/02/Milk-Chocolate-1.jpg',
+        },
+        {
+          id: 3,
+          food_type: 'food',
+          food_name: 'checken',
+          image:
+            'https://thestayathomechef.com/wp-content/uploads/2016/06/Fried-Chicken-4-1.jpg',
+        },
+        {
+          id: 4,
+          food_type: 'food',
+          food_name: 'icecream',
+          image:
+            'https://upload.wikimedia.org/wikipedia/commons/e/ea/Ice_cream_cone_%28cropped%29.jpg',
+        },
+        {
+          id: 5,
+          food_type: 'food',
+          food_name: 'avokado',
+          image:
+            'https://images.immediate.co.uk/production/volatile/sites/30/2020/02/Avocados-3d84a3a.jpg?quality=90&resize=960,872',
+        },
+        {
+          id: 6,
+          food_type: 'food',
+          food_name: 'fish',
+          image:
+            'https://www.krumpli.co.uk/wp-content/uploads/2019/03/Campfire-Baked-Fish-in-Foil-4-720x720.jpg',
+        },
+        {
+          id: 7,
+          food_type: 'meal',
+          food_name: 'pizza',
+          image:
+            'https://www.qsrmagazine.com/sites/default/files/styles/story_page/public/phut_0.jpg?itok=h30EAnkk',
+        },
+        {
+          id: 8,
+          food_type: 'meal',
+          food_name: 'maqlobah',
+          image: 'https://chefjar.com/wp-content/uploads/2017/04/2-2.jpg',
+        },
+        {
+          id: 9,
+          food_type: 'food',
+          food_name: 'checken pizza',
+          image:
+            'https://jeanniestriedandtruerecipes.com/wp-content/uploads/2020/05/Buffalo-Chicken-Pizza-2020-500x500.jpg',
+        },
+        {
+          id: 10,
+          food_type: 'food',
+          food_name: 'cake',
+          image:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRw9CXAFWkzlaQSYLCZGRkf3sU_QXWgcuAryw&usqp=CAU',
+        },
+        {
+          id: 11,
+          food_type: 'food',
+          food_name: 'coffee',
+          image:
+            'https://cdn-prod.medicalnewstoday.com/content/images/articles/270/270202/cups-of-coffee.jpg',
+        },
+        {
+          id: 12,
+          food_type: 'food',
+          food_name: 'apple',
+          image:
+            'https://bestapples.com/wp-content/uploads/2018/01/envy-apple.jpg',
+        },
+        {
+          id: 13,
+          food_type: 'meal',
+          food_name: 'Falafel',
+          image:
+            'https://www.themediterraneandish.com/wp-content/uploads/2020/02/falafel-recipe-1.jpg',
+        },
+        {
+          id: 14,
+          food_type: 'food',
+          food_name: 'egg',
+          image:
+            'https://upload.wikimedia.org/wikipedia/en/thumb/5/58/Instagram_egg.jpg/220px-Instagram_egg.jpg',
+        },
+        {
+          id: 15,
+          food_type: 'food',
+          food_name: 'chocolate',
+          image:
+            'https://vaya.in/recipes/wp-content/uploads/2018/02/Milk-Chocolate-1.jpg',
+        },
+        {
+          id: 16,
+          food_type: 'food',
+          food_name: 'checken',
+          image:
+            'https://thestayathomechef.com/wp-content/uploads/2016/06/Fried-Chicken-4-1.jpg',
+        },
+        {
+          id: 17,
+          food_type: 'food',
+          food_name: 'icecream',
+          image:
+            'https://upload.wikimedia.org/wikipedia/commons/e/ea/Ice_cream_cone_%28cropped%29.jpg',
+        },
+        {
+          id: 18,
+          food_type: 'food',
+          food_name: 'avokado',
+          image:
+            'https://images.immediate.co.uk/production/volatile/sites/30/2020/02/Avocados-3d84a3a.jpg?quality=90&resize=960,872',
+        },
+        {
+          id: 19,
+          food_type: 'food',
+          food_name: 'fish',
+          image:
+            'https://www.krumpli.co.uk/wp-content/uploads/2019/03/Campfire-Baked-Fish-in-Foil-4-720x720.jpg',
+        },
+        {
+          id: 20,
+          food_type: 'meal',
+          food_name: 'mosakhan',
+          image:
+            'https://i0.wp.com/www.middleeastmonitor.com/wp-content/uploads/2018/03/2018_2-34-food-blog-7.jpg?quality=85&strip=all&zoom=1&ssl=1',
+        },
+        {
+          id: 21,
+          food_type: 'meal',
+          food_name: 'maqlobah',
+          image: 'https://chefjar.com/wp-content/uploads/2017/04/2-2.jpg',
+        },
         {
           id: 22,
-          food_type_id: 1,
+          food_type: 'food',
           food_name: 'checken pizza',
-          image: null,
+          image:
+            'https://jeanniestriedandtruerecipes.com/wp-content/uploads/2020/05/Buffalo-Chicken-Pizza-2020-500x500.jpg',
         },
-        { id: 23, food_type_id: 1, food_name: 'cake', image: null },
-        { id: 24, food_type_id: 1, food_name: 'coffee', image: null },
-        { id: 25, food_type_id: 1, food_name: 'apple', image: null },
-        { id: 26, food_type_id: 2, food_name: 'Falafel', image: null },
+        {
+          id: 23,
+          food_type: 'food',
+          food_name: 'cake',
+          image:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRw9CXAFWkzlaQSYLCZGRkf3sU_QXWgcuAryw&usqp=CAU',
+        },
+        {
+          id: 24,
+          food_type: 'food',
+          food_name: 'coffee',
+          image:
+            'https://cdn-prod.medicalnewstoday.com/content/images/articles/270/270202/cups-of-coffee.jpg',
+        },
+        {
+          id: 25,
+          food_type: 'food',
+          food_name: 'apple',
+          image:
+            'https://bestapples.com/wp-content/uploads/2018/01/envy-apple.jpg',
+        },
+        {
+          id: 26,
+          food_type: 'meal',
+          food_name: 'Falafel',
+          image:
+            'https://www.themediterraneandish.com/wp-content/uploads/2020/02/falafel-recipe-1.jpg',
+        },
       ];
       const { rows } = await getFood();
       return expect(rows).toEqual(foodData);
