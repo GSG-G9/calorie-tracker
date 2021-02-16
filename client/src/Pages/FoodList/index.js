@@ -134,8 +134,8 @@ function AllFoodList() {
 
             <ContainerComponent
               direction="row"
-              spacing={5}
-              screenSize="sm"
+              spacing={7}
+              screenSize={smallScreen ? 'sm' : 'md'}
               itemColumns="6"
               className="filteringButtons"
             >
