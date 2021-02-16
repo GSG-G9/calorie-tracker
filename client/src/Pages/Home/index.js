@@ -1,17 +1,20 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import { Box, Typography, useMediaQuery, Button } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { Box, Typography, useMediaQuery } from '@material-ui/core';
 import ContainerComponent from '../../components/Container';
 import CardComponent from '../../components/Card';
 import useStyles from './style';
-import headerImageSrc from '../../images/header.png';
+import girlImageSrc from '../../images/header.png';
+import sportImageSrc from '../../images/sport.png';
 import { context } from '../../components/userProvider';
 import LoadingComponent from '../../components/Loading';
+import LoginSignupButtonsBox from '../../components/LoginSignupButtonsBox';
+import Footer from '../../components/Footer';
 
 function HomePage() {
   const [isAuthenticated] = useContext(context);
   const smallScreen = useMediaQuery('(max-width:900px)');
+  const largeScreen = useMediaQuery('(min-width:900px)');
   const classes = useStyles();
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
@@ -42,70 +45,69 @@ function HomePage() {
   }, []);
 
   return (
-    <Box className={classes.container_box}>
-      {!isAuthenticated && (
-        <Box className={classes.login_signup_box}>
-          <Link to="/login" className={classes.login_signup_link}>
-            <Button className={classes.login_signup_button}>log in</Button>
-          </Link>
-          <span className={classes.separated_span}>|</span>
-          <Link to="/signup" className={classes.login_signup_link}>
-            <Button className={classes.login_signup_button}>sign up</Button>
-          </Link>
-        </Box>
-      )}
-      <Box className={classes.header_box}>
-        <img alt="girl" src={headerImageSrc} className={classes.header_img} />
-        <Typography
-          variant="caption"
-          display="block"
-          gutterBottom
-          className={classes.header_caption}
-        >
-          join our family and enjoy the luxury of a healthy body
-        </Typography>
-      </Box>
+    <>
+      <Box className={classes.wrapper}>
+        <Box className={classes.container_box}>
+          {!isAuthenticated && <LoginSignupButtonsBox />}
+          <Box className={classes.header_box}>
+            <img
+              alt="girl"
+              src={largeScreen ? sportImageSrc : girlImageSrc}
+              className={classes.header_img}
+            />
+            <Typography
+              variant="caption"
+              display="block"
+              gutterBottom
+              className={classes.header_caption}
+            >
+              join our family and enjoy the luxury of a healthy body
+            </Typography>
+          </Box>
 
-      <Box className={classes.news_box}>
-        <Typography variant="h5" gutterBottom className={classes.news_feed}>
-          news feed
-        </Typography>
-        {loading ? (
-          <LoadingComponent />
-        ) : errorMessage ? (
-          <p>{errorMessage}</p>
-        ) : (
-          <ContainerComponent
-            spacing="2"
-            direction="column"
-            screenSize={smallScreen ? 'sm' : 'lg'}
-            className={classes.news_container}
-          >
-            {news.map((el) => (
-              <CardComponent
-                cardClassName={classes.news_card}
-                ContentClassName={classes.news_content}
+          <Box className={classes.news_box}>
+            <Typography variant="h5" gutterBottom className={classes.news_feed}>
+              news feed
+            </Typography>
+            {loading ? (
+              <LoadingComponent />
+            ) : errorMessage ? (
+              <p>{errorMessage}</p>
+            ) : (
+              <ContainerComponent
+                spacing="2"
+                direction="column"
+                screenSize={smallScreen ? 'sm' : 'lg'}
+                className={classes.news_container}
               >
-                <Typography
-                  variant="subtitle2"
-                  gutterBottom
-                  className={classes.card_news_title}
-                >
-                  {el.title}:
-                </Typography>
-                <Typography
-                  variant="body2"
-                  gutterBottom
-                  className={classes.card_news_body}
-                >
-                  {el.content}
-                </Typography>
-              </CardComponent>
-            ))}
-          </ContainerComponent>
-        )}
+                {news.map((el) => (
+                  <CardComponent
+                    cardClassName={classes.news_card}
+                    ContentClassName={classes.news_content}
+                  >
+                    <Typography
+                      variant="subtitle2"
+                      gutterBottom
+                      className={classes.card_news_title}
+                    >
+                      {el.title}:
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      gutterBottom
+                      className={classes.card_news_body}
+                    >
+                      {el.content}
+                    </Typography>
+                  </CardComponent>
+                ))}
+              </ContainerComponent>
+            )}
+          </Box>
+        </Box>
+        <Footer />
       </Box>
-    </Box>
+    </>
   );
 }
 

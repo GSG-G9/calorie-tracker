@@ -6,6 +6,9 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '25px 25px 0 0',
     width: '100%',
     margin: 'auto',
+    '@media (min-device-width: 600px)': {
+      borderRadius: 0,
+    },
   },
   news_container: {
     width: '90%',
@@ -22,19 +25,31 @@ const useStyles = makeStyles((theme) => ({
       borderRadius: '14px',
     },
   },
+  wrapper: {
+    position: 'relative',
+  },
   container_box: {
     backgroundColor: theme.customColors[3],
+    paddingBottom: '55px',
   },
 
   header_box: {
     backgroundColor: theme.customColors[3],
-    height: '40vh',
+    height: '37vh',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+    paddingTop: '1.8em',
     '@media (min-device-width: 900px)': {
       flexDirection: 'row',
+      backgroundColor: theme.customColors[5],
+    },
+    '@media (min-device-width: 900px) and (max-device-width: 1199px)': {
+      height: '31vh',
+    },
+    '@media (min-device-width: 1200px)': {
+      height: '40vh',
     },
   },
 
@@ -62,6 +77,8 @@ const useStyles = makeStyles((theme) => ({
       fontSize: '1.54rem',
     },
     '@media (min-device-width: 900px)': {
+      color: theme.customColors[1],
+
       width: '44%',
       fontSize: '2rem',
     },
@@ -96,29 +113,6 @@ const useStyles = makeStyles((theme) => ({
     },
     '@media (min-device-width: 1200px)': {
       fontSize: '1.6em',
-    },
-  },
-  login_signup_link: {
-    textDecoration: 'none',
-  },
-  login_signup_button: {
-    color: 'white',
-    fontSize: '1.1em',
-    fontWeight: 'bold',
-    '@media (min-device-width: 600px)': {
-      fontSize: '1.3em',
-    },
-  },
-  login_signup_box: {
-    marginLeft: 15,
-    opacity: '0.85',
-  },
-  separated_span: {
-    color: 'white',
-    fontWeight: 'bold',
-
-    '@media (min-device-width: 900px)': {
-      fontSize: '1.3em',
     },
   },
 }));

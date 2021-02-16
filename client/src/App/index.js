@@ -24,6 +24,8 @@ import MyFoodPage from '../Pages/MyFood';
 import FoodPage from '../Pages/Food';
 import ExercisePage from '../Pages/Exercise';
 import Provider from '../components/userProvider';
+import Footer from '../components/Footer';
+import DesktopNavBar from '../components/DesktopNavBar';
 import './style.css';
 
 function App() {
@@ -31,6 +33,7 @@ function App() {
     <ThemeProvider>
       <Provider>
         <Router>
+          <DesktopNavBar />
           <Switch>
             <Route exact path={Home} component={HomePage} />
             <Route exact path={Login} component={LoginPage} />

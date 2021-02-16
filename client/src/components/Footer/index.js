@@ -6,11 +6,18 @@ import { Typography, Box, IconButton } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   footer: {
-    width: 'auto',
-    backgroundColor: theme.customColors[3],
-    color: 'white',
-    display: 'flex',
-    justifyContent: 'space-between',
+    display: 'none',
+    '@media (min-device-width: 600px)': {
+      width: 'auto',
+      backgroundColor: theme.customColors[3],
+      color: 'white',
+      display: 'flex',
+      justifyContent: 'space-between',
+      position: 'absolute',
+      bottom: 0,
+      width: '100%',
+      height: '55px',
+    },
   },
   icons_box: {
     color: 'white',
@@ -26,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
   footer_text: {
     fontSize: '0.75rem',
-    paddingTop: '1.5em',
+    paddingTop: '1.25em',
     paddingRight: '3em',
     '@media (min-device-width: 900px)': {
       fontSize: '1rem',
@@ -39,7 +46,10 @@ const Footer = () => {
   const classes = useStyles();
 
   return (
-    <BottomNavigation className={classes.footer}>
+    <BottomNavigation
+      className={classes.footer}
+      display={{ xs: 'none', md: 'block' }}
+    >
       <Box className={classes.icons_box}>
         <IconButton>
           <Facebook className={classes.footer_icon} />
