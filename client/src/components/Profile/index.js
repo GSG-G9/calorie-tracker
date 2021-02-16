@@ -15,7 +15,7 @@ function ProfileInfo() {
 
   const useStyles = makeStyles(() => ({
     cardContent: {
-      minHeight: '100vh',
+      minHeight: '90vh',
       '@media (min-device-width: 900px)': {
         display: 'flex',
         minHeight: '100vh',
@@ -24,7 +24,7 @@ function ProfileInfo() {
 
     img: {
       width: '70vw',
-      height: '38vh',
+      height: '33vh',
       marginLeft: '12%',
       '@media (min-device-width: 900px)': {
         width: '30vw',
@@ -34,15 +34,13 @@ function ProfileInfo() {
       },
     },
     icon: {
-      margin: '0 0 5% 45%',
+      margin: '0 0 3% 0',
       '@media (min-device-width: 900px)': {
         margin: '10% 0 0 5%',
       },
     },
     info: {
-      marginLeft: '18%',
       '@media (min-device-width: 900px)': {
-        marginLeft: '0',
         height: '40vh',
         marginTop: '13%',
       },
@@ -52,7 +50,7 @@ function ProfileInfo() {
       '@media (min-device-width: 900px)': {
         width: '9vw',
         height: '7vh',
-        margin: '3% 0 0 10%',
+        margin: '6% 0 0 10%',
       },
     },
   }));
