@@ -2,10 +2,12 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   popover_btns: {
+    backgroundColor: theme.customColors[2],
+    color: 'white',
     width: '80px',
     height: '50px',
     '@media (min-device-width: 600px)': {
-      color: theme.palette.primary.main,
+      color: 'white',
       width: '180px',
       height: '70px',
       fontSize: '24px',
@@ -18,16 +20,18 @@ const useStyles = makeStyles((theme) => ({
   },
 
   btns_container: {
+    zIndex: '1000',
     display: 'flex',
     justifyContent: 'space-around',
     alignItems: 'center',
     height: '60px',
     width: '200px',
     margin: '0 auto',
-    bottom: '15%',
+    bottom: '10vh',
     position: 'fixed',
     left: 'calc(50% - 100px)',
     '@media (min-device-width: 600px)': {
+      zIndex: '1000',
       height: '150px',
       width: '400px',
       borderRadius: '10px',
@@ -35,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
       justifyContent: 'space-around',
       alignItems: 'center',
       margin: '0 auto',
-      bottom: '0',
+      bottom: '10vh',
       position: 'fixed',
       left: 'calc(50% - 200px)',
     },
