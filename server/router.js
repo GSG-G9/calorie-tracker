@@ -10,6 +10,7 @@ const {
   getFoodById,
   insertFoodController,
   deleteFoodController,
+  editFood,
   getProfileData,
 } = require('./controllers');
 
@@ -22,6 +23,7 @@ router.use(Auth);
 
 router.get('/category/:categoryId/food', foodCategory);
 router.delete('/food/:categoryID/:foodID', deleteFoodController);
+router.patch('/food/:categoryId/:foodId', editFood);
 
 router.route('/category/:categoryId/food/:foodId').get(getFoodById);
 router.get('/food', getFood);
