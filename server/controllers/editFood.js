@@ -6,8 +6,8 @@ const editFood = async (req, res, next) => {
   const {
     user: { id },
   } = req;
-  const { categoryId, foodId } = req.params;
-  const { quantityInGrams } = req.body;
+
+  const { quantityInGrams, userFoodRelationId } = req.body;
   try {
     if (!id) {
       throw Boom.unauthorized('you are not logged!');
@@ -22,9 +22,7 @@ const editFood = async (req, res, next) => {
     }
 
     const { rowCount } = await editFoodGrams(
-      id,
-      categoryId,
-      foodId,
+      userFoodRelationId,
       quantityInGrams,
     );
 
