@@ -17,7 +17,7 @@ function Home() {
   const largeScreen = useMediaQuery('(min-width:900px)');
   const classes = useStyles();
   const [errorMessage, setErrorMessage] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const [news, setNews] = useState([]);
   useEffect(() => {
@@ -25,14 +25,14 @@ function Home() {
     const source = CancelToken.source();
     (async () => {
       try {
-        setLoading(true);
         const {
           data: { data },
         } = await axios.get('http://localhost:5000/api/v1/healthnews', {
           cancelToken: source.token,
         });
         setLoading(false);
-        return setNews(data);
+        setNews(data);
+        return null;
       } catch (err) {
         setLoading(false);
         if (err.response) {
