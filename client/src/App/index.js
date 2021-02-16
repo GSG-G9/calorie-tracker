@@ -23,6 +23,8 @@ import CaloriesPage from '../Pages/Calories';
 import FoodPage from '../Pages/Food';
 import ExercisePage from '../Pages/Exercise';
 import Provider from '../components/userProvider';
+import NavBar from '../components/NavBar';
+
 import './style.css';
 import AllFoodList from '../Pages/FoodList';
 
@@ -31,6 +33,7 @@ function App() {
     <ThemeProvider>
       <Provider>
         <Router>
+          <NavBar />
           <Switch>
             <Route exact path={Home} component={HomePage} />
             <Route exact path={Login} component={LoginPage} />
