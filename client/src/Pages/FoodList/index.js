@@ -9,6 +9,18 @@ import TextInputField from '../../components/InputField';
 import CardComponent from '../../components/Card';
 
 const useStyle = makeStyles((theme) => ({
+  errorMsg: {
+    backgroundColor: theme.customColors[6],
+    width: '45%',
+    height: '40%',
+    display: 'flex',
+    flexDirection: 'row',
+    borderRadius: 10,
+  },
+  contentMsg: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
   searchBar: {
     width: '90%',
   },
@@ -50,6 +62,7 @@ const useStyle = makeStyles((theme) => ({
     height: 'fit-content',
     margin: 'auto',
     marginLeft: 10,
+    fontWeight: 600,
   },
   iconAdd: {
     color: theme.customColors[3],
@@ -94,15 +107,20 @@ function AllFoodList() {
   return (
     <>
       {errorMessage ? (
-        <p>{errorMessage}</p>
+        <CardComponent
+          cardClassName={classes.errorMsg}
+          ContentClassName={classes.contentMsg}
+        >
+          {errorMessage}
+        </CardComponent>
       ) : (
         <>
           <ContainerComponent
             className={classes.searchBar}
-            direction="column"
+            direction={smallScreen ? 'column' : 'row'}
             spacing={5}
-            screenSize="xs"
-            itemColumns="6"
+            screenSize={smallScreen ? 'xs' : 'md'}
+            itemColumns="2"
           >
             <TextInputField
               key={10001}
@@ -113,6 +131,7 @@ function AllFoodList() {
               onChange={({ target: { value } }) => setShowFoodName(value)}
               placeholder="search for your desired food"
             />
+
             <ContainerComponent
               direction="row"
               spacing={5}
@@ -129,6 +148,7 @@ function AllFoodList() {
               >
                 Meals
               </IconLabeledButton>
+
               <IconLabeledButton
                 key={100004}
                 variant="outlined"
@@ -145,8 +165,8 @@ function AllFoodList() {
             direction="row"
             spacing={4}
             screenSize={smallScreen ? 'xs' : 'md'}
-            itemColumns={smallScreen ? '6' : '3'}
-            gridUserWidth={smallScreen ? '50%' : '25%'}
+            itemColumns={smallScreen ? '2' : '3'}
+            gridUserWidth={smallScreen ? '45%' : '25%'}
             className={classes.foodContainer}
           >
             {foodArray ? (
@@ -157,42 +177,33 @@ function AllFoodList() {
                 .filter(({ food_name: foodNames }) =>
                   showFoodName ? foodNames.includes(showFoodName) : foodNames
                 )
-                .map(
-                  ({
-                    image,
-                    food_name: foodsName,
-                    food_type: foodsType,
-                    id,
-                  }) => (
-                    <CardComponent
-                      key={id}
-                      ContentClassName={classes.content}
-                      cardClassName={classes.foodCard}
-                    >
-                      <img
-                        className={classes.media}
-                        src={image}
-                        alt={foodsName}
-                      />
-                      <p className={classes.detail}>
-                        {foodsName}: {foodsType}
-                      </p>
-                      <AddCircleOutlinedIcon
-                        className={classes.iconAdd}
-                        onClick={() =>
-                          history.push('/food/list/quantity', {
-                            foodId: id,
-                            categoryId,
-                          })
-                        }
-                      />
-                    </CardComponent>
-                  )
-                )
+                .map(({ image, food_name: foodsName, id }) => (
+                  <CardComponent
+                    key={id}
+                    ContentClassName={classes.content}
+                    cardClassName={classes.foodCard}
+                  >
+                    <img
+                      className={classes.media}
+                      src={image}
+                      alt={foodsName}
+                    />
+                    <p className={classes.detail}>{foodsName}</p>
+                    <AddCircleOutlinedIcon
+                      className={classes.iconAdd}
+                      onClick={() =>
+                        history.push('/food/list/quantity', {
+                          foodId: id,
+                          categoryId,
+                        })
+                      }
+                    />
+                  </CardComponent>
+                ))
             ) : (
               <CardComponent
-                cardClassName={classes.foodCard}
-                ContentClassName={classes.foodCardContent}
+                cardClassName={classes.errorMsg}
+                ContentClassName={classes.contentMsg}
               >
                 No Food to View
               </CardComponent>
