@@ -25,29 +25,33 @@ import FoodPage from '../Pages/Food';
 import ExercisePage from '../Pages/Exercise';
 import Provider from '../components/userProvider';
 import DesktopNavBar from '../components/DesktopNavBar';
+import Footer from '../components/Footer';
 import './style.css';
 
 function App() {
   return (
-    <ThemeProvider>
-      <Provider>
-        <Router>
-          <DesktopNavBar />
-          <Switch>
-            <Route exact path={Home} component={HomePage} />
-            <Route exact path={Login} component={LoginPage} />
-            <Route exact path={Signup} component={SignupPage} />
-            <Route exact path={Logout} component={LogoutPage} />
-            <Route exact path={Nutrition} component={NutritionPage} />
-            <Route exact path={MyProfile} component={MyProfilePage} />
-            <Route exact path={Calories} component={CaloriesPage} />
-            <Route exact path={MyFood} component={MyFoodPage} />
-            <Route exact path={Food} component={FoodPage} />
-            <Route exact path={Exercise} component={ExercisePage} />
-          </Switch>
-        </Router>
-      </Provider>
-    </ThemeProvider>
+    <div className="App">
+      <ThemeProvider>
+        <Provider>
+          <Router>
+            <DesktopNavBar />
+            <Switch>
+              <Route exact path={Home} component={HomePage} />
+              <Route exact path={Login} component={LoginPage} />
+              <Route exact path={Signup} component={SignupPage} />
+              <Route exact path={Logout} component={LogoutPage} />
+              <Route exact path={Nutrition} component={NutritionPage} />
+              <Route exact path={MyProfile} component={MyProfilePage} />
+              <Route exact path={Calories} component={CaloriesPage} />
+              <Route exact path={MyFood} component={MyFoodPage} />
+              <Route exact path={Food} component={FoodPage} />
+              <Route exact path={Exercise} component={ExercisePage} />
+            </Switch>
+            <Footer />
+          </Router>
+        </Provider>
+      </ThemeProvider>
+    </div>
   );
 }
 

@@ -12,7 +12,9 @@ const DesktopNavBar = () => {
   return (
     <BottomNavigation className={classes.navbar}>
       <Box className={classes.logo_container}>
-        <img alt="scale" src={favIcon} className={classes.scale_img} />
+        <Link to="/">
+          <img alt="scale" src={favIcon} className={classes.scale_img} />
+        </Link>
         <span className={classes.logo}>CalTrack</span>
       </Box>
       <Box className={classes.login_logout_signup_container}>

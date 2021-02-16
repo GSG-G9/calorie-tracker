@@ -14,7 +14,8 @@ const useStyles = makeStyles((theme) => ({
       justifyContent: 'space-between',
       alignItems: 'center',
       position: 'absolute',
-      bottom: 0,
+      bottom: '0px',
+
       width: '100%',
       height: '8.5vh',
     },

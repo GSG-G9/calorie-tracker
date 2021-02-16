@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     width: '20vw',
   },
   scale_img: {
-    height: '75%',
+    height: '40px',
     marginBottom: '0.8em',
   },
   logo: {

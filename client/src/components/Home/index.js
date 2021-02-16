@@ -75,13 +75,15 @@ function Home() {
               <p>{errorMessage}</p>
             ) : (
               <ContainerComponent
-                spacing="2"
+                spacing={2}
                 direction="column"
                 screenSize={smallScreen ? 'sm' : 'lg'}
                 className={classes.news_container}
+                itemColumns="12"
               >
                 {news.map((el) => (
                   <CardComponent
+                    key={el.id}
                     cardClassName={classes.news_card}
                     ContentClassName={classes.news_content}
                   >
@@ -105,7 +107,6 @@ function Home() {
             )}
           </Box>
         </Box>
-        <Footer />
       </Box>
     </>
   );
