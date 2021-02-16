@@ -22,7 +22,7 @@ weight float,
 height float,
 goalWeight float,
 dailyCaloriesGoal float,
-image TEXT,
+image TEXT DEFAULT ('https://image.freepik.com/free-vector/vector-avatar-smiling-man-facial-expression_102172-203.jpg'),
 activity_id INTEGER REFERENCES activity(id) ON DELETE CASCADE ON UPDATE CASCADE
 
 );
@@ -73,7 +73,8 @@ id SERIAL PRIMARY KEY,
 users_id INTEGER REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE,
 exercises_id INTEGER REFERENCES exercises(id) ON DELETE CASCADE ON UPDATE CASCADE,
 exercise_duration_in_minutes float NOT NULL,
-created_at TIMESTAMP DEFAULT CURRENT_DATE
+created_at TIMESTAMP DEFAULT CURRENT_DATE,
+creation_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 
@@ -83,7 +84,8 @@ CREATE TABLE UserFoodRelation(
   food_id INTEGER REFERENCES food(id) ON DELETE CASCADE ON UPDATE CASCADE,
   food_category_id INTEGER REFERENCES food_category(id) ON DELETE CASCADE ON UPDATE CASCADE,
   amount_in_grams float NOT NUll,
-  created_at TIMESTAMP DEFAULT CURRENT_DATE
+  created_at TIMESTAMP DEFAULT CURRENT_DATE,
+  creation_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
   );
 
 CREATE TABLE news(

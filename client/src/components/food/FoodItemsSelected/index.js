@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 import FoodItems from '../FoodItems';
 import Container from '../../Container';
 import Button from '../../Button';
-import { MyFood } from '../../../Utils/constant';
+import { FoodList } from '../../../Utils/constant';
 import Loading from '../../Loading';
 import CustomErrorMessage from '../CustomErrorMessage';
 
@@ -24,6 +24,14 @@ const useStyle = makeStyles((theme) => ({
   totalCalories: {
     fontSize: '20px',
     fontWeight: '800',
+  },
+  errorMessage: {
+    width: '100%',
+    backgroundColor: theme.customColors[6],
+    padding: '0 10px',
+    borderRadius: '10px',
+    height: '200px',
+    overflow: 'auto',
   },
 }));
 
@@ -47,10 +55,9 @@ function FoodItemsSelected(props) {
         } = await axios.get(`/api/v1/category/${foodCategoryId}/food`, {
           cancelToken: source.token,
         });
-
         setTotalCalories(
-          (
-            data.reduce(
+          data
+            .reduce(
               (
                 calories,
                 {
@@ -59,8 +66,8 @@ function FoodItemsSelected(props) {
                 }
               ) => calories + +caloriesPerGram * +amountInGrams,
               0
-            ) / 1000
-          ).toFixed(0)
+            )
+            .toFixed(0)
         );
         setFoodArray(data);
         setErrorMessage('success');
@@ -76,19 +83,20 @@ function FoodItemsSelected(props) {
   }, [foodCategoryId]);
   const classes = useStyle();
   return (
-    <Container direction="column" itemColumns="12" spacing="1">
+    <Container direction="column" itemColumns="12" spacing={1}>
       {showLoading ? (
         <Loading key="10" height200px />
       ) : (
         <CustomErrorMessage
+          className={classes.errorMessage}
           errorMessage={errorMessage}
           component={<FoodItems key="1" foodArray={foodArray} />}
         />
       )}
-      <Container key="2" direction="row" itemColumns="12" spacing="1">
+      <Container key="2" direction="row" itemColumns="12" spacing={1}>
         {[
           <p key="3" className={classes.totalCalories}>
-            Total : {totalCalories} Kcal
+            Total : {totalCalories} Cal
           </p>,
           <Button
             key="1"
@@ -96,7 +104,7 @@ function FoodItemsSelected(props) {
             className={classes.button}
             variant="contained"
             disable={false}
-            event={() => history.push(MyFood)}
+            event={() => history.push(FoodList, { categoryId: foodCategoryId })}
           >
             add food
           </Button>,
