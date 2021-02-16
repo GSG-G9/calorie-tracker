@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import {
   Home,
   Login,
@@ -35,7 +35,11 @@ function Pages() {
           exact
           path={Login}
           render={(props) =>
-            isAuthenticated ? <HomePage {...props} /> : <LoginPage {...props} />
+            isAuthenticated ? (
+              <Redirect component={HomePage} />
+            ) : (
+              <LoginPage {...props} />
+            )
           }
         />
         <Route
@@ -43,7 +47,7 @@ function Pages() {
           path={Signup}
           render={(props) =>
             isAuthenticated ? (
-              <HomePage {...props} />
+              <Redirect component={HomePage} />
             ) : (
               <SignupPage {...props} />
             )
