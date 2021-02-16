@@ -39,28 +39,31 @@ export default function SignupFormSteps() {
   }, [skipped, activeStep, setActiveStep, setSkipped]);
 
   useEffect(() => {
-    const { CancelToken } = axios;
-    const source = CancelToken.source();
+    if (Object.keys(data).length === 10) {
+      const { CancelToken } = axios;
+      const source = CancelToken.source();
 
-    (async () => {
-      try {
-        setShowLoading(true); // turn the loading progress bar
-        await axios.post('/api/v1/signup', data, {
-          cancelToken: source.token,
-        });
-        setShowLoading(false); // turnoff the loading progress bar after success
-        setErrorMessage('success');
-        return history.push(Login);
-      } catch (err) {
-        setShowLoading(false); // turnoff the loading progress bar after fail
-        return setErrorMessage(
-          err.response.data.message || 'Something went wrong !! '
-        );
-      }
-    })();
+      (async () => {
+        try {
+          setShowLoading(true); // turn the loading progress bar
+          await axios.post('/api/v1/signup', data, {
+            cancelToken: source.token,
+          });
+          setShowLoading(false); // turnoff the loading progress bar after success
+          setErrorMessage('success');
+          return history.push(Login);
+        } catch (err) {
+          setShowLoading(false); // turnoff the loading progress bar after fail
+          return setErrorMessage(
+            err.response.data.message || 'Something went wrong !! '
+          );
+        }
+      })();
 
-    return () => source.cancel('Operation canceled by the user.');
-  }, [Object.keys(data).length === 10]);
+      return () => source.cancel('Operation canceled by the user.');
+    }
+    return null;
+  }, [data]);
 
   return (
     <div className={classes.root}>
