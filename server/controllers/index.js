@@ -5,6 +5,7 @@ const healthNews = require('./healthNews');
 const signup = require('./signup');
 const login = require('./login');
 const foodCategory = require('./foodCategory');
+const logout = require('./logout');
 const deleteFoodController = require('./deleteFood');
 const editFood = require('./editFood');
 const getFoodById = require('./getFoodById');
@@ -19,6 +20,7 @@ module.exports = {
   getUserCalories,
   getFoodById,
   insertFoodController,
+  logout,
   deleteFoodController,
   editFood,
   getProfileData,

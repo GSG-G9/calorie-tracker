@@ -649,6 +649,31 @@ describe('authentication', () => {
       });
     });
 
+    describe('Test Get /logout', () => {
+      test('should return successfully logout with status 200 with message logged out successfully', async () => {
+        const {
+          status,
+          body: { message },
+          header: { 'set-cookie': cookies },
+        } = await request(app)
+          .get('/api/v1/logout')
+          .set('Cookie', [`token=${token}`]);
+        const logoutToken = cookie.parse(cookies[0]).token;
+        expect(status).toBe(200);
+        expect(logoutToken).toBe('');
+        return expect(message).toBe('logged out successfully');
+      });
+      test('should return your are not registered after logout if get isAuth route', async () => {
+        const {
+          status,
+          body: { message },
+        } = await request(app)
+          .get('/api/v1/isAuth')
+          .set('Cookie', ["token=''"]);
+        expect(status).toBe(401);
+        return expect(message).toBe('You are not Authorized');
+      });
+    });
     describe('Test POST /api/v1/category/:categoryId/food/:foodId Route', () => {
       test('Should return successfully added', async () => {
         const reqFood = {

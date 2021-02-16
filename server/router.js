@@ -9,6 +9,7 @@ const {
   getUserCalories,
   getFoodById,
   insertFoodController,
+  logout,
   deleteFoodController,
   editFood,
   getProfileData,
@@ -32,6 +33,7 @@ router.get('/user/calories', getUserCalories);
 router.get('/profile', getProfileData);
 
 router.post('/category/:categoryId/food/:foodId', insertFoodController);
+router.get('/logout', logout);
 
 router.use(clientError);
 router.use(serverError);
