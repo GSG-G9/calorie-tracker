@@ -25,6 +25,14 @@ const useStyle = makeStyles((theme) => ({
     fontSize: '20px',
     fontWeight: '800',
   },
+  errorMessage: {
+    width: '100%',
+    backgroundColor: theme.customColors[6],
+    padding: '0 10px',
+    borderRadius: '10px',
+    height: '200px',
+    overflow: 'auto',
+  },
 }));
 
 function FoodItemsSelected(props) {
@@ -80,6 +88,7 @@ function FoodItemsSelected(props) {
         <Loading key="10" height200px />
       ) : (
         <CustomErrorMessage
+          className={classes.errorMessage}
           errorMessage={errorMessage}
           component={<FoodItems key="1" foodArray={foodArray} />}
         />
@@ -87,7 +96,7 @@ function FoodItemsSelected(props) {
       <Container key="2" direction="row" itemColumns="12" spacing={1}>
         {[
           <p key="3" className={classes.totalCalories}>
-            Total : {totalCalories} Kcal
+            Total : {totalCalories} Cal
           </p>,
           <Button
             key="1"

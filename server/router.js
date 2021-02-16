@@ -7,6 +7,7 @@ const {
   foodCategory,
   getFood,
   getUserCalories,
+  getFoodById,
   insertFoodController,
   isAuth,
   getProfileData,
@@ -21,6 +22,8 @@ router.use(Auth);
 
 router.get('/isAuth', isAuth);
 router.get('/category/:categoryId/food', foodCategory);
+
+router.route('/category/:categoryId/food/:foodId').get(getFoodById);
 router.get('/food', getFood);
 router.get('/user/calories', getUserCalories);
 
