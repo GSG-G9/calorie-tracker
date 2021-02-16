@@ -48,7 +48,7 @@ function CircularProgressWithLabel(props) {
       <Box
         top={0}
         left={smallScreen ? 60 : 0}
-        bottom={smallScreen ? 0 : 24}
+        bottom={smallScreen ? 0 : 15}
         right={0}
         className={classes.circular}
         position="absolute"

@@ -30,6 +30,8 @@ function DailyUserCalories({ showCard, showChart }) {
   const classes = useStyles();
 
   useEffect(() => {
+    const { CancelToken } = Axios;
+    const source = CancelToken.source();
     const getCalories = async () => {
       try {
         const {
@@ -63,6 +65,7 @@ function DailyUserCalories({ showCard, showChart }) {
       }
     };
     getCalories();
+    return () => source.cancel('Operation canceled');
   }, []);
 
   return loading ? (
