@@ -7,6 +7,7 @@ import IconLabeledButton from '../../components/Button';
 import ContainerComponent from '../../components/Container';
 import TextInputField from '../../components/InputField';
 import CardComponent from '../../components/Card';
+import Loading from '../../components/Loading';
 
 const useStyle = makeStyles((theme) => ({
   errorMsg: {
@@ -83,6 +84,7 @@ function AllFoodList() {
   const smallScreen = useMediaQuery('(max-width:600px)');
   const history = useHistory();
   const classes = useStyle();
+  const [showLoading, setShowLoading] = useState(true);
   const [foodArray, setFoodArray] = useState([]);
   const [showType, setShowType] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -94,8 +96,10 @@ function AllFoodList() {
     (async () => {
       try {
         const food = await axios.get('/api/v1/food');
+        setShowLoading(false);
         return setFoodArray(food.data.data);
       } catch (err) {
+        setShowLoading(false);
         return setErrorMessage(
           err.response.data.message || 'something went wrong'
         );
@@ -104,7 +108,9 @@ function AllFoodList() {
     return () => source.cancel('Operation canceled by the user.');
   }, []);
 
-  return (
+  return showLoading ? (
+    <Loading />
+  ) : (
     <>
       {errorMessage ? (
         <CardComponent
