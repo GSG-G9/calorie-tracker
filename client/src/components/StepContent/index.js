@@ -46,8 +46,8 @@ StepContent.propTypes = {
   handleNext: func.isRequired,
   setData: func.isRequired,
   data: objectOf(oneOfType([string, number])).isRequired,
-  errorMessage: string,
   loadingBar: shape.isRequired,
+  errorMessage: string,
 };
 StepContent.defaultProps = {
   step: 0,

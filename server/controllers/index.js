@@ -5,6 +5,8 @@ const healthNews = require('./healthNews');
 const signup = require('./signup');
 const login = require('./login');
 const foodCategory = require('./foodCategory');
+const getFoodById = require('./getFoodById');
+const getProfileData = require('./getProfile');
 
 module.exports = {
   healthNews,
@@ -13,5 +15,7 @@ module.exports = {
   foodCategory,
   getFood,
   getUserCalories,
+  getFoodById,
   insertFoodController,
+  getProfileData,
 };
