@@ -27,6 +27,7 @@ import DesktopNavBar from '../components/DesktopNavBar';
 import Footer from '../components/Footer';
 import './style.css';
 import AllFoodList from '../Pages/FoodList';
+import NavBar from '../components/NavBar';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Provider>
           <Router>
             <DesktopNavBar />
+            <NavBar />
             <Switch>
               <Route exact path={Home} component={HomePage} />
               <Route exact path={Login} component={LoginPage} />

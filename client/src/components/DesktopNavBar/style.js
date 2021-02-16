@@ -2,12 +2,13 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   navbar: {
-    display: 'none',
+    width: '100%',
+    height: '3rem',
+    backgroundColor: theme.customColors[3],
     '@media (min-device-width: 900px)': {
       display: 'flex',
       justifyContent: 'space-around',
       alignItems: 'center',
-      backgroundColor: theme.customColors[3],
       color: 'white',
       zIndex: 100,
       position: 'fixed',
