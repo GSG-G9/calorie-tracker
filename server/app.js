@@ -18,6 +18,7 @@ const middlewares = [
   express.urlencoded({ extended: false }),
   express.json(),
 ];
+
 app.use((req, res, next) => {
   res.append('Access-Control-Allow-Origin', ['*']);
   next();
