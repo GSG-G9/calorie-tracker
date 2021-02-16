@@ -12,7 +12,6 @@ const deleteFoodController = async (req, res, next) => {
       throw Boom.unauthorized('you are not logged');
     }
     const { rowCount } = await deleteFood(categoryID, foodID, id);
-
     if (rowCount === 0) {
       throw Boom.badRequest('delete failed');
     }
