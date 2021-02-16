@@ -4,7 +4,7 @@ import BasicUserInfo from '../signUpForm/BasicUserInfo';
 import GenderSelection from '../signUpForm/GenderSelection';
 import PhysicalCharacteristics from '../signUpForm/PhysicalCharacteristics';
 
-const { number, func, string, oneOfType, objectOf } = PropTypes;
+const { number, func, string, oneOfType, objectOf, shape } = PropTypes;
 const StepContent = (props) => {
   const {
     step,
@@ -47,6 +47,7 @@ StepContent.propTypes = {
   setData: func.isRequired,
   data: objectOf(oneOfType([string, number])).isRequired,
   errorMessage: string,
+  loadingBar: shape.isRequired,
 };
 StepContent.defaultProps = {
   step: 0,
