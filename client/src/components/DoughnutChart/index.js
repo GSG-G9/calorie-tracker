@@ -36,7 +36,6 @@ DoughnutChart.defaultProps = {
 };
 
 DoughnutChart.propTypes = {
-  legend: arrayOf(string).isRequired,
   section: arrayOf(number).isRequired,
   sectionBackground: arrayOf(string).isRequired,
   width: arrayOf(number),
