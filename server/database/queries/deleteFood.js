@@ -1,10 +1,9 @@
 const connection = require('../config/connection');
 
-const deleteFood = (categoryID, foodID, userID) => {
+const deleteFood = (userFoodRelationId) => {
   const sql = {
-    text:
-      'DELETE FROM UserFoodRelation WHERE users_id=$1 AND food_category_id=$2 AND food_id=$3 and created_at=current_date',
-    values: [userID, categoryID, foodID],
+    text: 'DELETE FROM UserFoodRelation WHERE id=$1',
+    values: [userFoodRelationId],
   };
   return connection.query(sql);
 };

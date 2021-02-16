@@ -74,6 +74,7 @@ users_id INTEGER REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE,
 exercises_id INTEGER REFERENCES exercises(id) ON DELETE CASCADE ON UPDATE CASCADE,
 exercise_duration_in_minutes float NOT NULL,
 created_at TIMESTAMP DEFAULT CURRENT_DATE
+creation_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 
@@ -84,6 +85,7 @@ CREATE TABLE UserFoodRelation(
   food_category_id INTEGER REFERENCES food_category(id) ON DELETE CASCADE ON UPDATE CASCADE,
   amount_in_grams float NOT NUll,
   created_at TIMESTAMP DEFAULT CURRENT_DATE
+  creation_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
   );
 
 CREATE TABLE news(

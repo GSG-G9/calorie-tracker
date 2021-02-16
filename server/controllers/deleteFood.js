@@ -2,7 +2,7 @@ const Boom = require('@hapi/boom');
 const { deleteFood } = require('../database/queries');
 
 const deleteFoodController = async (req, res, next) => {
-  const { categoryID, foodID } = req.params;
+  const { userFoodRelationId } = req.body;
   const {
     user: { id },
   } = req;
@@ -11,7 +11,7 @@ const deleteFoodController = async (req, res, next) => {
     if (!id) {
       throw Boom.unauthorized('you are not logged');
     }
-    const { rowCount } = await deleteFood(categoryID, foodID, id);
+    const { rowCount } = await deleteFood(userFoodRelationId);
     if (rowCount === 0) {
       throw Boom.badRequest('delete failed');
     }
