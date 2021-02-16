@@ -178,7 +178,7 @@ function AllFood() {
               className={classes.backBtn}
               variant="outlined"
               disable={false}
-              event={() => history.push('/food')}
+              event={() => history.push('/food', { categoryId })}
             >
               Back
             </IconLabeledButton>

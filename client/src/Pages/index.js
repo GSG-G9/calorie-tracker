@@ -11,7 +11,7 @@ import {
   Food,
   Exercise,
   FoodList,
-  FoodQuantity,
+  FoodQuantityPath,
 } from '../Utils/constant';
 import AllFoodList from './FoodList';
 import HomePage from './Home';
@@ -21,7 +21,7 @@ import LogoutPage from './Logout';
 import NutritionPage from './Nutrition';
 import MyProfilePage from './Profile';
 import CaloriesPage from './Calories';
-
+import FoodQuantity from './FoodQuantity';
 import FoodPage from './Food';
 import ExercisePage from './Exercise';
 import NavBar from '../components/NavBar';
@@ -60,17 +60,18 @@ function Pages() {
         <Route exact path={Logout} component={LogoutPage} />
         {isAuthenticated ? (
           <>
-            <Route exact path={Nutrition} component={NutritionPage} />
             <Route exact path={MyProfile} component={MyProfilePage} />
-            <Route exact path={Calories} component={CaloriesPage} />
             <Route exact path={Food} component={FoodPage} />
             <Route exact path={FoodList} component={AllFoodList} />
-            <Route exact path={FoodQuantity} component={FoodQuantity} />
+            <Route exact path={FoodQuantityPath} component={FoodQuantity} />
             <Route exact path={Exercise} component={ExercisePage} />
+            <Route exact path={Nutrition} component={NutritionPage} />
+            <Route exact path={Calories} component={CaloriesPage} />
           </>
         ) : (
           ''
         )}
+        <Redirect to="/" />
       </Switch>
     </>
   );
