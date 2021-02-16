@@ -25,7 +25,6 @@ const handleAddFoodQuantity = (
     await axios.post(`/api/v1/category/${categoryId}/food/${foodId}`, {
       grams: quantity,
     });
-
     setPostErrorMessage('success');
     setShowLoadingPost(false);
     return history.push('/food', { categoryId });

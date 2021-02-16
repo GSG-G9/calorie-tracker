@@ -52,7 +52,7 @@ function FoodCatagories() {
       key="2"
       direction={matchSmallScreen ? 'column' : 'row'}
       itemColumns={matchSmallScreen ? '12' : '4'}
-      spacing="2"
+      spacing={2}
     >
       <Hidden key="4" smDown>
         <CardMedia
@@ -61,7 +61,7 @@ function FoodCatagories() {
           src="/foodCategory/logo512.png"
         />
       </Hidden>
-      <Container key="1" direction="column" itemColumns="12" spacing="4">
+      <Container key="1" direction="column" itemColumns="12" spacing={4}>
         {[
           { label: 'Breakfast', id: 1 },
           { label: 'Lunch', id: 2 },

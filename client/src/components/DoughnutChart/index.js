@@ -41,14 +41,15 @@ function DoughnutChart({
 DoughnutChart.defaultProps = {
   width: [20],
   height: [5],
+  legend: [''],
 };
 
 DoughnutChart.propTypes = {
-  legend: arrayOf(string).isRequired,
   section: arrayOf(number).isRequired,
   sectionBackground: arrayOf(string).isRequired,
   width: number,
   height: number,
+  legend: arrayOf(string),
 };
 
 export default DoughnutChart;

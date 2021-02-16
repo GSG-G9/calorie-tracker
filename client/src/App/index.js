@@ -9,7 +9,7 @@ import {
   Nutrition,
   MyProfile,
   Calories,
-  MyFood,
+  FoodList,
   Food,
   Exercise,
 } from '../Utils/constant';
@@ -20,7 +20,6 @@ import LogoutPage from '../Pages/Logout';
 import NutritionPage from '../Pages/Nutrition';
 import MyProfilePage from '../Pages/Profile';
 import CaloriesPage from '../Pages/Calories';
-import MyFoodPage from '../Pages/MyFood';
 import FoodPage from '../Pages/Food';
 import ExercisePage from '../Pages/Exercise';
 import Provider from '../components/userProvider';
@@ -28,6 +27,7 @@ import FoodQuantity from '../components/food/FoodQuantity';
 import NavBar from '../components/NavBar';
 
 import './style.css';
+import AllFoodList from '../Pages/FoodList';
 
 function App() {
   return (
@@ -43,7 +43,7 @@ function App() {
             <Route exact path={Nutrition} component={NutritionPage} />
             <Route exact path={MyProfile} component={MyProfilePage} />
             <Route exact path={Calories} component={CaloriesPage} />
-            <Route exact path={MyFood} component={MyFoodPage} />
+            <Route exact path={FoodList} component={AllFoodList} />
             <Route exact path={Food} component={FoodPage} />
             <Route exact path={Exercise} component={ExercisePage} />
             <Route

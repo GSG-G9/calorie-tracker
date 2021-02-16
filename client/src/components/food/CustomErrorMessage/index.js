@@ -19,6 +19,9 @@ const AlertComponent = ({ errorMessage, component, ...rest }) => {
 
 AlertComponent.propTypes = {
   errorMessage: string.isRequired,
-  component: node.isRequired,
+  component: node,
+};
+AlertComponent.defaultProps = {
+  component: null,
 };
 export default AlertComponent;
