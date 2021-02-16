@@ -19,6 +19,11 @@ const middlewares = [
   express.json(),
 ];
 
+app.use((req, res, next) => {
+  res.append('Access-Control-Allow-Origin', ['*']);
+  next();
+});
+
 app.use(middlewares);
 app.use('/api/v1/', router);
 
