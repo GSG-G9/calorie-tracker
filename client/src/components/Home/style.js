@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
   },
   wrapper: {
     position: 'relative',
+    paddingBottom: '15vh',
   },
   container_box: {
     backgroundColor: theme.customColors[3],
