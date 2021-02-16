@@ -30,6 +30,9 @@ const useStyle = makeStyles(() => ({
   container: {
     height: '50vh',
   },
+  errorMessage: {
+    width: '250px',
+  },
 }));
 
 export default useStyle;
