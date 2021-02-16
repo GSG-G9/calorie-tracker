@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
   news_box: {
     backgroundColor: 'white',
-    borderRadius: '2em 2em 0',
+    borderRadius: '2em 2em 0 0',
     width: '100%',
     margin: 'auto',
     '@media (min-device-width: 600px)': {
