@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
   news_box: {
     backgroundColor: 'white',
-    borderRadius: '25px 25px 0 0',
+    borderRadius: '2em 2em 0',
     width: '100%',
     margin: 'auto',
     '@media (min-device-width: 600px)': {
@@ -19,10 +19,10 @@ const useStyles = makeStyles((theme) => ({
 
   news_card: {
     backgroundColor: theme.customColors[6],
-    borderRadius: '5px',
+    borderRadius: '1em',
     margin: 'auto',
     '@media (min-device-width: 600px)': {
-      borderRadius: '14px',
+      borderRadius: '0.5em',
     },
   },
   wrapper: {
@@ -30,7 +30,6 @@ const useStyles = makeStyles((theme) => ({
   },
   container_box: {
     backgroundColor: theme.customColors[3],
-    paddingBottom: '55px',
   },
 
   header_box: {

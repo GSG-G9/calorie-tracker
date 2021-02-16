@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
       position: 'fixed',
       top: 0,
       width: '100%',
-      height: '55px',
+      height: '8.5vh',
     },
   },
   logo_container: {

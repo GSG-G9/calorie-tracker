@@ -8,15 +8,15 @@ const useStyles = makeStyles((theme) => ({
   footer: {
     display: 'none',
     '@media (min-device-width: 600px)': {
-      width: 'auto',
       backgroundColor: theme.customColors[3],
       color: 'white',
       display: 'flex',
       justifyContent: 'space-between',
+      alignItems: 'center',
       position: 'absolute',
       bottom: 0,
       width: '100%',
-      height: '55px',
+      height: '8.5vh',
     },
   },
   icons_box: {
