@@ -1,6 +1,5 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import BottomNavigation from '@material-ui/core/BottomNavigation';
 import { Facebook, Instagram, Twitter, LinkedIn } from '@material-ui/icons';
 import { Typography, Box, IconButton } from '@material-ui/core';
 
@@ -15,9 +14,10 @@ const useStyles = makeStyles((theme) => ({
       alignItems: 'center',
       position: 'absolute',
       bottom: '0px',
-
       width: '100%',
+      top: 'auto',
       height: '8.5vh',
+      boxShadow: `-2px -10px 10px ${theme.customColors[1]}`,
     },
   },
   icons_box: {
@@ -47,10 +47,7 @@ const Footer = () => {
   const classes = useStyles();
 
   return (
-    <BottomNavigation
-      className={classes.footer}
-      display={{ xs: 'none', md: 'block' }}
-    >
+    <div className={classes.footer}>
       <Box className={classes.icons_box}>
         <IconButton>
           <Facebook className={classes.footer_icon} />
@@ -65,13 +62,12 @@ const Footer = () => {
           <LinkedIn className={classes.footer_icon} />
         </IconButton>
       </Box>
-      {/* <Box> */}
+
       <Typography className={classes.footer_text}>
         {' '}
         @ 2020 all rights reserved by CalTrack
       </Typography>
-      {/* </Box> */}
-    </BottomNavigation>
+    </div>
   );
 };
 

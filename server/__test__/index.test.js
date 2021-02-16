@@ -11,6 +11,8 @@ const {
   calculateUserFoodCalories,
   getUserCalories,
   getFoodCategory,
+  insertFoodQuery,
+  getProfile,
 } = require('../database/queries');
 
 describe('authentication', () => {
@@ -41,7 +43,7 @@ describe('authentication', () => {
         .set({
           'Content-Type': 'application/json',
         })
-        .send(JSON.stringify(userData));
+        .send(JSON.stringify({ ...userData, email: 'zein@gmail.com' }));
       expect(message).toBe('user already exists');
       expect(statusCode).toBe(409);
     });
@@ -151,37 +153,186 @@ describe('authentication', () => {
         .expect(200);
       const actual = res.body;
       const foodData = [
-        { id: 1, food_type_id: 1, food_name: 'egg', image: null },
-        { id: 2, food_type_id: 1, food_name: 'chocolate', image: null },
-        { id: 3, food_type_id: 1, food_name: 'checken', image: null },
-        { id: 4, food_type_id: 1, food_name: 'icecream', image: null },
-        { id: 5, food_type_id: 1, food_name: 'avokado', image: null },
-        { id: 6, food_type_id: 1, food_name: 'fish', image: null },
-        { id: 7, food_type_id: 2, food_name: 'pizza', image: null },
-        { id: 8, food_type_id: 2, food_name: 'maqlobah', image: null },
-        { id: 9, food_type_id: 1, food_name: 'checken pizza', image: null },
-        { id: 10, food_type_id: 1, food_name: 'cake', image: null },
-        { id: 11, food_type_id: 1, food_name: 'coffee', image: null },
-        { id: 12, food_type_id: 1, food_name: 'apple', image: null },
-        { id: 13, food_type_id: 2, food_name: 'Falafel', image: null },
-        { id: 14, food_type_id: 1, food_name: 'egg', image: null },
-        { id: 15, food_type_id: 1, food_name: 'chocolate', image: null },
-        { id: 16, food_type_id: 1, food_name: 'checken', image: null },
-        { id: 17, food_type_id: 1, food_name: 'icecream', image: null },
-        { id: 18, food_type_id: 1, food_name: 'avokado', image: null },
-        { id: 19, food_type_id: 1, food_name: 'fish', image: null },
-        { id: 20, food_type_id: 2, food_name: 'mosakhan', image: null },
-        { id: 21, food_type_id: 2, food_name: 'maqlobah', image: null },
+        {
+          id: 1,
+          food_type: 'food',
+          food_name: 'egg',
+          image:
+            'https://upload.wikimedia.org/wikipedia/en/thumb/5/58/Instagram_egg.jpg/220px-Instagram_egg.jpg',
+        },
+        {
+          id: 2,
+          food_type: 'food',
+          food_name: 'chocolate',
+          image:
+            'https://vaya.in/recipes/wp-content/uploads/2018/02/Milk-Chocolate-1.jpg',
+        },
+        {
+          id: 3,
+          food_type: 'food',
+          food_name: 'checken',
+          image:
+            'https://thestayathomechef.com/wp-content/uploads/2016/06/Fried-Chicken-4-1.jpg',
+        },
+        {
+          id: 4,
+          food_type: 'food',
+          food_name: 'icecream',
+          image:
+            'https://upload.wikimedia.org/wikipedia/commons/e/ea/Ice_cream_cone_%28cropped%29.jpg',
+        },
+        {
+          id: 5,
+          food_type: 'food',
+          food_name: 'avokado',
+          image:
+            'https://images.immediate.co.uk/production/volatile/sites/30/2020/02/Avocados-3d84a3a.jpg?quality=90&resize=960,872',
+        },
+        {
+          id: 6,
+          food_type: 'food',
+          food_name: 'fish',
+          image:
+            'https://www.krumpli.co.uk/wp-content/uploads/2019/03/Campfire-Baked-Fish-in-Foil-4-720x720.jpg',
+        },
+        {
+          id: 7,
+          food_type: 'meal',
+          food_name: 'pizza',
+          image:
+            'https://www.qsrmagazine.com/sites/default/files/styles/story_page/public/phut_0.jpg?itok=h30EAnkk',
+        },
+        {
+          id: 8,
+          food_type: 'meal',
+          food_name: 'maqlobah',
+          image: 'https://chefjar.com/wp-content/uploads/2017/04/2-2.jpg',
+        },
+        {
+          id: 9,
+          food_type: 'food',
+          food_name: 'checken pizza',
+          image:
+            'https://jeanniestriedandtruerecipes.com/wp-content/uploads/2020/05/Buffalo-Chicken-Pizza-2020-500x500.jpg',
+        },
+        {
+          id: 10,
+          food_type: 'food',
+          food_name: 'cake',
+          image:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRw9CXAFWkzlaQSYLCZGRkf3sU_QXWgcuAryw&usqp=CAU',
+        },
+        {
+          id: 11,
+          food_type: 'food',
+          food_name: 'coffee',
+          image:
+            'https://cdn-prod.medicalnewstoday.com/content/images/articles/270/270202/cups-of-coffee.jpg',
+        },
+        {
+          id: 12,
+          food_type: 'food',
+          food_name: 'apple',
+          image:
+            'https://bestapples.com/wp-content/uploads/2018/01/envy-apple.jpg',
+        },
+        {
+          id: 13,
+          food_type: 'meal',
+          food_name: 'Falafel',
+          image:
+            'https://www.themediterraneandish.com/wp-content/uploads/2020/02/falafel-recipe-1.jpg',
+        },
+        {
+          id: 14,
+          food_type: 'food',
+          food_name: 'egg',
+          image:
+            'https://upload.wikimedia.org/wikipedia/en/thumb/5/58/Instagram_egg.jpg/220px-Instagram_egg.jpg',
+        },
+        {
+          id: 15,
+          food_type: 'food',
+          food_name: 'chocolate',
+          image:
+            'https://vaya.in/recipes/wp-content/uploads/2018/02/Milk-Chocolate-1.jpg',
+        },
+        {
+          id: 16,
+          food_type: 'food',
+          food_name: 'checken',
+          image:
+            'https://thestayathomechef.com/wp-content/uploads/2016/06/Fried-Chicken-4-1.jpg',
+        },
+        {
+          id: 17,
+          food_type: 'food',
+          food_name: 'icecream',
+          image:
+            'https://upload.wikimedia.org/wikipedia/commons/e/ea/Ice_cream_cone_%28cropped%29.jpg',
+        },
+        {
+          id: 18,
+          food_type: 'food',
+          food_name: 'avokado',
+          image:
+            'https://images.immediate.co.uk/production/volatile/sites/30/2020/02/Avocados-3d84a3a.jpg?quality=90&resize=960,872',
+        },
+        {
+          id: 19,
+          food_type: 'food',
+          food_name: 'fish',
+          image:
+            'https://www.krumpli.co.uk/wp-content/uploads/2019/03/Campfire-Baked-Fish-in-Foil-4-720x720.jpg',
+        },
+        {
+          id: 20,
+          food_type: 'meal',
+          food_name: 'mosakhan',
+          image:
+            'https://i0.wp.com/www.middleeastmonitor.com/wp-content/uploads/2018/03/2018_2-34-food-blog-7.jpg?quality=85&strip=all&zoom=1&ssl=1',
+        },
+        {
+          id: 21,
+          food_type: 'meal',
+          food_name: 'maqlobah',
+          image: 'https://chefjar.com/wp-content/uploads/2017/04/2-2.jpg',
+        },
         {
           id: 22,
-          food_type_id: 1,
+          food_type: 'food',
           food_name: 'checken pizza',
-          image: null,
+          image:
+            'https://jeanniestriedandtruerecipes.com/wp-content/uploads/2020/05/Buffalo-Chicken-Pizza-2020-500x500.jpg',
         },
-        { id: 23, food_type_id: 1, food_name: 'cake', image: null },
-        { id: 24, food_type_id: 1, food_name: 'coffee', image: null },
-        { id: 25, food_type_id: 1, food_name: 'apple', image: null },
-        { id: 26, food_type_id: 2, food_name: 'Falafel', image: null },
+        {
+          id: 23,
+          food_type: 'food',
+          food_name: 'cake',
+          image:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRw9CXAFWkzlaQSYLCZGRkf3sU_QXWgcuAryw&usqp=CAU',
+        },
+        {
+          id: 24,
+          food_type: 'food',
+          food_name: 'coffee',
+          image:
+            'https://cdn-prod.medicalnewstoday.com/content/images/articles/270/270202/cups-of-coffee.jpg',
+        },
+        {
+          id: 25,
+          food_type: 'food',
+          food_name: 'apple',
+          image:
+            'https://bestapples.com/wp-content/uploads/2018/01/envy-apple.jpg',
+        },
+        {
+          id: 26,
+          food_type: 'meal',
+          food_name: 'Falafel',
+          image:
+            'https://www.themediterraneandish.com/wp-content/uploads/2020/02/falafel-recipe-1.jpg',
+        },
       ];
 
       const expected = { message: 'success', status: 200, data: foodData };
@@ -191,37 +342,186 @@ describe('authentication', () => {
   describe('Test getFood Query', () => {
     test('should return all data from food table', async () => {
       const foodData = [
-        { id: 1, food_type_id: 1, food_name: 'egg', image: null },
-        { id: 2, food_type_id: 1, food_name: 'chocolate', image: null },
-        { id: 3, food_type_id: 1, food_name: 'checken', image: null },
-        { id: 4, food_type_id: 1, food_name: 'icecream', image: null },
-        { id: 5, food_type_id: 1, food_name: 'avokado', image: null },
-        { id: 6, food_type_id: 1, food_name: 'fish', image: null },
-        { id: 7, food_type_id: 2, food_name: 'pizza', image: null },
-        { id: 8, food_type_id: 2, food_name: 'maqlobah', image: null },
-        { id: 9, food_type_id: 1, food_name: 'checken pizza', image: null },
-        { id: 10, food_type_id: 1, food_name: 'cake', image: null },
-        { id: 11, food_type_id: 1, food_name: 'coffee', image: null },
-        { id: 12, food_type_id: 1, food_name: 'apple', image: null },
-        { id: 13, food_type_id: 2, food_name: 'Falafel', image: null },
-        { id: 14, food_type_id: 1, food_name: 'egg', image: null },
-        { id: 15, food_type_id: 1, food_name: 'chocolate', image: null },
-        { id: 16, food_type_id: 1, food_name: 'checken', image: null },
-        { id: 17, food_type_id: 1, food_name: 'icecream', image: null },
-        { id: 18, food_type_id: 1, food_name: 'avokado', image: null },
-        { id: 19, food_type_id: 1, food_name: 'fish', image: null },
-        { id: 20, food_type_id: 2, food_name: 'mosakhan', image: null },
-        { id: 21, food_type_id: 2, food_name: 'maqlobah', image: null },
+        {
+          id: 1,
+          food_type: 'food',
+          food_name: 'egg',
+          image:
+            'https://upload.wikimedia.org/wikipedia/en/thumb/5/58/Instagram_egg.jpg/220px-Instagram_egg.jpg',
+        },
+        {
+          id: 2,
+          food_type: 'food',
+          food_name: 'chocolate',
+          image:
+            'https://vaya.in/recipes/wp-content/uploads/2018/02/Milk-Chocolate-1.jpg',
+        },
+        {
+          id: 3,
+          food_type: 'food',
+          food_name: 'checken',
+          image:
+            'https://thestayathomechef.com/wp-content/uploads/2016/06/Fried-Chicken-4-1.jpg',
+        },
+        {
+          id: 4,
+          food_type: 'food',
+          food_name: 'icecream',
+          image:
+            'https://upload.wikimedia.org/wikipedia/commons/e/ea/Ice_cream_cone_%28cropped%29.jpg',
+        },
+        {
+          id: 5,
+          food_type: 'food',
+          food_name: 'avokado',
+          image:
+            'https://images.immediate.co.uk/production/volatile/sites/30/2020/02/Avocados-3d84a3a.jpg?quality=90&resize=960,872',
+        },
+        {
+          id: 6,
+          food_type: 'food',
+          food_name: 'fish',
+          image:
+            'https://www.krumpli.co.uk/wp-content/uploads/2019/03/Campfire-Baked-Fish-in-Foil-4-720x720.jpg',
+        },
+        {
+          id: 7,
+          food_type: 'meal',
+          food_name: 'pizza',
+          image:
+            'https://www.qsrmagazine.com/sites/default/files/styles/story_page/public/phut_0.jpg?itok=h30EAnkk',
+        },
+        {
+          id: 8,
+          food_type: 'meal',
+          food_name: 'maqlobah',
+          image: 'https://chefjar.com/wp-content/uploads/2017/04/2-2.jpg',
+        },
+        {
+          id: 9,
+          food_type: 'food',
+          food_name: 'checken pizza',
+          image:
+            'https://jeanniestriedandtruerecipes.com/wp-content/uploads/2020/05/Buffalo-Chicken-Pizza-2020-500x500.jpg',
+        },
+        {
+          id: 10,
+          food_type: 'food',
+          food_name: 'cake',
+          image:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRw9CXAFWkzlaQSYLCZGRkf3sU_QXWgcuAryw&usqp=CAU',
+        },
+        {
+          id: 11,
+          food_type: 'food',
+          food_name: 'coffee',
+          image:
+            'https://cdn-prod.medicalnewstoday.com/content/images/articles/270/270202/cups-of-coffee.jpg',
+        },
+        {
+          id: 12,
+          food_type: 'food',
+          food_name: 'apple',
+          image:
+            'https://bestapples.com/wp-content/uploads/2018/01/envy-apple.jpg',
+        },
+        {
+          id: 13,
+          food_type: 'meal',
+          food_name: 'Falafel',
+          image:
+            'https://www.themediterraneandish.com/wp-content/uploads/2020/02/falafel-recipe-1.jpg',
+        },
+        {
+          id: 14,
+          food_type: 'food',
+          food_name: 'egg',
+          image:
+            'https://upload.wikimedia.org/wikipedia/en/thumb/5/58/Instagram_egg.jpg/220px-Instagram_egg.jpg',
+        },
+        {
+          id: 15,
+          food_type: 'food',
+          food_name: 'chocolate',
+          image:
+            'https://vaya.in/recipes/wp-content/uploads/2018/02/Milk-Chocolate-1.jpg',
+        },
+        {
+          id: 16,
+          food_type: 'food',
+          food_name: 'checken',
+          image:
+            'https://thestayathomechef.com/wp-content/uploads/2016/06/Fried-Chicken-4-1.jpg',
+        },
+        {
+          id: 17,
+          food_type: 'food',
+          food_name: 'icecream',
+          image:
+            'https://upload.wikimedia.org/wikipedia/commons/e/ea/Ice_cream_cone_%28cropped%29.jpg',
+        },
+        {
+          id: 18,
+          food_type: 'food',
+          food_name: 'avokado',
+          image:
+            'https://images.immediate.co.uk/production/volatile/sites/30/2020/02/Avocados-3d84a3a.jpg?quality=90&resize=960,872',
+        },
+        {
+          id: 19,
+          food_type: 'food',
+          food_name: 'fish',
+          image:
+            'https://www.krumpli.co.uk/wp-content/uploads/2019/03/Campfire-Baked-Fish-in-Foil-4-720x720.jpg',
+        },
+        {
+          id: 20,
+          food_type: 'meal',
+          food_name: 'mosakhan',
+          image:
+            'https://i0.wp.com/www.middleeastmonitor.com/wp-content/uploads/2018/03/2018_2-34-food-blog-7.jpg?quality=85&strip=all&zoom=1&ssl=1',
+        },
+        {
+          id: 21,
+          food_type: 'meal',
+          food_name: 'maqlobah',
+          image: 'https://chefjar.com/wp-content/uploads/2017/04/2-2.jpg',
+        },
         {
           id: 22,
-          food_type_id: 1,
+          food_type: 'food',
           food_name: 'checken pizza',
-          image: null,
+          image:
+            'https://jeanniestriedandtruerecipes.com/wp-content/uploads/2020/05/Buffalo-Chicken-Pizza-2020-500x500.jpg',
         },
-        { id: 23, food_type_id: 1, food_name: 'cake', image: null },
-        { id: 24, food_type_id: 1, food_name: 'coffee', image: null },
-        { id: 25, food_type_id: 1, food_name: 'apple', image: null },
-        { id: 26, food_type_id: 2, food_name: 'Falafel', image: null },
+        {
+          id: 23,
+          food_type: 'food',
+          food_name: 'cake',
+          image:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRw9CXAFWkzlaQSYLCZGRkf3sU_QXWgcuAryw&usqp=CAU',
+        },
+        {
+          id: 24,
+          food_type: 'food',
+          food_name: 'coffee',
+          image:
+            'https://cdn-prod.medicalnewstoday.com/content/images/articles/270/270202/cups-of-coffee.jpg',
+        },
+        {
+          id: 25,
+          food_type: 'food',
+          food_name: 'apple',
+          image:
+            'https://bestapples.com/wp-content/uploads/2018/01/envy-apple.jpg',
+        },
+        {
+          id: 26,
+          food_type: 'meal',
+          food_name: 'Falafel',
+          image:
+            'https://www.themediterraneandish.com/wp-content/uploads/2020/02/falafel-recipe-1.jpg',
+        },
       ];
       const { rows } = await getFood();
       return expect(rows).toEqual(foodData);
@@ -238,10 +538,10 @@ describe('authentication', () => {
         status: 200,
         message: 'success',
         data: {
-          userCalories: 1500,
-          userFoodCalories: 307495,
-          userExercisesCalories: 456750,
-          remainingCalories: 150755,
+          userCalories: 2099.196,
+          userFoodCalories: 2345.9,
+          userExercisesCalories: 248.0625,
+          remainingCalories: 1.3584999999998217,
         },
       };
       expect(JSON.parse(res.text)).toEqual(expected);
@@ -254,21 +554,21 @@ describe('authentication', () => {
       const {
         rows: [{ userexercisescalories: userExercisesCalories }],
       } = await calculateUserExercisesCalories(userId);
-      return expect(userExercisesCalories).toBe(456750);
+      return expect(userExercisesCalories).toBe(248.0625);
     });
 
-    test('calculateUserFoodCalories Query should return calories equal to 307495 of user 1', async () => {
+    test('calculateUserFoodCalories Query should return calories equal to 308245 of user 1', async () => {
       const {
         rows: [{ userfoodcalories: userFoodCalories }],
       } = await calculateUserFoodCalories(userId);
-      return expect(userFoodCalories).toBe(307495);
+      return expect(userFoodCalories).toBe(2345.9);
     });
 
     test('getUserCalories Query should return calories equal to 1500 of user 1', async () => {
       const {
         rows: [{ usercalories: userCalories }],
       } = await getUserCalories(userId);
-      return expect(userCalories).toBe(1500);
+      return expect(userCalories).toBe(2099.196);
     });
   });
 
@@ -280,9 +580,9 @@ describe('authentication', () => {
       expect(status).toBe(200);
     });
     test('getUserByEmail query, number of rows when email is exist will be 1', async () => {
-      const { rows } = await getUserByEmail('lina@gmail.com');
+      const { rows } = await getUserByEmail('zein@gmail.com');
       expect(rows).toHaveLength(1);
-      expect(rows[0].firstname).toBe('lina');
+      expect(rows[0].firstname).toBe('zein');
     });
 
     test('getUserByEmail query, number of rows when email is not exist will be 0', async () => {
@@ -293,7 +593,7 @@ describe('authentication', () => {
     test('should return the user zein jendeya from users table', async () => {
       const userData = [
         {
-          id: 8,
+          id: 1,
           activity_id: 1,
           firstname: 'zein',
           lastname: 'jendeya',
@@ -334,7 +634,7 @@ describe('authentication', () => {
 
     describe('getFoodCategory query', () => {
       test('should get Food in Category from the userFoodRelation table', async () => {
-        const userID = 4;
+        const userID = 1;
         const categoryId = 2;
         const { rows } = await getFoodCategory(userID, categoryId);
         const foods = rows.map((row) => row.food_name);
@@ -342,6 +642,54 @@ describe('authentication', () => {
       });
     });
 
+    describe('Test insertFood Query', () => {
+      test('insert Food', async () => {
+        const { rowCount } = await insertFoodQuery(1, 1, 1, 3);
+        return expect(rowCount).toEqual(1);
+      });
+    });
+
+    describe('Test POST /api/v1/category/:categoryId/food/:foodId Route', () => {
+      test('Should return successfully added', async () => {
+        const reqFood = {
+          grams: 3,
+        };
+
+        const res = await request(app)
+          .post('/api/v1/category/1/food/1')
+          .set({
+            'Content-Type': 'application/json',
+          })
+          .set('Cookie', [`token=${token}`])
+          .send(JSON.stringify(reqFood))
+          .expect(200)
+          .expect('Content-Type', /json/);
+
+        expect(res.status).toBe(200);
+        return expect(res.body.message).toBe('Food Successfully Added');
+      });
+
+      test('Should return must be a positive number', async () => {
+        const reqFood = {
+          grams: -3,
+        };
+
+        const res = await request(app)
+          .post('/api/v1/category/1/food/1')
+          .set({
+            'Content-Type': 'application/json',
+          })
+          .set('Cookie', [`token=${token}`])
+          .send(JSON.stringify(reqFood))
+          .expect(400)
+          .expect('Content-Type', /json/);
+
+        expect(res.status).toBe(400);
+        return expect(res.body.message).toBe(
+          '"grams" must be a positive number',
+        );
+      });
+    });
     describe('food category', () => {
       it('router returns 401 if there is no user logged', async () => {
         const { status } = await request(app)
@@ -365,6 +713,55 @@ describe('authentication', () => {
           .expect(200);
         expect(status).toBe(200);
       });
+    });
+  });
+
+  describe('Test GET /api/v1/profile', () => {
+    test('should return status 200 and an object with correct data {message:"success",status:200,data:{}}', async () => {
+      const res = await request(app)
+        .get('/api/v1/profile')
+        .expect('Content-Type', /json/)
+        .set('Cookie', [`token=${token}`])
+        .expect(200);
+      const expected = {
+        status: 200,
+        message: 'success',
+        data: [
+          {
+            image:
+              'https://i.pinimg.com/564x/a9/f6/e3/a9f6e37a1211793bd2f45f161dc3dfbb.jpg',
+            firstname: 'zein',
+            lastname: 'jendeya',
+            email: 'zein@gmail.com',
+            weight: 63,
+            height: 1.68,
+            gender: 'f',
+            age: 19,
+          },
+        ],
+      };
+      const actual = res.body;
+      return expect(actual).toEqual(expected);
+    });
+  });
+
+  describe('Test getProfileData Query', () => {
+    test('should return profile data from users table', async () => {
+      const profileData = [
+        {
+          image:
+            'https://i.pinimg.com/564x/a9/f6/e3/a9f6e37a1211793bd2f45f161dc3dfbb.jpg',
+          firstname: 'zein',
+          lastname: 'jendeya',
+          email: 'zein@gmail.com',
+          weight: 63,
+          height: 1.68,
+          gender: 'f',
+          age: 19,
+        },
+      ];
+      const { rows } = await getProfile(1);
+      return expect(rows).toEqual(profileData);
     });
   });
 });

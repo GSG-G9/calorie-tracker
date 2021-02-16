@@ -9,7 +9,6 @@ import sportImageSrc from '../../images/sport.png';
 import { context } from '../userProvider';
 import LoadingComponent from '../Loading';
 import LoginSignupButtonsBox from '../LoginSignupButtonsBox';
-import Footer from '../Footer';
 
 function Home() {
   const [isAuthenticated] = useContext(context);

@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
       top: 0,
       width: '100%',
       height: '8.5vh',
+      boxShadow: `2px 10px 10px ${theme.customColors[1]}`,
     },
   },
   logo_container: {
