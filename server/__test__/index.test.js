@@ -350,6 +350,15 @@ describe('authentication', () => {
       });
     });
 
+    describe('Test Get /logout', () => {
+      test('should return successfully logout with status 200', async () => {
+        const res = await request(app)
+          .get('/api/v1/logout')
+          .set('Cookie', [`token=${token}`]);
+        expect(res.status).toBe(200);
+        return expect(res.body.message).toBe('logged out successfully');
+      });
+    });
     describe('Test POST /api/v1/category/:categoryId/food/:foodId Route', () => {
       test('Should return successfully added', async () => {
         const reqFood = {
