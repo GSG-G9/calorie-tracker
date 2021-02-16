@@ -8,6 +8,7 @@ const {
   getFood,
   getUserCalories,
   insertFoodController,
+  isAuth,
 } = require('./controllers');
 
 const { clientError, serverError, Auth } = require('./middlewares');
@@ -17,6 +18,7 @@ router.post('/signup', signup);
 router.post('/login', login);
 router.use(Auth);
 
+router.get('/isAuth', isAuth);
 router.get('/category/:categoryId/food', foodCategory);
 router.get('/food', getFood);
 router.get('/user/calories', getUserCalories);

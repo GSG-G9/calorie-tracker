@@ -350,6 +350,16 @@ describe('authentication', () => {
       });
     });
 
+    describe('Test GET /api/v1/isAuth', () => {
+      test('Should return status 200 and message your are Authenticated', async () => {
+        const res = await request(app)
+          .get('/api/v1/isAuth')
+          .set('Cookie', [`token=${token}`]);
+        expect(res.status).toBe(200);
+        return expect(res.body.message).toBe('Your Are Authenticated');
+      });
+    });
+
     describe('Test POST /api/v1/category/:categoryId/food/:foodId Route', () => {
       test('Should return successfully added', async () => {
         const reqFood = {
