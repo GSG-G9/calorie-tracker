@@ -1,10 +1,18 @@
 import React, { useCallback, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Hidden, CardMedia, useMediaQuery } from '@material-ui/core';
+import { useLocation } from 'react-router-dom';
 import FoodItemsSelected from '../FoodItemsSelected';
 import FoodCategoryButton from '../FoodCategoryButton';
 import Container from '../../Container';
 
+const foodCategories = {
+  1: 'breakfast',
+  2: 'lunch',
+  3: 'dinner',
+  4: 'snack',
+  0: '',
+};
 const useStyle = makeStyles({
   FoodItemsSelected: {
     width: '300px',
@@ -19,8 +27,13 @@ const useStyle = makeStyles({
   },
 });
 function FoodCatagories() {
+  const { state } = useLocation();
+  const categoryId = state ? state.categoryId : 0;
   const classes = useStyle();
-  const [showIcon, setShowIcon] = useState({ foodCategory: '', id: 0 });
+  const [showIcon, setShowIcon] = useState({
+    foodCategory: foodCategories[categoryId],
+    id: categoryId,
+  });
   const matchSmallScreen = useMediaQuery('(max-width:600px)');
   const handleShowSelectedFood = useCallback(
     (food, id) => () => {
@@ -39,7 +52,7 @@ function FoodCatagories() {
       key="2"
       direction={matchSmallScreen ? 'column' : 'row'}
       itemColumns={matchSmallScreen ? '12' : '4'}
-      spacing="2"
+      spacing={2}
     >
       <Hidden key="4" smDown>
         <CardMedia
@@ -48,7 +61,7 @@ function FoodCatagories() {
           src="/foodCategory/logo512.png"
         />
       </Hidden>
-      <Container key="1" direction="column" itemColumns="12" spacing="4">
+      <Container key="1" direction="column" itemColumns="12" spacing={4}>
         {[
           { label: 'Breakfast', id: 1 },
           { label: 'Lunch', id: 2 },

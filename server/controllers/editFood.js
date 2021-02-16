@@ -1,5 +1,6 @@
 const Boom = require('@hapi/boom');
 const { editFoodGrams } = require('../database/queries');
+const { foodAmountValidation } = require('../utils');
 
 const editFood = async (req, res, next) => {
   const {
@@ -11,9 +12,15 @@ const editFood = async (req, res, next) => {
     if (!id) {
       throw Boom.unauthorized('you are not logged!');
     }
-    if (quantityInGrams < 0 || typeof quantityInGrams !== 'number') {
-      throw Boom.badRequest('invalid value');
+    try {
+      await foodAmountValidation.validateAsync(
+        { quantityInGrams },
+        { abortEarly: false },
+      );
+    } catch (error) {
+      throw Boom.badRequest(error.details.map((e) => e.message).join('\n'));
     }
+
     const { rowCount } = await editFoodGrams(
       id,
       categoryId,

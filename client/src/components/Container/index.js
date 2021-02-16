@@ -20,6 +20,7 @@ function ContainerComponent({
   direction,
   itemColumns,
   spacing,
+  gridUserWidth,
   ...rest
 }) {
   const classes = useStyle();
@@ -28,6 +29,7 @@ function ContainerComponent({
       <Grid container direction={direction} justify="center" spacing={+spacing}>
         {children.map((element) => (
           <Grid
+            style={{ width: gridUserWidth }}
             className={classes.grid}
             key={element.key}
             item
@@ -49,10 +51,12 @@ ContainerComponent.propTypes = {
   direction: string.isRequired,
   itemColumns: string.isRequired,
   spacing: number.isRequired,
+  gridUserWidth: string,
 };
 
 ContainerComponent.defaultProps = {
   screenSize: 'sm',
+  gridUserWidth: 'auto',
 };
 
 export default ContainerComponent;
