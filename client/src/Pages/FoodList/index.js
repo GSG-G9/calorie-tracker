@@ -117,9 +117,9 @@ function AllFoodList() {
         <>
           <ContainerComponent
             className={classes.searchBar}
-            direction={smallScreen ? 'column' : 'row'}
+            direction="column"
             spacing={5}
-            screenSize={smallScreen ? 'xs' : 'md'}
+            screenSize="xs"
             itemColumns="2"
           >
             <TextInputField
@@ -135,7 +135,7 @@ function AllFoodList() {
             <ContainerComponent
               direction="row"
               spacing={7}
-              screenSize={smallScreen ? 'sm' : 'md'}
+              screenSize="sm"
               itemColumns="6"
               className="filteringButtons"
             >
