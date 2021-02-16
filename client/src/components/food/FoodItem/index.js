@@ -33,7 +33,7 @@ function FoodItem({ label, calories }) {
     <li className={classes.container}>
       <p className={classes.food}>
         {label}
-        <span className={classes.calories}> {calories} Kcal</span>
+        <span className={classes.calories}> {calories} Cal</span>
       </p>
       <div>
         <EditIcon className={classes.icon} />

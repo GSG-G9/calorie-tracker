@@ -23,6 +23,7 @@ import CaloriesPage from '../Pages/Calories';
 import FoodPage from '../Pages/Food';
 import ExercisePage from '../Pages/Exercise';
 import Provider from '../components/userProvider';
+import FoodQuantity from '../components/food/FoodQuantity';
 import NavBar from '../components/NavBar';
 
 import './style.css';
@@ -45,6 +46,13 @@ function App() {
             <Route exact path={FoodList} component={AllFoodList} />
             <Route exact path={Food} component={FoodPage} />
             <Route exact path={Exercise} component={ExercisePage} />
+            <Route
+              exact
+              path="/food/list/quantity"
+              render={(props) => (
+                <FoodQuantity categoryId={1} foodId={5} {...props} />
+              )}
+            />
           </Switch>
         </Router>
       </Provider>

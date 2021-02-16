@@ -25,10 +25,7 @@ function FootItems({ foodArray }) {
           calories_per_gram: caloriesPerGram,
           amount_in_grams: amountInGrams,
         }) => {
-          const calories = +(
-            (+caloriesPerGram * +amountInGrams) /
-            1000
-          ).toFixed(0);
+          const calories = +(+caloriesPerGram * +amountInGrams).toFixed(0);
           return (
             <FoodItem label={foodName} calories={calories} key={uniqueId} />
           );
