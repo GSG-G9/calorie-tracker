@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Axios from 'axios';
+import PropTypes from 'prop-types';
 import DailyCaloriesCard from '../DailyCaloriesCard';
 
 import CircularProgressWithLabel from '../CircularProgress';
 import Loading from '../Loading';
 
-function DailyUserCalories() {
+const { bool } = PropTypes;
+
+function DailyUserCalories({ showCard, showChart }) {
   const [loading, setLoading] = useState(true);
   const [goal, setGoal] = useState();
   const [food, setFood] = useState();
@@ -66,16 +69,25 @@ function DailyUserCalories() {
     <Loading />
   ) : (
     <div className={classes.root}>
-      <DailyCaloriesCard
-        goal={goal}
-        food={food}
-        exercises={exercises}
-        remaining={remaining}
-      />
+      {showCard && (
+        <DailyCaloriesCard
+          goal={goal}
+          food={food}
+          exercises={exercises}
+          remaining={remaining}
+        />
+      )}
 
-      <CircularProgressWithLabel value={(1 - remaining / goal) * 100} />
+      {showChart && (
+        <CircularProgressWithLabel value={(1 - remaining / goal) * 100} />
+      )}
     </div>
   );
 }
+
+DailyUserCalories.propTypes = {
+  showCard: bool.isRequired,
+  showChart: bool.isRequired,
+};
 
 export default DailyUserCalories;
