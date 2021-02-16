@@ -9,6 +9,7 @@ const getUserByEmail = require('./getEmail');
 const signupUser = require('./signup');
 const getUserActivity = require('./getUserActivity');
 const getFoodCategory = require('./getFoodCategory');
+const getProfile = require('./getProfile');
 
 module.exports = {
   getNews,
@@ -21,4 +22,5 @@ module.exports = {
   getUserCalories,
   calculateUserExercisesCalories,
   insertFoodQuery,
+  getProfile,
 };

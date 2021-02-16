@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import ThemeProvider from '../components/ThemeProvider';
 import Pages from '../Pages';
+
 import Provider from '../components/userProvider';
 
 import './style.css';

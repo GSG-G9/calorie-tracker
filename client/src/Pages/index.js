@@ -10,7 +10,10 @@ import {
   Calories,
   Food,
   Exercise,
+  FoodList,
+  FoodQuantity,
 } from '../Utils/constant';
+import AllFoodList from './FoodList';
 import HomePage from './Home';
 import LoginPage from './Login';
 import SignupPage from './Signup';
@@ -61,8 +64,8 @@ function Pages() {
             <Route exact path={MyProfile} component={MyProfilePage} />
             <Route exact path={Calories} component={CaloriesPage} />
             <Route exact path={Food} component={FoodPage} />
-            {/* <Route exact path={FoodList} component={FoodList} />
-            <Route exact path={FoodQuantity} component={FoodQuantity} /> */}
+            <Route exact path={FoodList} component={AllFoodList} />
+            <Route exact path={FoodQuantity} component={FoodQuantity} />
             <Route exact path={Exercise} component={ExercisePage} />
           </>
         ) : (

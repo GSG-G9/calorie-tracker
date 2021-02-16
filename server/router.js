@@ -9,6 +9,7 @@ const {
   getUserCalories,
   insertFoodController,
   isAuth,
+  getProfileData,
 } = require('./controllers');
 
 const { clientError, serverError, Auth } = require('./middlewares');
@@ -22,6 +23,8 @@ router.get('/isAuth', isAuth);
 router.get('/category/:categoryId/food', foodCategory);
 router.get('/food', getFood);
 router.get('/user/calories', getUserCalories);
+
+router.get('/profile', getProfileData);
 
 router.post('/category/:categoryId/food/:foodId', insertFoodController);
 

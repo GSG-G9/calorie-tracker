@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 import FoodItems from '../FoodItems';
 import Container from '../../Container';
 import Button from '../../Button';
-import { MyFood } from '../../../Utils/constant';
+import { FoodList } from '../../../Utils/constant';
 import Loading from '../../Loading';
 import CustomErrorMessage from '../CustomErrorMessage';
 
@@ -47,11 +47,9 @@ function FoodItemsSelected(props) {
         } = await axios.get(`/api/v1/category/${foodCategoryId}/food`, {
           cancelToken: source.token,
         });
-        console.log(data);
-
         setTotalCalories(
-          (
-            data.reduce(
+          data
+            .reduce(
               (
                 calories,
                 {
@@ -60,8 +58,8 @@ function FoodItemsSelected(props) {
                 }
               ) => calories + +caloriesPerGram * +amountInGrams,
               0
-            ) / 1000
-          ).toFixed(0)
+            )
+            .toFixed(0)
         );
         setFoodArray(data);
         setErrorMessage('success');
@@ -97,7 +95,7 @@ function FoodItemsSelected(props) {
             className={classes.button}
             variant="contained"
             disable={false}
-            event={() => history.push(MyFood)}
+            event={() => history.push(FoodList, { categoryId: foodCategoryId })}
           >
             add food
           </Button>,
