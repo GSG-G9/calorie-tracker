@@ -1,5 +1,5 @@
 import React, { useState, useLayoutEffect, useCallback } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { useMediaQuery } from '@material-ui/core';
 import axios from 'axios';
 import Container from '../../Container';
@@ -38,11 +38,9 @@ const handleAddFoodQuantity = (
 };
 
 function FoodQuantity() {
-  // const {
-  //   state: { foodId, categoryId },
-  // } = useLocation();
-  const foodId = 1;
-  const categoryId = 1;
+  const {
+    state: { foodId, categoryId },
+  } = useLocation();
   const smallScreen = useMediaQuery('(max-width:600px)');
   const history = useHistory();
   const [quantity, setQuantity] = useState(1);
