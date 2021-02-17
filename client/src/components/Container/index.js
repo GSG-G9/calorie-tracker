@@ -29,7 +29,9 @@ function ContainerComponent({
       <Grid container direction={direction} justify="center" spacing={+spacing}>
         {children.map((element) => (
           <Grid
-            style={{ width: gridUserWidth }}
+            style={{
+              width: gridUserWidth,
+            }}
             className={classes.grid}
             key={element.key}
             item

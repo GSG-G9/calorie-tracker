@@ -21,7 +21,10 @@ const useStyle = makeStyles((theme) => ({
   input: {
     color: theme.customColors[1],
     backgroundColor: theme.customColors[7],
-    width: '300px',
+    width: '250px',
+    '@media(min-width:600px)': {
+      width: '250px',
+    },
   },
 }));
 
@@ -30,7 +33,6 @@ function BasicUserInfo(props) {
     methods: { handleNext, setData },
   } = props;
   const classes = useStyle();
-
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -42,22 +44,22 @@ function BasicUserInfo(props) {
   const [passwordError, setPasswordError] = useState(false);
 
   return (
-    <Container screenSize="lg" direction="row" itemColumns="6" spacing={2}>
+    <Container screenSize="md" direction="row" itemColumns="6" spacing={2}>
       <Hidden smDown key="1">
         <CardMedia
           component="img"
-          height="600"
+          height="400"
           image="./signupImages/3.png"
           title="main"
         />
       </Hidden>
 
-      <Container key="2" direction="column" itemColumns="12" spacing={5}>
+      <Container key="2" direction="column" itemColumns="12" spacing={2}>
         <Typography key="1" variant="h4">
           Create User Account :-
         </Typography>
         <form key="2">
-          <Container direction="column" itemColumns="12" spacing={5}>
+          <Container direction="column" itemColumns="12" spacing={3}>
             <InputField
               key="1"
               variant="outlined"

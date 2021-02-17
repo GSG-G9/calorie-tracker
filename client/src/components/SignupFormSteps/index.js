@@ -10,7 +10,7 @@ import Loading from '../Loading';
 
 const useStyles = makeStyles(() => ({
   root: {
-    width: '100%',
+    paddingTop: '5rem',
   },
 }));
 
