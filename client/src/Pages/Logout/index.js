@@ -1,13 +1,8 @@
 import React from 'react';
+import Logout from '../../components/logout';
 
 function LogoutPage() {
-  return (
-    <>
-      <div>
-        <h1>Logout Page</h1>
-      </div>
-    </>
-  );
+  return <Logout />;
 }
 
 export default LogoutPage;

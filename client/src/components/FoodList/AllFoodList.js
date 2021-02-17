@@ -25,6 +25,7 @@ const useStyle = makeStyles((theme) => ({
   },
   searchBar: {
     width: '90%',
+    '@media(min-width:600px)': { marginTop: '5rem' },
   },
   searchInput: {
     borderColor: 'none',
@@ -178,7 +179,7 @@ function AllFood() {
               className={classes.backBtn}
               variant="outlined"
               disable={false}
-              event={() => history.push('/food')}
+              event={() => history.push('/food', { categoryId })}
             >
               Back
             </IconLabeledButton>

@@ -24,6 +24,7 @@ const useStyle = makeStyles({
   },
   container: {
     maxWidth: '80%',
+    '@media(min-width:600px)': { marginTop: '10rem' },
   },
 });
 function FoodCatagories() {
@@ -34,6 +35,7 @@ function FoodCatagories() {
     foodCategory: foodCategories[categoryId],
     id: categoryId,
   });
+  console.log('showIcon', showIcon);
   const matchSmallScreen = useMediaQuery('(max-width:600px)');
   const handleShowSelectedFood = useCallback(
     (food, id) => () => {

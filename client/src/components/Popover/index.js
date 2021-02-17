@@ -13,7 +13,7 @@ const Popover = (props) => {
         <Link to="/food" className={classes.links}>
           <Button
             onClick={() => setIsClicked(true)}
-            variant="outlined"
+            variant="filled"
             className={classes.popover_btns}
           >
             🥗 Food
@@ -22,7 +22,7 @@ const Popover = (props) => {
         <Link to="/exercise" className={classes.links}>
           <Button
             onClick={() => setIsClicked(true)}
-            variant="outlined"
+            variant="filled"
             className={classes.popover_btns}
           >
             🚴‍♂️ Exercise
