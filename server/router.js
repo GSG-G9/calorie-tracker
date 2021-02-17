@@ -13,6 +13,7 @@ const {
   deleteFoodController,
   editFood,
   getProfileData,
+  getExercise,
 } = require('./controllers');
 
 const { clientError, serverError, Auth } = require('./middlewares');
@@ -22,6 +23,7 @@ router.post('/signup', signup);
 router.post('/login', login);
 router.use(Auth);
 
+router.get('/exercise', getExercise);
 router.get('/category/:categoryId/food', foodCategory);
 router.delete('/food/:categoryID/:foodID', deleteFoodController);
 router.patch('/food/:categoryId/:foodId', editFood);

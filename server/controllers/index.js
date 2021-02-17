@@ -10,6 +10,7 @@ const deleteFoodController = require('./deleteFood');
 const editFood = require('./editFood');
 const getFoodById = require('./getFoodById');
 const getProfileData = require('./getProfile');
+const getExercise = require('./getExercise');
 
 module.exports = {
   healthNews,
@@ -24,4 +25,5 @@ module.exports = {
   deleteFoodController,
   editFood,
   getProfileData,
+  getExercise,
 };
