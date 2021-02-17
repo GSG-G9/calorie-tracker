@@ -32,7 +32,8 @@ const useStyle = makeStyles((theme) => ({
     margin: '20px',
   },
   container: {
-    height: '100vh',
+    minHeight: '100vh',
+    paddingBottom: '20vh',
   },
 }));
 

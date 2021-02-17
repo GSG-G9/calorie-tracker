@@ -14,7 +14,9 @@ const useStyles = makeStyles(() => ({
   },
   login_signup_box: {
     opacity: '0.85',
-    '@media (min-device-width: 1000px)': {},
+    '@media (min-device-width: 600px)': {
+      visibility: 'visible',
+    },
   },
   separated_span: {
     color: 'white',

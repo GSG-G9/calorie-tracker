@@ -37,9 +37,9 @@ function Pages() {
         <Route exact path={Login} component={LoginPage} />
         <Route exact path={Signup} component={SignupPage} />
         <Route exact path={Home} component={HomePage} />
-        <Route exact path={Logout} component={LogoutPage} />
         {isAuthenticated ? (
           <>
+            <Route exact path={Logout} component={LogoutPage} />
             <Route exact path={MyProfile} component={MyProfilePage} />
             <Route exact path={Food} component={FoodPage} />
             <Route exact path={FoodList} component={AllFoodList} />

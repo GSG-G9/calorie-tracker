@@ -5,6 +5,8 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     height: '3rem',
     backgroundColor: theme.customColors[3],
+    display: 'flex',
+    justifyContent: 'space-between',
     '@media (min-device-width: 900px)': {
       display: 'flex',
       justifyContent: 'space-around',
@@ -20,18 +22,28 @@ const useStyles = makeStyles((theme) => ({
   },
   logo_container: {
     height: '100%',
-    width: '67vw',
+    width: '70vw',
     display: 'flex',
     alignItems: 'center',
   },
   login_logout_signup_container: {
     display: 'flex',
+    color: 'white',
+    zIndex: '1000',
     justifyContent: 'flex-end',
-    width: '20vw',
+    width: '30vw',
+    '@media(min-width:600px)': {
+      visibility: 'visible',
+      marginRight: '40px',
+    },
   },
   scale_img: {
     height: '40px',
-    marginBottom: '0.8em',
+    marginLeft: '20px',
+    '@media(min-width:600px)': {
+      marginLeft: '40px',
+      marginBottom: '0.8em',
+    },
   },
   logo: {
     fontSize: '1.25rem',
@@ -39,6 +51,8 @@ const useStyles = makeStyles((theme) => ({
   },
   logout_link: {
     textDecoration: 'none',
+    cursor: 'pointer',
+    marginRight: '20px',
   },
   logout_btn: {
     color: 'white',

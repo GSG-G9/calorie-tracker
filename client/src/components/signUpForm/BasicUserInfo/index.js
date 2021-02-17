@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Hidden, CardMedia } from '@material-ui/core';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 
 import updateAndValidateInput from '../../../Utils/checkValidationPureFunction';
 
@@ -29,6 +30,7 @@ const useStyle = makeStyles((theme) => ({
 }));
 
 function BasicUserInfo(props) {
+  const history = useHistory();
   const {
     methods: { handleNext, setData },
   } = props;
@@ -185,7 +187,12 @@ function BasicUserInfo(props) {
           >
             Next
           </ButtonComponent>
-          <ButtonComponent key="2" variant="outlined" color="primary">
+          <ButtonComponent
+            key="2"
+            variant="outlined"
+            color="primary"
+            onClick={() => history.push('/')}
+          >
             Cancel
           </ButtonComponent>
         </Container>
