@@ -14,6 +14,7 @@ const {
   deleteFoodController,
   editFood,
   getProfileData,
+  postExercise,
 } = require('./controllers');
 
 const { clientError, serverError, Auth } = require('./middlewares');
@@ -24,6 +25,7 @@ router.post('/login', login);
 router.use(Auth);
 
 router.get('/isAuth', isAuth);
+router.post('/exercises/:exerciseID', postExercise);
 router.get('/category/:categoryId/food', foodCategory);
 router.delete('/food/:categoryID/:foodID', deleteFoodController);
 router.patch('/food/:categoryId/:foodId', editFood);
