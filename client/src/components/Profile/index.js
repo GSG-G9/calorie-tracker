@@ -40,9 +40,13 @@ function ProfileInfo() {
       },
     },
     info: {
+      display: 'flex',
+      flexDirection: 'column',
+      textAlign: 'start',
+      marginLeft: '19%',
       '@media (min-device-width: 900px)': {
         height: '40vh',
-        marginTop: '13%',
+        margin: '13% 0 0 0',
       },
     },
     myprofile: {
