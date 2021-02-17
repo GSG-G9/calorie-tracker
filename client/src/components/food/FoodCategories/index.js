@@ -35,7 +35,7 @@ function FoodCatagories() {
     foodCategory: foodCategories[categoryId],
     id: categoryId,
   });
-  console.log('showIcon', showIcon);
+
   const matchSmallScreen = useMediaQuery('(max-width:600px)');
   const handleShowSelectedFood = useCallback(
     (food, id) => () => {

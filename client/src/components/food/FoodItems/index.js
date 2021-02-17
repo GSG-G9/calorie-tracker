@@ -1,9 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import PropTypes, { oneOfType } from 'prop-types';
+import { oneOfType, func, arrayOf, objectOf, string, number } from 'prop-types';
 import FoodItem from '../FoodItem';
 
-const { arrayOf, objectOf, string, number } = PropTypes;
 const useStyle = makeStyles((theme) => ({
   list: {
     width: '100%',
@@ -14,20 +13,28 @@ const useStyle = makeStyles((theme) => ({
     overflow: 'auto',
   },
 }));
-function FootItems({ foodArray }) {
+function FootItems({ foodArray, handleDeleteRequest }) {
   const classes = useStyle();
   return (
     <ul className={classes.list}>
       {foodArray.map(
         ({
           food_name: foodName,
+          food_id: foodId,
           unique_id: uniqueId,
           calories_per_gram: caloriesPerGram,
           amount_in_grams: amountInGrams,
         }) => {
           const calories = +(+caloriesPerGram * +amountInGrams).toFixed(0);
           return (
-            <FoodItem label={foodName} calories={calories} key={uniqueId} />
+            <FoodItem
+              label={foodName}
+              calories={calories}
+              key={uniqueId}
+              userFoodId={uniqueId}
+              foodId={foodId}
+              handleDeleteRequest={handleDeleteRequest}
+            />
           );
         }
       )}
@@ -37,5 +44,6 @@ function FootItems({ foodArray }) {
 
 FootItems.propTypes = {
   foodArray: arrayOf(objectOf(oneOfType([number, string]))).isRequired,
+  handleDeleteRequest: func.isRequired,
 };
 export default FootItems;
