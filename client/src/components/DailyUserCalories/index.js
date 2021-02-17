@@ -9,7 +9,7 @@ import Loading from '../Loading';
 
 const { bool } = PropTypes;
 
-function DailyUserCalories({ showCard, showChart }) {
+function DailyUserCalories({ showCard, showChart, displayNone, ...rest }) {
   const [loading, setLoading] = useState(true);
   const [goal, setGoal] = useState();
   const [food, setFood] = useState();
@@ -22,7 +22,8 @@ function DailyUserCalories({ showCard, showChart }) {
       '@media (min-device-width: 900px)': {
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'center',
+        marginLeft: '20%',
+        height: '25vh',
       },
     },
   }));
@@ -75,7 +76,7 @@ function DailyUserCalories({ showCard, showChart }) {
     <CustomErrorMessage
       errorMessage={ErrorMessage}
       component={
-        <div className={classes.root}>
+        <div className={classes.root} {...rest}>
           {showCard && (
             <DailyCaloriesCard
               goal={goal}
@@ -94,9 +95,13 @@ function DailyUserCalories({ showCard, showChart }) {
   );
 }
 
+DailyUserCalories.defaultProps = {
+  displayNone: false,
+};
 DailyUserCalories.propTypes = {
   showCard: bool.isRequired,
   showChart: bool.isRequired,
+  displayNone: bool,
 };
 
 export default DailyUserCalories;
