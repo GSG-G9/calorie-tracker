@@ -1,11 +1,11 @@
 import React from 'react';
-import AddExercise from '../../components/AddExercise';
+import ExercisesTable from '../../components/exercises/ExercisesTable';
 
 function ExercisePage() {
   return (
     <>
       <div style={{ paddingTop: '100px' }}>
-        <AddExercise />
+        <ExercisesTable />
       </div>
     </>
   );
