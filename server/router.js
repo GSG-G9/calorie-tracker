@@ -14,6 +14,7 @@ const {
   deleteFoodController,
   editFood,
   getProfileData,
+  getExercises,
 } = require('./controllers');
 
 const { clientError, serverError, Auth } = require('./middlewares');
@@ -33,6 +34,7 @@ router.get('/food', getFood);
 router.get('/user/calories', getUserCalories);
 
 router.get('/profile', getProfileData);
+router.get('/exercises', getExercises);
 
 router.post('/category/:categoryId/food/:foodId', insertFoodController);
 router.get('/logout', logout);
