@@ -5,35 +5,27 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { string, number } from 'prop-types';
+import { string, number, shape, func } from 'prop-types';
 import useStyle from './style';
 
 function AddExercise(props) {
-  const { exerciseName, exerciseCalories } = props;
+  const {
+    methods: { handleClose, handlePostRequest },
+    params: { open, exerciseName, exerciseCalories, exerciseId },
+  } = props;
   const classes = useStyle();
 
-  const [open, setOpen] = useState(false);
   const [duration, setDuration] = useState(0);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const [caloriesBurned, setCaloriesBurned] = useState(0);
 
   return (
     <div className={classes.container}>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Open form dialog
-      </Button>
       <Dialog
         open={open}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">Add Exercise</DialogTitle>
+        <DialogTitle id="form-dialog-title">Add Exercise Duration</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
@@ -59,19 +51,45 @@ function AddExercise(props) {
           <TextField
             autoFocus
             value={duration}
-            onChange={({ target: { value } }) => setDuration(+value)}
+            onChange={({ target: { value } }) => {
+              setDuration(+value);
+              setCaloriesBurned(Math.floor((exerciseCalories * +value) / 60));
+            }}
+            className={classes.inputDuration}
             margin="dense"
             id="Duration"
             label="Duration"
             type="number"
+            InputProps={{
+              endAdornment: <span>minutes</span>,
+            }}
+            fullWidth
+          />
+          <TextField
+            autoFocus
+            value={caloriesBurned}
+            margin="dense"
+            id="Calories Burned"
+            label="Calories Burned"
+            type="number"
+            InputProps={{
+              endAdornment: <span>Calories</span>,
+            }}
             fullWidth
           />
         </DialogContent>
-        <DialogActions className={classes}>
+        <DialogActions className={classes.buttons}>
           <Button onClick={handleClose} variant="contained" color="primary">
             Cancel
           </Button>
-          <Button onClick={handleClose} variant="contained" color="primary">
+          <Button
+            onClick={() => {
+              handlePostRequest(exerciseId, duration);
+              return handleClose();
+            }}
+            variant="contained"
+            color="primary"
+          >
             Add
           </Button>
         </DialogActions>
@@ -81,13 +99,19 @@ function AddExercise(props) {
 }
 
 AddExercise.propTypes = {
-  exerciseName: string,
-  exerciseCalories: number,
+  params: shape({
+    exerciseName: string,
+    exerciseCalories: number,
+    exerciseId: number.isRequired,
+  }),
+  methods: shape({
+    handleClose: func.isRequired,
+    handlePostRequest: func.isRequired,
+  }).isRequired,
 };
 
 AddExercise.defaultProps = {
-  exerciseName: 'Walking',
-  exerciseCalories: '300',
+  params: { exerciseName: 'Walking', exerciseCalories: '300' },
 };
 
 export default AddExercise;
