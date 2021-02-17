@@ -7,16 +7,21 @@ const { number } = PropTypes;
 
 const useStyles = makeStyles({
   root: {
-    width: '100%',
-    '@media (min-device-width: 900px)': {
+    margin: '3% 7% 0 0',
+    '@media (min-device-width: 600px)': {
       width: '35%',
+      height: '0',
     },
   },
   box: {
+    fontWeight: '500',
     flexDirection: 'column',
     margin: '0 4px',
     alignItems: 'center',
     width: '100%',
+    '@media (min-device-width: 600px)': {
+      margin: '0 5%',
+    },
   },
 });
 
