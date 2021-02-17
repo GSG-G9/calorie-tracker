@@ -11,6 +11,7 @@ const editFood = require('./editFood');
 const getFoodById = require('./getFoodById');
 const getProfileData = require('./getProfile');
 const getExercise = require('./getExercise');
+const isAuth = require('./isAuth');
 
 module.exports = {
   healthNews,
@@ -21,6 +22,7 @@ module.exports = {
   getUserCalories,
   getFoodById,
   insertFoodController,
+  isAuth,
   logout,
   deleteFoodController,
   editFood,

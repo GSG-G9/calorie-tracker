@@ -4,8 +4,10 @@ const useStyles = makeStyles((theme) => ({
   popover_btns: {
     width: '80px',
     height: '50px',
+    backgroundColor: theme.customColors[2],
+    color: 'white',
     '@media (min-device-width: 600px)': {
-      color: theme.palette.primary.main,
+      color: 'white',
       width: '180px',
       height: '70px',
       fontSize: '24px',
@@ -18,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   btns_container: {
+    zIndex: '1000',
     display: 'flex',
     justifyContent: 'space-around',
     alignItems: 'center',
@@ -28,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'fixed',
     left: 'calc(50% - 100px)',
     '@media (min-device-width: 600px)': {
+      zIndex: '1000',
       height: '150px',
       width: '400px',
       borderRadius: '10px',

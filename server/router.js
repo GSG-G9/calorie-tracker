@@ -9,6 +9,7 @@ const {
   getUserCalories,
   getFoodById,
   insertFoodController,
+  isAuth,
   logout,
   deleteFoodController,
   editFood,
@@ -23,6 +24,7 @@ router.post('/signup', signup);
 router.post('/login', login);
 router.use(Auth);
 
+router.get('/isAuth', isAuth);
 router.get('/exercise', getExercise);
 router.get('/category/:categoryId/food', foodCategory);
 router.delete('/food/:categoryID/:foodID', deleteFoodController);

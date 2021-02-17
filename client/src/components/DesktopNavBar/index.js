@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
-import { Button, Box } from '@material-ui/core';
+import { Button, Box, useMediaQuery } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import favIcon from '../../images/favicon.ico';
+import favIcon from './favicon.ico';
 import { context } from '../userProvider';
 import LoginSignupButtonsBox from '../LoginSignupButtonsBox';
 import useStyles from './style';
 
 const DesktopNavBar = () => {
+  const smallScreen = useMediaQuery('(max-width:600px)');
   const classes = useStyles();
   const [isAuthenticated] = useContext(context);
   return (
@@ -22,6 +23,8 @@ const DesktopNavBar = () => {
           <Link to="/logout" className={classes.logout_link}>
             <Button className={classes.logout_btn}>log out</Button>
           </Link>
+        ) : smallScreen ? (
+          ''
         ) : (
           <LoginSignupButtonsBox />
         )}

@@ -23,11 +23,17 @@ const { shape, func, bool } = PropTypes;
 const useStyle = makeStyles((theme) => ({
   input: {
     color: theme.customColors[1],
-    width: '300px',
+    width: '250px',
     backgroundColor: theme.customColors[7],
   },
   loadingArea: {
-    height: '30px',
+    height: '10px',
+    padding: '10px',
+    margin: '20px',
+  },
+  container: {
+    minHeight: '100vh',
+    paddingBottom: '20vh',
   },
 }));
 
@@ -56,21 +62,27 @@ function PhysicalCharacteristics(props) {
   const [goalWeightError, setGoalWeightError] = useState(false);
 
   return (
-    <Container screenSize="lg" direction="row" itemColumns="6" spacing={2}>
+    <Container
+      className={classes.container}
+      screenSize="md"
+      direction="row"
+      itemColumns="6"
+      spacing={2}
+    >
       <Hidden smDown key="1">
         <CardMedia
           component="img"
-          height="600"
+          height="400"
           image="./signupImages/3.png"
           title="main"
         />
       </Hidden>
       <Container key="2" direction="column" itemColumns="12" spacing={5}>
         <Typography key="1" variant="h5">
-          Select Your Physical Characteristics :-
+          Select Your Physical Characteristics
         </Typography>
         <form key="22">
-          <Container direction="column" itemColumns="12" spacing={5}>
+          <Container direction="column" itemColumns="12" spacing={2}>
             <InputField
               key="6"
               variant="outlined"
@@ -166,13 +178,7 @@ function PhysicalCharacteristics(props) {
             />
           </Container>
         </form>
-        <div key="111" className={classes.loadingArea}>
-          {showLoading ? (
-            <Loading circleSize={30} />
-          ) : (
-            <Alert errorMessage={errorMessage} />
-          )}
-        </div>
+
         <Container key="4" direction="row" itemColumns="4" spacing={5}>
           <ButtonComponent
             onClick={handleBack}
@@ -229,6 +235,18 @@ function PhysicalCharacteristics(props) {
             Finish
           </ButtonComponent>
         </Container>
+        <div
+          key="111-errorMessage"
+          NoPaddingProperty="111-errorMessage"
+          className={classes.loadingArea}
+        >
+          {'Hassan'}
+          {showLoading ? (
+            <Loading circleSize={30} />
+          ) : (
+            <Alert errorMessage={errorMessage} />
+          )}
+        </div>
       </Container>
     </Container>
   );
