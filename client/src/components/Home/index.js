@@ -26,7 +26,7 @@ function Home() {
       try {
         const {
           data: { data },
-        } = await axios.get('http://localhost:5000/api/v1/healthnews', {
+        } = await axios.get('/api/v1/healthnews', {
           cancelToken: source.token,
         });
         setLoading(false);
