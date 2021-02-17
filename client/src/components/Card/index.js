@@ -10,9 +10,12 @@ const CardComponent = ({ cardClassName, ContentClassName, children }) => (
     <CardContent className={ContentClassName}>{children}</CardContent>
   </Card>
 );
+CardComponent.defaultProps = {
+  cardClassName: '',
+};
 
 CardComponent.propTypes = {
-  cardClassName: string.isRequired,
+  cardClassName: string,
   ContentClassName: string.isRequired,
   children: node.isRequired,
 };
