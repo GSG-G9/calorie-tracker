@@ -2,14 +2,14 @@ import React from 'react';
 import { Alert } from '@material-ui/lab';
 import { string } from 'prop-types';
 
-const AlertComponent = ({ errorMessage }) => {
+const AlertComponent = ({ errorMessage, successMessage }) => {
   switch (errorMessage) {
     case '':
       return null;
     case 'success':
       return (
         <Alert variant="outlined" severity="success">
-          Registration Successful
+          {successMessage}
         </Alert>
       );
     default:
@@ -23,5 +23,8 @@ const AlertComponent = ({ errorMessage }) => {
 
 AlertComponent.propTypes = {
   errorMessage: string.isRequired,
+  successMessage: string,
 };
+AlertComponent.defaultProps = { successMessage: 'Registration Successful' };
+
 export default AlertComponent;

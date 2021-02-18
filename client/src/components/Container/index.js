@@ -12,7 +12,7 @@ const useStyle = makeStyles({
   },
 });
 
-const { node, string, number } = PropTypes;
+const { node, string, number, bool } = PropTypes;
 
 function ContainerComponent({
   children,
@@ -21,6 +21,7 @@ function ContainerComponent({
   itemColumns,
   spacing,
   gridUserWidth,
+  displayNone,
   ...rest
 }) {
   const classes = useStyle();
@@ -29,7 +30,10 @@ function ContainerComponent({
       <Grid container direction={direction} justify="center" spacing={+spacing}>
         {children.map((element) => (
           <Grid
-            style={{ width: gridUserWidth }}
+            style={{
+              width: gridUserWidth,
+              display: element.props.displayNone ? 'none' : 'block',
+            }}
             className={classes.grid}
             key={element.key}
             item
@@ -52,11 +56,13 @@ ContainerComponent.propTypes = {
   itemColumns: string.isRequired,
   spacing: number.isRequired,
   gridUserWidth: string,
+  displayNone: bool,
 };
 
 ContainerComponent.defaultProps = {
   screenSize: 'sm',
   gridUserWidth: 'auto',
+  displayNone: false,
 };
 
 export default ContainerComponent;

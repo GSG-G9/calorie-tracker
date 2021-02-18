@@ -115,6 +115,17 @@ const useStyles = makeStyles((theme) => ({
       fontSize: '1.6em',
     },
   },
+  daily_calories: {
+    paddingTop: '10%',
+    fontWeight: '700',
+
+    '@media (min-device-width: 900px)': {
+      paddingTop: '4%',
+      fontWeight: '700',
+      fontSize: '1.2rem',
+      marginLeft: '0',
+    },
+  },
 }));
 
 export default useStyles;

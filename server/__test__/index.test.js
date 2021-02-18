@@ -649,6 +649,16 @@ describe('authentication', () => {
       });
     });
 
+    describe('Test GET /api/v1/isAuth', () => {
+      test('Should return status 200 and message your are Authenticated', async () => {
+        const res = await request(app)
+          .get('/api/v1/isAuth')
+          .set('Cookie', [`token=${token}`]);
+        expect(res.status).toBe(200);
+        return expect(res.body.message).toBe('Your Are Authenticated');
+      });
+    });
+
     describe('Test Get /logout', () => {
       test('should return successfully logout with status 200 with message logged out successfully', async () => {
         const {

@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 import FoodItemsSelected from '../FoodItemsSelected';
 import FoodCategoryButton from '../FoodCategoryButton';
 import Container from '../../Container';
+import DailyUserCalories from '../../DailyUserCalories';
 
 const foodCategories = {
   1: 'breakfast',
@@ -14,6 +15,9 @@ const foodCategories = {
   0: '',
 };
 const useStyle = makeStyles({
+  root: {
+    minHeight: '108vh',
+  },
   FoodItemsSelected: {
     width: '300px',
     height: '300px',
@@ -24,6 +28,8 @@ const useStyle = makeStyles({
   },
   container: {
     maxWidth: '80%',
+    minHeight: '115vh',
+    '@media(min-width:600px)': { marginTop: '10rem' },
   },
 });
 function FoodCatagories() {
@@ -34,6 +40,7 @@ function FoodCatagories() {
     foodCategory: foodCategories[categoryId],
     id: categoryId,
   });
+
   const matchSmallScreen = useMediaQuery('(max-width:600px)');
   const handleShowSelectedFood = useCallback(
     (food, id) => () => {
@@ -61,25 +68,34 @@ function FoodCatagories() {
           src="/foodCategory/logo512.png"
         />
       </Hidden>
-      <Container key="1" direction="column" itemColumns="12" spacing={4}>
-        {[
-          { label: 'Breakfast', id: 1 },
-          { label: 'Lunch', id: 2 },
-          { label: 'Dinner', id: 3 },
-          { label: 'Snacks', id: 4 },
-        ]
-          .filter(({ id }) =>
-            matchSmallScreen ? showIcon.id === 0 || showIcon.id === id : id
-          )
-          .map(({ id, label }) => (
-            <FoodCategoryButton
-              key={id}
-              label={label}
-              showIcon={showIcon.foodCategory !== label}
-              handleClick={handleShowSelectedFood(label, id)}
-            />
-          ))}
-      </Container>
+
+      <DailyUserCalories
+        key="5"
+        showCard
+        showChart
+        displayNone={!matchSmallScreen}
+      />
+      <div>
+        <Container key="1" direction="column" itemColumns="12" spacing={4}>
+          {[
+            { label: 'Breakfast', id: 1 },
+            { label: 'Lunch', id: 2 },
+            { label: 'Dinner', id: 3 },
+            { label: 'Snacks', id: 4 },
+          ]
+            .filter(({ id }) =>
+              matchSmallScreen ? showIcon.id === 0 || showIcon.id === id : id
+            )
+            .map(({ id, label }) => (
+              <FoodCategoryButton
+                key={id}
+                label={label}
+                showIcon={showIcon.foodCategory !== label}
+                handleClick={handleShowSelectedFood(label, id)}
+              />
+            ))}
+        </Container>
+      </div>
       <div key="2" className={classes.FoodItemsSelected}>
         {showIcon.foodCategory && (
           <FoodItemsSelected foodCategoryId={showIcon.id} key="5" />

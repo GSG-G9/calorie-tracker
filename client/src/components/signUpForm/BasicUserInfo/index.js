@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Hidden, CardMedia } from '@material-ui/core';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 
 import updateAndValidateInput from '../../../Utils/checkValidationPureFunction';
 
@@ -21,16 +22,19 @@ const useStyle = makeStyles((theme) => ({
   input: {
     color: theme.customColors[1],
     backgroundColor: theme.customColors[7],
-    width: '300px',
+    width: '250px',
+    '@media(min-width:600px)': {
+      width: '250px',
+    },
   },
 }));
 
 function BasicUserInfo(props) {
+  const history = useHistory();
   const {
     methods: { handleNext, setData },
   } = props;
   const classes = useStyle();
-
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -42,22 +46,22 @@ function BasicUserInfo(props) {
   const [passwordError, setPasswordError] = useState(false);
 
   return (
-    <Container screenSize="lg" direction="row" itemColumns="6" spacing={2}>
+    <Container screenSize="md" direction="row" itemColumns="6" spacing={2}>
       <Hidden smDown key="1">
         <CardMedia
           component="img"
-          height="600"
+          height="400"
           image="./signupImages/3.png"
           title="main"
         />
       </Hidden>
 
-      <Container key="2" direction="column" itemColumns="12" spacing={5}>
+      <Container key="2" direction="column" itemColumns="12" spacing={2}>
         <Typography key="1" variant="h4">
           Create User Account :-
         </Typography>
         <form key="2">
-          <Container direction="column" itemColumns="12" spacing={5}>
+          <Container direction="column" itemColumns="12" spacing={3}>
             <InputField
               key="1"
               variant="outlined"
@@ -183,7 +187,12 @@ function BasicUserInfo(props) {
           >
             Next
           </ButtonComponent>
-          <ButtonComponent key="2" variant="outlined" color="primary">
+          <ButtonComponent
+            key="2"
+            variant="outlined"
+            color="primary"
+            onClick={() => history.push('/')}
+          >
             Cancel
           </ButtonComponent>
         </Container>

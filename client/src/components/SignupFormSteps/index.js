@@ -1,18 +1,20 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 import { Login } from '../../Utils/constant';
 import StepContent from '../StepContent';
+import { context } from '../userProvider';
+import Loading from '../Loading';
 
 const useStyles = makeStyles(() => ({
   root: {
-    width: '100%',
+    paddingTop: '5rem',
   },
 }));
 
-export default function SignupFormSteps() {
+function SignupFormSteps() {
   const classes = useStyles();
   const history = useHistory();
   const [activeStep, setActiveStep] = useState(0);
@@ -39,28 +41,31 @@ export default function SignupFormSteps() {
   }, [skipped, activeStep, setActiveStep, setSkipped]);
 
   useEffect(() => {
-    const { CancelToken } = axios;
-    const source = CancelToken.source();
+    if (Object.keys(data).length === 10) {
+      const { CancelToken } = axios;
+      const source = CancelToken.source();
 
-    (async () => {
-      try {
-        setShowLoading(true); // turn the loading progress bar
-        await axios.post('/api/v1/signup', data, {
-          cancelToken: source.token,
-        });
-        setShowLoading(false); // turnoff the loading progress bar after success
-        setErrorMessage('success');
-        return history.push(Login);
-      } catch (err) {
-        setShowLoading(false); // turnoff the loading progress bar after fail
-        return setErrorMessage(
-          err.response.data.message || 'Something went wrong !! '
-        );
-      }
-    })();
+      (async () => {
+        try {
+          setShowLoading(true); // turn the loading progress bar
+          await axios.post('/api/v1/signup', data, {
+            cancelToken: source.token,
+          });
+          setShowLoading(false); // turnoff the loading progress bar after success
+          setErrorMessage('success');
+          return history.push(Login);
+        } catch (err) {
+          setShowLoading(false); // turnoff the loading progress bar after fail
+          return setErrorMessage(
+            err.response.data.message || 'Something went wrong !! '
+          );
+        }
+      })();
 
-    return () => source.cancel('Operation canceled by the user.');
-  }, [Object.keys(data).length === 10]);
+      return () => source.cancel('Operation canceled by the user.');
+    }
+    return null;
+  }, [data]);
 
   return (
     <div className={classes.root}>
@@ -78,3 +83,17 @@ export default function SignupFormSteps() {
     </div>
   );
 }
+
+const SignUp = () => {
+  const [isAuthenticated] = useContext(context);
+
+  return isAuthenticated === null ? (
+    <Loading />
+  ) : isAuthenticated ? (
+    <Redirect to="/" />
+  ) : (
+    <SignupFormSteps />
+  );
+};
+
+export default SignUp;

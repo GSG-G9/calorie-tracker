@@ -19,17 +19,17 @@ function GenderSelection(props) {
   } = props;
   const [genderError, setGenderError] = useState(false);
   return (
-    <Container screenSize="lg" direction="row" itemColumns="6" spacing={2}>
+    <Container screenSize="md" direction="row" itemColumns="6" spacing={2}>
       <Hidden smDown key="1">
         <CardMedia
           component="img"
-          height="600"
+          height="400"
           image="./signupImages/3.png"
           title="main"
         />
       </Hidden>
 
-      <Container key="2" direction="column" itemColumns="12" spacing={5}>
+      <Container key="2" direction="column" itemColumns="12" spacing={3}>
         <Typography key="1" variant="h4">
           Select Gender
         </Typography>
@@ -37,8 +37,9 @@ function GenderSelection(props) {
         <Card key="2">
           <CardActionArea>
             <CardMedia
+              style={{ width: '100px' }}
               component="img"
-              height="140"
+              height="100"
               image="./signupImages/2.png"
               title="male"
               onClick={() => {
@@ -55,7 +56,8 @@ function GenderSelection(props) {
           <CardActionArea>
             <CardMedia
               component="img"
-              height="140px"
+              height="100px"
+              style={{ width: '100px' }}
               image="./signupImages/1.png"
               title="female"
               onClick={() => {
