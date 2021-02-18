@@ -13,7 +13,7 @@ const useStyle = makeStyles((theme) => ({
     overflow: 'auto',
   },
 }));
-function FootItems({ foodArray, handleDeleteRequest }) {
+function FootItems({ foodArray, handleDeleteRequest, handleEditRequest }) {
   const classes = useStyle();
   return (
     <ul className={classes.list}>
@@ -34,6 +34,7 @@ function FootItems({ foodArray, handleDeleteRequest }) {
               userFoodId={uniqueId}
               foodId={foodId}
               handleDeleteRequest={handleDeleteRequest}
+              handleEditRequest={handleEditRequest}
             />
           );
         }
@@ -45,5 +46,6 @@ function FootItems({ foodArray, handleDeleteRequest }) {
 FootItems.propTypes = {
   foodArray: arrayOf(objectOf(oneOfType([number, string]))).isRequired,
   handleDeleteRequest: func.isRequired,
+  handleEditRequest: func.isRequired,
 };
 export default FootItems;

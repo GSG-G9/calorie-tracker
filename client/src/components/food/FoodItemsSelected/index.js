@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 import FoodItems from '../FoodItems';
 import Container from '../../Container';
 import Button from '../../Button';
-import { FoodList } from '../../../Utils/constant';
+import { FoodList, FoodQuantityPath } from '../../../Utils/constant';
 import Loading from '../../Loading';
 import CustomErrorMessage from '../CustomErrorMessage';
 
@@ -44,10 +44,19 @@ function FoodItemsSelected(props) {
   const [errorMessage, setErrorMessage] = useState('');
   const [getData, setGetData] = useState(false);
 
+  const handleEditRequest = (userFoodId, foodId) => {
+    history.push(FoodQuantityPath, {
+      categoryId: foodCategoryId,
+      foodId,
+      userFoodId,
+      isEditFood: true,
+    });
+  };
+
   const handleDeleteRequest = (userFoodRelationId, foodId) => async () => {
     try {
       setShowLoading(true);
-      await axios.delete(`/api/v1/food/${foodCategoryId}/${foodId}`, {
+      await axios.delete(`/api/v1/category/${foodCategoryId}/food/${foodId}`, {
         data: { userFoodRelationId },
       });
       setErrorMessage('success');
@@ -113,6 +122,7 @@ function FoodItemsSelected(props) {
               key="1"
               foodArray={foodArray}
               handleDeleteRequest={handleDeleteRequest}
+              handleEditRequest={handleEditRequest}
             />
           }
         />

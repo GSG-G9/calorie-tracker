@@ -33,6 +33,7 @@ function FoodItem({
   userFoodId,
   foodId,
   handleDeleteRequest,
+  handleEditRequest,
 }) {
   const classes = useStyle();
   return (
@@ -42,7 +43,10 @@ function FoodItem({
         <span className={classes.calories}> {calories} Cal</span>
       </p>
       <div>
-        <EditIcon className={classes.icon} />
+        <EditIcon
+          className={classes.icon}
+          onClick={() => handleEditRequest(userFoodId, foodId)}
+        />
         <HighlightOffTwoToneIcon
           className={classes.icon}
           onClick={handleDeleteRequest(userFoodId, foodId)}
@@ -58,6 +62,7 @@ FoodItem.propTypes = {
   calories: number.isRequired,
   userFoodId: number.isRequired,
   handleDeleteRequest: func.isRequired,
+  handleEditRequest: func.isRequired,
   foodId: number.isRequired,
 };
 export default FoodItem;
