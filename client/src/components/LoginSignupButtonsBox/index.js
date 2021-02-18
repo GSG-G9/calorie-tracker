@@ -8,6 +8,10 @@ const LoginSignupButtonsBox = () => {
 
   return (
     <Box className={classes.login_signup_box}>
+      <Link to="/contactus" className={classes.login_signup_link}>
+        <Button className={classes.login_signup_button}>contact us</Button>
+      </Link>
+      <span className={classes.separated_span}>|</span>
       <Link to="/login" className={classes.login_signup_link}>
         <Button className={classes.login_signup_button}>log in</Button>
       </Link>
