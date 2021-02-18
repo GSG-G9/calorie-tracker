@@ -59,5 +59,16 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '1rem',
     fontWeight: 'bold',
   },
+  contactus_btn: {
+    color: 'white',
+    fontSize: '0.49rem',
+    fontWeight: 'bold',
+    paddingTop: '2.7em',
+  },
+  contactus_link: {
+    textDecoration: 'none',
+    cursor: 'pointer',
+    marginRight: '30px',
+  },
 }));
 export default useStyles;

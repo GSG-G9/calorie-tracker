@@ -24,7 +24,9 @@ const DesktopNavBar = () => {
             <Button className={classes.logout_btn}>log out</Button>
           </Link>
         ) : smallScreen ? (
-          ''
+          <Link to="/contactus" className={classes.contactus_link}>
+            <Button className={classes.contactus_btn}>contact us</Button>
+          </Link>
         ) : (
           <LoginSignupButtonsBox />
         )}
