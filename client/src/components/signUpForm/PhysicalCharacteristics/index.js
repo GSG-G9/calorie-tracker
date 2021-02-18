@@ -235,12 +235,7 @@ function PhysicalCharacteristics(props) {
             Finish
           </ButtonComponent>
         </Container>
-        <div
-          key="111-errorMessage"
-          NoPaddingProperty="111-errorMessage"
-          className={classes.loadingArea}
-        >
-          {'Hassan'}
+        <div key="111-errorMessage" className={classes.loadingArea}>
           {showLoading ? (
             <Loading circleSize={30} />
           ) : (
