@@ -33,7 +33,9 @@ const getExercise = async (req, res, next) => {
       ),
     }));
 
-    res.status(200).json({ status: 200, data: { data, userExercises } });
+    res
+      .status(200)
+      .json({ status: 200, data: { data, userExercises: userExercises.rows } });
   } catch (err) {
     next(err);
   }
