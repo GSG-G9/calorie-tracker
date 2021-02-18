@@ -1,11 +1,11 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { func, number } from 'prop-types';
+import { func, number, string } from 'prop-types';
 import Container from '../../Container';
 import Button from '../../Button';
 
 function AddFoodQuantityButtons(props) {
-  const { handleAddFoodQuantity, categoryId, ...rest } = props;
+  const { handleAddFoodQuantity, categoryId, buttonLabel, ...rest } = props;
   const history = useHistory();
   return (
     <Container
@@ -32,7 +32,7 @@ function AddFoodQuantityButtons(props) {
         variant="contained"
         key="2"
       >
-        Add Food
+        {buttonLabel}
       </Button>
     </Container>
   );
@@ -40,5 +40,9 @@ function AddFoodQuantityButtons(props) {
 AddFoodQuantityButtons.propTypes = {
   handleAddFoodQuantity: func.isRequired,
   categoryId: number.isRequired,
+  buttonLabel: string,
+};
+AddFoodQuantityButtons.defaultProps = {
+  buttonLabel: 'Add Food',
 };
 export default AddFoodQuantityButtons;

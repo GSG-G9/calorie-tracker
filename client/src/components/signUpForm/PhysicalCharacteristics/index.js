@@ -240,7 +240,6 @@ function PhysicalCharacteristics(props) {
           NoPaddingProperty="111-errorMessage"
           className={classes.loadingArea}
         >
-          {'Hassan'}
           {showLoading ? (
             <Loading circleSize={30} />
           ) : (

@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 import FoodItems from '../FoodItems';
 import Container from '../../Container';
 import Button from '../../Button';
-import { FoodList } from '../../../Utils/constant';
+import { FoodList, FoodQuantityPath } from '../../../Utils/constant';
 import Loading from '../../Loading';
 import CustomErrorMessage from '../CustomErrorMessage';
 
@@ -42,7 +42,33 @@ function FoodItemsSelected(props) {
   const [totalCalories, setTotalCalories] = useState(0);
   const [showLoading, setShowLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [getData, setGetData] = useState(false);
 
+  const handleEditRequest = (userFoodId, foodId) => {
+    history.push(FoodQuantityPath, {
+      categoryId: foodCategoryId,
+      foodId,
+      userFoodId,
+      isEditFood: true,
+    });
+  };
+
+  const handleDeleteRequest = (userFoodRelationId, foodId) => async () => {
+    try {
+      setShowLoading(true);
+      await axios.delete(`/api/v1/category/${foodCategoryId}/food/${foodId}`, {
+        data: { userFoodRelationId },
+      });
+      setErrorMessage('success');
+      setGetData((item) => !item);
+      return setShowLoading(false);
+    } catch (err) {
+      setShowLoading(false);
+      return setErrorMessage(
+        err.response ? err.response.message : 'Something went wrong !! '
+      );
+    }
+  };
   useEffect(() => {
     let source;
     (async () => {
@@ -80,7 +106,8 @@ function FoodItemsSelected(props) {
       }
     })();
     return () => source.cancel('Operation canceled by the user.');
-  }, [foodCategoryId]);
+  }, [foodCategoryId, getData]);
+
   const classes = useStyle();
   return (
     <Container direction="column" itemColumns="12" spacing={1}>
@@ -90,7 +117,14 @@ function FoodItemsSelected(props) {
         <CustomErrorMessage
           className={classes.errorMessage}
           errorMessage={errorMessage}
-          component={<FoodItems key="1" foodArray={foodArray} />}
+          component={
+            <FoodItems
+              key="1"
+              foodArray={foodArray}
+              handleDeleteRequest={handleDeleteRequest}
+              handleEditRequest={handleEditRequest}
+            />
+          }
         />
       )}
       <Container key="2" direction="row" itemColumns="12" spacing={1}>

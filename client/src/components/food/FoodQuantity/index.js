@@ -18,13 +18,21 @@ const handleAddFoodQuantity = (
   foodId,
   history,
   setShowLoadingPost,
-  setPostErrorMessage
+  setPostErrorMessage,
+  { isEditFood, userFoodId }
 ) => () => async () => {
   try {
     setShowLoadingPost(true);
-    await axios.post(`/api/v1/category/${categoryId}/food/${foodId}`, {
-      grams: quantity,
-    });
+    if (isEditFood) {
+      await axios.patch(`/api/v1/category/${categoryId}/food/${foodId}`, {
+        quantityInGrams: quantity,
+        userFoodRelationId: userFoodId,
+      });
+    } else {
+      await axios.post(`/api/v1/category/${categoryId}/food/${foodId}`, {
+        grams: quantity,
+      });
+    }
     setPostErrorMessage('success');
     setShowLoadingPost(false);
     return history.push('/food', { categoryId });
@@ -38,7 +46,7 @@ const handleAddFoodQuantity = (
 
 function FoodQuantity() {
   const {
-    state: { foodId, categoryId },
+    state: { foodId, categoryId, isEditFood, userFoodId },
   } = useLocation();
   const smallScreen = useMediaQuery('(max-width:600px)');
   const history = useHistory();
@@ -155,13 +163,15 @@ function FoodQuantity() {
 
                       <AddFoodQuantityButtons
                         categoryId={categoryId}
+                        buttonLabel={isEditFood ? 'Edit Food' : 'Add Food'}
                         handleAddFoodQuantity={handleAddFoodQuantity(
                           quantity,
                           categoryId,
                           foodId,
                           history,
                           setShowLoadingPost,
-                          setPostErrorMessage
+                          setPostErrorMessage,
+                          { isEditFood, userFoodId }
                         )}
                       />
                       <div key="35">

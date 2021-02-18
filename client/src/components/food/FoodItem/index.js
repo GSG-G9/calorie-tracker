@@ -4,7 +4,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import HighlightOffTwoToneIcon from '@material-ui/icons/HighlightOffTwoTone';
 import PropTypes from 'prop-types';
 
-const { string, number } = PropTypes;
+const { string, number, func } = PropTypes;
 const useStyle = makeStyles((theme) => ({
   container: {
     width: '100%',
@@ -27,7 +27,14 @@ const useStyle = makeStyles((theme) => ({
   },
 }));
 
-function FoodItem({ label, calories }) {
+function FoodItem({
+  label,
+  calories,
+  userFoodId,
+  foodId,
+  handleDeleteRequest,
+  handleEditRequest,
+}) {
   const classes = useStyle();
   return (
     <li className={classes.container}>
@@ -36,8 +43,15 @@ function FoodItem({ label, calories }) {
         <span className={classes.calories}> {calories} Cal</span>
       </p>
       <div>
-        <EditIcon className={classes.icon} />
-        <HighlightOffTwoToneIcon className={classes.icon} color="primary" />
+        <EditIcon
+          className={classes.icon}
+          onClick={() => handleEditRequest(userFoodId, foodId)}
+        />
+        <HighlightOffTwoToneIcon
+          className={classes.icon}
+          onClick={handleDeleteRequest(userFoodId, foodId)}
+          color="primary"
+        />
       </div>
     </li>
   );
@@ -46,5 +60,9 @@ function FoodItem({ label, calories }) {
 FoodItem.propTypes = {
   label: string.isRequired,
   calories: number.isRequired,
+  userFoodId: number.isRequired,
+  handleDeleteRequest: func.isRequired,
+  handleEditRequest: func.isRequired,
+  foodId: number.isRequired,
 };
 export default FoodItem;
