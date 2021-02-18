@@ -22,9 +22,6 @@ const getExercise = async (req, res, next) => {
       throw Boom.notFound('no user found');
     }
     const userExercises = await getUserExercise(id);
-    if (userExercises.rowCount === 0) {
-      throw Boom.notFound('no exercises found');
-    }
     const data = exercises.rows.map((row) => ({
       id: row.id,
       exercise_name: row.exercise_name,
