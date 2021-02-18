@@ -14,6 +14,7 @@ const editFoodGrams = require('./editFoodGrams');
 const getFoodById = require('./getFoodById');
 const getProfile = require('./getProfile');
 const getExercises = require('./getExercise');
+const getUserExercise = require('./getUserExercise');
 
 module.exports = {
   getNews,
@@ -31,4 +32,5 @@ module.exports = {
   editFoodGrams,
   getProfile,
   getExercises,
+  getUserExercise,
 };
