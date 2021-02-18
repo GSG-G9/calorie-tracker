@@ -4,11 +4,11 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import FoodItems from '../FoodItems';
-import Container from '../../Container';
-import Button from '../../Button';
-import { FoodList, FoodQuantityPath } from '../../../Utils/constant';
-import Loading from '../../Loading';
-import CustomErrorMessage from '../CustomErrorMessage';
+import Container from '../../common/Container';
+import Button from '../../common/Button';
+import { FoodList, FoodQuantityPath } from '../../../utils/constant';
+import Loading from '../../common/Loading';
+import CustomErrorMessage from '../../common/CustomErrorMessage';
 
 const { number, func, bool } = PropTypes;
 

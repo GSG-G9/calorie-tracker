@@ -1,6 +1,6 @@
 import React from 'react';
 import { number, string, oneOfType, arrayOf, func, objectOf } from 'prop-types';
-import Container from '../../Container';
+import Container from '../../common/Container';
 import ExerciseItem from '../ExerciseItem';
 
 function ExerciseItems(props) {

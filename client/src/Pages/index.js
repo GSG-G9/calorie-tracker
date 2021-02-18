@@ -5,31 +5,27 @@ import {
   Login,
   Signup,
   Logout,
-  Nutrition,
   MyProfile,
-  Calories,
   Food,
   Exercise,
   FoodList,
   FoodQuantityPath,
   ContactUs,
-} from '../Utils/constant';
+} from '../utils/constant';
 import AllFoodList from './FoodList';
 import HomePage from './Home';
 import LoginPage from './Login';
 import SignupPage from './Signup';
 import LogoutPage from './Logout';
-import NutritionPage from './Nutrition';
 import MyProfilePage from './Profile';
-import CaloriesPage from './Calories';
 import FoodQuantity from './FoodQuantity';
 import FoodPage from './Food';
 import ExercisePage from './Exercise';
-import NavBar from '../components/NavBar';
+import NavBar from '../components/layout/NavBar';
 import NotFound from './NotFoundPage';
 import ContactUsPage from './ContactUs';
 
-import { context } from '../components/userProvider';
+import { context } from '../components/UserProvider';
 
 function Pages() {
   const [isAuthenticated] = useContext(context);
@@ -49,8 +45,6 @@ function Pages() {
             <Route exact path={FoodList} component={AllFoodList} />
             <Route exact path={FoodQuantityPath} component={FoodQuantity} />
             <Route exact path={Exercise} component={ExercisePage} />
-            <Route exact path={Nutrition} component={NutritionPage} />
-            <Route exact path={Calories} component={CaloriesPage} />
           </>
         ) : (
           ''

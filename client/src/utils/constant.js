@@ -1,0 +1,10 @@
+export const Home = '/';
+export const Login = '/login';
+export const Signup = '/signup';
+export const Logout = '/logout';
+export const MyProfile = '/myprofile';
+export const FoodList = '/food/list';
+export const Food = '/food';
+export const FoodQuantityPath = '/food/list/quantity';
+export const Exercise = '/exercise';
+export const ContactUs = '/contactus';
