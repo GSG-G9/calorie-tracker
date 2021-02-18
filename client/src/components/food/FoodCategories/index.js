@@ -4,8 +4,8 @@ import { Hidden, CardMedia, useMediaQuery } from '@material-ui/core';
 import { useLocation } from 'react-router-dom';
 import FoodItemsSelected from '../FoodItemsSelected';
 import FoodCategoryButton from '../FoodCategoryButton';
-import Container from '../../Container';
-import DailyUserCalories from '../../DailyUserCalories';
+import Container from '../../common/Container';
+import DailyUserCalories from '../../common/Card/DailyUserCalories';
 
 const foodCategories = {
   1: 'breakfast',

@@ -1,5 +1,5 @@
 import React from 'react';
-import AllFood from '../../components/FoodList/AllFoodList';
+import AllFood from '../../components/food/FoodList/AllFoodList';
 
 function AllFoodList() {
   return <AllFood />;

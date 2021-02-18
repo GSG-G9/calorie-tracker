@@ -1,6 +1,6 @@
 import React from 'react';
 import { number, objectOf, oneOfType, string } from 'prop-types';
-import Container from '../../Container';
+import Container from '../../common/Container';
 
 import useStyle from './style';
 

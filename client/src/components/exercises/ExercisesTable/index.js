@@ -3,8 +3,8 @@ import axios from 'axios';
 import useStyle from './style';
 import AddExercise from '../AddExercise';
 import ExerciseItems from '../ExerciseItems';
-import CustomErrorMessage from '../../food/CustomErrorMessage';
-import Loading from '../../Loading';
+import CustomErrorMessage from '../../common/CustomErrorMessage';
+import Loading from '../../common/Loading';
 
 function ExercisesTable() {
   const [showLoading, setShowLoading] = useState(false);

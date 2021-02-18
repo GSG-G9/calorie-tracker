@@ -1,8 +1,8 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { func, number, string } from 'prop-types';
-import Container from '../../Container';
-import Button from '../../Button';
+import Container from '../../common/Container';
+import Button from '../../common/Button';
 
 function AddFoodQuantityButtons(props) {
   const { handleAddFoodQuantity, categoryId, buttonLabel, ...rest } = props;

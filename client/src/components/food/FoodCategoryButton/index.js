@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import AddCircleOutlinedIcon from '@material-ui/icons/AddCircleOutlined';
 import RemoveCircleOutlinedIcon from '@material-ui/icons/RemoveCircleOutlined';
-import Button from '../../Button';
+import Button from '../../common/Button';
 
 const { string, bool, func } = PropTypes;
 

@@ -2,15 +2,15 @@ import React, { useState, useLayoutEffect, useCallback } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useMediaQuery } from '@material-ui/core';
 import axios from 'axios';
-import Container from '../../Container';
-import InputField from '../../InputField';
-import Chart from '../../DoughnutChart';
+import Container from '../../common/Container';
+import InputField from '../../common/InputField';
+import Chart from '../../common/DoughnutChart';
 import useStyle from './style';
 import AddFoodQuantityButtons from '../AddFoodQuantityButtons';
 import NutritionTable from '../NutritionTable';
-import filterNutrition from '../../../Utils/filterNutrition';
-import Loading from '../../Loading';
-import CustomErrorMessage from '../CustomErrorMessage';
+import filterNutrition from '../../../utils/filterNutrition';
+import Loading from '../../common/Loading';
+import CustomErrorMessage from '../../common/CustomErrorMessage';
 
 const handleAddFoodQuantity = (
   quantity,
