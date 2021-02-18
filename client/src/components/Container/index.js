@@ -32,7 +32,7 @@ function ContainerComponent({
           <Grid
             style={{
               width: gridUserWidth,
-              display: element.props.displayNone ? 'none' : 'block',
+              display: element.props.displayNone ? 'none' : '',
             }}
             className={classes.grid}
             key={element.key}

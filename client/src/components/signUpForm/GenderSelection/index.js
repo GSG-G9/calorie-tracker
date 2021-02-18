@@ -34,7 +34,7 @@ function GenderSelection(props) {
           Select Gender
         </Typography>
 
-        <Card key="2">
+        <Card key="2" style={{ width: '100px' }}>
           <CardActionArea>
             <CardMedia
               style={{ width: '100px' }}
@@ -52,7 +52,7 @@ function GenderSelection(props) {
             />
           </CardActionArea>
         </Card>
-        <Card key="3">
+        <Card key="3" style={{ width: '100px' }}>
           <CardActionArea>
             <CardMedia
               component="img"

@@ -26,7 +26,7 @@ router.post('/login', login);
 router.use(Auth);
 
 router.get('/isAuth', isAuth);
-router.get('/exercise', getExercise);
+router.get('/exercises', getExercise);
 router.post('/exercises/:exerciseID', postExercise);
 router.get('/category/:categoryId/food', foodCategory);
 

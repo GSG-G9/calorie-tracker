@@ -1,10 +1,11 @@
 import React from 'react';
+import ExercisesTable from '../../components/exercises/ExercisesTable';
 
 function ExercisePage() {
   return (
     <>
       <div>
-        <h1>Exercise Page </h1>
+        <ExercisesTable />
       </div>
     </>
   );

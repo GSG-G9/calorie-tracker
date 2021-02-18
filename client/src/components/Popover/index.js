@@ -12,6 +12,7 @@ const Popover = (props) => {
       <Box className={classes.btns_container}>
         <Link to="/food" className={classes.links}>
           <Button
+            color="primary"
             onClick={() => setIsClicked(true)}
             variant="contained"
             className={classes.popover_btns}
@@ -21,6 +22,7 @@ const Popover = (props) => {
         </Link>
         <Link to="/exercise" className={classes.links}>
           <Button
+            color="primary"
             onClick={() => setIsClicked(true)}
             variant="contained"
             className={classes.popover_btns}
