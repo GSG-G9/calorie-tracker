@@ -15,21 +15,17 @@ function CircularProgressWithLabel(props) {
 
   const useStyles = makeStyles({
     progress: {
-      fontSize: '.8rem',
+      fontSize: '1.1rem',
+      marginLeft: '17%',
       '@media (min-device-width: 900px)': {
-        marginLeft: '65%',
-        fontSize: '1.2rem',
+        marginLeft: '0',
       },
     },
-    box: {
-      display: 'inline-flex',
-      marginLeft: '30%',
-      marginTop: '10%',
-
+    root: {
+      margin: '15% 30% 20% 0',
       '@media (min-device-width: 900px)': {
-        width: '10vw',
-        marginTop: '1%',
-        marginLeft: '4%',
+        marginTop: '5%',
+        marginLeft: '10%',
       },
     },
   });
@@ -37,24 +33,20 @@ function CircularProgressWithLabel(props) {
   const classes = useStyles();
 
   return (
-    <Box position="relative" className={classes.box}>
+    <Box position="relative" className={classes.root}>
       <CircularProgress
         variant="determinate"
         style={{
-          width: '25vw',
+          width: smallScreen ? '33vw' : '12vw',
         }}
         {...props}
       />
       <Box
         top={0}
-        left={smallScreen ? 60 : 0}
-        bottom={smallScreen ? 0 : 15}
+        left={smallScreen ? 70 : 105}
+        bottom={0}
         right={0}
-        className={classes.circular}
         position="absolute"
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
       >
         <Box>
           <Typography
@@ -77,9 +69,5 @@ function CircularProgressWithLabel(props) {
     </Box>
   );
 }
-
-CircularProgressWithLabel.propTypes = {
-  value: number.isRequired,
-};
 
 export default CircularProgressWithLabel;
