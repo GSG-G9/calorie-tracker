@@ -28,27 +28,6 @@ INSERT INTO activity (activity_name, activity_value) VALUES
 ('lazy', 1.25);
 
 
-INSERT INTO food_type(name) values 
-('food'),
-('meal');
-
-
-INSERT INTO food(food_type_id, food_name, image) values
-(1, 'egg', 'https://upload.wikimedia.org/wikipedia/en/thumb/5/58/Instagram_egg.jpg/220px-Instagram_egg.jpg'),
- (1, 'chocolate', 'https://vaya.in/recipes/wp-content/uploads/2018/02/Milk-Chocolate-1.jpg'),
- (1, 'checken', 'https://thestayathomechef.com/wp-content/uploads/2016/06/Fried-Chicken-4-1.jpg'),
- (1, 'icecream', 'https://upload.wikimedia.org/wikipedia/commons/e/ea/Ice_cream_cone_%28cropped%29.jpg'),
- (1, 'avokado', 'https://images.immediate.co.uk/production/volatile/sites/30/2020/02/Avocados-3d84a3a.jpg?quality=90&resize=960,872'),
- (1, 'fish', 'https://www.krumpli.co.uk/wp-content/uploads/2019/03/Campfire-Baked-Fish-in-Foil-4-720x720.jpg'),
- (2, 'mosakhan', 'https://i0.wp.com/www.middleeastmonitor.com/wp-content/uploads/2018/03/2018_2-34-food-blog-7.jpg?quality=85&strip=all&zoom=1&ssl=1'),
- (2, 'maqlobah', 'https://chefjar.com/wp-content/uploads/2017/04/2-2.jpg'),
- (1, 'checken pizza', 'https://jeanniestriedandtruerecipes.com/wp-content/uploads/2020/05/Buffalo-Chicken-Pizza-2020-500x500.jpg'),
- (1, 'cake', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRw9CXAFWkzlaQSYLCZGRkf3sU_QXWgcuAryw&usqp=CAU'),
- (1, 'coffee', 'https://cdn-prod.medicalnewstoday.com/content/images/articles/270/270202/cups-of-coffee.jpg'),
- (1, 'apple', 'https://bestapples.com/wp-content/uploads/2018/01/envy-apple.jpg'),
- (2, 'Falafel', 'https://www.themediterraneandish.com/wp-content/uploads/2020/02/falafel-recipe-1.jpg');
-
-
 INSERT INTO nutrition(food_id, calories_per_gram, fat, carbs, protein, sugar, cholesterol) values 
 (9,2, 10, 1, 50, 0, 20),
  (8, 3, 2, 17, 20, 80, 20),
