@@ -18,7 +18,11 @@ function AddFoodQuantityButtons(props) {
     >
       <Button
         color="primary"
-        event={() => history.push('/food/list', { categoryId })}
+        event={() =>
+          history.push(buttonLabel === 'Edit Food' ? '/food' : '/food/list', {
+            categoryId,
+          })
+        }
         className=""
         variant="contained"
         key="1"

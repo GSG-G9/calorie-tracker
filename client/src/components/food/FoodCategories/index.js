@@ -40,6 +40,7 @@ function FoodCatagories() {
     foodCategory: foodCategories[categoryId],
     id: categoryId,
   });
+  const [getData, setGetData] = useState(false);
 
   const matchSmallScreen = useMediaQuery('(max-width:600px)');
   const handleShowSelectedFood = useCallback(
@@ -74,6 +75,7 @@ function FoodCatagories() {
         showCard
         showChart
         displayNone={!matchSmallScreen}
+        getData={getData}
       />
       <div>
         <Container key="1" direction="column" itemColumns="12" spacing={4}>
@@ -98,7 +100,12 @@ function FoodCatagories() {
       </div>
       <div key="2" className={classes.FoodItemsSelected}>
         {showIcon.foodCategory && (
-          <FoodItemsSelected foodCategoryId={showIcon.id} key="5" />
+          <FoodItemsSelected
+            getData={getData}
+            setGetData={setGetData}
+            foodCategoryId={showIcon.id}
+            key="5"
+          />
         )}
       </div>
     </Container>

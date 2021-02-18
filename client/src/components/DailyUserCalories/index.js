@@ -9,7 +9,13 @@ import Loading from '../Loading';
 
 const { bool } = PropTypes;
 
-function DailyUserCalories({ showCard, showChart, displayNone, ...rest }) {
+function DailyUserCalories({
+  showCard,
+  showChart,
+  displayNone,
+  getData,
+  ...rest
+}) {
   const [loading, setLoading] = useState(true);
   const [goal, setGoal] = useState();
   const [food, setFood] = useState();
@@ -68,7 +74,7 @@ function DailyUserCalories({ showCard, showChart, displayNone, ...rest }) {
     };
     getCalories();
     return () => source.cancel('Operation canceled');
-  }, []);
+  }, [getData]);
 
   return loading ? (
     <Loading />
@@ -97,11 +103,13 @@ function DailyUserCalories({ showCard, showChart, displayNone, ...rest }) {
 
 DailyUserCalories.defaultProps = {
   displayNone: false,
+  getData: false,
 };
 DailyUserCalories.propTypes = {
   showCard: bool.isRequired,
   showChart: bool.isRequired,
   displayNone: bool,
+  getData: bool,
 };
 
 export default DailyUserCalories;

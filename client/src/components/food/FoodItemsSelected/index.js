@@ -10,7 +10,7 @@ import { FoodList, FoodQuantityPath } from '../../../Utils/constant';
 import Loading from '../../Loading';
 import CustomErrorMessage from '../CustomErrorMessage';
 
-const { number } = PropTypes;
+const { number, func, bool } = PropTypes;
 
 const useStyle = makeStyles((theme) => ({
   button: {
@@ -36,13 +36,12 @@ const useStyle = makeStyles((theme) => ({
 }));
 
 function FoodItemsSelected(props) {
-  const { foodCategoryId } = props;
+  const { foodCategoryId, getData, setGetData } = props;
   const history = useHistory();
   const [foodArray, setFoodArray] = useState([]);
   const [totalCalories, setTotalCalories] = useState(0);
   const [showLoading, setShowLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  const [getData, setGetData] = useState(false);
 
   const handleEditRequest = (userFoodId, foodId) => {
     history.push(FoodQuantityPath, {
@@ -69,6 +68,7 @@ function FoodItemsSelected(props) {
       );
     }
   };
+
   useEffect(() => {
     let source;
     (async () => {
@@ -150,6 +150,8 @@ function FoodItemsSelected(props) {
 
 FoodItemsSelected.propTypes = {
   foodCategoryId: number.isRequired,
+  getData: bool.isRequired,
+  setGetData: func.isRequired,
 };
 
 export default FoodItemsSelected;
