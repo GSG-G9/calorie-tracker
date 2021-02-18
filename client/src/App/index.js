@@ -12,6 +12,7 @@ import {
   FoodList,
   Food,
   Exercise,
+  ContactUs,
 } from '../Utils/constant';
 import HomePage from '../Pages/Home';
 import LoginPage from '../Pages/Login';
@@ -28,6 +29,7 @@ import Footer from '../components/Footer';
 import './style.css';
 import AllFoodList from '../Pages/FoodList';
 import NavBar from '../components/NavBar';
+import ContactUsPage from '../components/ContactUs';
 
 function App() {
   return (
@@ -48,6 +50,7 @@ function App() {
               <Route exact path={FoodList} component={AllFoodList} />
               <Route exact path={Food} component={FoodPage} />
               <Route exact path={Exercise} component={ExercisePage} />
+              <Route exact path={ContactUs} component={ContactUsPage} />
             </Switch>
             <Footer />
           </Router>
