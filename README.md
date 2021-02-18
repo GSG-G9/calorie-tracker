@@ -1,8 +1,8 @@
 # Personal health tracker🏋️‍♀️
 
-## Live Demo :
-[Cal Track Website](https://caltracker0.herokuapp.com/)
-## Problem
+## Live Demo 🔥
+### [Cal Track Website](https://caltracker0.herokuapp.com/)
+## Problem ☠️
 
 People usually find it difficult to control weight and keep track of their progress, or when they start working out they might lose interest when they don’t have a visual representation of what they’ve accomplished.
 
@@ -53,13 +53,22 @@ As a user, I can create an account then enter my health details. Then, I can add
 - I can show my profile page
 - I can see a contact us page
 
-## Prototype
+## Prototype 🍥
+
+
+#### Mobile Design
+![Mobile Design](https://user-images.githubusercontent.com/35685437/108361985-d6d5d500-71fb-11eb-8a3f-4d9c528c828c.png)
+
+
+#### Desktop Design
+![Desktop Design](https://user-images.githubusercontent.com/35685437/108361826-a5f5a000-71fb-11eb-8710-1d8bd471ef5d.png)
 
 #### [show figma](https://www.figma.com/file/1FtfYBIz27qmLXEiTJ590m/CalTrack?node-id=0%3A1)
 
 ## DATABASE Schema :file_cabinet:
 
-![schema](https://user-images.githubusercontent.com/62110034/106577269-d7f1db80-6546-11eb-88ea-952899d94f45.png)
+![schema](https://user-images.githubusercontent.com/35685437/108363409-8eb7b200-71fd-11eb-9fb2-afb060ff5405.png)
+
 
 ## Technologies 🔧
 
