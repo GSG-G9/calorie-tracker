@@ -39,16 +39,12 @@ function ExercisesTable() {
 
   const handlePostRequest = async (id, exerciseDuration) => {
     try {
-      const {
-        data: { data },
-      } = await axios.post(`/api/v1/exercises/${id}`, {
+      await axios.post(`/api/v1/exercises/${id}`, {
         exerciseDuration,
       });
-      setGetData((item) => !item);
-      return console.log(data);
+      return setGetData((item) => !item);
     } catch (err) {
-      setGetData((item) => !item);
-      return console.log(err.response);
+      return setGetData((item) => !item);
     }
   };
 
