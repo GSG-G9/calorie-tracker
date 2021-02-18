@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import {
   Home,
   Login,
@@ -26,6 +26,7 @@ import FoodQuantity from './FoodQuantity';
 import FoodPage from './Food';
 import ExercisePage from './Exercise';
 import NavBar from '../components/NavBar';
+import NotFound from './NotFoundPage';
 import ContactUsPage from './ContactUs';
 
 import { context } from '../components/userProvider';
@@ -54,7 +55,7 @@ function Pages() {
         ) : (
           ''
         )}
-        <Redirect to="/" />
+        <Route component={NotFound} />
       </Switch>
     </>
   );
