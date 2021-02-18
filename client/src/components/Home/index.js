@@ -9,6 +9,7 @@ import sportImageSrc from './1.png';
 import { context } from '../userProvider';
 import LoadingComponent from '../Loading';
 import LoginSignupButtonsBox from '../LoginSignupButtonsBox';
+import DailyUserCalories from '../DailyUserCalories';
 
 function Home() {
   const [isAuthenticated] = useContext(context);
@@ -26,7 +27,7 @@ function Home() {
       try {
         const {
           data: { data },
-        } = await axios.get('http://localhost:5000/api/v1/healthnews', {
+        } = await axios.get('/api/v1/healthnews', {
           cancelToken: source.token,
         });
         setLoading(false);
@@ -65,6 +66,14 @@ function Home() {
           </Box>
 
           <Box className={classes.news_box}>
+            {isAuthenticated && (
+              <Box className={classes.daily_calories}>
+                <DailyUserCalories
+                  showCard={smallScreen || largeScreen}
+                  showChart={largeScreen}
+                />
+              </Box>
+            )}
             <Typography variant="h5" gutterBottom className={classes.news_feed}>
               news feed
             </Typography>
