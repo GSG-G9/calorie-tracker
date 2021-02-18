@@ -70,4 +70,7 @@ function CircularProgressWithLabel(props) {
   );
 }
 
+CircularProgressWithLabel.propTypes = {
+  value: number.isRequired,
+};
 export default CircularProgressWithLabel;
