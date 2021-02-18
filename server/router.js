@@ -29,16 +29,19 @@ router.get('/isAuth', isAuth);
 router.get('/exercises', getExercise);
 router.post('/exercises/:exerciseID', postExercise);
 router.get('/category/:categoryId/food', foodCategory);
-router.delete('/food/:categoryID/:foodID', deleteFoodController);
-router.patch('/food/:categoryId/:foodId', editFood);
 
-router.route('/category/:categoryId/food/:foodId').get(getFoodById);
+router
+  .route('/category/:categoryId/food/:foodId')
+  .patch(editFood)
+  .delete(deleteFoodController)
+  .get(getFoodById)
+  .post(insertFoodController);
+
 router.get('/food', getFood);
 router.get('/user/calories', getUserCalories);
 
 router.get('/profile', getProfileData);
 
-router.post('/category/:categoryId/food/:foodId', insertFoodController);
 router.get('/logout', logout);
 
 router.use(clientError);
