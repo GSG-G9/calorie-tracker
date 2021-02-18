@@ -12,6 +12,7 @@ import {
   Exercise,
   FoodList,
   FoodQuantityPath,
+  ContactUs,
 } from '../Utils/constant';
 import AllFoodList from './FoodList';
 import HomePage from './Home';
@@ -25,6 +26,7 @@ import FoodQuantity from './FoodQuantity';
 import FoodPage from './Food';
 import ExercisePage from './Exercise';
 import NavBar from '../components/NavBar';
+import ContactUsPage from './ContactUs';
 
 import { context } from '../components/userProvider';
 
@@ -37,6 +39,7 @@ function Pages() {
         <Route exact path={Login} component={LoginPage} />
         <Route exact path={Signup} component={SignupPage} />
         <Route exact path={Home} component={HomePage} />
+        <Route exact path={ContactUs} component={ContactUsPage} />
         {isAuthenticated ? (
           <>
             <Route exact path={Logout} component={LogoutPage} />

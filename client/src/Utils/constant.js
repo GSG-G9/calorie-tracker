@@ -9,3 +9,4 @@ export const FoodList = '/food/list';
 export const Food = '/food';
 export const FoodQuantityPath = '/food/list/quantity';
 export const Exercise = '/exercise';
+export const ContactUs = '/contactus';
