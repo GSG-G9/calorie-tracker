@@ -4,7 +4,7 @@ import ExercisesTable from '../../components/exercises/ExercisesTable';
 function ExercisePage() {
   return (
     <>
-      <div style={{ paddingTop: '100px' }}>
+      <div>
         <ExercisesTable />
       </div>
     </>

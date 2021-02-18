@@ -7,16 +7,34 @@ function ExerciseItems(props) {
   const { exercises, handleClickOpen, userExercisesList } = props;
   return (
     <Container direction="column" spacing={1} itemColumns="12" screenSize="sm">
-      {exercises.map((exercise) => (
-        <ExerciseItem
-          element={exercise}
-          key={exercise.id}
-          handleClickOpen={handleClickOpen}
-          isChecked={userExercisesList.some(
-            ({ exercises_id: exerciseId }) => exercise.id === exerciseId
-          )}
-        />
-      ))}
+      <ExerciseItem
+        headerRow
+        element={{
+          exercise_name: 'Exercise Name',
+          caloriesPerHour: 'Calories/hr',
+          id: 0,
+        }}
+        key="Header"
+        handleClickOpen={handleClickOpen}
+      />
+      <Container
+        key="table"
+        direction="column"
+        spacing={1}
+        itemColumns="12"
+        screenSize="sm"
+      >
+        {exercises.map((exercise) => (
+          <ExerciseItem
+            element={exercise}
+            key={exercise.id}
+            handleClickOpen={handleClickOpen}
+            isChecked={userExercisesList.some(
+              ({ exercises_id: exerciseId }) => exercise.id === exerciseId
+            )}
+          />
+        ))}
+      </Container>
     </Container>
   );
 }
